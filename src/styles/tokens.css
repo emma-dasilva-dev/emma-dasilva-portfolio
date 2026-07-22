@@ -1,0 +1,61 @@
+:root {
+  /* =========================================
+     BRAND COLORS
+     ========================================= */
+
+  --color-blue: #144493;
+  --color-blue-deep: #0e2e66;
+  --color-blue-dark: #081c3d;
+
+  /* =========================================
+     TITANIUM SYSTEM
+     ========================================= */
+
+  --color-titanium: #a7adb5;
+  --color-titanium-light: #d8dce1;
+  --color-titanium-dark: #555d66;
+
+  /* =========================================
+     NEUTRALS
+     ========================================= */
+
+  --color-ink: #111111;
+  --color-black: #080808;
+  --color-silver-white: #f2f3f4;
+  --color-white: #ffffff;
+
+  /* =========================================
+     TRANSPARENT COLORS
+     ========================================= */
+
+  --color-blue-soft: rgba(20, 68, 147, 0.12);
+  --color-blue-medium: rgba(20, 68, 147, 0.28);
+
+  --color-titanium-soft: rgba(167, 173, 181, 0.28);
+  --color-titanium-medium: rgba(167, 173, 181, 0.55);
+
+  --color-ink-soft: rgba(17, 17, 17, 0.58);
+
+  /* =========================================
+     LAYOUT
+     ========================================= */
+
+  --page-width: 1600px;
+
+  --page-padding-desktop: clamp(2rem, 4vw, 4.5rem);
+  --page-padding-tablet: clamp(1.5rem, 4vw, 3rem);
+  --page-padding-mobile: 1.25rem;
+
+  /* =========================================
+     BORDERS
+     ========================================= */
+
+  --border-light: rgba(17, 17, 17, 0.13);
+  --border-titanium: rgba(167, 173, 181, 0.65);
+
+  /* =========================================
+     MOTION
+     ========================================= */
+
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+}

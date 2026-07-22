@@ -1,26 +1,88 @@
 @import "tailwindcss";
+@import "../styles/tokens.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* =========================================
+   RESET
+   ========================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+
+  background: var(--color-silver-white);
+  color: var(--color-ink);
+
+  font-family: var(--font-manrope), Arial, sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* =========================================
+   ELEMENT DEFAULTS
+   ========================================= */
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  padding: 0;
+  border: 0;
+
+  background: none;
+  color: inherit;
+
+  cursor: pointer;
+}
+
+img {
+  display: block;
+
+  max-width: 100%;
+}
+
+/* =========================================
+   SELECTION
+   ========================================= */
+
+::selection {
+  background: var(--color-blue);
+  color: var(--color-white);
+}
+
+/* =========================================
+   ACCESSIBILITY
+   ========================================= */
+
+:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 4px;
 }
