@@ -10,7 +10,6 @@
 
 .container {
   position: relative;
-  z-index: 2;
 
   display: grid;
   grid-template-columns:
@@ -134,7 +133,7 @@
 .annotation {
   position: absolute;
   top: 50%;
-  right: -7rem;
+  right: -11rem;
 
   color: var(--color-titanium-dark);
 
@@ -149,7 +148,7 @@
 .footer {
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: flex-end;
 
   gap: 2rem;
 }

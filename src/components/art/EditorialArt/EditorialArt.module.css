@@ -113,20 +113,6 @@
   transform: rotate(17deg);
 }
 
-/* Small archive detail */
-.issue {
-  position: absolute;
-  bottom: 3.5rem;
-  left: var(--page-padding-desktop);
-
-  color: var(--color-titanium-dark);
-
-  font-size: 0.57rem;
-  font-weight: 700;
-  line-height: 1.8;
-  letter-spacing: 0.17em;
-}
-
 /* Rotated side text */
 .verticalLabel {
   position: absolute;
@@ -212,11 +198,6 @@
   .titaniumLine,
   .verticalLabel {
     display: none;
-  }
-
-  .issue {
-    bottom: 1.5rem;
-    left: var(--page-padding-mobile);
   }
 
   .dotGrid {

@@ -14,11 +14,7 @@ export default function EditorialArt() {
 
       <span className={styles.cross}>×</span>
 
-      <span className={styles.issue}>
-        001
-        <br />
-        PERSONAL ARCHIVE
-      </span>
+
 
       <span className={styles.verticalLabel}>
         BUILD / LEARN / CREATE
