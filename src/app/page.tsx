@@ -1,18 +1,11 @@
 import Header from "@/components/layout/Header/Header";
+import Hero from "@/components/home/Hero/Hero";
 
 export default function Home() {
   return (
     <main>
       <Header />
-
-      <div
-        style={{
-          minHeight: "100vh",
-          padding: "10rem 2rem",
-        }}
-      >
-        <h1>Emma DA SILVA</h1>
-      </div>
+      <Hero />
     </main>
   );
 }

@@ -1,0 +1,464 @@
+.hero {
+  position: relative;
+
+  min-height: 100svh;
+
+  overflow: hidden;
+
+  background: var(--color-silver-white);
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+  grid-template-columns:
+    minmax(0, 0.95fr)
+    minmax(360px, 1.05fr);
+
+  width: min(
+    calc(100% - (var(--page-padding-desktop) * 2)),
+    var(--page-width)
+  );
+
+  min-height: 100svh;
+
+  margin: 0 auto;
+
+  padding-top: clamp(7.5rem, 13vh, 10rem);
+  padding-bottom: 3rem;
+
+  gap: clamp(3rem, 6vw, 7.5rem);
+}
+
+/* =========================================
+   LEFT SIDE
+   ========================================= */
+
+.copy {
+  position: relative;
+  z-index: 3;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  min-height: calc(100svh - 13rem);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+
+  gap: 0.75rem;
+
+  color: var(--color-titanium-dark);
+
+  font-size: 0.61rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.eyebrowLine {
+  width: 2rem;
+  height: 1px;
+
+  background: var(--color-blue);
+}
+
+.dot {
+  color: var(--color-blue);
+}
+
+.statement {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.statement h1 {
+  max-width: 650px;
+
+  margin: 0;
+
+  color: var(--color-ink);
+
+  font-size: clamp(2.8rem, 4.8vw, 5.15rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+
+.signatureWrap {
+  position: relative;
+
+  width: fit-content;
+
+  margin-top: clamp(0.8rem, 2vw, 1.7rem);
+  margin-left: clamp(2rem, 7vw, 7rem);
+}
+
+.signature {
+  position: relative;
+
+  z-index: 2;
+
+  margin: 0;
+
+  color: var(--color-blue);
+
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(3.2rem, 5.5vw, 5.8rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+}
+
+.signature::after {
+  position: absolute;
+
+  right: -1rem;
+  bottom: -0.6rem;
+  left: -0.8rem;
+
+  height: 1px;
+
+  background: var(--color-blue);
+
+  content: "";
+
+  transform: rotate(-2deg);
+}
+
+.annotation {
+  position: absolute;
+  top: 50%;
+  right: -7rem;
+
+  color: var(--color-titanium-dark);
+
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  transform: rotate(-8deg);
+}
+
+.footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 2rem;
+}
+
+.role {
+  margin: 0;
+
+  color: var(--color-titanium-dark);
+
+  font-size: 0.76rem;
+  line-height: 1.65;
+}
+
+.explore {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 0.9rem;
+
+  padding-bottom: 0.4rem;
+
+  border-bottom: 1px solid var(--color-blue);
+
+  color: var(--color-blue);
+
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.arrow {
+  display: inline-block;
+
+  font-size: 1rem;
+
+  transition: transform 300ms var(--ease-editorial);
+}
+
+.explore:hover .arrow {
+  transform: translate(4px, 4px);
+}
+
+/* =========================================
+   RIGHT SIDE
+   ========================================= */
+
+.visual {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+}
+
+.imageFrame {
+  position: relative;
+  z-index: 3;
+
+  width: min(100%, 540px);
+
+  aspect-ratio: 4 / 5;
+
+  overflow: hidden;
+
+  background: var(--color-titanium);
+}
+
+.portrait {
+  object-fit: cover;
+  object-position: center;
+
+  filter:
+    grayscale(100%)
+    contrast(1.04);
+}
+
+.titaniumFrame {
+  position: absolute;
+  z-index: 1;
+
+  width: min(100%, 540px);
+
+  aspect-ratio: 4 / 5;
+
+  border: 1px solid var(--color-titanium);
+
+  transform: translate(2rem, 2rem);
+}
+
+.photoCaption {
+  position: absolute;
+  z-index: 5;
+
+  right: max(0%, calc((100% - 540px) / 2));
+  bottom: 8%;
+
+  display: flex;
+  justify-content: space-between;
+
+  width: min(82%, 445px);
+
+  padding: 0.7rem 0.9rem;
+
+  background: var(--color-silver-white);
+
+  font-size: 0.54rem;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+}
+
+.blueSticker {
+  position: absolute;
+  z-index: 6;
+
+  top: 17%;
+  left: -1rem;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 0.8rem 1rem;
+
+  background: var(--color-blue);
+  color: var(--color-white);
+
+  font-size: 0.51rem;
+  font-weight: 700;
+  line-height: 1.65;
+  letter-spacing: 0.16em;
+
+  transform: rotate(-4deg);
+}
+
+.silverTag {
+  position: absolute;
+  z-index: 7;
+
+  right: -1rem;
+  bottom: 15%;
+
+  padding: 0.7rem 0.9rem;
+
+  border: 1px solid var(--color-titanium);
+
+  background: rgba(242, 243, 244, 0.9);
+  color: var(--color-ink);
+
+  font-size: 0.49rem;
+  font-weight: 800;
+  line-height: 1.65;
+  letter-spacing: 0.14em;
+
+  transform: rotate(3deg);
+}
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 1100px) {
+  .container {
+    grid-template-columns:
+      minmax(0, 0.9fr)
+      minmax(320px, 1.1fr);
+
+    gap: 2.5rem;
+  }
+
+  .statement h1 {
+    font-size: clamp(2.6rem, 5.6vw, 4.35rem);
+  }
+
+  .signatureWrap {
+    margin-left: 2rem;
+  }
+
+  .imageFrame,
+  .titaniumFrame {
+    width: min(100%, 460px);
+  }
+
+  .annotation {
+    display: none;
+  }
+}
+
+/* =========================================
+   TABLET PORTRAIT
+   ========================================= */
+
+@media (max-width: 820px) {
+  .hero {
+    min-height: auto;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+
+    width: calc(
+      100% - (var(--page-padding-tablet) * 2)
+    );
+
+    min-height: auto;
+
+    padding-top: 7.5rem;
+    padding-bottom: 7rem;
+
+    gap: 4.5rem;
+  }
+
+  .copy {
+    min-height: auto;
+  }
+
+  .statement {
+    margin: 4rem 0 3rem;
+  }
+
+  .statement h1 {
+    max-width: 600px;
+
+    font-size: clamp(3rem, 9vw, 5rem);
+  }
+
+  .signatureWrap {
+    margin-left: clamp(2rem, 15vw, 7rem);
+  }
+
+  .signature {
+    font-size: clamp(3.6rem, 12vw, 6.4rem);
+  }
+
+  .visual {
+    align-self: center;
+
+    width: min(88%, 570px);
+  }
+
+  .blueSticker {
+    left: -2rem;
+  }
+}
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 560px) {
+  .container {
+    width: calc(
+      100% - (var(--page-padding-mobile) * 2)
+    );
+
+    padding-top: 6.5rem;
+
+    gap: 3.5rem;
+  }
+
+  .eyebrow {
+    font-size: 0.54rem;
+  }
+
+  .statement {
+    margin-top: 3.5rem;
+  }
+
+  .statement h1 {
+    font-size: clamp(2.5rem, 11.5vw, 3.8rem);
+  }
+
+  .signatureWrap {
+    margin-left: 1.25rem;
+  }
+
+  .signature {
+    font-size: clamp(3.2rem, 15vw, 5rem);
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .visual {
+    width: 92%;
+  }
+
+  .titaniumFrame {
+    transform: translate(1rem, 1rem);
+  }
+
+  .blueSticker {
+    top: -1rem;
+    left: -0.75rem;
+  }
+
+  .silverTag {
+    right: -0.7rem;
+    bottom: 14%;
+  }
+
+  .photoCaption {
+    right: 0;
+    bottom: 4%;
+
+    width: 90%;
+  }
+}
