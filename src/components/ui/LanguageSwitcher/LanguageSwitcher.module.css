@@ -1,0 +1,45 @@
+.switcher {
+  display: flex;
+
+  height: 100%;
+
+  min-height: 3rem;
+
+  border-left:
+    1px solid
+    var(--color-border);
+}
+
+.option,
+.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.5rem;
+
+  font-size: 0.62rem;
+  font-weight: 700;
+
+  letter-spacing:
+    0.12em;
+
+  transition:
+    background-color
+      250ms ease,
+    color
+      250ms ease;
+}
+
+.option:hover {
+  background:
+    var(--color-surface-secondary);
+}
+
+.active {
+  background:
+    var(--color-text);
+
+  color:
+    var(--color-background);
+}

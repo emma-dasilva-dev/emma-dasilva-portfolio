@@ -1,10 +1,6 @@
 @import "tailwindcss";
 @import "../styles/tokens.css";
 
-/* =========================================
-   RESET
-   ========================================= */
-
 *,
 *::before,
 *::after {
@@ -16,23 +12,37 @@ html {
   scroll-behavior: smooth;
 }
 
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
 body {
+  min-width: 320px;
   min-height: 100vh;
+
   margin: 0;
 
-  background: var(--color-silver-white);
-  color: var(--color-ink);
+  overflow-x: hidden;
 
-  font-family: var(--font-manrope), Arial, sans-serif;
+  background: var(--color-background);
+  color: var(--color-text);
+
+  font-family:
+    var(--font-manrope),
+    Arial,
+    sans-serif;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
 
-/* =========================================
-   ELEMENT DEFAULTS
-   ========================================= */
+  transition:
+    background-color 350ms ease,
+    color 350ms ease;
+}
 
 h1,
 h2,
@@ -55,9 +65,10 @@ textarea {
 
 button {
   padding: 0;
+
   border: 0;
 
-  background: none;
+  background: transparent;
   color: inherit;
 
   cursor: pointer;
@@ -69,20 +80,25 @@ img {
   max-width: 100%;
 }
 
-/* =========================================
-   SELECTION
-   ========================================= */
-
 ::selection {
-  background: var(--color-blue);
-  color: var(--color-white);
+  background: var(--color-text);
+  color: var(--color-background);
 }
 
-/* =========================================
-   ACCESSIBILITY
-   ========================================= */
-
 :focus-visible {
-  outline: 2px solid var(--color-blue);
+  outline: 2px solid var(--color-text);
   outline-offset: 4px;
+}
+
+.site-shell {
+  position: relative;
+
+  isolation: isolate;
+
+  min-height: 100vh;
+}
+
+.page-layer {
+  position: relative;
+  z-index: 2;
 }
