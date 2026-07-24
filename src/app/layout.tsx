@@ -11,6 +11,10 @@ import {
 } from "next/font/google";
 
 import {
+  Analytics,
+} from "@vercel/analytics/next";
+
+import {
   LocaleProvider,
 } from "@/components/providers/LocaleProvider/LocaleProvider";
 
@@ -93,6 +97,7 @@ export default function RootLayout({
         <LocaleProvider>
           {children}
         </LocaleProvider>
+        <Analytics />
       </body>
     </html>
   );
