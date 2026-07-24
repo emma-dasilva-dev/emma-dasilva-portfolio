@@ -1,0 +1,187 @@
+.overlay {
+  position: fixed;
+  z-index: 98;
+
+  inset: 0;
+
+  visibility: hidden;
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition:
+    visibility 0s linear 450ms,
+    opacity 250ms ease;
+}
+
+.open {
+  visibility: visible;
+  opacity: 1;
+
+  pointer-events: auto;
+
+  transition-delay: 0s;
+}
+
+.backdrop {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background:
+    rgba(
+      9,
+      10,
+      11,
+      0.44
+    );
+
+  backdrop-filter:
+    blur(8px);
+
+  -webkit-backdrop-filter:
+    blur(8px);
+}
+
+.panel {
+  position: absolute;
+
+  top: 4.25rem;
+  right: var(--page-padding);
+  left: var(--page-padding);
+
+  max-height:
+    calc(
+      100svh -
+      5.25rem
+    );
+
+  overflow-y: auto;
+
+  border:
+    1px solid
+    var(--color-border);
+
+  background:
+    var(--color-background);
+
+  box-shadow:
+    var(--shadow-navigation);
+
+  transform:
+    translateY(-1rem);
+
+  transition:
+    transform
+      450ms
+      var(--ease-primary);
+}
+
+.open .panel {
+  transform:
+    translateY(0);
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  display: grid;
+
+  grid-template-columns:
+    2.25rem
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 1rem;
+
+  min-height: 4.6rem;
+
+  padding:
+    1rem
+    1.25rem;
+
+  border-bottom:
+    1px solid
+    var(--color-border);
+
+  transition:
+    padding-left
+      350ms
+      var(--ease-primary),
+    background-color
+      250ms ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  padding-left: 1.55rem;
+
+  background:
+    var(--color-surface-secondary);
+}
+
+.index {
+  color:
+    var(--color-text-muted);
+
+  font-size: 0.56rem;
+  font-weight: 700;
+
+  letter-spacing:
+    0.12em;
+}
+
+.label {
+  font-size:
+    clamp(
+      1.5rem,
+      6vw,
+      2.3rem
+    );
+
+  font-weight: 500;
+
+  letter-spacing:
+    -0.045em;
+}
+
+.arrow {
+  font-size: 0.9rem;
+
+  transition:
+    transform
+      350ms
+      var(--ease-primary);
+}
+
+.link:hover .arrow {
+  transform:
+    translate(
+      0.2rem,
+      0.2rem
+    );
+}
+
+.controls {
+  display: flex;
+
+  justify-content:
+    flex-end;
+
+  min-height: 2.8rem;
+}
+
+@media (max-width: 560px) {
+  .panel {
+    right: 0.75rem;
+    left: 0.75rem;
+  }
+}

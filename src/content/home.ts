@@ -4,7 +4,6 @@ import type {
   NavigationItem,
   Principle,
   Story,
-  ThreadMilestone,
 } from "@/types/portfolio";
 
 interface HomeCopy {
@@ -57,25 +56,37 @@ interface HomeCopy {
   };
 }
 
-export const HOME_COPY: Record<Locale, HomeCopy> = {
+export const HOME_COPY: Record<
+  Locale,
+  HomeCopy
+> = {
   en: {
     header: {
       menu: "MENU",
       close: "CLOSE",
-      primaryNavigation: "Primary navigation",
-      mobileNavigation: "Mobile navigation",
-      closeNavigation: "Close navigation menu",
+
+      primaryNavigation:
+        "Primary navigation",
+
+      mobileNavigation:
+        "Mobile navigation",
+
+      closeNavigation:
+        "Close navigation menu",
     },
 
     hero: {
-      eyebrow: "PORTFOLIO / 2026",
-      name: "EMMA DA SILVA",
+      eyebrow:
+        "PORTFOLIO / 2026",
+
+      name:
+        "EMMA DA SILVA",
 
       headlineLead:
-        "From concept to code, I build thoughtful digital experiences with",
+        "From concept to code, I build",
 
       headlineStrong:
-        "uncompromising quality.",
+        "thoughtful digital experiences.",
 
       supporting:
         "Front-end developer and emerging software engineer turning ideas into refined, responsive and purposeful digital products.",
@@ -91,8 +102,11 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
     },
 
     work: {
-      label: "SELECTED WORK",
-      title: "A few things I've built.",
+      label:
+        "SELECTED WORK",
+
+      title:
+        "A few things I've built.",
 
       intro:
         "Projects that pushed me to think beyond the first working version and consider the complete experience.",
@@ -102,7 +116,9 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
     },
 
     thinking: {
-      label: "HOW I THINK",
+      label:
+        "HOW I THINK",
+
       title:
         "The thinking behind the interface.",
 
@@ -122,7 +138,8 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
     },
 
     contact: {
-      label: "CONTACT",
+      label:
+        "CONTACT",
 
       title:
         "Have an idea, opportunity or problem worth solving?",
@@ -141,23 +158,29 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
     header: {
       menu: "MENU",
       close: "FERMER",
+
       primaryNavigation:
         "Navigation principale",
+
       mobileNavigation:
         "Navigation mobile",
+
       closeNavigation:
         "Fermer le menu de navigation",
     },
 
     hero: {
-      eyebrow: "PORTFOLIO / 2026",
-      name: "EMMA DA SILVA",
+      eyebrow:
+        "PORTFOLIO / 2026",
+
+      name:
+        "EMMA DA SILVA",
 
       headlineLead:
-        "De l’idée au code, je conçois des expériences numériques réfléchies avec",
+        "De l’idée au code, je construis",
 
       headlineStrong:
-        "une exigence de qualité sans compromis.",
+        "des expériences numériques réfléchies.",
 
       supporting:
         "Développeuse front-end et ingénieure logiciel en devenir, je transforme les idées en produits numériques soignés, responsifs et utiles.",
@@ -209,7 +232,8 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
     },
 
     contact: {
-      label: "CONTACT",
+      label:
+        "CONTACT",
 
       title:
         "Une idée, une opportunité ou un problème qui mérite d’être résolu ?",
@@ -228,6 +252,7 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
 export const NAV_ITEMS: NavigationItem[] = [
   {
     id: "work",
+
     label: {
       en: "WORK",
       fr: "PROJETS",
@@ -236,6 +261,7 @@ export const NAV_ITEMS: NavigationItem[] = [
 
   {
     id: "thinking",
+
     label: {
       en: "THINKING",
       fr: "RÉFLEXION",
@@ -244,6 +270,7 @@ export const NAV_ITEMS: NavigationItem[] = [
 
   {
     id: "stories",
+
     label: {
       en: "STORIES",
       fr: "HISTOIRES",
@@ -252,48 +279,7 @@ export const NAV_ITEMS: NavigationItem[] = [
 
   {
     id: "contact",
-    label: {
-      en: "CONTACT",
-      fr: "CONTACT",
-    },
-  },
-];
 
-export const THREAD_MILESTONES: ThreadMilestone[] = [
-  {
-    id: "home",
-    label: {
-      en: "INTRO",
-      fr: "INTRO",
-    },
-  },
-
-  {
-    id: "work",
-    label: {
-      en: "WORK",
-      fr: "PROJETS",
-    },
-  },
-
-  {
-    id: "thinking",
-    label: {
-      en: "THINKING",
-      fr: "RÉFLEXION",
-    },
-  },
-
-  {
-    id: "stories",
-    label: {
-      en: "STORIES",
-      fr: "HISTOIRES",
-    },
-  },
-
-  {
-    id: "contact",
     label: {
       en: "CONTACT",
       fr: "CONTACT",
@@ -347,7 +333,8 @@ export const PRINCIPLES: Principle[] = [
   },
 
   {
-    id: "beyond-first-version",
+    id:
+      "beyond-first-version",
 
     number: "03",
 
@@ -376,8 +363,11 @@ export const STORIES: Story[] = [
     number: "01",
 
     eyebrow: {
-      en: "THE EASIER PATH",
-      fr: "LE CHEMIN LE PLUS FACILE",
+      en:
+        "THE EASIER PATH",
+
+      fr:
+        "LE CHEMIN LE PLUS FACILE",
     },
 
     title: {
@@ -390,45 +380,47 @@ export const STORIES: Story[] = [
 
     body: {
       en:
-        "I chose literature because it felt safer than the calculations I wanted to avoid. Coding later taught me something I did not expect: difficulty is not always a warning to turn back. Sometimes it is simply the cost of becoming capable.",
+        "I chose literature because it felt safer than the calculations I wanted to avoid. Coding later taught me that difficulty is not always a warning to turn back. Sometimes it is simply evidence that I am learning something new.",
 
       fr:
-        "J’ai choisi la littérature parce qu’elle me semblait plus sûre que les calculs que je voulais éviter. Le code m’a ensuite appris quelque chose que je n’attendais pas : la difficulté n’est pas toujours un signal pour faire demi-tour. Parfois, c’est simplement le prix à payer pour devenir capable.",
+        "J’ai choisi la littérature parce qu’elle me semblait plus sûre que les calculs que je voulais éviter. Le code m’a ensuite appris que la difficulté n’est pas toujours un signal pour faire demi-tour. Parfois, elle prouve simplement que j’apprends quelque chose de nouveau.",
     },
   },
 
   {
-    id: "accidental-start",
+    id:
+      "curiosity-became-action",
 
     number: "02",
 
     eyebrow: {
       en:
-        "STARTING ALMOST ACCIDENTALLY",
+        "CURIOSITY BECAME ACTION",
 
       fr:
-        "COMMENCER PRESQUE PAR HASARD",
+        "QUAND LA CURIOSITÉ DEVIENT ACTION",
     },
 
     title: {
       en:
-        "Curiosity did what a perfect plan never could.",
+        "I began by giving my curiosity somewhere to go.",
 
       fr:
-        "La curiosité a fait ce qu’aucun plan parfait n’aurait pu faire.",
+        "J’ai commencé en donnant une direction à ma curiosité.",
     },
 
     body: {
       en:
-        "My mother had bought me a lifetime Tynker subscription years earlier. During a quiet period at home, I remembered it, opened it and started learning Python. There was no grand plan. I was simply curious enough to begin.",
+        "I kept seeing conversations about coding and programming, so I stopped treating the subject as something distant and began exploring it for myself. Small lessons gradually became real projects, and curiosity became commitment.",
 
       fr:
-        "Ma mère m’avait acheté un abonnement à vie à Tynker plusieurs années auparavant. Pendant une période plus calme à la maison, je m’en suis souvenue, je l’ai ouvert et j’ai commencé à apprendre Python. Il n’y avait aucun grand plan. J’étais simplement assez curieuse pour commencer.",
+        "Je voyais régulièrement des discussions autour du code et de la programmation. J’ai donc cessé de considérer ce domaine comme quelque chose de lointain et j’ai commencé à l’explorer par moi-même. De petites leçons sont progressivement devenues de vrais projets, et la curiosité s’est transformée en engagement.",
     },
   },
 
   {
-    id: "before-certainty",
+    id:
+      "before-certainty",
 
     number: "03",
 
@@ -458,7 +450,8 @@ export const STORIES: Story[] = [
   },
 
   {
-    id: "beyond-working",
+    id:
+      "beyond-working",
 
     number: "04",
 
@@ -530,4 +523,4 @@ export const CONTACT_LINKS: ContactLink[] = [
       fr: "LINKEDIN",
     },
   },
-];   
+];

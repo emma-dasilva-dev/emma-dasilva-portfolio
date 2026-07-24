@@ -1,10 +1,8 @@
 .header {
   position: fixed;
-
   z-index: 100;
 
   top: 1rem;
-
   left: 0;
 
   width: 100%;
@@ -18,17 +16,13 @@
 
 .bar {
   position: relative;
-
   z-index: 3;
 
   display: grid;
 
   grid-template-columns:
     auto
-    minmax(
-      0,
-      1fr
-    )
+    minmax(0, 1fr)
     auto;
 
   width:
@@ -54,9 +48,7 @@
     );
 
   box-shadow:
-    var(
-      --shadow-navigation
-    );
+    var(--shadow-navigation);
 
   backdrop-filter:
     blur(18px);
@@ -79,17 +71,12 @@
     1.2rem;
 
   background:
-    var(
-      --color-brand-background
-    );
+    var(--color-brand-background);
 
   color:
-    var(
-      --color-brand-text
-    );
+    var(--color-brand-text);
 
   font-size: 0.62rem;
-
   font-weight: 800;
 
   letter-spacing:
@@ -100,18 +87,15 @@
 
 .desktopNavigation {
   display: flex;
-
   align-items: stretch;
 
-  padding-left:
-    0.6rem;
+  padding-left: 0.6rem;
 }
 
 .navLink {
   position: relative;
 
   display: flex;
-
   align-items: center;
 
   padding:
@@ -123,12 +107,9 @@
     );
 
   color:
-    var(
-      --color-text-muted
-    );
+    var(--color-text-muted);
 
   font-size: 0.58rem;
-
   font-weight: 720;
 
   letter-spacing:
@@ -143,9 +124,7 @@
   position: absolute;
 
   right: 0.75rem;
-
   bottom: 0;
-
   left: 0.75rem;
 
   height: 1px;
@@ -190,14 +169,11 @@
     var(--color-border);
 }
 
-.mobileMenuButton,
-.mobilePanel {
+.mobileMenuButton {
   display: none;
 }
 
-@media (
-  max-width: 900px
-) {
+@media (max-width: 900px) {
   .header {
     top: 0.75rem;
   }
@@ -217,7 +193,6 @@
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     min-width: 4.8rem;
@@ -227,219 +202,14 @@
       var(--color-border);
 
     font-size: 0.58rem;
-
     font-weight: 800;
 
     letter-spacing:
       0.14em;
   }
-
-  .mobilePanel {
-    position: fixed;
-
-    z-index: 2;
-
-    inset: 0;
-
-    display: block;
-
-    visibility: hidden;
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    transition:
-      visibility
-        0s linear
-        420ms,
-      opacity
-        250ms ease;
-  }
-
-  .mobilePanelOpen {
-    visibility: visible;
-
-    opacity: 1;
-
-    pointer-events: auto;
-
-    transition-delay: 0s;
-  }
-
-  .mobileBackdrop {
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    background:
-      rgba(
-        9,
-        10,
-        11,
-        0.38
-      );
-
-    backdrop-filter:
-      blur(7px);
-
-    -webkit-backdrop-filter:
-      blur(7px);
-  }
-
-  .mobileSheet {
-    position: absolute;
-
-    top: 4.2rem;
-
-    right:
-      var(
-        --page-padding
-      );
-
-    left:
-      var(
-        --page-padding
-      );
-
-    max-height:
-      calc(
-        100svh -
-          5rem
-      );
-
-    overflow-y: auto;
-
-    border:
-      1px solid
-      var(--color-border);
-
-    background:
-      var(
-        --color-background
-      );
-
-    box-shadow:
-      var(
-        --shadow-navigation
-      );
-
-    transform:
-      translateY(
-        -0.8rem
-      );
-
-    transition:
-      transform
-        450ms
-        var(
-          --ease-primary
-        );
-  }
-
-  .mobilePanelOpen
-  .mobileSheet {
-    transform:
-      translateY(0);
-  }
-
-  .mobileNavigation {
-    display: flex;
-
-    flex-direction: column;
-  }
-
-  .mobileNavigation
-  a {
-    display: grid;
-
-    grid-template-columns:
-      2.25rem
-      1fr
-      auto;
-
-    align-items: center;
-
-    gap: 1rem;
-
-    padding:
-      1.15rem
-      1.25rem;
-
-    border-bottom:
-      1px solid
-      var(--color-border);
-
-    font-size:
-      clamp(
-        1.4rem,
-        6vw,
-        2.2rem
-      );
-
-    font-weight: 500;
-
-    letter-spacing:
-      -0.045em;
-
-    transition:
-      background-color
-        250ms ease,
-      padding-left
-        350ms
-        var(
-          --ease-primary
-        );
-  }
-
-  .mobileNavigation
-  a:hover {
-    padding-left:
-      1.5rem;
-
-    background:
-      var(
-        --color-surface-secondary
-      );
-  }
-
-  .mobileIndex {
-    color:
-      var(
-        --color-text-muted
-      );
-
-    font-size: 0.56rem;
-
-    font-weight: 700;
-
-    letter-spacing:
-      0.12em;
-  }
-
-  .mobileNavigation
-  a
-  > span:last-child {
-    font-size: 0.9rem;
-  }
-
-  .mobileControls {
-    display: flex;
-
-    justify-content:
-      flex-end;
-
-    min-height: 2.8rem;
-  }
 }
 
-@media (
-  max-width: 560px
-) {
+@media (max-width: 560px) {
   .header {
     padding:
       0
@@ -452,11 +222,5 @@
       1rem;
 
     font-size: 0.56rem;
-  }
-
-  .mobileSheet {
-    right: 0.75rem;
-
-    left: 0.75rem;
   }
 }

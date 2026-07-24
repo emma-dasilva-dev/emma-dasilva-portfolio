@@ -1,12 +1,10 @@
 .hero {
   position: relative;
-
   z-index: 2;
 
   display: flex;
 
-  min-height:
-    100svh;
+  min-height: 100svh;
 
   overflow: hidden;
 
@@ -22,7 +20,6 @@
 
 .grid {
   position: absolute;
-
   z-index: -1;
 
   inset: 0;
@@ -32,10 +29,8 @@
       to bottom,
       transparent 0,
       transparent 9px,
-      var(--color-grid)
-        9px,
-      var(--color-grid)
-        10px
+      var(--color-grid) 9px,
+      var(--color-grid) 10px
     );
 
   pointer-events: none;
@@ -45,14 +40,8 @@
   display: grid;
 
   grid-template-columns:
-    minmax(
-      0,
-      1.15fr
-    )
-    minmax(
-      330px,
-      0.85fr
-    );
+    minmax(0, 1.15fr)
+    minmax(330px, 0.85fr);
 
   align-items: center;
 
@@ -84,19 +73,16 @@
 
   min-height:
     min(
-      68vh,
-      640px
+      66vh,
+      610px
     );
 }
 
 .eyebrow {
   color:
-    var(
-      --color-text-muted
-    );
+    var(--color-text-muted);
 
   font-size: 0.62rem;
-
   font-weight: 720;
 
   letter-spacing:
@@ -104,17 +90,13 @@
 }
 
 .mainCopy {
-  max-width:
-    760px;
+  max-width: 740px;
 }
 
 .name {
-  margin-bottom:
-    1.4rem;
+  margin-bottom: 1.4rem;
 
-  font-size:
-    0.72rem;
-
+  font-size: 0.72rem;
   font-weight: 800;
 
   letter-spacing:
@@ -123,7 +105,6 @@
 
 .title {
   display: flex;
-
   flex-direction: column;
 
   gap: 0.12em;
@@ -132,9 +113,9 @@
 
   font-size:
     clamp(
-      3.2rem,
-      5.6vw,
-      5.8rem
+      3rem,
+      5vw,
+      5.2rem
     );
 
   font-weight: 430;
@@ -150,16 +131,12 @@
 }
 
 .supporting {
-  max-width:
-    39rem;
+  max-width: 38rem;
 
-  margin-top:
-    2rem;
+  margin-top: 2rem;
 
   color:
-    var(
-      --color-text-muted
-    );
+    var(--color-text-muted);
 
   font-size:
     clamp(
@@ -178,6 +155,8 @@
 
   gap: 0.8rem;
 
+  margin-top: 3rem;
+
   flex-wrap: wrap;
 }
 
@@ -186,9 +165,7 @@
   display: inline-flex;
 
   align-items: center;
-
-  justify-content:
-    space-between;
+  justify-content: space-between;
 
   min-height: 2.9rem;
 
@@ -197,7 +174,6 @@
     1.1rem;
 
   font-size: 0.62rem;
-
   font-weight: 750;
 
   letter-spacing:
@@ -220,21 +196,15 @@
   min-width: 11rem;
 
   background:
-    var(
-      --color-brand-background
-    );
+    var(--color-brand-background);
 
   color:
-    var(
-      --color-brand-text
-    );
+    var(--color-brand-text);
 }
 
 .primaryAction:hover {
   transform:
-    translateY(
-      -2px
-    );
+    translateY(-2px);
 }
 
 .secondaryAction {
@@ -245,23 +215,19 @@
 
 .secondaryAction:hover {
   background:
-    var(
-      --color-surface-secondary
-    );
+    var(--color-surface-secondary);
 }
 
 .portraitReveal {
   display: flex;
 
-  justify-content:
-    center;
+  justify-content: center;
 }
 
 .portraitStage {
   position: relative;
 
   display: grid;
-
   place-items: center;
 
   width:
@@ -279,9 +245,7 @@
 
   border:
     1px solid
-    var(
-      --color-border-strong
-    );
+    var(--color-border-strong);
 
   border-radius: 50%;
 
@@ -290,7 +254,6 @@
 
 .outerOrbit {
   width: 100%;
-
   height: 100%;
 
   opacity: 0.7;
@@ -302,13 +265,10 @@
 
 .innerOrbit {
   width: 84%;
-
   height: 84%;
 
   border-color:
-    var(
-      --color-thread
-    );
+    var(--color-thread);
 
   opacity: 0.32;
 
@@ -331,16 +291,12 @@
 
   border:
     1px solid
-    var(
-      --color-border-strong
-    );
+    var(--color-border-strong);
 
   border-radius: 50%;
 
   background:
-    var(
-      --color-surface-secondary
-    );
+    var(--color-surface-secondary);
 
   box-shadow:
     var(--shadow-image);
@@ -358,15 +314,11 @@
       circle at
         calc(
           50% +
-          var(
-            --portrait-x
-          )
+          var(--portrait-x)
         )
         calc(
           50% +
-          var(
-            --portrait-y
-          )
+          var(--portrait-y)
         ),
       rgba(
         255,
@@ -374,8 +326,7 @@
         255,
         0.12
       ),
-      transparent
-        42%
+      transparent 42%
     );
 
   content: "";
@@ -390,12 +341,8 @@
 
   transform:
     translate(
-      var(
-        --portrait-x
-      ),
-      var(
-        --portrait-y
-      )
+      var(--portrait-x),
+      var(--portrait-y)
     )
     scale(1.04);
 
@@ -407,28 +354,18 @@
 
 .portrait {
   object-fit: cover;
-
-  object-position:
-    center;
+  object-position: center;
 
   filter:
     grayscale(100%)
     contrast(1.05);
 }
 
-@media (
-  max-width: 1100px
-) {
+@media (max-width: 1100px) {
   .inner {
     grid-template-columns:
-      minmax(
-        0,
-        1.05fr
-      )
-      minmax(
-        300px,
-        0.75fr
-      );
+      minmax(0, 1.05fr)
+      minmax(300px, 0.75fr);
 
     gap: 3rem;
   }
@@ -436,52 +373,43 @@
   .title {
     font-size:
       clamp(
-        2.9rem,
-        5.5vw,
-        4.6rem
+        2.8rem,
+        5.2vw,
+        4.3rem
       );
   }
 
   .portraitStage {
-    max-width:
-      390px;
+    max-width: 390px;
   }
 }
 
-@media (
-  max-width: 820px
-) {
+@media (max-width: 820px) {
   .hero {
     min-height: auto;
 
-    padding-top:
-      8.5rem;
-
-    padding-bottom:
-      6rem;
+    padding-top: 8.5rem;
+    padding-bottom: 5rem;
   }
 
   .inner {
-    grid-template-columns:
-      1fr;
+    grid-template-columns: 1fr;
 
-    gap: 5rem;
+    gap: 4rem;
   }
 
   .copy {
-    min-height:
-      35rem;
+    min-height: auto;
   }
 
   .title {
-    max-width:
-      720px;
+    max-width: 720px;
 
     font-size:
       clamp(
-        3rem,
+        2.9rem,
         9vw,
-        5rem
+        4.8rem
       );
   }
 
@@ -498,9 +426,7 @@
   }
 }
 
-@media (
-  max-width: 560px
-) {
+@media (max-width: 560px) {
   .hero {
     padding:
       7.25rem
@@ -509,39 +435,33 @@
   }
 
   .inner {
-    gap: 3.5rem;
-  }
-
-  .copy {
-    min-height:
-      32rem;
+    gap: 3.25rem;
   }
 
   .title {
     font-size:
       clamp(
-        2.65rem,
-        12vw,
-        4rem
+        2.55rem,
+        11vw,
+        3.8rem
       );
   }
 
   .supporting {
-    font-size:
-      0.98rem;
+    font-size: 0.98rem;
   }
 
   .actions {
-    align-items:
-      stretch;
+    align-items: stretch;
+
+    margin-top: 2.5rem;
   }
 
   .primaryAction,
   .secondaryAction {
     flex: 1;
 
-    min-width:
-      9.5rem;
+    min-width: 9.5rem;
   }
 
   .portraitStage {
