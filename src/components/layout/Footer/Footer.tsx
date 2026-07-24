@@ -1,6 +1,11 @@
 "use client";
 
 import {
+  CONTACT_LINKS,
+  HOME_COPY,
+} from "@/content/home";
+
+import {
   useLocale,
 } from "@/components/providers/LocaleProvider/LocaleProvider";
 
@@ -9,7 +14,17 @@ import styles from "./Footer.module.css";
 export default function Footer() {
   const {
     locale,
-  } = useLocale();
+  } =
+    useLocale();
+
+  const copy =
+    HOME_COPY[
+      locale
+    ].footer;
+
+  const year =
+    new Date()
+      .getFullYear();
 
   return (
     <footer
@@ -32,12 +47,12 @@ export default function Footer() {
 
         <p
           className={
-            styles.statement
+            styles.motto
           }
         >
-          {locale === "en"
-            ? "If it's not exceptional, it's not finished."
-            : "Si ce n'est pas exceptionnel, ce n'est pas terminé."}
+          {
+            copy.motto
+          }
         </p>
 
         <div
@@ -45,22 +60,46 @@ export default function Footer() {
             styles.links
           }
         >
-          <a
-            href="https://github.com/emma-dasilva-dev"
-            target="_blank"
-            rel="noreferrer"
-          >
-            GitHub
-          </a>
-
-          <a
-            href="https://www.linkedin.com/in/emmadasilvadev"
-            target="_blank"
-            rel="noreferrer"
-          >
-            LinkedIn
-          </a>
+          {CONTACT_LINKS.map(
+            (
+              link,
+            ) => (
+              <a
+                key={
+                  link.id
+                }
+                href={
+                  link.href
+                }
+                target={
+                  link.external
+                    ? "_blank"
+                    : undefined
+                }
+                rel={
+                  link.external
+                    ? "noreferrer"
+                    : undefined
+                }
+              >
+                {
+                  link
+                    .label[
+                    locale
+                  ]
+                }
+              </a>
+            ),
+          )}
         </div>
+
+        <p
+          className={
+            styles.copyright
+          }
+        >
+          © {year}
+        </p>
       </div>
     </footer>
   );

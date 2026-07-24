@@ -14,39 +14,58 @@ type Theme =
 const STORAGE_KEY =
   "emma-portfolio-theme";
 
+function getCurrentTheme(): Theme {
+  return document
+    .documentElement
+    .dataset
+    .theme === "dark"
+      ? "dark"
+      : "light";
+}
+
 export default function ThemeToggle() {
-  const [theme, setTheme] =
-    useState<Theme>("light");
-
-  useEffect(() => {
-    const currentTheme =
-      document.documentElement
-        .dataset.theme ===
-      "dark"
-        ? "dark"
-        : "light";
-
-    setTheme(currentTheme);
-  }, []);
-
-  const toggleTheme = () => {
-    const nextTheme:
-      Theme =
-      theme === "light"
-        ? "dark"
-        : "light";
-
-    document.documentElement
-      .dataset.theme =
-      nextTheme;
-
-    localStorage.setItem(
-      STORAGE_KEY,
-      nextTheme,
+  const [
+    theme,
+    setTheme,
+  ] =
+    useState<Theme>(
+      "light",
     );
 
-    setTheme(nextTheme);
-  };
+  useEffect(() => {
+    setTheme(
+      getCurrentTheme(),
+    );
+  }, []);
+
+  const toggleTheme =
+    () => {
+      const nextTheme:
+        Theme =
+        theme ===
+        "light"
+          ? "dark"
+          : "light";
+
+      document
+        .documentElement
+        .dataset
+        .theme =
+        nextTheme;
+
+      try {
+        localStorage.setItem(
+          STORAGE_KEY,
+          nextTheme,
+        );
+      } catch {
+        // Local storage may be unavailable.
+      }
+
+      setTheme(
+        nextTheme,
+      );
+    };
 
   return (
     <button

@@ -16,12 +16,17 @@ import {
 
 import "./globals.css";
 
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable:
-    "--font-manrope",
-  display: "swap",
-});
+const manrope =
+  Manrope({
+    subsets: [
+      "latin",
+    ],
+
+    variable:
+      "--font-manrope",
+
+    display: "swap",
+  });
 
 const themeScript = `
   (() => {
@@ -49,21 +54,23 @@ const themeScript = `
   })();
 `;
 
-export const metadata: Metadata = {
-  title:
-    "Emma DA SILVA | Developer",
+export const metadata: Metadata =
+  {
+    title:
+      "Emma Da Silva | Developer",
 
-  description:
-    "Personal portfolio of Emma DA SILVA.",
-};
+    description:
+      "Portfolio of Emma Da Silva, a front-end developer and emerging software engineer building thoughtful digital products.",
+  };
 
-type RootLayoutProps = Readonly<{
-  children: ReactNode;
-}>;
+interface RootLayoutProps {
+  children:
+    ReactNode;
+}
 
 export default function RootLayout({
   children,
-}: RootLayoutProps) {
+}: Readonly<RootLayoutProps>) {
   return (
     <html
       lang="en"

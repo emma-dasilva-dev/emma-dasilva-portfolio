@@ -1,18 +1,20 @@
 .hero {
   position: relative;
+
   z-index: 2;
 
   display: flex;
 
-  min-height: 100svh;
+  min-height:
+    100svh;
 
   overflow: hidden;
 
   padding:
     clamp(
-      8rem,
-      14vh,
-      10rem
+      7.5rem,
+      13vh,
+      9rem
     )
     var(--page-padding)
     4rem;
@@ -29,185 +31,311 @@
     repeating-linear-gradient(
       to bottom,
       transparent 0,
-      transparent 31px,
+      transparent 9px,
       var(--color-grid)
-        32px
+        9px,
+      var(--color-grid)
+        10px
     );
 
   pointer-events: none;
 }
 
-.content {
+.inner {
   display: grid;
 
   grid-template-columns:
-    minmax(0, 1fr)
     minmax(
-      320px,
-      0.82fr
+      0,
+      1.15fr
+    )
+    minmax(
+      330px,
+      0.85fr
     );
 
   align-items: center;
 
-  width: min(
-    100%,
-    var(--page-width)
-  );
+  width:
+    min(
+      100%,
+      var(--page-width)
+    );
 
-  margin: 0 auto;
+  margin:
+    0
+    auto;
 
   gap:
     clamp(
       3rem,
       8vw,
-      9rem
+      8rem
     );
 }
 
 .copy {
   display: flex;
+
   flex-direction: column;
-  justify-content: space-between;
+
+  justify-content:
+    space-between;
 
   min-height:
     min(
-      65vh,
-      600px
+      68vh,
+      640px
     );
 }
 
 .eyebrow {
   color:
-    var(--color-text-muted);
+    var(
+      --color-text-muted
+    );
 
-  font-size: 0.61rem;
-  font-weight: 700;
+  font-size: 0.62rem;
+
+  font-weight: 720;
 
   letter-spacing:
     0.17em;
 }
 
+.mainCopy {
+  max-width:
+    760px;
+}
+
+.name {
+  margin-bottom:
+    1.4rem;
+
+  font-size:
+    0.72rem;
+
+  font-weight: 800;
+
+  letter-spacing:
+    0.19em;
+}
+
 .title {
   display: flex;
+
   flex-direction: column;
 
-  max-width: 680px;
+  gap: 0.12em;
 
-  color:
-    var(--color-text);
+  margin: 0;
 
   font-size:
     clamp(
-      3rem,
-      5vw,
-      4.8rem
+      3.2rem,
+      5.6vw,
+      5.8rem
     );
 
-  font-weight: 450;
+  font-weight: 430;
 
   line-height: 0.98;
 
   letter-spacing:
-    -0.06em;
+    -0.065em;
 }
 
-.finalLine {
+.title strong {
+  font-weight: 660;
+}
+
+.supporting {
+  max-width:
+    39rem;
+
   margin-top:
-    1.3rem;
+    2rem;
 
   color:
-    var(--color-text-muted);
+    var(
+      --color-text-muted
+    );
 
   font-size:
     clamp(
-      1.5rem,
-      2.8vw,
-      2.5rem
+      1rem,
+      1.35vw,
+      1.15rem
     );
 
-  font-weight: 350;
-
-  letter-spacing:
-    -0.04em;
+  line-height: 1.75;
 }
 
-.explore {
+.actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.8rem;
+
+  flex-wrap: wrap;
+}
+
+.primaryAction,
+.secondaryAction {
   display: inline-flex;
 
   align-items: center;
-  justify-content: space-between;
 
-  width: fit-content;
+  justify-content:
+    space-between;
 
-  min-width: 12rem;
+  min-height: 2.9rem;
 
   padding:
-    0.9rem
-    0;
+    0
+    1.1rem;
 
-  border-bottom:
-    1px solid
-    var(--color-text);
+  font-size: 0.62rem;
 
-  font-size: 0.67rem;
-  font-weight: 700;
+  font-weight: 750;
 
   letter-spacing:
-    0.11em;
+    0.1em;
 
   text-transform:
     uppercase;
 
   transition:
-    opacity
+    transform
+      300ms
+      var(--ease-primary),
+    background-color
+      250ms ease,
+    color
       250ms ease;
 }
 
-.explore span:last-child {
-  margin-left: 2rem;
+.primaryAction {
+  min-width: 11rem;
 
-  transition:
-    transform
-      350ms
-      var(--ease-primary);
-}
+  background:
+    var(
+      --color-brand-background
+    );
 
-.explore:hover {
-  opacity: 0.62;
-}
-
-.explore:hover
-  span:last-child {
-  transform:
-    translateY(
-      0.3rem
+  color:
+    var(
+      --color-brand-text
     );
 }
 
-.portraitArea {
-  position: relative;
-
-  display: flex;
-  justify-content: flex-end;
+.primaryAction:hover {
+  transform:
+    translateY(
+      -2px
+    );
 }
 
-.portraitFrame {
+.secondaryAction {
+  border:
+    1px solid
+    var(--color-border);
+}
+
+.secondaryAction:hover {
+  background:
+    var(
+      --color-surface-secondary
+    );
+}
+
+.portraitReveal {
+  display: flex;
+
+  justify-content:
+    center;
+}
+
+.portraitStage {
   position: relative;
+
+  display: grid;
+
+  place-items: center;
 
   width:
     min(
       100%,
-      440px
+      460px
     );
 
-  aspect-ratio:
-    4 / 5;
+  aspect-ratio: 1;
+}
+
+.outerOrbit,
+.innerOrbit {
+  position: absolute;
+
+  border:
+    1px solid
+    var(
+      --color-border-strong
+    );
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.outerOrbit {
+  width: 100%;
+
+  height: 100%;
+
+  opacity: 0.7;
+
+  transform:
+    rotate(-9deg)
+    scaleY(0.96);
+}
+
+.innerOrbit {
+  width: 84%;
+
+  height: 84%;
+
+  border-color:
+    var(
+      --color-thread
+    );
+
+  opacity: 0.32;
+
+  transform:
+    rotate(17deg)
+    scaleX(0.96);
+}
+
+.portraitFrame {
+  --portrait-x: 0px;
+  --portrait-y: 0px;
+
+  position: relative;
+
+  width: 73%;
+
+  aspect-ratio: 1;
 
   overflow: hidden;
 
   border:
     1px solid
-    var(--color-border);
+    var(
+      --color-border-strong
+    );
+
+  border-radius: 50%;
 
   background:
     var(
@@ -218,6 +346,65 @@
     var(--shadow-image);
 }
 
+.portraitFrame::after {
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: inherit;
+
+  background:
+    radial-gradient(
+      circle at
+        calc(
+          50% +
+          var(
+            --portrait-x
+          )
+        )
+        calc(
+          50% +
+          var(
+            --portrait-y
+          )
+        ),
+      rgba(
+        255,
+        255,
+        255,
+        0.12
+      ),
+      transparent
+        42%
+    );
+
+  content: "";
+
+  pointer-events: none;
+}
+
+.portraitInner {
+  position: absolute;
+
+  inset: -4%;
+
+  transform:
+    translate(
+      var(
+        --portrait-x
+      ),
+      var(
+        --portrait-y
+      )
+    )
+    scale(1.04);
+
+  transition:
+    transform
+      400ms
+      var(--ease-primary);
+}
+
 .portrait {
   object-fit: cover;
 
@@ -226,23 +413,21 @@
 
   filter:
     grayscale(100%)
-    contrast(1.04);
+    contrast(1.05);
 }
-
-/* Laptop / smaller desktop */
 
 @media (
   max-width: 1100px
 ) {
-  .content {
+  .inner {
     grid-template-columns:
       minmax(
         0,
-        1fr
+        1.05fr
       )
       minmax(
         300px,
-        0.8fr
+        0.75fr
       );
 
     gap: 3rem;
@@ -251,19 +436,17 @@
   .title {
     font-size:
       clamp(
-        2.7rem,
+        2.9rem,
         5.5vw,
-        4rem
+        4.6rem
       );
   }
 
-  .portraitFrame {
+  .portraitStage {
     max-width:
       390px;
   }
 }
-
-/* Tablet */
 
 @media (
   max-width: 820px
@@ -272,13 +455,13 @@
     min-height: auto;
 
     padding-top:
-      9rem;
+      8.5rem;
 
     padding-bottom:
       6rem;
   }
 
-  .content {
+  .inner {
     grid-template-columns:
       1fr;
 
@@ -287,10 +470,13 @@
 
   .copy {
     min-height:
-      34rem;
+      35rem;
   }
 
   .title {
+    max-width:
+      720px;
+
     font-size:
       clamp(
         3rem,
@@ -299,64 +485,70 @@
       );
   }
 
-  .portraitArea {
-    justify-content:
-      center;
-  }
-
-  .portraitFrame {
+  .portraitStage {
     width:
       min(
-        75vw,
+        78vw,
         480px
       );
+
+    margin:
+      0
+      auto;
   }
 }
-
-/* Mobile */
 
 @media (
   max-width: 560px
 ) {
   .hero {
-    padding-top:
-      7.5rem;
-
-    padding-bottom:
+    padding:
+      7.25rem
+      1.25rem
       4.5rem;
   }
 
-  .content {
+  .inner {
     gap: 3.5rem;
   }
 
   .copy {
     min-height:
-      29rem;
+      32rem;
   }
 
   .title {
     font-size:
       clamp(
-        2.6rem,
+        2.65rem,
         12vw,
         4rem
       );
-
-    letter-spacing:
-      -0.055em;
   }
 
-  .finalLine {
+  .supporting {
     font-size:
-      clamp(
-        1.4rem,
-        7vw,
-        2rem
-      );
+      0.98rem;
   }
 
-  .portraitFrame {
-    width: 100%;
+  .actions {
+    align-items:
+      stretch;
+  }
+
+  .primaryAction,
+  .secondaryAction {
+    flex: 1;
+
+    min-width:
+      9.5rem;
+  }
+
+  .portraitStage {
+    width:
+      min(
+        88vw,
+        390px
+      );
   }
 }

@@ -10,45 +10,49 @@ export default function LanguageSwitcher() {
   const {
     locale,
     setLocale,
-  } = useLocale();
+  } =
+    useLocale();
 
   return (
     <div
       className={
         styles.switcher
       }
+      role="group"
       aria-label="Language"
     >
       <button
         type="button"
-        className={
+        className={`${styles.option} ${
           locale === "en"
             ? styles.active
-            : styles.option
-        }
+            : ""
+        }`}
         onClick={() =>
           setLocale("en")
         }
         aria-pressed={
           locale === "en"
         }
+        aria-label="English"
       >
         EN
       </button>
 
       <button
         type="button"
-        className={
+        className={`${styles.option} ${
           locale === "fr"
             ? styles.active
-            : styles.option
-        }
+            : ""
+        }`}
         onClick={() =>
           setLocale("fr")
         }
         aria-pressed={
           locale === "fr"
         }
+        aria-label="Français"
       >
         FR
       </button>

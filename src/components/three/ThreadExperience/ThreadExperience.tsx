@@ -7,13 +7,31 @@ import {
 
 import * as THREE from "three";
 
+import {
+  THREAD_MILESTONES,
+} from "@/content/home";
+
+import {
+  useLocale,
+} from "@/components/providers/LocaleProvider/LocaleProvider";
+
+import {
+  useActiveSection,
+} from "@/hooks/useActiveSection";
+
 import styles from "./ThreadExperience.module.css";
 
+const SECTION_IDS =
+  THREAD_MILESTONES.map(
+    (
+      milestone,
+    ) =>
+      milestone.id,
+  );
+
 function readColor(
-  variable:
-    string,
-  fallback:
-    string,
+  variable: string,
+  fallback: string,
 ) {
   const value =
     getComputedStyle(
@@ -36,6 +54,17 @@ export default function ThreadExperience() {
       null,
     );
 
+  const {
+    locale,
+  } =
+    useLocale();
+
+  const activeSection =
+    useActiveSection(
+      SECTION_IDS,
+      "home",
+    );
+
   useEffect(() => {
     const canvas =
       canvasRef.current;
@@ -56,14 +85,14 @@ export default function ThreadExperience() {
         100,
       );
 
-    camera.position.z =
-      10;
-
     const renderer =
       new THREE.WebGLRenderer({
         canvas,
+
         alpha: true,
+
         antialias: true,
+
         powerPreference:
           "high-performance",
       });
@@ -80,7 +109,7 @@ export default function ThreadExperience() {
       THREE.ACESFilmicToneMapping;
 
     renderer.toneMappingExposure =
-      1;
+      1.05;
 
     renderer.setPixelRatio(
       Math.min(
@@ -89,83 +118,83 @@ export default function ThreadExperience() {
       ),
     );
 
-    /*
-     * The curve is deliberately longer
-     * than one viewport.
-     *
-     * Scroll movement exposes different
-     * parts of it over time.
-     */
-
     const curve =
       new THREE.CatmullRomCurve3(
         [
           new THREE.Vector3(
-            0.5,
-            6,
+            2.8,
+            4.3,
             -0.6,
           ),
 
           new THREE.Vector3(
-            2.3,
-            4.8,
+            4,
+            3.3,
             0.25,
           ),
 
           new THREE.Vector3(
-            1.4,
-            3.4,
-            -0.1,
+            3.05,
+            2.2,
+            -0.25,
           ),
 
           new THREE.Vector3(
-            2.8,
-            2,
+            4.25,
+            1.2,
             0.5,
           ),
 
           new THREE.Vector3(
-            1.7,
-            0.4,
-            -0.3,
+            3,
+            0.1,
+            -0.2,
           ),
 
           new THREE.Vector3(
-            2.5,
-            -1.3,
+            4,
+            -1.1,
             0.4,
           ),
 
           new THREE.Vector3(
-            0.8,
-            -2.9,
+            2.8,
+            -2.2,
             -0.4,
           ),
 
           new THREE.Vector3(
-            1.8,
-            -4.5,
+            3.8,
+            -3.3,
             0.2,
           ),
 
           new THREE.Vector3(
-            -0.8,
-            -6.2,
+            2.6,
+            -4.5,
             -0.5,
           ),
         ],
+
         false,
+
         "centripetal",
       );
 
     const geometry =
       new THREE.TubeGeometry(
         curve,
-        260,
-        0.048,
-        12,
+        320,
+        0.06,
+        14,
         false,
       );
+
+    const maximumDrawCount =
+      geometry.index
+        ?.count ??
+      geometry.attributes
+        .position.count;
 
     const material =
       new THREE.MeshPhysicalMaterial({
@@ -175,18 +204,18 @@ export default function ThreadExperience() {
             "#4b5055",
           ),
 
-        metalness: 0.94,
+        metalness: 0.95,
 
-        roughness: 0.3,
+        roughness: 0.28,
 
-        clearcoat: 0.22,
+        clearcoat: 0.24,
 
         clearcoatRoughness:
-          0.35,
+          0.34,
 
         transparent: true,
 
-        opacity: 0.9,
+        opacity: 0.94,
       });
 
     const thread =
@@ -198,24 +227,28 @@ export default function ThreadExperience() {
     const group =
       new THREE.Group();
 
-    group.add(thread);
+    group.add(
+      thread,
+    );
 
-    scene.add(group);
+    scene.add(
+      group,
+    );
 
     const ambientLight =
       new THREE.AmbientLight(
         0xffffff,
-        1.25,
+        1.4,
       );
 
     const keyLight =
       new THREE.DirectionalLight(
         0xffffff,
-        3.3,
+        3.6,
       );
 
     keyLight.position.set(
-      3,
+      4,
       5,
       6,
     );
@@ -223,7 +256,7 @@ export default function ThreadExperience() {
     const fillLight =
       new THREE.DirectionalLight(
         0xffffff,
-        1.35,
+        1.5,
       );
 
     fillLight.position.set(
@@ -238,47 +271,56 @@ export default function ThreadExperience() {
       fillLight,
     );
 
-    /*
-     * Scroll values.
-     */
+    let targetProgress =
+      0;
 
-    let targetProgress = 0;
-    let currentProgress = 0;
-
-    /*
-     * Pointer movement stays extremely
-     * restrained.
-     */
+    let currentProgress =
+      0;
 
     let pointerX = 0;
+
     let pointerY = 0;
+
+    let baseX = 0;
+
+    let baseScale = 1;
 
     const reducedMotion =
       window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
 
-    let baseX = 1.2;
-    let baseScale = 1;
+    const finePointer =
+      window.matchMedia(
+        "(pointer: fine)",
+      ).matches;
 
-    const calculateScroll =
+    const updateScroll =
       () => {
-        const total =
+        const scrollHeight =
           document.documentElement
             .scrollHeight -
           window.innerHeight;
 
         targetProgress =
-          total > 0
-            ? Math.min(
+          scrollHeight > 0
+            ? THREE.MathUtils.clamp(
+                window.scrollY /
+                  scrollHeight,
+                0,
                 1,
-                Math.max(
-                  0,
-                  window.scrollY /
-                    total,
-                ),
               )
             : 0;
+      };
+
+    const updateTheme =
+      () => {
+        material.color.set(
+          readColor(
+            "--color-thread",
+            "#4b5055",
+          ),
+        );
       };
 
     const handlePointerMove =
@@ -287,7 +329,8 @@ export default function ThreadExperience() {
           PointerEvent,
       ) => {
         if (
-          reducedMotion
+          reducedMotion ||
+          !finePointer
         ) {
           return;
         }
@@ -301,16 +344,6 @@ export default function ThreadExperience() {
           event.clientY /
             window.innerHeight -
           0.5;
-      };
-
-    const updateTheme =
-      () => {
-        material.color.set(
-          readColor(
-            "--color-thread",
-            "#4b5055",
-          ),
-        );
       };
 
     const handleResize =
@@ -339,29 +372,35 @@ export default function ThreadExperience() {
           camera.position.z =
             10;
 
-          baseX = 1.35;
           baseScale = 1;
+
+          baseX = 0;
         } else if (
           width >= 700
         ) {
           camera.position.z =
-            10.8;
+            10.5;
 
-          baseX = 0.8;
-          baseScale =
-            0.92;
+          baseScale = 0.68;
+
+          baseX = -0.45;
         } else {
           camera.position.z =
-            11.6;
+            10.8;
 
-          baseX = 0.4;
-          baseScale =
-            0.78;
+          baseScale = 0.58;
+
+          baseX = -1;
         }
 
         group.scale.setScalar(
           baseScale,
         );
+
+        group.position.x =
+          baseX;
+
+        updateScroll();
       };
 
     const themeObserver =
@@ -373,6 +412,7 @@ export default function ThreadExperience() {
       document.documentElement,
       {
         attributes: true,
+
         attributeFilter: [
           "data-theme",
         ],
@@ -381,7 +421,7 @@ export default function ThreadExperience() {
 
     window.addEventListener(
       "scroll",
-      calculateScroll,
+      updateScroll,
       {
         passive: true,
       },
@@ -400,11 +440,14 @@ export default function ThreadExperience() {
       },
     );
 
-    calculateScroll();
     handleResize();
+
     updateTheme();
 
-    let frameId = 0;
+    updateScroll();
+
+    let animationFrame =
+      0;
 
     const animate =
       () => {
@@ -415,42 +458,61 @@ export default function ThreadExperience() {
           ) *
           0.055;
 
-        /*
-         * The Thread moves through the
-         * document according to scroll.
-         */
+        const revealProgress =
+          THREE.MathUtils.clamp(
+            0.18 +
+              currentProgress *
+                0.82,
+            0,
+            1,
+          );
+
+        const visibleCount =
+          Math.floor(
+            (
+              maximumDrawCount *
+              revealProgress
+            ) /
+              6,
+          ) *
+          6;
+
+        geometry.setDrawRange(
+          0,
+          visibleCount,
+        );
 
         group.position.x =
           baseX +
           Math.sin(
             currentProgress *
               Math.PI *
-              1.7,
+              1.5,
           ) *
-            0.42;
+            0.14;
 
         group.position.y =
-          -0.5 +
-          currentProgress *
-            5.2;
-
-        /*
-         * Small depth and direction
-         * changes as the visitor scrolls.
-         */
+          THREE.MathUtils.lerp(
+            0.45,
+            -0.55,
+            currentProgress,
+          );
 
         group.rotation.z =
-          -0.08 +
-          currentProgress *
-            0.32;
+          THREE.MathUtils.lerp(
+            -0.05,
+            0.17,
+            currentProgress,
+          );
 
         if (
-          !reducedMotion
+          !reducedMotion &&
+          finePointer
         ) {
           group.rotation.x +=
             (
               pointerY *
-                0.045 -
+                0.035 -
               group.rotation.x
             ) *
             0.025;
@@ -458,41 +520,32 @@ export default function ThreadExperience() {
           group.rotation.y +=
             (
               pointerX *
-                0.07 -
+                0.055 -
               group.rotation.y
             ) *
             0.025;
         }
 
-        /*
-         * Fade quietly near the footer.
-         */
-
-        if (
+        material.opacity =
           currentProgress >
-          0.84
-        ) {
-          material.opacity =
-            Math.max(
-              0.12,
-              0.9 -
+          0.9
+            ? THREE.MathUtils.lerp(
+                0.94,
+                0.4,
                 (
                   currentProgress -
-                  0.84
-                ) *
-                  4.5,
-            );
-        } else {
-          material.opacity =
-            0.9;
-        }
+                  0.9
+                ) /
+                  0.1,
+              )
+            : 0.94;
 
         renderer.render(
           scene,
           camera,
         );
 
-        frameId =
+        animationFrame =
           requestAnimationFrame(
             animate,
           );
@@ -502,12 +555,12 @@ export default function ThreadExperience() {
 
     return () => {
       cancelAnimationFrame(
-        frameId,
+        animationFrame,
       );
 
       window.removeEventListener(
         "scroll",
-        calculateScroll,
+        updateScroll,
       );
 
       window.removeEventListener(
@@ -531,20 +584,71 @@ export default function ThreadExperience() {
   }, []);
 
   return (
-    <div
-      className={
-        styles.thread
-      }
-      aria-hidden="true"
-    >
-      <canvas
-        ref={
-          canvasRef
-        }
+    <>
+      <div
         className={
-          styles.canvas
+          styles.threadLayer
         }
-      />
-    </div>
+        aria-hidden="true"
+      >
+        <canvas
+          ref={
+            canvasRef
+          }
+          className={
+            styles.canvas
+          }
+        />
+      </div>
+
+      <div
+        className={
+          styles.milestones
+        }
+        aria-hidden="true"
+      >
+        {THREAD_MILESTONES.map(
+          (
+            milestone,
+          ) => {
+            const active =
+              milestone.id ===
+              activeSection;
+
+            return (
+              <div
+                key={
+                  milestone.id
+                }
+                className={`${styles.milestone} ${
+                  active
+                    ? styles.active
+                    : ""
+                }`}
+              >
+                <span
+                  className={
+                    styles.dot
+                  }
+                />
+
+                <span
+                  className={
+                    styles.milestoneLabel
+                  }
+                >
+                  {
+                    milestone
+                      .label[
+                      locale
+                    ]
+                  }
+                </span>
+              </div>
+            );
+          },
+        )}
+      </div>
+    </>
   );
 }

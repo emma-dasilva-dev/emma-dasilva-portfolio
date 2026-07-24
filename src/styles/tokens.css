@@ -1,91 +1,165 @@
 :root {
-  /* =========================================
-     LIGHT THEME
-     ========================================= */
+  --color-background:
+    #f4f4f1;
 
-  --color-background: #f4f4f1;
-  --color-surface: #ffffff;
-  --color-surface-secondary: #ebece9;
+  --color-surface:
+    #ffffff;
 
-  --color-text: #090a0b;
-  --color-text-muted: #6f7478;
+  --color-surface-secondary:
+    #e9eae7;
 
-  --color-border: #d6d8d5;
-  --color-grid: rgba(9, 10, 11, 0.055);
+  --color-text:
+    #090a0b;
 
-  /* =========================================
-     NAVIGATION
-     ========================================= */
+  --color-text-muted:
+    #6f7478;
 
-  --color-brand-background: #090a0b;
-  --color-brand-text: #f4f4f1;
+  --color-border:
+    #d6d8d5;
 
-  /* =========================================
-     TITANIUM THREAD
-     ========================================= */
+  --color-border-strong:
+    #aeb2b4;
 
-  --color-thread: #4b5055;
-  --color-thread-highlight: #c4c8cc;
+  --color-grid:
+    rgba(
+      9,
+      10,
+      11,
+      0.045
+    );
 
-  /* =========================================
-     INTERACTION
-     ========================================= */
+  --color-brand-background:
+    #090a0b;
 
-  --color-hover: #1f2225;
+  --color-brand-text:
+    #f4f4f1;
 
-  /* =========================================
-     SHADOWS
-     ========================================= */
-
-  --shadow-image:
-    0 30px 80px rgba(9, 10, 11, 0.13);
+  --color-thread:
+    #555b60;
 
   --shadow-navigation:
-    0 12px 35px rgba(9, 10, 11, 0.06);
+    0
+    12px
+    36px
+    rgba(
+      9,
+      10,
+      11,
+      0.06
+    );
 
-  /* =========================================
-     LAYOUT
-     ========================================= */
+  --shadow-image:
+    0
+    28px
+    80px
+    rgba(
+      9,
+      10,
+      11,
+      0.14
+    );
 
-  --page-width: 1440px;
+  --shadow-card-hover:
+    0
+    24px
+    70px
+    rgba(
+      9,
+      10,
+      11,
+      0.09
+    );
+
+  --page-width:
+    1440px;
 
   --page-padding:
-    clamp(1.25rem, 4vw, 4.5rem);
-
-  /* =========================================
-     MOTION
-     ========================================= */
+    clamp(
+      1.25rem,
+      4vw,
+      4.5rem
+    );
 
   --ease-primary:
-    cubic-bezier(0.22, 1, 0.36, 1);
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
 }
 
-/* =========================================
-   DARK THEME
-   ========================================= */
+:root[
+  data-theme="dark"
+] {
+  --color-background:
+    #090a0b;
 
-:root[data-theme="dark"] {
-  --color-background: #090a0b;
-  --color-surface: #111315;
-  --color-surface-secondary: #16191b;
+  --color-surface:
+    #111315;
 
-  --color-text: #f1f2ef;
-  --color-text-muted: #92979c;
+  --color-surface-secondary:
+    #16191b;
 
-  --color-border: #2c2f31;
-  --color-grid: rgba(241, 242, 239, 0.055);
+  --color-text:
+    #f1f2ef;
 
-  --color-brand-background: #f1f2ef;
-  --color-brand-text: #090a0b;
+  --color-text-muted:
+    #969b9f;
 
-  --color-thread: #c8ccd0;
-  --color-thread-highlight: #f1f2f3;
+  --color-border:
+    #2b2e30;
 
-  --color-hover: #ffffff;
+  --color-border-strong:
+    #5b6064;
 
-  --shadow-image:
-    0 30px 90px rgba(0, 0, 0, 0.38);
+  --color-grid:
+    rgba(
+      241,
+      242,
+      239,
+      0.042
+    );
+
+  --color-brand-background:
+    #f1f2ef;
+
+  --color-brand-text:
+    #090a0b;
+
+  --color-thread:
+    #c9cdd1;
 
   --shadow-navigation:
-    0 12px 40px rgba(0, 0, 0, 0.3);
+    0
+    12px
+    40px
+    rgba(
+      0,
+      0,
+      0,
+      0.32
+    );
+
+  --shadow-image:
+    0
+    30px
+    90px
+    rgba(
+      0,
+      0,
+      0,
+      0.42
+    );
+
+  --shadow-card-hover:
+    0
+    26px
+    80px
+    rgba(
+      0,
+      0,
+      0,
+      0.32
+    );
 }

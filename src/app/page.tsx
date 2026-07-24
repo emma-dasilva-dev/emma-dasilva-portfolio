@@ -1,10 +1,16 @@
-import Footer from "@/components/layout/Footer/Footer";
-
-import Header from "@/components/layout/Header/Header";
+import Contact from "@/components/home/Contact/Contact";
 
 import Hero from "@/components/home/Hero/Hero";
 
-import HomeSections from "@/components/home/HomeSections/HomeSections";
+import HowIThink from "@/components/home/HowIThink/HowIThink";
+
+import SelectedWork from "@/components/home/SelectedWork/SelectedWork";
+
+import Stories from "@/components/home/Stories/Stories";
+
+import Footer from "@/components/layout/Footer/Footer";
+
+import Header from "@/components/layout/Header/Header";
 
 import ThreadExperience from "@/components/three/ThreadExperience/ThreadExperience";
 
@@ -22,7 +28,13 @@ export default function Home() {
       >
         <Hero />
 
-        <HomeSections />
+        <SelectedWork />
+
+        <HowIThink />
+
+        <Stories />
+
+        <Contact />
 
         <Footer />
       </div>

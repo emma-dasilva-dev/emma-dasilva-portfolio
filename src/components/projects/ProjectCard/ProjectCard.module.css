@@ -1,0 +1,366 @@
+.card {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-height: 100%;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(--color-border);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--color-background)
+        93%,
+      transparent
+    );
+
+  transition:
+    transform
+      500ms
+      var(--ease-primary),
+    border-color
+      300ms ease,
+    box-shadow
+      500ms
+      var(--ease-primary);
+}
+
+.card:hover {
+  transform:
+    translateY(
+      -0.4rem
+    );
+
+  border-color:
+    var(
+      --color-border-strong
+    );
+
+  box-shadow:
+    var(
+      --shadow-card-hover
+    );
+}
+
+.visual {
+  position: relative;
+
+  aspect-ratio:
+    16 / 10;
+
+  overflow: hidden;
+
+  background:
+    var(
+      --color-surface-secondary
+    );
+}
+
+.image {
+  object-fit: cover;
+
+  transition:
+    transform
+      850ms
+      var(--ease-primary),
+    filter
+      500ms ease;
+}
+
+.card:hover
+.image {
+  transform:
+    scale(1.035);
+}
+
+.visualOverlay {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(
+        9,
+        10,
+        11,
+        0.28
+      ),
+      transparent
+        48%
+    );
+
+  opacity: 0;
+
+  transition:
+    opacity
+      350ms ease;
+}
+
+.card:hover
+.visualOverlay {
+  opacity: 1;
+}
+
+.placeholder {
+  display: grid;
+
+  place-items: center;
+
+  width: 100%;
+
+  height: 100%;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      var(
+        --color-surface-secondary
+      )
+        0,
+      var(
+        --color-surface-secondary
+      )
+        9px,
+      var(
+        --color-grid
+      )
+        10px
+    );
+
+  color:
+    var(
+      --color-text-muted
+    );
+
+  font-size:
+    clamp(
+      1.4rem,
+      4vw,
+      2.5rem
+    );
+
+  font-weight: 500;
+
+  letter-spacing:
+    -0.04em;
+}
+
+.liveIndicator {
+  position: absolute;
+
+  right: 1rem;
+
+  bottom: 1rem;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.8rem;
+
+  min-height: 2.2rem;
+
+  padding:
+    0
+    0.8rem;
+
+  background:
+    var(
+      --color-brand-background
+    );
+
+  color:
+    var(
+      --color-brand-text
+    );
+
+  font-size: 0.54rem;
+
+  font-weight: 750;
+
+  letter-spacing:
+    0.09em;
+
+  text-transform:
+    uppercase;
+
+  transform:
+    translateY(
+      0.3rem
+    );
+
+  opacity: 0;
+
+  transition:
+    opacity
+      350ms ease,
+    transform
+      450ms
+      var(
+        --ease-primary
+      );
+}
+
+.card:hover
+.liveIndicator {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+.content {
+  display: flex;
+
+  flex: 1;
+
+  flex-direction: column;
+
+  padding:
+    1.4rem;
+}
+
+.meta {
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  gap: 1rem;
+
+  color:
+    var(
+      --color-text-muted
+    );
+
+  font-size: 0.56rem;
+
+  font-weight: 700;
+
+  line-height: 1.4;
+
+  letter-spacing:
+    0.09em;
+
+  text-transform:
+    uppercase;
+}
+
+.title {
+  margin-top:
+    2rem;
+
+  font-size:
+    clamp(
+      1.8rem,
+      3vw,
+      2.7rem
+    );
+
+  font-weight: 520;
+
+  letter-spacing:
+    -0.055em;
+
+  transition:
+    transform
+      400ms
+      var(--ease-primary);
+}
+
+.card:hover
+.title {
+  transform:
+    translateX(
+      0.18rem
+    );
+}
+
+.summary {
+  margin-top:
+    1.2rem;
+
+  color:
+    var(
+      --color-text-muted
+    );
+
+  line-height: 1.7;
+}
+
+.role {
+  margin-top:
+    1.4rem;
+
+  font-size: 0.68rem;
+
+  font-weight: 650;
+
+  line-height: 1.5;
+
+  letter-spacing:
+    0.04em;
+}
+
+.technologies {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap:
+    0.45rem;
+
+  margin:
+    auto
+    0
+    0;
+
+  padding:
+    2rem
+    0
+    0;
+
+  list-style: none;
+}
+
+.technologies
+li {
+  padding:
+    0.4rem
+    0.55rem;
+
+  border:
+    1px solid
+    var(--color-border);
+
+  color:
+    var(
+      --color-text-muted
+    );
+
+  font-size: 0.54rem;
+
+  font-weight: 680;
+
+  letter-spacing:
+    0.06em;
+}
+
+@media (
+  hover: none
+) {
+  .liveIndicator {
+    opacity: 1;
+
+    transform: none;
+  }
+}

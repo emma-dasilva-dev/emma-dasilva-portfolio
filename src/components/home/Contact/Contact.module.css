@@ -1,0 +1,191 @@
+.section {
+  position: relative;
+
+  z-index: 2;
+
+  padding:
+    clamp(
+      7rem,
+      13vw,
+      12rem
+    )
+    var(--page-padding);
+
+  border-top:
+    1px solid
+    var(--color-border);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--color-background)
+        94%,
+      transparent
+    );
+
+  backdrop-filter:
+    blur(4px);
+}
+
+.inner {
+  width:
+    min(
+      100%,
+      var(--page-width)
+    );
+
+  margin:
+    0
+    auto;
+}
+
+.content {
+  display: grid;
+
+  grid-template-columns:
+    minmax(
+      0,
+      1.4fr
+    )
+    minmax(
+      260px,
+      0.6fr
+    );
+
+  align-items: end;
+
+  gap:
+    clamp(
+      3rem,
+      8vw,
+      8rem
+    );
+
+  margin-top:
+    3rem;
+}
+
+.title {
+  max-width:
+    900px;
+
+  font-size:
+    clamp(
+      3rem,
+      6vw,
+      6.5rem
+    );
+
+  font-weight: 450;
+
+  line-height: 0.98;
+
+  letter-spacing:
+    -0.07em;
+}
+
+.body {
+  max-width:
+    30rem;
+
+  color:
+    var(
+      --color-text-muted
+    );
+
+  line-height: 1.8;
+}
+
+.links {
+  margin-top:
+    clamp(
+      4rem,
+      8vw,
+      7rem
+    );
+
+  border-top:
+    1px solid
+    var(--color-border);
+}
+
+.link {
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  min-height:
+    5.2rem;
+
+  padding:
+    0
+    0.3rem;
+
+  border-bottom:
+    1px solid
+    var(--color-border);
+
+  font-size:
+    clamp(
+      1.3rem,
+      2.5vw,
+      2.3rem
+    );
+
+  font-weight: 500;
+
+  letter-spacing:
+    -0.045em;
+
+  transition:
+    padding
+      400ms
+      var(--ease-primary),
+    background-color
+      300ms ease;
+}
+
+.link:hover {
+  padding:
+    0
+    1rem;
+
+  background:
+    var(
+      --color-surface-secondary
+    );
+}
+
+.link
+span:last-child {
+  font-size:
+    1rem;
+
+  transition:
+    transform
+      400ms
+      var(--ease-primary);
+}
+
+.link:hover
+span:last-child {
+  transform:
+    translate(
+      0.25rem,
+      -0.25rem
+    );
+}
+
+@media (
+  max-width: 800px
+) {
+  .content {
+    grid-template-columns:
+      1fr;
+
+    gap: 2rem;
+  }
+}

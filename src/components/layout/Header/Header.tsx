@@ -1,14 +1,22 @@
 "use client";
 
-import Link from "next/link";
-
 import {
+  useEffect,
   useState,
 } from "react";
 
 import {
+  HOME_COPY,
+  NAV_ITEMS,
+} from "@/content/home";
+
+import {
   useLocale,
 } from "@/components/providers/LocaleProvider/LocaleProvider";
+
+import {
+  useActiveSection,
+} from "@/hooks/useActiveSection";
 
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher/LanguageSwitcher";
 
@@ -16,59 +24,119 @@ import ThemeToggle from "@/components/ui/ThemeToggle/ThemeToggle";
 
 import styles from "./Header.module.css";
 
+const SECTION_IDS =
+  NAV_ITEMS.map(
+    (
+      item,
+    ) =>
+      item.id,
+  );
+
 export default function Header() {
-  const [menuOpen, setMenuOpen] =
+  const [
+    menuOpen,
+    setMenuOpen,
+  ] =
     useState(false);
 
   const {
     locale,
-  } = useLocale();
+  } =
+    useLocale();
 
-  const labels =
-    locale === "en"
-      ? {
-          work: "WORK",
-          story: "STORY",
-          lab: "LAB",
-          now: "NOW",
-          menu: "MENU",
-          close: "CLOSE",
+  const copy =
+    HOME_COPY[
+      locale
+    ];
+
+  const activeSection =
+    useActiveSection(
+      SECTION_IDS,
+      "",
+    );
+
+  useEffect(() => {
+    document.body
+      .classList
+      .toggle(
+        "menu-open",
+        menuOpen,
+      );
+
+    return () => {
+      document.body
+        .classList
+        .remove(
+          "menu-open",
+        );
+    };
+  }, [
+    menuOpen,
+  ]);
+
+  useEffect(() => {
+    if (!menuOpen) {
+      return;
+    }
+
+    const handleKeyDown =
+      (
+        event:
+          KeyboardEvent,
+      ) => {
+        if (
+          event.key ===
+          "Escape"
+        ) {
+          setMenuOpen(
+            false,
+          );
         }
-      : {
-          work: "PROJETS",
-          story: "PARCOURS",
-          lab: "LAB",
-          now: "ACTUEL",
-          menu: "MENU",
-          close: "FERMER",
-        };
+      };
 
-  const navigation = [
-    {
-      label:
-        labels.work,
-      href: "#work",
-    },
-    {
-      label:
-        labels.story,
-      href: "#story",
-    },
-    {
-      label:
-        labels.lab,
-      href: "#lab",
-    },
-    {
-      label:
-        labels.now,
-      href: "#now",
-    },
-  ];
+    const handleResize =
+      () => {
+        if (
+          window.innerWidth >
+          900
+        ) {
+          setMenuOpen(
+            false,
+          );
+        }
+      };
 
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
+    window.addEventListener(
+      "keydown",
+      handleKeyDown,
+    );
+
+    window.addEventListener(
+      "resize",
+      handleResize,
+    );
+
+    return () => {
+      window.removeEventListener(
+        "keydown",
+        handleKeyDown,
+      );
+
+      window.removeEventListener(
+        "resize",
+        handleResize,
+      );
+    };
+  }, [
+    menuOpen,
+  ]);
+
+  const closeMenu =
+    () => {
+      setMenuOpen(
+        false,
+      );
+    };
 
   return (
     <header
@@ -81,8 +149,8 @@ export default function Header() {
           styles.bar
         }
       >
-        <Link
-          href="/"
+        <a
+          href="#home"
           className={
             styles.brand
           }
@@ -91,32 +159,51 @@ export default function Header() {
           }
         >
           EMMA DA SILVA
-        </Link>
+        </a>
 
         <nav
           className={
             styles.desktopNavigation
           }
-          aria-label="Primary navigation"
+          aria-label={
+            copy.header
+              .primaryNavigation
+          }
         >
-          {navigation.map(
-            (item) => (
-              <a
-                key={
-                  item.href
-                }
-                href={
-                  item.href
-                }
-                className={
-                  styles.navLink
-                }
-              >
-                {
-                  item.label
-                }
-              </a>
-            ),
+          {NAV_ITEMS.map(
+            (
+              item,
+            ) => {
+              const active =
+                activeSection ===
+                item.id;
+
+              return (
+                <a
+                  key={
+                    item.id
+                  }
+                  href={`#${item.id}`}
+                  className={`${styles.navLink} ${
+                    active
+                      ? styles.navLinkActive
+                      : ""
+                  }`}
+                  aria-current={
+                    active
+                      ? "location"
+                      : undefined
+                  }
+                >
+                  {
+                    item
+                      .label[
+                      locale
+                    ]
+                  }
+                </a>
+              );
+            },
           )}
         </nav>
 
@@ -146,54 +233,121 @@ export default function Header() {
           aria-expanded={
             menuOpen
           }
+          aria-controls="mobile-navigation"
         >
           {menuOpen
-            ? labels.close
-            : labels.menu}
+            ? copy.header
+                .close
+            : copy.header
+                .menu}
         </button>
       </div>
 
       <div
+        id="mobile-navigation"
         className={`${styles.mobilePanel} ${
           menuOpen
             ? styles.mobilePanelOpen
             : ""
         }`}
+        aria-hidden={
+          !menuOpen
+        }
       >
-        <nav
+        <button
+          type="button"
           className={
-            styles.mobileNavigation
+            styles.mobileBackdrop
           }
-        >
-          {navigation.map(
-            (item) => (
-              <a
-                key={
-                  item.href
-                }
-                href={
-                  item.href
-                }
-                onClick={
-                  closeMenu
-                }
-              >
-                {
-                  item.label
-                }
-              </a>
-            ),
-          )}
-        </nav>
+          onClick={
+            closeMenu
+          }
+          aria-label={
+            copy.header
+              .closeNavigation
+          }
+          tabIndex={
+            menuOpen
+              ? 0
+              : -1
+          }
+        />
 
         <div
           className={
-            styles.mobileControls
+            styles.mobileSheet
           }
         >
-          <LanguageSwitcher />
+          <nav
+            className={
+              styles.mobileNavigation
+            }
+            aria-label={
+              copy.header
+                .mobileNavigation
+            }
+          >
+            {NAV_ITEMS.map(
+              (
+                item,
+                index,
+              ) => (
+                <a
+                  key={
+                    item.id
+                  }
+                  href={`#${item.id}`}
+                  onClick={
+                    closeMenu
+                  }
+                  tabIndex={
+                    menuOpen
+                      ? 0
+                      : -1
+                  }
+                >
+                  <span
+                    className={
+                      styles.mobileIndex
+                    }
+                  >
+                    {String(
+                      index +
+                        1,
+                    ).padStart(
+                      2,
+                      "0",
+                    )}
+                  </span>
 
-          <ThemeToggle />
+                  <span>
+                    {
+                      item
+                        .label[
+                        locale
+                      ]
+                    }
+                  </span>
+
+                  <span
+                    aria-hidden="true"
+                  >
+                    ↘
+                  </span>
+                </a>
+              ),
+            )}
+          </nav>
+
+          <div
+            className={
+              styles.mobileControls
+            }
+          >
+            <LanguageSwitcher />
+
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </header>

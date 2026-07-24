@@ -2,24 +2,31 @@
   display: flex;
 
   height: 100%;
+}
 
-  min-height: 3rem;
+.option {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-width: 2.45rem;
+
+  min-height: 2.8rem;
 
   border-left:
     1px solid
     var(--color-border);
-}
 
-.option,
-.active {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color:
+    var(
+      --color-text-muted
+    );
 
-  width: 2.5rem;
+  font-size: 0.58rem;
 
-  font-size: 0.62rem;
-  font-weight: 700;
+  font-weight: 750;
 
   letter-spacing:
     0.12em;
@@ -32,14 +39,23 @@
 }
 
 .option:hover {
+  color:
+    var(--color-text);
+
   background:
-    var(--color-surface-secondary);
+    var(
+      --color-surface-secondary
+    );
 }
 
 .active {
-  background:
-    var(--color-text);
-
   color:
-    var(--color-background);
+    var(
+      --color-brand-text
+    );
+
+  background:
+    var(
+      --color-brand-background
+    );
 }

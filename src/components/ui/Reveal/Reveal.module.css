@@ -1,0 +1,53 @@
+.reveal {
+  opacity: 0;
+
+  transform:
+    translateY(1.5rem);
+
+  clip-path:
+    inset(
+      0 0 12% 0
+    );
+
+  transition:
+    opacity
+      700ms
+      var(--ease-primary),
+    transform
+      850ms
+      var(--ease-primary),
+    clip-path
+      850ms
+      var(--ease-primary);
+
+  transition-delay:
+    var(
+      --reveal-delay,
+      0ms
+    );
+}
+
+.visible {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+
+  clip-path:
+    inset(0);
+}
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+  .reveal {
+    opacity: 1;
+
+    transform: none;
+
+    clip-path: none;
+
+    transition: none;
+  }
+}

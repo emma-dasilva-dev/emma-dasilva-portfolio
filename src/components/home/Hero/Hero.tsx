@@ -3,53 +3,104 @@
 import Image from "next/image";
 
 import {
+  type PointerEvent,
+  useRef,
+} from "react";
+
+import {
+  HOME_COPY,
+} from "@/content/home";
+
+import {
   useLocale,
 } from "@/components/providers/LocaleProvider/LocaleProvider";
+
+import Reveal from "@/components/ui/Reveal/Reveal";
 
 import styles from "./Hero.module.css";
 
 export default function Hero() {
   const {
     locale,
-  } = useLocale();
+  } =
+    useLocale();
 
-  const content =
-    locale === "en"
-      ? {
-          eyebrow:
-            "PORTFOLIO / 2026",
+  const copy =
+    HOME_COPY[
+      locale
+    ].hero;
 
-          lineOne:
-            "All that I can be",
+  const portraitRef =
+    useRef<HTMLDivElement>(
+      null,
+    );
 
-          lineTwo:
-            "is me.",
+  const handlePointerMove =
+    (
+      event:
+        PointerEvent<HTMLDivElement>,
+    ) => {
+      const element =
+        portraitRef.current;
 
-          finalLine:
-            "All of me.",
+      if (!element) {
+        return;
+      }
 
-          explore:
-            "Explore my work",
-        }
-      : {
-          eyebrow:
-            "PORTFOLIO / 2026",
+      const rect =
+        element
+          .getBoundingClientRect();
 
-          lineOne:
-            "Tout ce que je peux être,",
+      const x =
+        (
+          event.clientX -
+          rect.left
+        ) /
+          rect.width -
+        0.5;
 
-          lineTwo:
-            "c'est moi.",
+      const y =
+        (
+          event.clientY -
+          rect.top
+        ) /
+          rect.height -
+        0.5;
 
-          finalLine:
-            "Pleinement moi.",
+      element.style.setProperty(
+        "--portrait-x",
+        `${x * 10}px`,
+      );
 
-          explore:
-            "Découvrir mes projets",
-        };
+      element.style.setProperty(
+        "--portrait-y",
+        `${y * 10}px`,
+      );
+    };
+
+  const resetPortrait =
+    () => {
+      const element =
+        portraitRef.current;
+
+      if (!element) {
+        return;
+      }
+
+      element.style.setProperty(
+        "--portrait-x",
+        "0px",
+      );
+
+      element.style.setProperty(
+        "--portrait-y",
+        "0px",
+      );
+    };
 
   return (
     <section
+      id="home"
       className={
         styles.hero
       }
@@ -63,7 +114,7 @@ export default function Hero() {
 
       <div
         className={
-          styles.content
+          styles.inner
         }
       >
         <div
@@ -71,92 +122,177 @@ export default function Hero() {
             styles.copy
           }
         >
-          <p
-            className={
-              styles.eyebrow
-            }
-          >
-            {
-              content.eyebrow
-            }
-          </p>
-
-          <div>
-            <h1
-              className={
-                styles.title
-              }
-            >
-              <span>
-                {
-                  content.lineOne
-                }
-              </span>
-
-              <span>
-                {
-                  content.lineTwo
-                }
-              </span>
-            </h1>
-
+          <Reveal>
             <p
               className={
-                styles.finalLine
+                styles.eyebrow
               }
             >
               {
-                content.finalLine
+                copy.eyebrow
               }
             </p>
-          </div>
+          </Reveal>
 
-          <a
-            href="#work"
+          <div
             className={
-              styles.explore
+              styles.mainCopy
             }
           >
-            <span>
-              {
-                content.explore
-              }
-            </span>
-
-            <span
-              aria-hidden="true"
+            <Reveal
+              delay={80}
             >
-              ↓
-            </span>
-          </a>
+              <p
+                className={
+                  styles.name
+                }
+              >
+                {
+                  copy.name
+                }
+              </p>
+            </Reveal>
+
+            <Reveal
+              delay={130}
+            >
+              <h1
+                className={
+                  styles.title
+                }
+              >
+                <span>
+                  {
+                    copy.headlineLead
+                  }
+                </span>
+
+                <strong>
+                  {
+                    copy.headlineStrong
+                  }
+                </strong>
+              </h1>
+            </Reveal>
+
+            <Reveal
+              delay={190}
+            >
+              <p
+                className={
+                  styles.supporting
+                }
+              >
+                {
+                  copy.supporting
+                }
+              </p>
+            </Reveal>
+          </div>
+
+          <Reveal
+            delay={240}
+          >
+            <div
+              className={
+                styles.actions
+              }
+            >
+              <a
+                href="#work"
+                className={
+                  styles.primaryAction
+                }
+              >
+                {
+                  copy.primaryAction
+                }
+
+                <span
+                  aria-hidden="true"
+                >
+                  ↘
+                </span>
+              </a>
+
+              <a
+                href="#stories"
+                className={
+                  styles.secondaryAction
+                }
+              >
+                {
+                  copy.secondaryAction
+                }
+              </a>
+            </div>
+          </Reveal>
         </div>
 
-        <div
+        <Reveal
           className={
-            styles.portraitArea
+            styles.portraitReveal
           }
+          delay={150}
         >
           <div
             className={
-              styles.portraitFrame
+              styles.portraitStage
             }
           >
-            <Image
-              src="/images/portrait/emma-portrait.jpg"
-              alt="Portrait of Emma DA SILVA"
-              fill
-              priority
-              sizes="
-                (max-width: 700px) 88vw,
-                (max-width: 1100px) 48vw,
-                440px
-              "
+            <span
               className={
-                styles.portrait
+                styles.outerOrbit
               }
+              aria-hidden="true"
             />
+
+            <span
+              className={
+                styles.innerOrbit
+              }
+              aria-hidden="true"
+            />
+
+            <div
+              ref={
+                portraitRef
+              }
+              className={
+                styles.portraitFrame
+              }
+              onPointerMove={
+                handlePointerMove
+              }
+              onPointerLeave={
+                resetPortrait
+              }
+            >
+              <div
+                className={
+                  styles.portraitInner
+                }
+              >
+                <Image
+                  src="/images/portrait/emma-portrait.jpg"
+                  alt={
+                    copy.portraitAlt
+                  }
+                  fill
+                  priority
+                  sizes="
+                    (max-width: 700px) 78vw,
+                    (max-width: 1100px) 42vw,
+                    430px
+                  "
+                  className={
+                    styles.portrait
+                  }
+                />
+              </div>
+            </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
