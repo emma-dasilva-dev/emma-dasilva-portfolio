@@ -41,44 +41,9 @@ export const PROJECTS: Project[] =
     },
 
     {
-      id: "byterush",
-
-      number: "02",
-
-      title: "ByteRush",
-
-      year: "2026",
-
-      liveUrl:
-        "https://azatoys.com",
-
-      category: {
-        en:
-          "Interactive coding game",
-
-        fr:
-          "Jeu interactif d’apprentissage du code",
-      },
-
-      description: {
-        en:
-          "A challenge-based introduction to HTML, CSS and JavaScript.",
-
-        fr:
-          "Une introduction à HTML, CSS et JavaScript fondée sur des défis.",
-      },
-
-      technologies: [
-        "HTML",
-        "CSS",
-        "JavaScript",
-      ],
-    },
-
-    {
       id: "bandit",
 
-      number: "03",
+      number: "02",
 
       title:
         "Bandit Redline Journal",
