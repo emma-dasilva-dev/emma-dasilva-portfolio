@@ -2,165 +2,113 @@ import type {
   Project,
 } from "@/types/portfolio";
 
-export const PROJECTS: Project[] = [
-  {
-    id: "stay",
+export const PROJECTS: Project[] =
+  [
+    {
+      id: "stay",
 
-    title: "STAY",
+      number: "01",
 
-    year: "2026",
+      title: "STAY",
 
-    image:
-      "/images/projects/stay/stay-cover.jpg",
+      year: "2026",
 
-    liveUrl:
-      "https://staybj.vercel.app",
+      liveUrl:
+        "https://staybj.vercel.app",
 
-    technologies: [
-      "React",
-      "Node.js",
-      "Express",
-      "MySQL",
-      "JWT",
-    ],
+      category: {
+        en:
+          "Full-stack hospitality platform",
 
-    type: {
-      en:
-        "Full-stack hospitality platform",
+        fr:
+          "Plateforme hôtelière full-stack",
+      },
 
-      fr:
-        "Plateforme hôtelière full-stack",
+      description: {
+        en:
+          "Booking and operations across public and internal experiences.",
+
+        fr:
+          "Réservation et gestion des opérations à travers les expériences publiques et internes.",
+      },
+
+      technologies: [
+        "React",
+        "Node.js",
+        "Express",
+        "MySQL",
+      ],
     },
 
-    role: {
-      en:
-        "Product design & full-stack development",
+    {
+      id: "byterush",
 
-      fr:
-        "Conception produit & développement full-stack",
+      number: "02",
+
+      title: "ByteRush",
+
+      year: "2026",
+
+      liveUrl:
+        "https://azatoys.com",
+
+      category: {
+        en:
+          "Interactive coding game",
+
+        fr:
+          "Jeu interactif d’apprentissage du code",
+      },
+
+      description: {
+        en:
+          "A challenge-based introduction to HTML, CSS and JavaScript.",
+
+        fr:
+          "Une introduction à HTML, CSS et JavaScript fondée sur des défis.",
+      },
+
+      technologies: [
+        "HTML",
+        "CSS",
+        "JavaScript",
+      ],
     },
 
-    summary: {
-      en:
-        "A full-stack platform for discovering and managing premium stays, built from the public booking experience through authentication, reservations and internal operations.",
+    {
+      id: "bandit",
 
-      fr:
-        "Une plateforme full-stack dédiée à la découverte et à la gestion d’hébergements premium, construite de l’expérience publique de réservation jusqu’à l’authentification, aux réservations et aux opérations internes.",
+      number: "03",
+
+      title:
+        "Bandit Redline Journal",
+
+      year: "2026",
+
+      liveUrl:
+        "https://emma-dasilva-dev.github.io/bandit-redline-journal/",
+
+      category: {
+        en:
+          "Cybersecurity learning project",
+
+        fr:
+          "Projet d’apprentissage en cybersécurité",
+      },
+
+      description: {
+        en:
+          "Linux commands, security concepts and OverTheWire solutions.",
+
+        fr:
+          "Commandes Linux, concepts de sécurité et solutions OverTheWire.",
+      },
+
+      technologies: [
+        "Linux",
+        "Bash",
+        "HTML",
+        "CSS",
+      ],
     },
-
-    imageAlt: {
-      en:
-        "Preview of the STAY hospitality platform",
-
-      fr:
-        "Aperçu de la plateforme hôtelière STAY",
-    },
-  },
-
-  {
-    id: "byterush",
-
-    title: "ByteRush",
-
-    year: "2026",
-
-    image:
-      "/images/projects/byterush/byterush-cover.jpg",
-
-    liveUrl:
-      "https://azatoys.com",
-
-    technologies: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-    ],
-
-    type: {
-      en:
-        "Interactive coding game",
-
-      fr:
-        "Jeu interactif d’apprentissage du code",
-    },
-
-    role: {
-      en:
-        "Game concept, interface & front-end development",
-
-      fr:
-        "Concept du jeu, interface & développement front-end",
-    },
-
-    summary: {
-      en:
-        "An interactive coding game designed to help beginners learn HTML, CSS and JavaScript through challenges that turn programming concepts into play.",
-
-      fr:
-        "Un jeu interactif conçu pour aider les débutants à apprendre HTML, CSS et JavaScript grâce à des défis qui transforment les concepts de programmation en expérience ludique.",
-    },
-
-    imageAlt: {
-      en:
-        "Preview of the ByteRush coding game",
-
-      fr:
-        "Aperçu du jeu de programmation ByteRush",
-    },
-  },
-
-  {
-    id: "bandit",
-
-    title:
-      "Bandit Redline Journal",
-
-    year: "2026",
-
-    image:
-      "/images/projects/bandit/bandit-cover.jpg",
-
-    liveUrl:
-      "https://emma-dasilva-dev.github.io/bandit-redline-journal/",
-
-    technologies: [
-      "Linux",
-      "Bash",
-      "Cybersecurity",
-      "HTML",
-      "CSS",
-    ],
-
-    type: {
-      en:
-        "Cybersecurity learning journal",
-
-      fr:
-        "Journal d’apprentissage en cybersécurité",
-    },
-
-    role: {
-      en:
-        "Learning system, interface & documentation",
-
-      fr:
-        "Système d’apprentissage, interface & documentation",
-    },
-
-    summary: {
-      en:
-        "A visual learning journal documenting my progress through OverTheWire Bandit, turning terminal commands, solutions and security concepts into a structured reference.",
-
-      fr:
-        "Un journal visuel documentant ma progression sur OverTheWire Bandit et transformant commandes terminal, solutions et concepts de sécurité en une référence structurée.",
-    },
-
-    imageAlt: {
-      en:
-        "Preview of the Bandit Redline Journal",
-
-      fr:
-        "Aperçu du Bandit Redline Journal",
-    },
-  },
-];
+  ];

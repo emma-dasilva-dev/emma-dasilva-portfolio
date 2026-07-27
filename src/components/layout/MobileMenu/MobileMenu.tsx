@@ -14,7 +14,6 @@ interface MobileMenuProps {
   open: boolean;
   locale: Locale;
   navigation: NavigationItem[];
-  closeLabel: string;
   navigationLabel: string;
   onClose: () => void;
 }
@@ -23,61 +22,85 @@ export default function MobileMenu({
   open,
   locale,
   navigation,
-  closeLabel,
   navigationLabel,
   onClose,
 }: MobileMenuProps) {
   return (
     <div
       id="mobile-navigation"
-      className={`${styles.overlay} ${
-        open ? styles.open : ""
+      className={`${styles.menu} ${
+        open
+          ? styles.open
+          : ""
       }`}
-      aria-hidden={!open}
+      aria-hidden={
+        !open
+      }
     >
-      <button
-        type="button"
-        className={styles.backdrop}
-        onClick={onClose}
-        aria-label={closeLabel}
-        tabIndex={open ? 0 : -1}
-      />
-
-      <div className={styles.panel}>
-        <nav
-          className={styles.navigation}
-          aria-label={navigationLabel}
-        >
-          {navigation.map((item, index) => (
+      <nav
+        className={
+          styles.navigation
+        }
+        aria-label={
+          navigationLabel
+        }
+      >
+        {navigation.map(
+          (
+            item,
+            index,
+          ) => (
             <a
-              key={item.id}
+              key={
+                item.id
+              }
               href={`#${item.id}`}
-              onClick={onClose}
-              tabIndex={open ? 0 : -1}
-              className={styles.link}
+              className={
+                styles.link
+              }
+              onClick={
+                onClose
+              }
+              tabIndex={
+                open
+                  ? 0
+                  : -1
+              }
             >
-              <span className={styles.index}>
-                {String(index + 1).padStart(2, "0")}
-              </span>
-
-              <span className={styles.label}>
-                {item.label[locale]}
-              </span>
-
               <span
-                className={styles.arrow}
-                aria-hidden="true"
+                className={
+                  styles.index
+                }
               >
-                ↘
+                {String(
+                  index + 1,
+                ).padStart(
+                  2,
+                  "0",
+                )}
+              </span>
+
+              <span>
+                {
+                  item
+                    .label[
+                    locale
+                  ]
+                }
               </span>
             </a>
-          ))}
-        </nav>
+          ),
+        )}
+      </nav>
 
-        <div className={styles.controls}>
-          <LanguageSwitcher />
-          <ThemeToggle />
-        </div>
+      <div
+        className={
+          styles.controls
+        }
+      >
+        <LanguageSwitcher />
+
+        <ThemeToggle />
       </div>
     </div>
   );

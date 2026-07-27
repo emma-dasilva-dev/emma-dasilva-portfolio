@@ -52,8 +52,20 @@ export default function Reveal({
         window
       )
     ) {
-      setVisible(true);
-      return;
+      const animationFrame =
+        window.requestAnimationFrame(
+          () => {
+            setVisible(
+              true,
+            );
+          },
+        );
+
+      return () => {
+        window.cancelAnimationFrame(
+          animationFrame,
+        );
+      };
     }
 
     const observer =
@@ -75,10 +87,10 @@ export default function Reveal({
           }
         },
         {
-          threshold: 0.14,
+          threshold: 0.12,
 
           rootMargin:
-            "0px 0px -8% 0px",
+            "0px 0px -6% 0px",
         },
       );
 
@@ -91,7 +103,7 @@ export default function Reveal({
     };
   }, []);
 
-  const style = {
+  const inlineStyle = {
     "--reveal-delay":
       `${delay}ms`,
   } as CSSProperties;
@@ -104,7 +116,9 @@ export default function Reveal({
           ? styles.visible
           : ""
       } ${className}`}
-      style={style}
+      style={
+        inlineStyle
+      }
     >
       {children}
     </div>

@@ -2,22 +2,14 @@
   opacity: 0;
 
   transform:
-    translateY(1.5rem);
-
-  clip-path:
-    inset(
-      0 0 12% 0
-    );
+    translateY(1.25rem);
 
   transition:
     opacity
-      700ms
+      650ms
       var(--ease-primary),
     transform
-      850ms
-      var(--ease-primary),
-    clip-path
-      850ms
+      750ms
       var(--ease-primary);
 
   transition-delay:
@@ -32,9 +24,6 @@
 
   transform:
     translateY(0);
-
-  clip-path:
-    inset(0);
 }
 
 @media (
@@ -45,8 +34,6 @@
     opacity: 1;
 
     transform: none;
-
-    clip-path: none;
 
     transition: none;
   }

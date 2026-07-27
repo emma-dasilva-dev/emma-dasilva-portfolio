@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  CONTACT_LINKS,
   HOME_COPY,
 } from "@/content/home";
 
@@ -47,58 +46,20 @@ export default function Footer() {
 
         <p
           className={
-            styles.motto
+            styles.message
           }
         >
           {
-            copy.motto
+            copy.message
           }
         </p>
 
-        <div
-          className={
-            styles.links
-          }
-        >
-          {CONTACT_LINKS.map(
-            (
-              link,
-            ) => (
-              <a
-                key={
-                  link.id
-                }
-                href={
-                  link.href
-                }
-                target={
-                  link.external
-                    ? "_blank"
-                    : undefined
-                }
-                rel={
-                  link.external
-                    ? "noreferrer"
-                    : undefined
-                }
-              >
-                {
-                  link
-                    .label[
-                    locale
-                  ]
-                }
-              </a>
-            ),
-          )}
-        </div>
-
         <p
           className={
-            styles.copyright
+            styles.year
           }
         >
-          © {year}
+          {year}
         </p>
       </div>
     </footer>

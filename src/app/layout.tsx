@@ -1,5 +1,6 @@
 import type {
   Metadata,
+  Viewport,
 } from "next";
 
 import type {
@@ -7,33 +8,21 @@ import type {
 } from "react";
 
 import {
-  Manrope,
-} from "next/font/google";
-
-import {
   LocaleProvider,
 } from "@/components/providers/LocaleProvider/LocaleProvider";
 
+import {
+  ThemeProvider,
+} from "@/components/providers/ThemeProvider/ThemeProvider";
+
 import "./globals.css";
-
-const manrope =
-  Manrope({
-    subsets: [
-      "latin",
-    ],
-
-    variable:
-      "--font-manrope",
-
-    display: "swap",
-  });
 
 const themeScript = `
   (() => {
     const storageKey = "emma-portfolio-theme";
     const root = document.documentElement;
 
-    let theme;
+    let theme = null;
 
     try {
       theme = localStorage.getItem(storageKey);
@@ -51,17 +40,52 @@ const themeScript = `
     }
 
     root.dataset.theme = theme;
+    root.style.colorScheme = theme;
+
+    const themeMeta = document.querySelector(
+      'meta[name="theme-color"]'
+    );
+
+    if (themeMeta) {
+      themeMeta.setAttribute(
+        "content",
+        theme === "dark"
+          ? "#000000"
+          : "#FFFFFF"
+      );
+    }
   })();
 `;
 
-export const metadata: Metadata =
-  {
-    title:
-      "Emma Da Silva | Developer",
+export const metadata: Metadata = {
+  title: {
+    default:
+      "Emma Da Silva | Full-Stack Developer",
 
-    description:
-      "Portfolio of Emma Da Silva, a front-end developer and emerging software engineer building thoughtful digital products.",
-  };
+    template:
+      "%s | Emma Da Silva",
+  },
+
+  description:
+    "Portfolio of Emma Da Silva, a full-stack developer and software engineer building complete, high-performance web applications.",
+
+  authors: [
+    {
+      name:
+        "Emma Da Silva",
+    },
+  ],
+};
+
+export const viewport: Viewport = {
+  width:
+    "device-width",
+
+  initialScale: 1,
+
+  colorScheme:
+    "light dark",
+};
 
 interface RootLayoutProps {
   children:
@@ -77,6 +101,11 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <meta
+          name="theme-color"
+          content="#FFFFFF"
+        />
+
         <script
           dangerouslySetInnerHTML={{
             __html:
@@ -85,14 +114,12 @@ export default function RootLayout({
         />
       </head>
 
-      <body
-        className={
-          manrope.variable
-        }
-      >
-        <LocaleProvider>
-          {children}
-        </LocaleProvider>
+      <body>
+        <ThemeProvider>
+          <LocaleProvider>
+            {children}
+          </LocaleProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

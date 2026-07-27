@@ -7,12 +7,12 @@ import {
 
 export function useActiveSection(
   sectionIds: readonly string[],
-  defaultSection = "",
 ) {
   const [
     activeSection,
     setActiveSection,
-  ] = useState(defaultSection);
+  ] =
+    useState("");
 
   const sectionKey =
     sectionIds.join("|");
@@ -27,19 +27,16 @@ export function useActiveSection(
       return;
     }
 
-    let frameId = 0;
+    let animationFrame = 0;
 
     const updateActiveSection =
       () => {
-        const targetLine =
+        const marker =
+          window.scrollY +
           window.innerHeight *
-          0.38;
+            0.34;
 
-        let bestId =
-          ids[0];
-
-        let bestDistance =
-          Number.POSITIVE_INFINITY;
+        let current = "";
 
         for (
           const id of ids
@@ -49,66 +46,32 @@ export function useActiveSection(
               id,
             );
 
-          if (!element) {
-            continue;
-          }
-
-          const rect =
-            element.getBoundingClientRect();
-
           if (
-            rect.top <=
-              targetLine &&
-            rect.bottom >=
-              targetLine
+            element &&
+            marker >=
+              element.offsetTop
           ) {
-            bestId = id;
-            bestDistance = 0;
-            break;
-          }
-
-          const distance =
-            Math.min(
-              Math.abs(
-                rect.top -
-                  targetLine,
-              ),
-
-              Math.abs(
-                rect.bottom -
-                  targetLine,
-              ),
-            );
-
-          if (
-            distance <
-            bestDistance
-          ) {
-            bestDistance =
-              distance;
-
-            bestId = id;
+            current = id;
           }
         }
 
         setActiveSection(
           (
-            current,
+            previous,
           ) =>
-            current ===
-            bestId
-              ? current
-              : bestId,
+            previous === current
+              ? previous
+              : current,
         );
       };
 
     const requestUpdate =
       () => {
         cancelAnimationFrame(
-          frameId,
+          animationFrame,
         );
 
-        frameId =
+        animationFrame =
           requestAnimationFrame(
             updateActiveSection,
           );
@@ -131,7 +94,7 @@ export function useActiveSection(
 
     return () => {
       cancelAnimationFrame(
-        frameId,
+        animationFrame,
       );
 
       window.removeEventListener(

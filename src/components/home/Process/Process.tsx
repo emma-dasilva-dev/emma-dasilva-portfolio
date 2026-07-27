@@ -2,7 +2,7 @@
 
 import {
   HOME_COPY,
-  PRINCIPLES,
+  PROCESS_ITEMS,
 } from "@/content/home";
 
 import {
@@ -10,12 +10,11 @@ import {
 } from "@/components/providers/LocaleProvider/LocaleProvider";
 
 import Reveal from "@/components/ui/Reveal/Reveal";
-
 import SectionLabel from "@/components/ui/SectionLabel/SectionLabel";
 
-import styles from "./HowIThink.module.css";
+import styles from "./Process.module.css";
 
-export default function HowIThink() {
+export default function Process() {
   const {
     locale,
   } =
@@ -24,11 +23,11 @@ export default function HowIThink() {
   const copy =
     HOME_COPY[
       locale
-    ].thinking;
+    ].process;
 
   return (
     <section
-      id="thinking"
+      id="process"
       className={
         styles.section
       }
@@ -45,51 +44,31 @@ export default function HowIThink() {
           }
         />
 
-        <div
-          className={
-            styles.introduction
-          }
-        >
-          <Reveal>
-            <h2
-              className={
-                styles.title
-              }
-            >
-              {
-                copy.title
-              }
-            </h2>
-          </Reveal>
-
-          <Reveal
-            delay={80}
+        <Reveal>
+          <h2
+            className={
+              styles.title
+            }
           >
-            <p
-              className={
-                styles.intro
-              }
-            >
-              {
-                copy.intro
-              }
-            </p>
-          </Reveal>
-        </div>
+            {
+              copy.title
+            }
+          </h2>
+        </Reveal>
 
         <div
           className={
-            styles.list
+            styles.grid
           }
         >
-          {PRINCIPLES.map(
+          {PROCESS_ITEMS.map(
             (
-              principle,
+              item,
               index,
             ) => (
               <Reveal
                 key={
-                  principle.id
+                  item.id
                 }
                 delay={
                   index *
@@ -98,7 +77,7 @@ export default function HowIThink() {
               >
                 <article
                   className={
-                    styles.row
+                    styles.item
                   }
                 >
                   <span
@@ -107,17 +86,17 @@ export default function HowIThink() {
                     }
                   >
                     {
-                      principle.number
+                      item.number
                     }
                   </span>
 
                   <h3
                     className={
-                      styles.rowTitle
+                      styles.itemTitle
                     }
                   >
                     {
-                      principle
+                      item
                         .title[
                         locale
                       ]
@@ -126,12 +105,12 @@ export default function HowIThink() {
 
                   <p
                     className={
-                      styles.body
+                      styles.description
                     }
                   >
                     {
-                      principle
-                        .body[
+                      item
+                        .description[
                         locale
                       ]
                     }

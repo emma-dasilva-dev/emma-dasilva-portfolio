@@ -1,11 +1,3 @@
-"use client";
-
-import Image from "next/image";
-
-import {
-  useState,
-} from "react";
-
 import type {
   Locale,
   Project,
@@ -17,21 +9,15 @@ interface ProjectCardProps {
   project: Project;
   locale: Locale;
   actionLabel: string;
-  priority?: boolean;
+  featured?: boolean;
 }
 
 export default function ProjectCard({
   project,
   locale,
   actionLabel,
-  priority = false,
+  featured = false,
 }: ProjectCardProps) {
-  const [
-    imageError,
-    setImageError,
-  ] =
-    useState(false);
-
   return (
     <a
       href={
@@ -39,105 +25,56 @@ export default function ProjectCard({
       }
       target="_blank"
       rel="noreferrer"
-      className={
-        styles.card
-      }
+      className={`${styles.card} ${
+        featured
+          ? styles.featured
+          : ""
+      }`}
       aria-label={`${actionLabel}: ${project.title}`}
     >
       <div
         className={
-          styles.visual
+          styles.top
         }
       >
-        {!imageError ? (
-          <Image
-            src={
-              project.image
-            }
-            alt={
-              project
-                .imageAlt[
-                locale
-              ]
-            }
-            fill
-            priority={
-              priority
-            }
-            sizes="
-              (max-width: 720px) calc(100vw - 2.5rem),
-              (max-width: 1100px) 46vw,
-              31vw
-            "
-            className={
-              styles.image
-            }
-            onError={() =>
-              setImageError(
-                true,
-              )
-            }
-          />
-        ) : (
-          <div
-            className={
-              styles.placeholder
-            }
-          >
-            <span>
-              {
-                project.title
-              }
-            </span>
-          </div>
-        )}
-
-        <div
+        <span
           className={
-            styles.visualOverlay
+            styles.number
           }
-        />
+        >
+          {
+            project.number
+          }
+        </span>
 
         <span
           className={
-            styles.liveIndicator
+            styles.year
           }
         >
-          {actionLabel}
-
-          <span
-            aria-hidden="true"
-          >
-            ↗
-          </span>
+          {
+            project.year
+          }
         </span>
       </div>
 
       <div
         className={
-          styles.content
+          styles.main
         }
       >
-        <div
+        <p
           className={
-            styles.meta
+            styles.category
           }
         >
-          <span>
-            {
-              project
-                .type[
-                locale
-              ]
-            }
-          </span>
-
-          <span>
-            {
-              project.year
-            }
-          </span>
-        </div>
+          {
+            project
+              .category[
+              locale
+            ]
+          }
+        </p>
 
         <h3
           className={
@@ -151,30 +88,23 @@ export default function ProjectCard({
 
         <p
           className={
-            styles.summary
+            styles.description
           }
         >
           {
             project
-              .summary[
+              .description[
               locale
             ]
           }
         </p>
+      </div>
 
-        <p
-          className={
-            styles.role
-          }
-        >
-          {
-            project
-              .role[
-              locale
-            ]
-          }
-        </p>
-
+      <div
+        className={
+          styles.footer
+        }
+      >
         <ul
           className={
             styles.technologies
@@ -199,6 +129,16 @@ export default function ProjectCard({
               ),
             )}
         </ul>
+
+        <span
+          className={
+            styles.action
+          }
+        >
+          {
+            actionLabel
+          }
+        </span>
       </div>
     </a>
   );

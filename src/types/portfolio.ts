@@ -1,50 +1,43 @@
 export type Locale = "en" | "fr";
 
-export type LocalizedText = Record<Locale, string>;
+export type Theme = "light" | "dark";
+
+export type LocalizedText = Record<
+  Locale,
+  string
+>;
 
 export type SectionId =
   | "home"
   | "work"
-  | "thinking"
-  | "stories"
+  | "process"
   | "contact";
 
 export interface NavigationItem {
-  id: Exclude<SectionId, "home">;
-  label: LocalizedText;
-}
+  id: Exclude<
+    SectionId,
+    "home"
+  >;
 
-export interface ThreadMilestone {
-  id: SectionId;
   label: LocalizedText;
 }
 
 export interface Project {
   id: string;
+  number: string;
   title: string;
   year: string;
-  image: string;
   liveUrl: string;
+  category: LocalizedText;
+  description: LocalizedText;
   technologies: string[];
-  type: LocalizedText;
-  role: LocalizedText;
-  summary: LocalizedText;
-  imageAlt: LocalizedText;
 }
 
-export interface Principle {
+export interface ProcessItem {
   id: string;
   number: string;
   title: LocalizedText;
-  body: LocalizedText;
-}
-
-export interface Story {
-  id: string;
-  number: string;
-  eyebrow: LocalizedText;
-  title: LocalizedText;
-  body: LocalizedText;
+  description: LocalizedText;
 }
 
 export interface ContactLink {
@@ -52,4 +45,5 @@ export interface ContactLink {
   href: string;
   external: boolean;
   label: LocalizedText;
+  value: string;
 }

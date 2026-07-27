@@ -34,7 +34,6 @@ export default function LanguageSwitcher() {
         aria-pressed={
           locale === "en"
         }
-        aria-label="English"
       >
         EN
       </button>
@@ -52,7 +51,6 @@ export default function LanguageSwitcher() {
         aria-pressed={
           locale === "fr"
         }
-        aria-label="Français"
       >
         FR
       </button>

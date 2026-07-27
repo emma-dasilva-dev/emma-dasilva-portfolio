@@ -1,47 +1,84 @@
 .hero {
   position: relative;
-  z-index: 2;
-
-  display: flex;
 
   min-height: 100svh;
 
   overflow: hidden;
 
   padding:
-    clamp(
-      7.5rem,
-      13vh,
-      9rem
+    calc(
+      var(--header-height) +
+      clamp(
+        3.5rem,
+        8vw,
+        7rem
+      )
     )
     var(--page-padding)
-    4rem;
+    clamp(
+      4rem,
+      8vw,
+      7rem
+    );
+
+  border-bottom:
+    1px solid
+    var(--color-border);
 }
 
 .grid {
   position: absolute;
-  z-index: -1;
 
   inset: 0;
 
+  z-index: 0;
+
   background-image:
-    repeating-linear-gradient(
+    linear-gradient(
+      var(--color-grid)
+        1px,
+      transparent
+        1px
+    ),
+    linear-gradient(
+      90deg,
+      var(--color-grid)
+        1px,
+      transparent
+        1px
+    );
+
+  background-size:
+    42px
+    42px;
+
+  mask-image:
+    linear-gradient(
       to bottom,
-      transparent 0,
-      transparent 9px,
-      var(--color-grid) 9px,
-      var(--color-grid) 10px
+      black,
+      transparent
+        92%
     );
 
   pointer-events: none;
 }
 
 .inner {
+  position: relative;
+
+  z-index: 1;
+
   display: grid;
 
   grid-template-columns:
-    minmax(0, 1.15fr)
-    minmax(330px, 0.85fr);
+    minmax(
+      0,
+      1.2fr
+    )
+    minmax(
+      320px,
+      0.8fr
+    );
 
   align-items: center;
 
@@ -49,6 +86,13 @@
     min(
       100%,
       var(--page-width)
+    );
+
+  min-height:
+    calc(
+      100svh -
+      var(--header-height) -
+      10rem
     );
 
   margin:
@@ -63,101 +107,112 @@
     );
 }
 
-.copy {
-  display: flex;
-
-  flex-direction: column;
-
-  justify-content:
-    space-between;
-
-  min-height:
-    min(
-      66vh,
-      610px
-    );
-}
-
-.eyebrow {
-  color:
-    var(--color-text-muted);
-
-  font-size: 0.62rem;
-  font-weight: 720;
-
-  letter-spacing:
-    0.17em;
-}
-
-.mainCopy {
-  max-width: 740px;
+.content {
+  max-width: 820px;
 }
 
 .name {
-  margin-bottom: 1.4rem;
+  display: inline-flex;
 
-  font-size: 0.72rem;
-  font-weight: 800;
+  min-height: 1.9rem;
+
+  align-items: center;
+
+  padding:
+    0
+    0.7rem;
+
+  background:
+    var(--color-accent);
+
+  color: #000000;
+
+  font-family:
+    var(--font-mono);
+
+  font-size: 0.62rem;
+
+  font-weight: 700;
 
   letter-spacing:
-    0.19em;
+    0.14em;
 }
 
-.title {
-  display: flex;
-  flex-direction: column;
+.role {
+  max-width: 820px;
 
-  gap: 0.12em;
-
-  margin: 0;
+  margin-top:
+    1.6rem;
 
   font-size:
     clamp(
-      3rem,
-      5vw,
-      5.2rem
+      3.25rem,
+      6vw,
+      6.6rem
     );
 
-  font-weight: 430;
+  font-weight: 650;
 
-  line-height: 0.98;
+  line-height: 0.94;
 
   letter-spacing:
-    -0.065em;
+    -0.07em;
 }
 
-.title strong {
-  font-weight: 660;
-}
+.description {
+  max-width: 46rem;
 
-.supporting {
-  max-width: 38rem;
-
-  margin-top: 2rem;
+  margin-top:
+    clamp(
+      2rem,
+      4vw,
+      3rem
+    );
 
   color:
-    var(--color-text-muted);
+    var(--color-muted);
 
   font-size:
     clamp(
       1rem,
-      1.35vw,
-      1.15rem
+      1.25vw,
+      1.12rem
     );
 
   line-height: 1.75;
 }
 
+.focusLine {
+  margin-top:
+    1.5rem;
+
+  font-family:
+    var(--font-mono);
+
+  font-size: 0.68rem;
+
+  font-weight: 700;
+
+  letter-spacing:
+    0.1em;
+
+  text-transform:
+    uppercase;
+}
+
 .actions {
   display: flex;
 
-  align-items: center;
-
-  gap: 0.8rem;
-
-  margin-top: 3rem;
-
   flex-wrap: wrap;
+
+  gap: 0.75rem;
+
+  margin-top:
+    clamp(
+      2.5rem,
+      5vw,
+      3.75rem
+    );
 }
 
 .primaryAction,
@@ -165,310 +220,235 @@
   display: inline-flex;
 
   align-items: center;
-  justify-content: space-between;
 
-  min-height: 2.9rem;
+  justify-content: center;
+
+  min-height: 3.25rem;
 
   padding:
     0
-    1.1rem;
+    1.35rem;
+
+  border:
+    1px solid
+    var(--color-text);
+
+  font-family:
+    var(--font-mono);
 
   font-size: 0.62rem;
-  font-weight: 750;
+
+  font-weight: 700;
 
   letter-spacing:
     0.1em;
 
-  text-transform:
-    uppercase;
-
   transition:
-    transform
-      300ms
-      var(--ease-primary),
     background-color
-      250ms ease,
+      180ms ease,
     color
-      250ms ease;
+      180ms ease,
+    transform
+      260ms
+      var(--ease-primary);
 }
 
 .primaryAction {
-  min-width: 11rem;
+  border-color:
+    var(--color-accent);
 
   background:
-    var(--color-brand-background);
+    var(--color-accent);
 
-  color:
-    var(--color-brand-text);
-}
-
-.primaryAction:hover {
-  transform:
-    translateY(-2px);
+  color: #000000;
 }
 
 .secondaryAction {
-  border:
-    1px solid
-    var(--color-border);
+  background:
+    var(--color-background);
+
+  color:
+    var(--color-text);
+}
+
+.primaryAction:hover,
+.secondaryAction:hover {
+  transform:
+    translateY(-3px);
 }
 
 .secondaryAction:hover {
   background:
-    var(--color-surface-secondary);
+    var(--color-text);
+
+  color:
+    var(--color-background);
 }
 
 .portraitReveal {
   display: flex;
 
-  justify-content: center;
+  justify-content:
+    flex-end;
 }
 
 .portraitStage {
   position: relative;
 
-  display: grid;
-  place-items: center;
-
   width:
     min(
       100%,
-      460px
+      430px
     );
 
-  aspect-ratio: 1;
+  aspect-ratio:
+    4 / 5;
 }
 
-.outerOrbit,
-.innerOrbit {
+.accentBlock {
   position: absolute;
 
-  border:
-    1px solid
-    var(--color-border-strong);
+  top: 1rem;
 
-  border-radius: 50%;
+  right: -1rem;
 
-  pointer-events: none;
-}
+  bottom: -1rem;
 
-.outerOrbit {
-  width: 100%;
-  height: 100%;
+  left: 1rem;
 
-  opacity: 0.7;
-
-  transform:
-    rotate(-9deg)
-    scaleY(0.96);
-}
-
-.innerOrbit {
-  width: 84%;
-  height: 84%;
-
-  border-color:
-    var(--color-thread);
-
-  opacity: 0.32;
-
-  transform:
-    rotate(17deg)
-    scaleX(0.96);
+  background:
+    var(--color-accent);
 }
 
 .portraitFrame {
-  --portrait-x: 0px;
-  --portrait-y: 0px;
-
   position: relative;
 
-  width: 73%;
+  z-index: 1;
 
-  aspect-ratio: 1;
+  width: 100%;
+
+  height: 100%;
 
   overflow: hidden;
 
   border:
     1px solid
-    var(--color-border-strong);
-
-  border-radius: 50%;
+    var(--color-text);
 
   background:
-    var(--color-surface-secondary);
-
-  box-shadow:
-    var(--shadow-image);
-}
-
-.portraitFrame::after {
-  position: absolute;
-
-  inset: 0;
-
-  border-radius: inherit;
-
-  background:
-    radial-gradient(
-      circle at
-        calc(
-          50% +
-          var(--portrait-x)
-        )
-        calc(
-          50% +
-          var(--portrait-y)
-        ),
-      rgba(
-        255,
-        255,
-        255,
-        0.12
-      ),
-      transparent 42%
-    );
-
-  content: "";
-
-  pointer-events: none;
-}
-
-.portraitInner {
-  position: absolute;
-
-  inset: -4%;
-
-  transform:
-    translate(
-      var(--portrait-x),
-      var(--portrait-y)
-    )
-    scale(1.04);
-
-  transition:
-    transform
-      400ms
-      var(--ease-primary);
+    var(--color-background);
 }
 
 .portrait {
   object-fit: cover;
-  object-position: center;
+
+  object-position:
+    center;
 
   filter:
     grayscale(100%)
-    contrast(1.05);
+    contrast(1.04);
 }
 
-@media (max-width: 1100px) {
+@media (
+  max-width: 1000px
+) {
   .inner {
     grid-template-columns:
-      minmax(0, 1.05fr)
-      minmax(300px, 0.75fr);
+      minmax(
+        0,
+        1fr
+      )
+      minmax(
+        280px,
+        0.65fr
+      );
 
     gap: 3rem;
   }
 
-  .title {
+  .role {
     font-size:
       clamp(
-        2.8rem,
-        5.2vw,
-        4.3rem
+        3rem,
+        6vw,
+        5rem
       );
-  }
-
-  .portraitStage {
-    max-width: 390px;
   }
 }
 
-@media (max-width: 820px) {
+@media (
+  max-width: 760px
+) {
   .hero {
     min-height: auto;
 
-    padding-top: 8.5rem;
-    padding-bottom: 5rem;
+    padding-top:
+      calc(
+        var(--header-height) +
+        3rem
+      );
   }
 
   .inner {
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      1fr;
 
-    gap: 4rem;
-  }
-
-  .copy {
     min-height: auto;
+
+    gap: 4.5rem;
   }
 
-  .title {
-    max-width: 720px;
-
+  .role {
     font-size:
       clamp(
-        2.9rem,
-        9vw,
-        4.8rem
+        2.8rem,
+        12vw,
+        4.6rem
       );
+  }
+
+  .portraitReveal {
+    justify-content:
+      center;
   }
 
   .portraitStage {
     width:
       min(
-        78vw,
-        480px
+        calc(
+          100% -
+          1rem
+        ),
+        430px
       );
-
-    margin:
-      0
-      auto;
   }
 }
 
-@media (max-width: 560px) {
+@media (
+  max-width: 520px
+) {
   .hero {
-    padding:
-      7.25rem
-      1.25rem
-      4.5rem;
+    padding-right:
+      1.25rem;
+
+    padding-left:
+      1.25rem;
   }
 
-  .inner {
-    gap: 3.25rem;
-  }
-
-  .title {
-    font-size:
-      clamp(
-        2.55rem,
-        11vw,
-        3.8rem
-      );
-  }
-
-  .supporting {
+  .description {
     font-size: 0.98rem;
   }
 
   .actions {
-    align-items: stretch;
-
-    margin-top: 2.5rem;
+    align-items:
+      stretch;
   }
 
   .primaryAction,
   .secondaryAction {
     flex: 1;
 
-    min-width: 9.5rem;
-  }
-
-  .portraitStage {
-    width:
-      min(
-        88vw,
-        390px
-      );
+    min-width: 9rem;
   }
 }

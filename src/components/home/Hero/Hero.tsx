@@ -3,11 +3,6 @@
 import Image from "next/image";
 
 import {
-  type PointerEvent,
-  useRef,
-} from "react";
-
-import {
   HOME_COPY,
 } from "@/content/home";
 
@@ -30,74 +25,6 @@ export default function Hero() {
       locale
     ].hero;
 
-  const portraitRef =
-    useRef<HTMLDivElement>(
-      null,
-    );
-
-  const handlePointerMove =
-    (
-      event:
-        PointerEvent<HTMLDivElement>,
-    ) => {
-      const element =
-        portraitRef.current;
-
-      if (!element) {
-        return;
-      }
-
-      const rect =
-        element
-          .getBoundingClientRect();
-
-      const x =
-        (
-          event.clientX -
-          rect.left
-        ) /
-          rect.width -
-        0.5;
-
-      const y =
-        (
-          event.clientY -
-          rect.top
-        ) /
-          rect.height -
-        0.5;
-
-      element.style.setProperty(
-        "--portrait-x",
-        `${x * 10}px`,
-      );
-
-      element.style.setProperty(
-        "--portrait-y",
-        `${y * 10}px`,
-      );
-    };
-
-  const resetPortrait =
-    () => {
-      const element =
-        portraitRef.current;
-
-      if (!element) {
-        return;
-      }
-
-      element.style.setProperty(
-        "--portrait-x",
-        "0px",
-      );
-
-      element.style.setProperty(
-        "--portrait-y",
-        "0px",
-      );
-    };
-
   return (
     <section
       id="home"
@@ -119,76 +46,60 @@ export default function Hero() {
       >
         <div
           className={
-            styles.copy
+            styles.content
           }
         >
           <Reveal>
             <p
               className={
-                styles.eyebrow
+                styles.name
+              }
+            >
+              EMMA DA SILVA
+            </p>
+          </Reveal>
+
+          <Reveal
+            delay={70}
+          >
+            <h1
+              className={
+                styles.role
               }
             >
               {
-                copy.eyebrow
+                copy.role
+              }
+            </h1>
+          </Reveal>
+
+          <Reveal
+            delay={130}
+          >
+            <p
+              className={
+                styles.description
+              }
+            >
+              {
+                copy.description
               }
             </p>
           </Reveal>
 
-          <div
-            className={
-              styles.mainCopy
-            }
+          <Reveal
+            delay={190}
           >
-            <Reveal
-              delay={80}
+            <p
+              className={
+                styles.focusLine
+              }
             >
-              <p
-                className={
-                  styles.name
-                }
-              >
-                {
-                  copy.name
-                }
-              </p>
-            </Reveal>
-
-            <Reveal
-              delay={130}
-            >
-              <h1
-                className={
-                  styles.title
-                }
-              >
-                <span>
-                  {
-                    copy.headlineLead
-                  }
-                </span>
-
-                <strong>
-                  {
-                    copy.headlineStrong
-                  }
-                </strong>
-              </h1>
-            </Reveal>
-
-            <Reveal
-              delay={190}
-            >
-              <p
-                className={
-                  styles.supporting
-                }
-              >
-                {
-                  copy.supporting
-                }
-              </p>
-            </Reveal>
-          </div>
+              {
+                copy.focusLine
+              }
+            </p>
+          </Reveal>
 
           <Reveal
             delay={240}
@@ -207,16 +118,10 @@ export default function Hero() {
                 {
                   copy.primaryAction
                 }
-
-                <span
-                  aria-hidden="true"
-                >
-                  ↘
-                </span>
               </a>
 
               <a
-                href="#stories"
+                href="#contact"
                 className={
                   styles.secondaryAction
                 }
@@ -240,56 +145,34 @@ export default function Hero() {
               styles.portraitStage
             }
           >
-            <span
+            <div
               className={
-                styles.outerOrbit
-              }
-              aria-hidden="true"
-            />
-
-            <span
-              className={
-                styles.innerOrbit
+                styles.accentBlock
               }
               aria-hidden="true"
             />
 
             <div
-              ref={
-                portraitRef
-              }
               className={
                 styles.portraitFrame
               }
-              onPointerMove={
-                handlePointerMove
-              }
-              onPointerLeave={
-                resetPortrait
-              }
             >
-              <div
-                className={
-                  styles.portraitInner
+              <Image
+                src="/images/portrait/emma-portrait.jpg"
+                alt={
+                  copy.portraitAlt
                 }
-              >
-                <Image
-                  src="/images/portrait/emma-portrait.jpg"
-                  alt={
-                    copy.portraitAlt
-                  }
-                  fill
-                  priority
-                  sizes="
-                    (max-width: 700px) 78vw,
-                    (max-width: 1100px) 42vw,
-                    430px
-                  "
-                  className={
-                    styles.portrait
-                  }
-                />
-              </div>
+                fill
+                priority
+                sizes="
+                  (max-width: 700px) calc(100vw - 2.5rem),
+                  (max-width: 1100px) 42vw,
+                  430px
+                "
+                className={
+                  styles.portrait
+                }
+              />
             </div>
           </div>
         </Reveal>

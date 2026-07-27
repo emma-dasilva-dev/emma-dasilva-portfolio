@@ -1,71 +1,44 @@
 "use client";
 
 import {
-  useEffect,
-  useState,
-} from "react";
+  useLocale,
+} from "@/components/providers/LocaleProvider/LocaleProvider";
+
+import {
+  useTheme,
+} from "@/components/providers/ThemeProvider/ThemeProvider";
 
 import styles from "./ThemeToggle.module.css";
 
-type Theme =
-  | "light"
-  | "dark";
-
-const STORAGE_KEY =
-  "emma-portfolio-theme";
-
-function getCurrentTheme(): Theme {
-  return document
-    .documentElement
-    .dataset
-    .theme === "dark"
-      ? "dark"
-      : "light";
-}
-
 export default function ThemeToggle() {
-  const [
+  const {
+    locale,
+  } =
+    useLocale();
+
+  const {
     theme,
-    setTheme,
-  ] =
-    useState<Theme>(
-      "light",
-    );
+    toggleTheme,
+  } =
+    useTheme();
 
-  useEffect(() => {
-    setTheme(
-      getCurrentTheme(),
-    );
-  }, []);
+  const targetLabel =
+    theme === "light"
+      ? locale === "fr"
+        ? "SOMBRE"
+        : "DARK"
+      : locale === "fr"
+        ? "CLAIR"
+        : "LIGHT";
 
-  const toggleTheme =
-    () => {
-      const nextTheme:
-        Theme =
-        theme ===
-        "light"
-          ? "dark"
-          : "light";
-
-      document
-        .documentElement
-        .dataset
-        .theme =
-        nextTheme;
-
-      try {
-        localStorage.setItem(
-          STORAGE_KEY,
-          nextTheme,
-        );
-      } catch {
-        // Local storage may be unavailable.
-      }
-
-      setTheme(
-        nextTheme,
-      );
-    };
+  const accessibleLabel =
+    theme === "light"
+      ? locale === "fr"
+        ? "Activer le thème sombre"
+        : "Switch to dark theme"
+      : locale === "fr"
+        ? "Activer le thème clair"
+        : "Switch to light theme";
 
   return (
     <button
@@ -73,28 +46,14 @@ export default function ThemeToggle() {
       className={
         styles.toggle
       }
-      data-theme={theme}
       onClick={
         toggleTheme
       }
       aria-label={
-        theme === "light"
-          ? "Switch to dark mode"
-          : "Switch to light mode"
+        accessibleLabel
       }
     >
-      <span
-        className={
-          styles.track
-        }
-        aria-hidden="true"
-      >
-        <span
-          className={
-            styles.knob
-          }
-        />
-      </span>
+      {targetLabel}
     </button>
   );
 }

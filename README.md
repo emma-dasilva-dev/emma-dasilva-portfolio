@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Emma Da Silva — Portfolio
 
 > **From concept to code, I build thoughtful digital experiences.**
@@ -238,23 +239,93 @@ public/
 ## Installation
 
 ### 1. Clone the repository
+=======
+# Emma Da Silva Portfolio
+
+Personal portfolio of Emma Da Silva, a full-stack developer and software engineer building responsive, reliable, and thoughtfully designed web applications.
+
+## Overview
+
+The portfolio presents selected projects, my development process, and ways to contact me.
+
+It uses a focused black, white, and lime visual identity with support for English and French.
+
+## Features
+
+- Responsive desktop, tablet, and mobile layouts
+- English and French language support
+- Persistent light and dark themes
+- Theme-aware browser interface
+- Interactive project cards
+- Accessible mobile navigation
+- Keyboard navigation and visible focus states
+- Reduced-motion support
+
+## Selected Projects
+
+### STAY
+
+Full-stack hospitality platform for booking and internal reservation management.
+
+**Technologies:** React, Node.js, Express, MySQL
+
+[View STAY](https://staybj.vercel.app)
+
+### ByteRush
+
+Interactive coding game introducing beginners to HTML, CSS, and JavaScript through challenges.
+
+**Technologies:** HTML, CSS, JavaScript
+
+[View ByteRush](https://azatoys.com)
+
+### Bandit Redline Journal
+
+Cybersecurity learning project documenting Linux commands, security concepts, and OverTheWire Bandit solutions.
+
+**Technologies:** Linux, Bash, HTML, CSS
+
+[View Bandit Redline Journal](https://emma-dasilva-dev.github.io/bandit-redline-journal/)
+
+## Technology Stack
+
+- Next.js
+- React
+- TypeScript
+- CSS Modules
+- Tailwind CSS
+- Vercel
+
+## Installation
+
+Clone the repository:
+>>>>>>> aaf6aef (rebuild portfolio with focused lime design)
 
 ```bash
 git clone https://github.com/emma-dasilva-dev/emma-dasilva-portfolio.git
 ```
 
+<<<<<<< HEAD
 ### 2. Enter the project directory
+=======
+Enter the project directory:
+>>>>>>> aaf6aef (rebuild portfolio with focused lime design)
 
 ```bash
 cd emma-dasilva-portfolio
 ```
 
+<<<<<<< HEAD
 ### 3. Install dependencies
+=======
+Install the dependencies:
+>>>>>>> aaf6aef (rebuild portfolio with focused lime design)
 
 ```bash
 npm install
 ```
 
+<<<<<<< HEAD
 On Windows PowerShell systems that block `npm.ps1`, use:
 
 ```powershell
@@ -262,11 +333,15 @@ npm.cmd install
 ```
 
 ### 4. Start the development server
+=======
+Start the development server:
+>>>>>>> aaf6aef (rebuild portfolio with focused lime design)
 
 ```bash
 npm run dev
 ```
 
+<<<<<<< HEAD
 Or on restricted PowerShell systems:
 
 ```powershell
@@ -274,11 +349,22 @@ npm.cmd run dev
 ```
 
 Open:
+=======
+On Windows PowerShell, use `npm.cmd` when standard npm commands are blocked:
+
+```powershell
+npm.cmd install
+npm.cmd run dev
+```
+
+Open the portfolio locally at:
+>>>>>>> aaf6aef (rebuild portfolio with focused lime design)
 
 ```text
 http://localhost:3000
 ```
 
+<<<<<<< HEAD
 ---
 
 ## Available Scripts
@@ -416,17 +502,46 @@ Accessibility remains an ongoing part of the refinement process rather than a bo
 - Continue performance testing across real mobile devices
 
 ---
+=======
+## Available Scripts
+
+```bash
+npm run dev
+npm run lint
+npm run build
+npm run start
+```
+
+- `npm run dev` starts the development server.
+- `npm run lint` checks the code for linting issues.
+- `npm run build` creates the production build.
+- `npm run start` runs the production build locally.
+
+## Deployment
+
+The portfolio is deployed through Vercel.
+
+New pushes to the `main` branch trigger a new production deployment automatically.
+>>>>>>> aaf6aef (rebuild portfolio with focused lime design)
 
 ## Author
 
 **Emma Da Silva**
 
+<<<<<<< HEAD
 Front-end developer and emerging software engineer focused on building refined, responsive, and purposeful digital products.
+=======
+Full-stack developer and software engineer focused on building complete, high-performance digital products.
+>>>>>>> aaf6aef (rebuild portfolio with focused lime design)
 
 - [GitHub](https://github.com/emma-dasilva-dev)
 - [LinkedIn](https://www.linkedin.com/in/emmadasilvadev/)
 - [Email](mailto:emma.dasilva.dev@gmail.com)
 
+<<<<<<< HEAD
 ---
 
 © 2026 Emma Da Silva. All rights reserved.
+=======
+© 2026 Emma Da Silva
+>>>>>>> aaf6aef (rebuild portfolio with focused lime design)

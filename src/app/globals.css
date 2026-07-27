@@ -13,9 +13,11 @@ html {
   scroll-behavior: smooth;
 
   background:
-    var(
-      --color-background
-    );
+    var(--color-background);
+
+  scrollbar-color:
+    var(--color-accent)
+    var(--color-background);
 }
 
 html[
@@ -40,17 +42,16 @@ body {
   overflow-x: hidden;
 
   background:
-    var(
-      --color-background
-    );
+    var(--color-background);
 
   color:
     var(--color-text);
 
   font-family:
-    var(--font-manrope),
-    Arial,
-    sans-serif;
+    var(--font-sans);
+
+  text-rendering:
+    optimizeLegibility;
 
   -webkit-font-smoothing:
     antialiased;
@@ -60,9 +61,9 @@ body {
 
   transition:
     background-color
-      350ms ease,
+      220ms ease,
     color
-      350ms ease;
+      220ms ease;
 }
 
 body.menu-open {
@@ -81,6 +82,11 @@ p {
   margin: 0;
 }
 
+ul,
+ol {
+  margin: 0;
+}
+
 a {
   color: inherit;
 
@@ -89,7 +95,8 @@ a {
 
 button,
 input,
-textarea {
+textarea,
+select {
   font: inherit;
 }
 
@@ -111,47 +118,28 @@ img {
   max-width: 100%;
 }
 
-ul,
-ol {
-  margin: 0;
-}
-
 [id] {
   scroll-margin-top:
-    6rem;
+    calc(
+      var(--header-height) +
+      1rem
+    );
 }
 
 ::selection {
   background:
-    var(--color-text);
+    var(--color-accent);
 
-  color:
-    var(
-      --color-background
-    );
+  color: #000000;
 }
 
 :focus-visible {
   outline:
     2px solid
-    var(--color-text);
+    var(--color-accent);
 
   outline-offset:
     4px;
-}
-
-.site-shell {
-  position: relative;
-
-  isolation: isolate;
-
-  min-height: 100vh;
-}
-
-.page-layer {
-  position: relative;
-
-  z-index: 2;
 }
 
 @media (

@@ -17,13 +17,6 @@ export default function SectionLabel({
     >
       <span
         className={
-          styles.node
-        }
-        aria-hidden="true"
-      />
-
-      <span
-        className={
           styles.index
         }
       >
@@ -37,6 +30,13 @@ export default function SectionLabel({
       >
         {label}
       </span>
+
+      <span
+        className={
+          styles.line
+        }
+        aria-hidden="true"
+      />
     </div>
   );
 }

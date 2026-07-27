@@ -1,80 +1,43 @@
 .toggle {
-  display: flex;
+  display: grid;
 
-  align-items: center;
+  place-items: center;
 
-  justify-content: center;
+  min-width: 4.7rem;
 
-  width: 3.15rem;
+  min-height: 2.6rem;
 
-  min-height: 2.8rem;
+  padding:
+    0
+    0.8rem;
 
   border-left:
     1px solid
     var(--color-border);
 
+  color:
+    var(--color-text);
+
+  font-family:
+    var(--font-mono);
+
+  font-size: 0.58rem;
+
+  font-weight: 700;
+
+  letter-spacing:
+    0.1em;
+
   transition:
     background-color
-      250ms ease;
+      180ms ease,
+    color
+      180ms ease;
 }
 
 .toggle:hover {
   background:
-    var(
-      --color-surface-secondary
-    );
-}
+    var(--color-accent);
 
-.track {
-  position: relative;
-
-  width: 1.85rem;
-
-  height: 0.95rem;
-
-  border:
-    1px solid
-    var(
-      --color-text-muted
-    );
-
-  border-radius: 999px;
-}
-
-.knob {
-  position: absolute;
-
-  top: 50%;
-
-  left: 0.1rem;
-
-  width: 0.65rem;
-
-  height: 0.65rem;
-
-  border-radius: 50%;
-
-  background:
-    var(--color-text);
-
-  transform:
-    translateY(-50%);
-
-  transition:
-    transform
-      350ms
-      var(--ease-primary),
-    background-color
-      300ms ease;
-}
-
-.toggle[
-  data-theme="dark"
-]
-.knob {
-  transform:
-    translate(
-      0.9rem,
-      -50%
-    );
+  color: #000000;
 }

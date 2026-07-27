@@ -10,7 +10,6 @@ import {
 } from "@/components/providers/LocaleProvider/LocaleProvider";
 
 import Reveal from "@/components/ui/Reveal/Reveal";
-
 import SectionLabel from "@/components/ui/SectionLabel/SectionLabel";
 
 import styles from "./Contact.module.css";
@@ -39,7 +38,7 @@ export default function Contact() {
         }
       >
         <SectionLabel
-          index="04"
+          index="03"
           label={
             copy.label
           }
@@ -47,7 +46,7 @@ export default function Contact() {
 
         <div
           className={
-            styles.content
+            styles.introduction
           }
         >
           <Reveal>
@@ -67,11 +66,11 @@ export default function Contact() {
           >
             <p
               className={
-                styles.body
+                styles.description
               }
             >
               {
-                copy.body
+                copy.description
               }
             </p>
           </Reveal>
@@ -114,7 +113,11 @@ export default function Contact() {
                     styles.link
                   }
                 >
-                  <span>
+                  <span
+                    className={
+                      styles.linkLabel
+                    }
+                  >
                     {
                       link
                         .label[
@@ -124,9 +127,13 @@ export default function Contact() {
                   </span>
 
                   <span
-                    aria-hidden="true"
+                    className={
+                      styles.linkValue
+                    }
                   >
-                    ↗
+                    {
+                      link.value
+                    }
                   </span>
                 </a>
               </Reveal>
