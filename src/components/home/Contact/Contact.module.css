@@ -1,0 +1,12 @@
+.grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(20rem,1fr); gap:clamp(3rem,8vw,8rem); }
+.intro { max-width:38rem; margin-top:2rem; color:var(--text-secondary); font-size:clamp(1.1rem,2vw,1.45rem); }
+.links { display:flex; flex-wrap:wrap; gap:.8rem 1.4rem; margin-top:3rem; font-size:.75rem; font-weight:700; letter-spacing:.1em; }
+.links span { width:100%; color:var(--text-muted); }
+.form { display:grid; gap:1.3rem; }
+.form label { display:grid; gap:.55rem; color:var(--text-muted); font-size:.7rem; font-weight:700; letter-spacing:.12em; }
+.form input,.form textarea { width:100%; border:0; border-bottom:1px solid var(--border); background:transparent; color:var(--text-primary); font:inherit; font-size:1rem; outline:none; padding:.85rem 0; resize:vertical; }
+.form input:focus,.form textarea:focus { border-color:var(--primary-hover); }
+.form button { min-height:3.2rem; border:0; background:var(--button-bg); color:var(--button-text); font-weight:800; letter-spacing:.08em; cursor:pointer; }
+.form p { min-height:1.5rem; color:var(--text-secondary); font-size:.85rem; }
+.honeypot { position:absolute!important; left:-9999px!important; width:1px!important; height:1px!important; opacity:0!important; }
+@media(max-width:48rem){ .grid{grid-template-columns:1fr}.form{margin-top:1rem} }

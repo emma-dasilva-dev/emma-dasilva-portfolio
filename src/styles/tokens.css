@@ -1,0 +1,11 @@
+:root {
+  --background:#0D0F12; --background-alt:#12161A; --surface:#171C20;
+  --primary:#728D90; --primary-hover:#8CA7A9; --primary-dark:#5E787C; --primary-soft:#AFC2C3;
+  --text-primary:#F5F7F8; --text-secondary:#B4BDC4; --text-muted:#7E878D;
+  --border:#2A3137; --divider:#20262B;
+  --success:#6FA58A; --warning:#C8A96B; --error:#B66A6A;
+  --button-bg:#728D90; --button-hover:#8CA7A9; --button-active:#5E787C; --button-text:#0D0F12;
+  --selection:#728D90; --focus-ring:#8CA7A9;
+  --page-gutter:clamp(1.2rem,4vw,4rem); --content-width:92rem; --header-height:4.75rem;
+  --space-sm:clamp(2.5rem,5vw,4.5rem); --space-md:clamp(4rem,8vw,7rem); --space-lg:clamp(6rem,11vw,10rem); --grid-gap:clamp(1rem,2vw,2rem);
+}

@@ -1,0 +1,2 @@
+.button { min-width: 2.75rem; min-height: 2.5rem; padding: .55rem .7rem; border: 1px solid var(--border); background: transparent; color: var(--text-primary); font: inherit; font-size: .72rem; font-weight: 700; letter-spacing: .12em; cursor: pointer; transition: background .2s ease, color .2s ease, border-color .2s ease; }
+.button:hover, .button:focus-visible { background: var(--primary); color: var(--button-text); border-color: var(--primary); }

@@ -1,0 +1,7 @@
+.grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(18rem, .8fr); align-items: start; gap: clamp(2.5rem, 7vw, 7rem); }
+.copy { max-width: 46rem; margin-top: clamp(2rem, 5vw, 4rem); }
+.copy p { color: var(--text-secondary); font-size: clamp(1.1rem, 2vw, 1.45rem); line-height: 1.65; }
+.copy p + p { margin-top: 1.6rem; }
+.image { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--surface); }
+.image img { object-fit: cover; filter: grayscale(100%); }
+@media(max-width: 48rem){ .grid { grid-template-columns: 1fr; } .image { order: 2; width: min(100%, 34rem); } }

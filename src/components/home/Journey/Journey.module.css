@@ -1,0 +1,7 @@
+.header { display: grid; grid-template-columns: minmax(8rem,1fr) minmax(0,3fr); gap: var(--grid-gap); margin-bottom: var(--space-md); }
+.header > p:last-child { max-width: 44rem; color: var(--text-secondary); font-size: clamp(1.1rem, 2vw, 1.45rem); }
+.step { display: grid; grid-template-columns: minmax(3rem,.6fr) minmax(12rem,1.4fr) minmax(0,3fr); gap: var(--grid-gap); padding-block: clamp(2rem,4vw,3.5rem); border-top: 1px solid var(--divider); }
+.step > span { color: var(--primary); font-size: .7rem; font-weight: 700; letter-spacing: .13em; }
+.step h2 { margin: 0; font-size: clamp(1.4rem,3vw,2.6rem); line-height: 1; letter-spacing: -.04em; }
+.step p { max-width: 42rem; color: var(--text-secondary); }
+@media(max-width: 48rem){ .header, .step { grid-template-columns: 1fr; } .header { gap: 1rem; } .step { gap: .9rem; } }
