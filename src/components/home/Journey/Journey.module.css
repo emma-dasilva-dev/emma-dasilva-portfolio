@@ -1,7 +1,12 @@
-.header { display: grid; grid-template-columns: minmax(8rem,1fr) minmax(0,3fr); gap: var(--grid-gap); margin-bottom: var(--space-md); }
-.header > p:last-child { max-width: 44rem; color: var(--text-secondary); font-size: clamp(1.1rem, 2vw, 1.45rem); }
-.step { display: grid; grid-template-columns: minmax(3rem,.6fr) minmax(12rem,1.4fr) minmax(0,3fr); gap: var(--grid-gap); padding-block: clamp(2rem,4vw,3.5rem); border-top: 1px solid var(--divider); }
-.step > span { color: var(--primary); font-size: .7rem; font-weight: 700; letter-spacing: .13em; }
-.step h2 { margin: 0; font-size: clamp(1.4rem,3vw,2.6rem); line-height: 1; letter-spacing: -.04em; }
-.step p { max-width: 42rem; color: var(--text-secondary); }
-@media(max-width: 48rem){ .header, .step { grid-template-columns: 1fr; } .header { gap: 1rem; } .step { gap: .9rem; } }
+.header { display: grid; grid-template-columns: minmax(8rem,.8fr) minmax(0,2.4fr); gap: var(--grid-gap); margin-bottom: clamp(3rem,5vw,4.5rem); }
+.header > p:last-child { max-width: 42rem; color: var(--text-secondary); font-size: var(--text-lead); line-height: 1.6; }
+.step { display: grid; grid-template-columns: minmax(2.75rem,.45fr) minmax(11rem,1.2fr) minmax(0,2.6fr); gap: var(--grid-gap); padding-block: clamp(1.8rem,3.2vw,2.8rem); border-top: 1px solid var(--divider); }
+.step > span { color: var(--primary); font-size: var(--text-label); font-weight: 700; letter-spacing: .13em; }
+.step h2 { margin: 0; font-size: clamp(1.35rem,2.5vw,2.25rem); font-weight: 600; line-height: 1.05; letter-spacing: -.035em; }
+.step p { max-width: 39rem; color: var(--text-secondary); line-height: 1.68; }
+@media (max-width: 48rem) {
+  .header, .step { grid-template-columns: 1fr; }
+  .header { gap: .85rem; margin-bottom: 2.5rem; }
+  .step { gap: .7rem; padding-block: 2.15rem; }
+  .step h2 { max-width: 18ch; }
+}

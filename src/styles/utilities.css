@@ -1,4 +1,11 @@
-.shell{width:min(100%,var(--content-width));margin-inline:auto;padding-inline:var(--page-gutter)}
-.section{padding-block:var(--space-md);border-top:1px solid var(--divider)}
-.sectionAlt{background:var(--background-alt)}
-.eyebrow{color:var(--primary-soft);font-size:.72rem;font-weight:800;letter-spacing:.14em}
+.shell { width: min(100%, var(--content-width)); margin-inline: auto; padding-inline: var(--page-gutter); }
+.section { padding-block: var(--space-section-medium); border-top: 1px solid var(--divider); }
+.sectionLarge { padding-block: var(--space-section-large); border-top: 1px solid var(--divider); }
+.sectionCompact { padding-block: var(--space-section-compact); border-top: 1px solid var(--divider); }
+.sectionAlt { background: var(--background-alt); }
+.eyebrow { color: var(--primary-soft); font-size: var(--text-label); font-weight: 800; letter-spacing: var(--tracking-label); line-height: 1.2; text-transform: uppercase; }
+.readingWidth { max-width: var(--reading-width); }
+.muted { color: var(--text-muted); }
+@media (max-width: 48rem) {
+  .section, .sectionLarge, .sectionCompact { padding-block: var(--space-section-medium); }
+}

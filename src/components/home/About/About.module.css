@@ -1,7 +1,11 @@
-.grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(18rem, .8fr); align-items: start; gap: clamp(2.5rem, 7vw, 7rem); }
-.copy { max-width: 46rem; margin-top: clamp(2rem, 5vw, 4rem); }
-.copy p { color: var(--text-secondary); font-size: clamp(1.1rem, 2vw, 1.45rem); line-height: 1.65; }
-.copy p + p { margin-top: 1.6rem; }
-.image { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--surface); }
+.grid { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(17rem,.72fr); align-items: center; gap: clamp(2.5rem,6vw,6rem); }
+.copy { max-width: 43rem; margin-top: clamp(1.6rem,3.5vw,2.8rem); }
+.copy p { color: var(--text-secondary); font-size: var(--text-lead); line-height: 1.68; }
+.copy p + p { margin-top: 1.35rem; }
+.image { position: relative; width: min(100%,28rem); aspect-ratio: 4/5; justify-self: end; overflow: hidden; background: var(--surface); }
 .image img { object-fit: cover; filter: grayscale(100%); }
-@media(max-width: 48rem){ .grid { grid-template-columns: 1fr; } .image { order: 2; width: min(100%, 34rem); } }
+@media (max-width: 48rem) {
+  .grid { grid-template-columns: 1fr; align-items: start; gap: 2.5rem; }
+  .copy { margin-top: 1.4rem; }
+  .image { order: 2; width: min(100%,31rem); justify-self: start; }
+}
