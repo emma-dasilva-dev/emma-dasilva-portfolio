@@ -1,2 +1,47 @@
 "use client";
-import {useLocale} from "@/components/providers/LocaleProvider/LocaleProvider";import {CONTACT_LINKS,HOME_COPY} from "@/content/home";import styles from "./Contact.module.css";export default function Contact(){const{locale}=useLocale();const c=HOME_COPY[locale].contact;return <section id="contact" className="section"><div className={`shell ${styles.grid}`}><div><h2 className="sectionHeading">{c.label}</h2><p className={`${styles.introduction} sectionIntro`}>{c.introduction}</p></div><div className={styles.links}><span>{c.findMe}</span>{CONTACT_LINKS.map(l=><a key={l.id} href={l.href} target={l.external?"_blank":undefined} rel={l.external?"noreferrer":undefined}><strong>{l.label[locale]}</strong><span>{l.value}</span></a>)}</div></div></section>}
+
+import { useLocale } from "@/components/providers/LocaleProvider/LocaleProvider";
+import Reveal from "@/components/ui/Reveal/Reveal";
+import { CONTACT_LINKS, HOME_COPY } from "@/content/home";
+import styles from "./Contact.module.css";
+
+export default function Contact() {
+  const { locale } = useLocale();
+  const copy = HOME_COPY[locale].contact;
+
+  return (
+    <section id="contact" className="section">
+      <div className={`shell ${styles.grid}`}>
+        <div>
+          <Reveal>
+            <h2 className="sectionHeading">{copy.label}</h2>
+          </Reveal>
+
+          <Reveal delay={80}>
+            <p className={`${styles.introduction} sectionIntro`}>
+              {copy.introduction}
+            </p>
+          </Reveal>
+        </div>
+
+        <Reveal delay={120}>
+          <div className={styles.links}>
+            <span>{copy.findMe}</span>
+
+            {CONTACT_LINKS.map((link) => (
+              <a
+                key={link.id}
+                href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noreferrer" : undefined}
+              >
+                <strong>{link.label[locale]}</strong>
+                <span>{link.value}</span>
+              </a>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}

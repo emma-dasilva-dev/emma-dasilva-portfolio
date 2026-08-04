@@ -1,52 +1,20 @@
 .switcher {
-  display: flex;
-
-  align-items: center;
-
-  min-height: 100%;
-}
-
-.option {
   display: grid;
-
   place-items: center;
-
-  min-width: 2.65rem;
-
-  min-height: 2.6rem;
-
-  border-left:
-    1px solid
-    var(--color-border);
-
-  color:
-    var(--color-muted);
-
-  font-family:
-    var(--font-mono);
-
-  font-size: 0.58rem;
-
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  border-left: 1px solid var(--color-border);
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
   font-weight: 700;
-
-  letter-spacing:
-    0.1em;
-
+  letter-spacing: 0.1em;
   transition:
-    background-color
-      180ms ease,
-    color
-      180ms ease;
+    background-color 180ms ease,
+    color 180ms ease;
 }
 
-.option:hover {
-  color:
-    var(--color-text);
-}
-
-.active {
-  background:
-    var(--color-accent);
-
+.switcher:hover {
+  background: var(--color-accent);
   color: #000000;
 }

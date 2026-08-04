@@ -1,2 +1,38 @@
 "use client";
-import {useLocale} from "@/components/providers/LocaleProvider/LocaleProvider";import {HOME_COPY,TOOL_GROUPS} from "@/content/home";import styles from "./Tools.module.css";export default function Tools(){const{locale}=useLocale();const c=HOME_COPY[locale].tools;return <section id="tools" className="section"><div className="shell"><div className={styles.header}><h2 className="sectionHeading">{c.label}</h2><p className="sectionIntro">{c.introduction}</p></div><div className={styles.rows}>{TOOL_GROUPS.map(g=><article key={g.id}><h3>{g.title[locale]}</h3><p>{g.technologies.join(" / ")}</p></article>)}</div></div></section>}
+
+import { useLocale } from "@/components/providers/LocaleProvider/LocaleProvider";
+import Reveal from "@/components/ui/Reveal/Reveal";
+import { HOME_COPY, TOOL_GROUPS } from "@/content/home";
+import styles from "./Tools.module.css";
+
+export default function Tools() {
+  const { locale } = useLocale();
+  const copy = HOME_COPY[locale].tools;
+
+  return (
+    <section id="tools" className="section">
+      <div className="shell">
+        <div className={styles.header}>
+          <Reveal>
+            <h2 className="sectionHeading">{copy.label}</h2>
+          </Reveal>
+
+          <Reveal delay={80}>
+            <p className="sectionIntro">{copy.introduction}</p>
+          </Reveal>
+        </div>
+
+        <div className={styles.rows}>
+          {TOOL_GROUPS.map((group, index) => (
+            <Reveal key={group.id} delay={index * 60}>
+              <article className={styles.row}>
+                <h3>{group.title[locale]}</h3>
+                <p>{group.technologies.join(" / ")}</p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
