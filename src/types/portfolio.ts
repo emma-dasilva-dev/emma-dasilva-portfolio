@@ -1,5 +1,7 @@
 export type Locale = "en" | "fr";
 
+export type Theme = "light" | "dark";
+
 export type LocalizedText = Readonly<Record<Locale, string>>;
 
 export type SectionId =
@@ -25,6 +27,8 @@ export interface Project {
   liveUrl?: string;
   action?: LocalizedText;
   status?: LocalizedText;
+  number?: string;
+  year?: string;
 }
 
 export interface Principle {
@@ -37,6 +41,13 @@ export interface ToolGroup {
   id: string;
   title: LocalizedText;
   technologies: readonly string[];
+}
+
+export interface ProcessItem {
+  id: string;
+  number: string;
+  title: LocalizedText;
+  description: LocalizedText;
 }
 
 export interface ContactLink {
