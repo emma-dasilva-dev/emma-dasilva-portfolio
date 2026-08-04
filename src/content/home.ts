@@ -1,8 +1,8 @@
 import type {
   ContactLink,
-  Locale,
   NavigationItem,
-  ProcessItem,
+  Principle,
+  ToolGroup,
 } from "@/types/portfolio";
 
 interface HomeCopy {
@@ -14,29 +14,36 @@ interface HomeCopy {
   };
 
   hero: {
+    prefix: string;
+    name: string;
     role: string;
-    description: string;
-    focusLine: string;
-    primaryAction: string;
-    secondaryAction: string;
+  };
+
+  who: {
+    label: string;
+    paragraphs: readonly string[];
     portraitAlt: string;
   };
 
-  work: {
+  build: {
     label: string;
-    title: string;
-    visitProject: string;
+    introduction: string;
   };
 
-  process: {
+  think: {
     label: string;
-    title: string;
+    introduction: string;
+  };
+
+  tools: {
+    label: string;
+    introduction: string;
   };
 
   contact: {
     label: string;
-    title: string;
-    description: string;
+    introduction: string;
+    findMe: string;
   };
 
   footer: {
@@ -44,65 +51,57 @@ interface HomeCopy {
   };
 }
 
-export const HOME_COPY: Record<
-  Locale,
-  HomeCopy
-> = {
+export const HOME_COPY: Record<"en" | "fr", HomeCopy> = {
   en: {
     header: {
       menu: "MENU",
       close: "CLOSE",
-      primaryNavigation:
-        "Primary navigation",
-      mobileNavigation:
-        "Mobile navigation",
+      primaryNavigation: "Primary navigation",
+      mobileNavigation: "Mobile navigation",
     },
 
     hero: {
-      role:
-        "Full-Stack Developer & Software Engineer",
-
-      description:
-        "Passionate about the intersection of elegant design and scalable software engineering. As a full-stack developer, I bring digital ideas to life, crafting seamless user interfaces and building reliable back-end architecture to deliver complete, high-performance web applications.",
-
-      focusLine:
-        "Driven by curiosity. Focused on impact.",
-
-      primaryAction:
-        "SEE MY WORK",
-
-      secondaryAction:
-        "LET'S CONNECT",
-
-      portraitAlt:
-        "Portrait of Emma Da Silva",
+      prefix: "I AM",
+      name: "EMMA",
+      role: "JUNIOR FULL STACK DEVELOPER",
     },
 
-    work: {
-      label: "WORK",
-      title: "Selected work",
-      visitProject:
-        "VISIT PROJECT",
+    who: {
+      label: "WHO I AM",
+      paragraphs: [
+        "I did not begin this journey with a fixed destination. What started as curiosity gradually became a genuine interest in understanding how software is designed, how applications communicate, and what happens beyond the interface.",
+        "Today, I build full-stack web applications while continuing to explore systems programming, Linux, cybersecurity, and software engineering. Every project gives me another opportunity to refine my thinking, strengthen my technical foundations, and build with more intention than before.",
+      ],
+      portraitAlt: "Portrait of Emma Da Silva",
     },
 
-    process: {
-      label: "PROCESS",
-      title: "How I work",
+    build: {
+      label: "WHAT I BUILD",
+      introduction:
+        "A selection of projects that reflects how I approach software: with curiosity, attention to detail, and a desire to understand what happens beneath the surface.",
+    },
+
+    think: {
+      label: "HOW I THINK",
+      introduction:
+        "The principles behind the way I learn, solve problems, and approach the systems I build.",
+    },
+
+    tools: {
+      label: "TOOLS I BUILD WITH",
+      introduction:
+        "The languages, frameworks, and systems I currently use to turn ideas into working software.",
     },
 
     contact: {
-      label: "CONTACT",
-
-      title:
-        "Have something worth building?",
-
-      description:
-        "Open to internships, collaborations and thoughtful technical opportunities.",
+      label: "LET'S BUILD SOMETHING",
+      introduction:
+        "If you are working on something meaningful, have an idea worth exploring, or simply want to connect, I would be glad to hear from you.",
+      findMe: "FIND ME ON",
     },
 
     footer: {
-      message:
-        "Built with intention. Refined with care.",
+      message: "OPEN TO TECHNICAL COLLABORATIONS.",
     },
   },
 
@@ -110,212 +109,142 @@ export const HOME_COPY: Record<
     header: {
       menu: "MENU",
       close: "FERMER",
-      primaryNavigation:
-        "Navigation principale",
-      mobileNavigation:
-        "Navigation mobile",
+      primaryNavigation: "Navigation principale",
+      mobileNavigation: "Navigation mobile",
     },
 
     hero: {
-      role:
-        "Développeuse Full-Stack & Ingénieure Logiciel",
-
-      description:
-        "Passionnée par la rencontre entre le design soigné et l’ingénierie logicielle évolutive, je conçois des interfaces fluides et des systèmes back-end fiables pour créer des applications web complètes et performantes.",
-
-      focusLine:
-        "Guidée par la curiosité. Concentrée sur l’impact.",
-
-      primaryAction:
-        "VOIR MES PROJETS",
-
-      secondaryAction:
-        "ME CONTACTER",
-
-      portraitAlt:
-        "Portrait d’Emma Da Silva",
+      prefix: "JE SUIS",
+      name: "EMMA",
+      role: "DÉVELOPPEUSE FULL STACK JUNIOR",
     },
 
-    work: {
-      label: "PROJETS",
-      title:
-        "Projets sélectionnés",
-      visitProject:
-        "VISITER LE PROJET",
+    who: {
+      label: "QUI JE SUIS",
+      paragraphs: [
+        "Je n’ai pas commencé ce parcours avec une destination clairement définie. Ce qui n’était au départ qu’une curiosité est progressivement devenu un véritable intérêt pour la manière dont les logiciels sont conçus, dont les applications communiquent et pour ce qui se passe au-delà de l’interface.",
+        "Aujourd’hui, je développe des applications web full stack tout en approfondissant la programmation système, Linux, la cybersécurité et le génie logiciel. Chaque projet me permet d’affiner ma réflexion, de renforcer mes bases techniques et de construire avec davantage d’intention.",
+      ],
+      portraitAlt: "Portrait d’Emma Da Silva",
     },
 
-    process: {
-      label: "PROCESSUS",
-      title:
-        "Ma façon de travailler",
+    build: {
+      label: "CE QUE JE CONSTRUIS",
+      introduction:
+        "Une sélection de projets qui reflètent ma manière d’aborder le logiciel : avec curiosité, précision et l’envie de comprendre ce qui se passe sous la surface.",
+    },
+
+    think: {
+      label: "MA FAÇON DE PENSER",
+      introduction:
+        "Les principes qui guident ma manière d’apprendre, de résoudre des problèmes et d’aborder les systèmes que je construis.",
+    },
+
+    tools: {
+      label: "MES OUTILS DE CONSTRUCTION",
+      introduction:
+        "Les langages, frameworks et systèmes que j’utilise aujourd’hui pour transformer des idées en logiciels fonctionnels.",
     },
 
     contact: {
-      label: "CONTACT",
-
-      title:
-        "Un projet qui mérite d’être construit ?",
-
-      description:
-        "Ouverte aux stages, collaborations et opportunités techniques pertinentes.",
+      label: "CONSTRUISONS QUELQUE CHOSE",
+      introduction:
+        "Si vous travaillez sur un projet porteur de sens, avez une idée à explorer ou souhaitez simplement échanger, je serai ravie de vous lire.",
+      findMe: "ME RETROUVER SUR",
     },
 
     footer: {
-      message:
-        "Conçu avec intention. Affiné avec soin.",
+      message: "OUVERTE AUX COLLABORATIONS TECHNIQUES.",
     },
   },
 };
 
-export const NAV_ITEMS: NavigationItem[] =
-  [
-    {
-      id: "work",
+export const NAV_ITEMS: readonly NavigationItem[] = [
+  { id: "who", label: { en: "WHO", fr: "QUI" } },
+  { id: "build", label: { en: "BUILD", fr: "PROJETS" } },
+  { id: "think", label: { en: "THINK", fr: "PENSER" } },
+  { id: "tools", label: { en: "TOOLS", fr: "OUTILS" } },
+  { id: "contact", label: { en: "CONTACT", fr: "CONTACT" } },
+];
 
-      label: {
-        en: "WORK",
-        fr: "PROJETS",
-      },
+export const PRINCIPLES: readonly Principle[] = [
+  {
+    id: "curiosity",
+    title: { en: "CURIOSITY", fr: "CURIOSITÉ" },
+    description: {
+      en: "Everything begins with one question: how does this actually work? That question still drives the way I learn.",
+      fr: "Tout commence par une question : comment cela fonctionne-t-il réellement ? Cette question guide encore ma manière d’apprendre.",
     },
-
-    {
-      id: "process",
-
-      label: {
-        en: "PROCESS",
-        fr: "PROCESSUS",
-      },
+  },
+  {
+    id: "building",
+    title: { en: "LEARNING BY BUILDING", fr: "APPRENDRE EN CONSTRUISANT" },
+    description: {
+      en: "Clarity comes from practice. I learn by experimenting, correcting mistakes, and turning ideas into working systems.",
+      fr: "La clarté vient de la pratique. J’apprends en expérimentant, en corrigeant mes erreurs et en transformant des idées en systèmes fonctionnels.",
     },
-
-    {
-      id: "contact",
-
-      label: {
-        en: "CONTACT",
-        fr: "CONTACT",
-      },
+  },
+  {
+    id: "systems",
+    title: { en: "UNDERSTANDING SYSTEMS", fr: "COMPRENDRE LES SYSTÈMES" },
+    description: {
+      en: "I do not want to stop at the interface. I want to understand the processes, data, and decisions underneath it.",
+      fr: "Je ne veux pas m’arrêter à l’interface. Je veux comprendre les processus, les données et les décisions qui se trouvent en dessous.",
     },
-  ];
-
-export const PROCESS_ITEMS: ProcessItem[] =
-  [
-    {
-      id: "purpose",
-
-      number: "01",
-
-      title: {
-        en:
-          "Build with purpose",
-
-        fr:
-          "Construire avec intention",
-      },
-
-      description: {
-        en:
-          "Every decision should improve clarity, usability or identity.",
-
-        fr:
-          "Chaque décision doit améliorer la clarté, l’utilisabilité ou l’identité.",
-      },
+  },
+  {
+    id: "reliability",
+    title: { en: "BUILDING FOR REAL USE", fr: "CONSTRUIRE POUR UN USAGE RÉEL" },
+    description: {
+      en: "Software should be reliable, maintainable, and clear to the people who depend on it.",
+      fr: "Un logiciel doit être fiable, maintenable et clair pour les personnes qui en dépendent.",
     },
+  },
+];
 
-    {
-      id: "details",
+export const TOOL_GROUPS: readonly ToolGroup[] = [
+  {
+    id: "languages",
+    title: { en: "LANGUAGES", fr: "LANGAGES" },
+    technologies: ["C", "TypeScript", "JavaScript", "SQL", "HTML", "CSS"],
+  },
+  {
+    id: "frameworks",
+    title: { en: "FRAMEWORKS", fr: "FRAMEWORKS" },
+    technologies: ["React", "Next.js", "Node.js", "Express.js", "Vite"],
+  },
+  {
+    id: "systems",
+    title: { en: "SYSTEMS", fr: "SYSTÈMES" },
+    technologies: ["Linux", "Bash", "GCC", "Makefiles", "Git"],
+  },
+  {
+    id: "data",
+    title: { en: "DATA", fr: "DONNÉES" },
+    technologies: ["MySQL", "REST APIs", "JWT"],
+  },
+];
 
-      number: "02",
-
-      title: {
-        en:
-          "Refine the details",
-
-        fr:
-          "Soigner les détails",
-      },
-
-      description: {
-        en:
-          "Spacing, responsiveness and interaction quality are part of the product.",
-
-        fr:
-          "Les espacements, la responsivité et les interactions font partie du produit.",
-      },
-    },
-
-    {
-      id: "testing",
-
-      number: "03",
-
-      title: {
-        en:
-          "Test beyond one screen",
-
-        fr:
-          "Tester au-delà d’un seul écran",
-      },
-
-      description: {
-        en:
-          "The experience must remain reliable across devices and real usage.",
-
-        fr:
-          "L’expérience doit rester fiable sur différents appareils et usages.",
-      },
-    },
-  ];
-
-export const CONTACT_LINKS: ContactLink[] =
-  [
-    {
-      id: "email",
-
-      href:
-        "mailto:emma.dasilva.dev@gmail.com",
-
-      external: false,
-
-      label: {
-        en: "EMAIL",
-        fr: "EMAIL",
-      },
-
-      value:
-        "emma.dasilva.dev@gmail.com",
-    },
-
-    {
-      id: "github",
-
-      href:
-        "https://github.com/emma-dasilva-dev",
-
-      external: true,
-
-      label: {
-        en: "GITHUB",
-        fr: "GITHUB",
-      },
-
-      value:
-        "emma-dasilva-dev",
-    },
-
-    {
-      id: "linkedin",
-
-      href:
-        "https://www.linkedin.com/in/emmadasilvadev/",
-
-      external: true,
-
-      label: {
-        en: "LINKEDIN",
-        fr: "LINKEDIN",
-      },
-
-      value:
-        "emmadasilvadev",
-    },
-  ];
+export const CONTACT_LINKS: readonly ContactLink[] = [
+  {
+    id: "email",
+    href: "mailto:emma.dasilva.dev@gmail.com",
+    external: false,
+    label: { en: "EMAIL", fr: "E-MAIL" },
+    value: "emma.dasilva.dev@gmail.com",
+  },
+  {
+    id: "github",
+    href: "https://github.com/emma-dasilva-dev",
+    external: true,
+    label: { en: "GITHUB", fr: "GITHUB" },
+    value: "emma-dasilva-dev",
+  },
+  {
+    id: "linkedin",
+    href: "https://www.linkedin.com/in/emmadasilvadev/",
+    external: true,
+    label: { en: "LINKEDIN", fr: "LINKEDIN" },
+    value: "emmadasilvadev",
+  },
+];
