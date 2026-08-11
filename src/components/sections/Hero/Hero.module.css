@@ -1,0 +1,157 @@
+.hero {
+  min-height: calc(100svh - var(--header-height));
+  display: grid;
+  align-items: stretch;
+}
+
+.inner {
+  display: flex;
+  min-height: inherit;
+  padding-top: clamp(2.5rem, 6vw, 5rem);
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+  flex-direction: column;
+}
+
+.path,
+.sectionLabel {
+  margin: 0;
+  color: var(--text-muted);
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 0.7rem;
+}
+
+.path {
+  margin-bottom: clamp(2.5rem, 6vw, 5rem);
+}
+
+.sectionLabel {
+  margin-bottom: 1.2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: end;
+  gap: 1rem;
+}
+
+.identity {
+  grid-column: 1 / span 8;
+}
+
+.name {
+  margin: 0;
+  font-size: clamp(4rem, 9.2vw, 8.7rem);
+  font-weight: 560;
+  letter-spacing: -0.075em;
+  line-height: 0.82;
+  text-transform: uppercase;
+}
+
+.name span {
+  display: block;
+}
+
+.description {
+  max-width: 34rem;
+  margin: clamp(2rem, 4vw, 3.5rem) 0 0;
+  color: var(--text-secondary);
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
+  line-height: 1.55;
+}
+
+.roleBlock {
+  grid-column: 10 / -1;
+  align-self: center;
+}
+
+.role {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.4vw, 2.45rem);
+  font-weight: 480;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.bottom {
+  display: flex;
+  margin-top: auto;
+  padding-top: clamp(3rem, 8vw, 7rem);
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.scroll {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--text-muted);
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+}
+
+.scrollLine {
+  width: 3rem;
+  height: 1px;
+  background: var(--border-strong);
+  transition: width var(--fast) var(--ease);
+}
+
+.scroll:hover .scrollLine {
+  width: 4rem;
+  background: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .identity {
+    grid-column: 1 / span 9;
+  }
+
+  .roleBlock {
+    grid-column: 10 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero {
+    min-height: calc(100svh - var(--header-height));
+  }
+
+  .inner {
+    padding-top: 2rem;
+  }
+
+  .path {
+    margin-bottom: 2.4rem;
+  }
+
+  .grid {
+    display: block;
+  }
+
+  .name {
+    font-size: clamp(3.65rem, 17vw, 6rem);
+  }
+
+  .roleBlock {
+    margin-top: 1.8rem;
+  }
+
+  .role {
+    font-size: 1.2rem;
+  }
+
+  .description {
+    margin-top: 1.7rem;
+  }
+
+  .bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    padding-top: 3.5rem;
+  }
+}

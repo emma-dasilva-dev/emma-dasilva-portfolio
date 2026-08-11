@@ -1,0 +1,40 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  font-size: 0.95rem;
+  font-weight: 520;
+  border-bottom: 1px solid var(--border-strong);
+  transition:
+    border-color var(--fast) var(--ease),
+    color var(--fast) var(--ease);
+}
+
+.link:hover,
+.link:focus-visible {
+  border-color: var(--accent);
+}
+
+.icon {
+  width: 0.9rem;
+  height: 0.9rem;
+  transition: transform var(--fast) var(--ease);
+}
+
+.link:hover .icon,
+.link:focus-visible .icon {
+  transform: translate(2px, -2px);
+}
+
+.primary {
+  padding: 0.7rem 1rem;
+  color: #111111;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.primary:hover,
+.primary:focus-visible {
+  color: #111111;
+}

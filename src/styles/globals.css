@@ -1,5 +1,4 @@
 @import "./tokens.css";
-@import "tailwindcss";
 
 *,
 *::before,
@@ -9,15 +8,24 @@
 
 html {
   scroll-behavior: smooth;
+  background: var(--background);
 }
 
 body {
   margin: 0;
-  background: var(--color-background);
-  color: var(--color-text-primary);
-  font-family: var(--font-space-grotesk), sans-serif;
+  min-width: 320px;
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: var(--font-space-grotesk), Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  transition:
+    background-color var(--normal) var(--ease),
+    color var(--normal) var(--ease);
+}
+
+body.menu-open {
+  overflow: hidden;
 }
 
 button,
@@ -30,6 +38,10 @@ select {
 button,
 a {
   -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  color: inherit;
 }
 
 a {
@@ -45,6 +57,106 @@ svg {
 }
 
 ::selection {
-  background: var(--color-accent);
+  background: var(--accent);
   color: #111111;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 999;
+  padding: 0.75rem 1rem;
+  background: var(--accent);
+  color: #111111;
+  transform: translateY(-160%);
+  transition: transform var(--fast) var(--ease);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.page-shell {
+  width: min(100%, var(--page-max));
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-space);
+  border-top: 1px solid var(--border);
+  scroll-margin-top: calc(var(--header-height) + 1rem);
+}
+
+.section-label {
+  margin: 0 0 2rem;
+  color: var(--text-secondary);
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.section-heading {
+  margin: 0;
+  font-size: clamp(2.75rem, 7vw, 6.25rem);
+  font-weight: 560;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+}
+
+.mono {
+  font-family: var(--font-ibm-plex-mono), monospace;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --header-height: 4.25rem;
+    --section-space: 5.5rem;
+  }
+
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  .section-label {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
 }

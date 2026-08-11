@@ -1,0 +1,92 @@
+.terminal {
+  width: min(100%, 42rem);
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+}
+
+.form {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 0.74rem;
+}
+
+.prefix {
+  flex: none;
+  color: var(--text-secondary);
+}
+
+.dollar {
+  margin-left: 0.3rem;
+  color: var(--accent);
+}
+
+.input {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  color: var(--text-primary);
+  background: transparent;
+  border: 0;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.cursor {
+  width: 0.45rem;
+  height: 1rem;
+  flex: none;
+  background: var(--accent);
+  animation: blink 1s steps(2, start) infinite;
+}
+
+.output {
+  min-height: 1.5rem;
+  margin: 0;
+  color: var(--text-muted);
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 0.68rem;
+  line-height: 1.55;
+}
+
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.75rem;
+}
+
+.suggestions button {
+  min-height: 36px;
+  padding: 0.4rem 0.65rem;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 0.66rem;
+  transition:
+    border-color var(--fast) var(--ease),
+    color var(--fast) var(--ease);
+}
+
+.suggestions button:hover,
+.suggestions button:focus-visible {
+  color: var(--text-primary);
+  border-color: var(--accent);
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .prefix {
+    display: none;
+  }
+}

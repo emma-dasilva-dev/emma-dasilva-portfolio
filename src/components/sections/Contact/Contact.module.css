@@ -1,0 +1,71 @@
+.contact {
+  padding-bottom: clamp(6rem, 12vw, 11rem);
+}
+
+.heading {
+  max-width: 11ch;
+  margin: 0;
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  font-weight: 560;
+  letter-spacing: -0.07em;
+  line-height: 0.92;
+}
+
+.lineOne,
+.lineTwo {
+  max-width: 50rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.lineOne {
+  margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  color: var(--text-primary);
+}
+
+.lineTwo {
+  margin: 1rem 0 0;
+  font-size: clamp(1rem, 1.45vw, 1.15rem);
+}
+
+.actions {
+  display: flex;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.primary {
+  display: inline-flex;
+  min-height: 48px;
+  padding: 0.85rem 1.1rem;
+  align-items: center;
+  gap: 1rem;
+  color: #111111;
+  background: var(--accent);
+  font-weight: 560;
+}
+
+.mailArrow {
+  transition: transform var(--fast) var(--ease);
+}
+
+.primary:hover .mailArrow,
+.primary:focus-visible .mailArrow {
+  transform: translateX(3px);
+}
+
+.secondary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.7rem;
+}
+
+@media (max-width: 700px) {
+  .actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
