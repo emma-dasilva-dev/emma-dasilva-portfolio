@@ -1,108 +1,69 @@
 :root {
-  --color-background:
-    #ffffff;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-cyan-dark: #0095a6;
+  --color-cyan-bright: #00e1e1;
 
-  --color-text:
-    #000000;
+  --color-background: var(--color-black);
+  --color-surface: var(--color-black);
+  --color-text: var(--color-white);
+  --color-text-muted: rgb(255 255 255 / 0.72);
+  --color-border: rgb(255 255 255 / 0.16);
+  --color-border-strong: rgb(255 255 255 / 0.3);
+  --color-accent: var(--color-cyan-bright);
+  --color-accent-secondary: var(--color-cyan-dark);
+  --color-focus: var(--color-cyan-bright);
 
-  --color-accent:
-    #c6ff33;
+  --font-sans: var(--font-instrument-sans), Arial, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), "Courier New", monospace;
 
-  --color-muted:
-    rgba(
-      0,
-      0,
-      0,
-      0.64
-    );
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-28: 7rem;
 
-  --color-border:
-    rgba(
-      0,
-      0,
-      0,
-      0.18
-    );
+  --container-max: 77.5rem;
+  --reading-max: 46.25rem;
+  --container-gutter: 1.25rem;
 
-  --color-grid:
-    rgba(
-      0,
-      0,
-      0,
-      0.055
-    );
+  --border-width: 1px;
+  --radius-none: 0;
+  --radius-sm: 4px;
 
-  --page-width:
-    1440px;
+  --motion-fast: 140ms;
+  --motion-standard: 220ms;
+  --motion-structural: 360ms;
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
 
-  --page-padding:
-    clamp(
-      1.25rem,
-      4vw,
-      4.5rem
-    );
-
-  --header-height:
-    4.5rem;
-
-    --font-sans:
-  Inter,
-  ui-sans-serif,
-  -apple-system,
-  BlinkMacSystemFont,
-  "Segoe UI",
-  Helvetica,
-  Arial,
-  sans-serif;
-
-  --font-mono:
-    ui-monospace,
-    SFMono-Regular,
-    Menlo,
-    Monaco,
-    Consolas,
-    "Liberation Mono",
-    monospace;
-
-  --ease-primary:
-    cubic-bezier(
-      0.22,
-      1,
-      0.36,
-      1
-    );
+  --section-space: var(--space-20);
+  --header-height-mobile: 3.5rem;
+  --header-height-desktop: 4rem;
 }
 
-:root[
-  data-theme="dark"
-] {
-  --color-background:
-    #000000;
+@media (min-width: 40rem) {
+  :root {
+    --container-gutter: 2rem;
+    --section-space: var(--space-24);
+  }
+}
 
-  --color-text:
-    #ffffff;
+@media (min-width: 64rem) {
+  :root {
+    --container-gutter: 3rem;
+    --section-space: 6.5rem;
+  }
+}
 
-  --color-muted:
-    rgba(
-      255,
-      255,
-      255,
-      0.65
-    );
-
-  --color-border:
-    rgba(
-      255,
-      255,
-      255,
-      0.2
-    );
-
-  --color-grid:
-    rgba(
-      255,
-      255,
-      255,
-      0.065
-    );
+@media (min-width: 90rem) {
+  :root {
+    --container-gutter: 4rem;
+    --section-space: var(--space-28);
+  }
 }
