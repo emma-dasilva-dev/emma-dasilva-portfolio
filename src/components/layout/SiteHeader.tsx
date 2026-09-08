@@ -68,7 +68,6 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
     <header className={styles.header}>
       <div className={`container ${styles.inner}`}>
         <Link className={styles.identity} href={`/${locale}#home`} onClick={() => closeMenu()}>
-          <span className={styles.identityMarker} aria-hidden="true" />
           Emma Da Silva
         </Link>
 
@@ -85,13 +84,9 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
         </nav>
 
         <div className={styles.desktopLanguages} aria-label={languageLabel}>
-          <Link className={locale === "en" ? styles.languageActive : styles.languageLink} href={localeHref("en")} hrefLang="en">
-            EN
-          </Link>
+          <Link className={locale === "en" ? styles.languageActive : styles.languageLink} href={localeHref("en")} hrefLang="en">EN</Link>
           <span className={styles.languageDivider} aria-hidden="true">/</span>
-          <Link className={locale === "fr" ? styles.languageActive : styles.languageLink} href={localeHref("fr")} hrefLang="fr">
-            FR
-          </Link>
+          <Link className={locale === "fr" ? styles.languageActive : styles.languageLink} href={localeHref("fr")} hrefLang="fr">FR</Link>
         </div>
 
         <button
@@ -103,10 +98,6 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
           onClick={() => setIsOpen((open) => !open)}
         >
           <span>{isOpen ? closeMenuLabel : menuLabel}</span>
-          <span className={styles.menuIcon} aria-hidden="true">
-            <span />
-            <span />
-          </span>
         </button>
       </div>
 
@@ -114,11 +105,10 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
         <div ref={menuRef} id="mobile-navigation" className={styles.mobilePanel}>
           <nav className={`container ${styles.mobileNav}`} aria-label={locale === "en" ? "Mobile navigation" : "Navigation mobile"}>
             <ul className={styles.mobileList}>
-              {navigationItems.map((item, index) => (
+              {navigationItems.map((item) => (
                 <li key={item.id}>
                   <Link className={styles.mobileLink} href={`/${locale}${item.href}`} onClick={() => closeMenu()}>
-                    <span className={styles.mobileIndex}>{String(index + 1).padStart(2, "0")}</span>
-                    <span>{item.label[locale]}</span>
+                    {item.label[locale]}
                   </Link>
                 </li>
               ))}
@@ -127,13 +117,9 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
             <div className={styles.mobileLanguages} aria-label={languageLabel}>
               <span className={styles.mobileLanguageLabel}>{languageLabel}</span>
               <div className={styles.mobileLanguageLinks}>
-                <Link className={locale === "en" ? styles.languageActive : styles.languageLink} href={localeHref("en")} hrefLang="en" onClick={() => closeMenu()}>
-                  EN
-                </Link>
+                <Link className={locale === "en" ? styles.languageActive : styles.languageLink} href={localeHref("en")} hrefLang="en" onClick={() => closeMenu()}>EN</Link>
                 <span className={styles.languageDivider} aria-hidden="true">/</span>
-                <Link className={locale === "fr" ? styles.languageActive : styles.languageLink} href={localeHref("fr")} hrefLang="fr" onClick={() => closeMenu()}>
-                  FR
-                </Link>
+                <Link className={locale === "fr" ? styles.languageActive : styles.languageLink} href={localeHref("fr")} hrefLang="fr" onClick={() => closeMenu()}>FR</Link>
               </div>
             </div>
           </nav>
