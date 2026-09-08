@@ -143,7 +143,10 @@
 }
 
 .contactSection {
-  padding-bottom: var(--space-8);
+  padding-block: clamp(4.5rem, 8vw, 7rem) var(--space-8);
+  border-top: 0;
+  background: var(--color-accent);
+  color: var(--color-black);
 }
 
 .contactGrid {
@@ -153,12 +156,17 @@
   align-items: start;
 }
 
+.contactGrid h2 {
+  color: var(--color-black);
+}
+
 .contactGrid p {
   margin-top: var(--space-4);
+  color: rgb(0 0 0 / 0.72);
 }
 
 .contactLinks {
-  border-top: 1px solid var(--color-border-strong);
+  border-top: 1px solid rgb(0 0 0 / 0.5);
 }
 
 .contactLinks a {
@@ -166,21 +174,29 @@
   align-items: center;
   justify-content: space-between;
   min-height: 3.5rem;
-  border-bottom: 1px solid var(--color-border);
-  color: var(--color-text);
+  border-bottom: 1px solid rgb(0 0 0 / 0.22);
+  color: var(--color-black);
   font-size: 0.9rem;
+  font-weight: 500;
   text-decoration: none;
-  transition: color var(--motion-fast) var(--ease-standard), padding-left var(--motion-fast) var(--ease-standard);
+  transition:
+    padding-left var(--motion-fast) var(--ease-standard),
+    opacity var(--motion-fast) var(--ease-standard);
 }
 
 .contactLinks a span:last-child {
-  color: var(--color-accent-secondary);
+  color: var(--color-black);
 }
 
 .contactLinks a:hover,
 .contactLinks a:focus-visible {
   padding-left: var(--space-2);
-  color: var(--color-accent);
+  color: var(--color-black);
+  opacity: 0.65;
+}
+
+.contactLinks a:focus-visible {
+  outline-color: var(--color-black);
 }
 
 .footer {
@@ -189,13 +205,14 @@
   gap: var(--space-8);
   margin-top: clamp(var(--space-16), 8vw, var(--space-24));
   padding-top: var(--space-5, 1.25rem);
-  border-top: 1px solid var(--color-border);
-  color: var(--color-text-muted);
+  border-top: 1px solid rgb(0 0 0 / 0.3);
+  color: rgb(0 0 0 / 0.66);
   font-size: 0.75rem;
 }
 
 .footer span:first-child {
-  color: var(--color-text);
+  color: var(--color-black);
+  font-weight: 600;
 }
 
 @media (max-width: 63.9375rem) {
@@ -217,6 +234,10 @@
 @media (max-width: 47.9375rem) {
   .section {
     padding-block: var(--space-16);
+  }
+
+  .contactSection {
+    padding-block: var(--space-16) var(--space-6);
   }
 
   .sectionHeader,
@@ -244,6 +265,7 @@
 
   .footer {
     gap: var(--space-2);
+    margin-top: var(--space-16);
   }
 }
 
