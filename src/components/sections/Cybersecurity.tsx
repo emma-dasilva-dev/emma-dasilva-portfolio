@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { PageContainer } from "@/components/layout/PageContainer";
 import { Section } from "@/components/layout/Section";
 import { cybersecurityContent, linuxPractice, studyingAreas } from "@/content/cybersecurity";
@@ -79,9 +77,6 @@ export function Cybersecurity({ locale }: CybersecurityProps) {
                 <a href={bandit.links.journal} target="_blank" rel="noreferrer">
                   {copy.readJournal} <span aria-hidden="true">↗</span>
                 </a>
-                <Link href={`/${locale}/work/${bandit.slug}`}>
-                  {copy.viewCaseStudy} <span aria-hidden="true">→</span>
-                </Link>
               </div>
             </article>
 
