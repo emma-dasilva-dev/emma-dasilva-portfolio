@@ -28,7 +28,11 @@
   margin-top: calc(var(--space-2) * -1);
   padding: 0;
   border: 0;
+  outline: 0;
+  border-radius: 0;
   background: transparent;
+  box-shadow: none;
+  appearance: none;
   color: var(--color-text-muted);
   font: inherit;
   font-size: 0.8125rem;
@@ -41,9 +45,16 @@
   font-size: 0.75rem;
 }
 
-.voiceButton:hover,
+.voiceButton:hover {
+  color: var(--color-text);
+}
+
 .voiceButton:focus-visible {
   color: var(--color-text);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.35em;
 }
 
 @media (max-width: 47.9375rem) {
