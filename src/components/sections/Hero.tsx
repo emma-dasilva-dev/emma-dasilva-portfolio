@@ -24,22 +24,20 @@ export function Hero({ locale }: HeroProps) {
           </h1>
 
           <p className={styles.positioning}>
-            <span>{content.titlePrimary}</span>{" "}
-            <span className={styles.secondaryTitle}>{content.titleSecondary}</span>
+            {content.titlePrimary}<br />
+            <span>{content.titleSecondary}</span>
           </p>
 
           <p className={styles.supportingCopy}>{content.supportingCopy}</p>
 
-          <div className={styles.heroFooter}>
-            <div className={styles.metaRow}>
-              <span>{content.location}</span>
-              <span>{content.status}</span>
-            </div>
-
-            <a className={styles.cta} href="#work">
-              {content.cta} <span aria-hidden="true">↘</span>
-            </a>
+          <div className={styles.details}>
+            <span>{content.location}</span>
+            <span>{content.status}</span>
           </div>
+
+          <a className={styles.cta} href="#work">
+            {content.cta} <span aria-hidden="true">↓</span>
+          </a>
         </div>
       </PageContainer>
     </Section>
