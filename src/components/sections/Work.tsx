@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { PageContainer } from "@/components/layout/PageContainer";
 import { Section } from "@/components/layout/Section";
 import { projects } from "@/content/projects";
@@ -13,6 +11,13 @@ interface WorkProps {
 }
 
 const stay = projects.find((project) => project.slug === "stay")!;
+
+const systemFlow = [
+  { index: "01", label: "React Client", detail: "Interface" },
+  { index: "02", label: "REST API", detail: "Requests" },
+  { index: "03", label: "Express", detail: "Business logic" },
+  { index: "04", label: "MySQL", detail: "Data" },
+];
 
 export function Work({ locale }: WorkProps) {
   const copy = workContent[locale];
@@ -52,9 +57,6 @@ export function Work({ locale }: WorkProps) {
               <a href={stay.links.github} target="_blank" rel="noreferrer">
                 {copy.github} <span aria-hidden="true">↗</span>
               </a>
-              <Link href={`/${locale}/work/${stay.slug}`}>
-                {copy.viewCaseStudy} <span aria-hidden="true">→</span>
-              </Link>
             </div>
           </div>
 
@@ -65,20 +67,31 @@ export function Work({ locale }: WorkProps) {
             </div>
 
             <div className={styles.architecture}>
-              <div className={styles.systemNode}>React Client</div>
-              <span className={styles.flowArrow}>↓</span>
-              <div className={styles.systemNode}>REST API</div>
-              <span className={styles.flowArrow}>↓</span>
-              <div className={styles.systemNode}>Express</div>
-              <span className={styles.flowArrow}>↓</span>
-              <div className={styles.systemNode}>MySQL</div>
-              <div className={styles.authNode}>JWT / Auth</div>
+              <div className={styles.flowRail} aria-hidden="true" />
+              {systemFlow.map((node, index) => (
+                <div key={node.label} className={styles.flowStage}>
+                  <div className={styles.stageMarker}>{node.index}</div>
+                  <div className={styles.systemNode}>
+                    <span className={styles.nodeLabel}>{node.label}</span>
+                    <span className={styles.nodeDetail}>{node.detail}</span>
+                  </div>
+                  {index < systemFlow.length - 1 && (
+                    <span className={styles.flowConnector} aria-hidden="true">→</span>
+                  )}
+                </div>
+              ))}
+
+              <div className={styles.authLayer}>
+                <span className={styles.authLabel}>JWT / AUTH</span>
+                <span className={styles.authLine} aria-hidden="true" />
+                <span className={styles.authDetail}>Access control across protected flows</span>
+              </div>
             </div>
 
             <div className={styles.roles}>
-              <span>User</span>
-              <span>Employee</span>
-              <span>Admin</span>
+              <span><small>01</small>User</span>
+              <span><small>02</small>Employee</span>
+              <span><small>03</small>Admin</span>
             </div>
           </div>
         </article>
