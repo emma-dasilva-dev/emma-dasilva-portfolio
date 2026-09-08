@@ -89,8 +89,7 @@ a:hover {
 }
 
 .foundation {
-  min-height: 100dvh;
-  padding-block: var(--space-16);
+  min-height: calc(100dvh - var(--header-height-mobile));
 }
 
 .foundation__label {
@@ -129,6 +128,10 @@ a:hover {
 @media (min-width: 64rem) {
   [id] {
     scroll-margin-top: calc(var(--header-height-desktop) + var(--space-4));
+  }
+
+  .foundation {
+    min-height: calc(100dvh - var(--header-height-desktop));
   }
 }
 
