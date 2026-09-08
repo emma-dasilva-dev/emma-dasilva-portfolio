@@ -12,13 +12,6 @@ interface WorkProps {
 
 const stay = projects.find((project) => project.slug === "stay")!;
 
-const projectDetails = [
-  { label: "Frontend", value: "React" },
-  { label: "Backend", value: "Node.js · Express" },
-  { label: "Data", value: "MySQL" },
-  { label: "Access", value: "JWT · Role-based" },
-];
-
 export function Work({ locale }: WorkProps) {
   const copy = workContent[locale];
 
@@ -27,38 +20,33 @@ export function Work({ locale }: WorkProps) {
       <PageContainer>
         <header className={styles.sectionHeader}>
           <p className={styles.sectionNumber}>{copy.sectionNumber}</p>
-          <div className={styles.sectionLead}>
-            <h2 className={styles.sectionTitle}>{copy.heading}</h2>
-            <p className={styles.sectionIntro}>{copy.intro}</p>
+          <div>
+            <h2>{copy.heading}</h2>
+            <p>{copy.intro}</p>
           </div>
         </header>
 
         <article className={styles.project}>
-          <div className={styles.projectMeta}>
-            <span>01</span>
-            <span>{stay.subtitle[locale]}</span>
-            <span>2026</span>
+          <div className={styles.projectHeader}>
+            <div>
+              <p className={styles.projectKicker}>01 · {stay.subtitle[locale]}</p>
+              <h3>{stay.title}</h3>
+            </div>
+            <span className={styles.projectYear}>2026</span>
           </div>
 
-          <div className={styles.projectMain}>
-            <h3 className={styles.projectTitle}>{stay.title}</h3>
+          <div className={styles.projectBody}>
             <p className={styles.projectSummary}>{stay.summary[locale]}</p>
-          </div>
 
-          <div className={styles.projectDetails}>
-            {projectDetails.map((detail) => (
-              <div key={detail.label} className={styles.detailItem}>
-                <span>{detail.label}</span>
-                <strong>{detail.value}</strong>
-              </div>
-            ))}
+            <ul className={styles.techList} aria-label="Technologies">
+              {stay.technologies.map((technology) => (
+                <li key={technology}>{technology}</li>
+              ))}
+            </ul>
           </div>
 
           <div className={styles.projectFooter}>
-            <div className={styles.challenge}>
-              <span>{copy.challengeLabel}</span>
-              <p>{copy.stayChallenge}</p>
-            </div>
+            <p className={styles.challenge}>{copy.stayChallenge}</p>
 
             <div className={styles.projectActions}>
               <a href={stay.links.live} target="_blank" rel="noreferrer">
