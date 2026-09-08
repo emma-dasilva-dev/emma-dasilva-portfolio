@@ -68,8 +68,8 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
       heading: "About",
       paragraphs: [
         "I did not start from a technical background. I studied literature in high school and seriously began exploring programming in 2025 after returning to a course I had access to for years.",
-        "Development pulled me in because I enjoy turning ideas into things people can actually use. Building full-stack applications then made me curious about everything underneath the interface: APIs, databases, authentication, operating systems and networks.",
-        "That curiosity is what led me toward cybersecurity. I want to keep building software while developing the depth to understand how systems behave, fail and can be protected.",
+        "Development pulled me in because I enjoy turning ideas into things people can actually use.",
+        "I don’t want to limit myself to one side of technology. I want to become a versatile engineer, capable of building software while understanding the systems, networks and security principles behind it. That curiosity is what is drawing me deeper into cybersecurity.",
       ],
       quote: "I want to be able to build systems and understand them deeply enough to protect them.",
     },
@@ -128,8 +128,8 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
       heading: "À propos",
       paragraphs: [
         "Je ne viens pas à l’origine d’un parcours technique. J’ai étudié la littérature au lycée et j’ai commencé à explorer sérieusement la programmation en 2025 en reprenant un cours auquel j’avais accès depuis plusieurs années.",
-        "Le développement m’a attirée parce que j’aime transformer des idées en outils réellement utilisables. En construisant des applications full-stack, je suis devenue de plus en plus curieuse de ce qui se passe sous l’interface : APIs, bases de données, authentification, systèmes d’exploitation et réseaux.",
-        "C’est cette curiosité qui m’a menée vers la cybersécurité. Je veux continuer à construire des logiciels tout en développant la profondeur nécessaire pour comprendre comment les systèmes fonctionnent, échouent et peuvent être protégés.",
+        "Le développement m’a attirée parce que j’aime transformer des idées en outils réellement utilisables.",
+        "Je ne veux pas me limiter à un seul domaine de la technologie. Je veux devenir une ingénieure polyvalente, capable de construire des logiciels tout en comprenant les systèmes, les réseaux et les principes de sécurité qui les entourent. C’est cette curiosité qui m’attire de plus en plus vers la cybersécurité.",
       ],
       quote: "Je veux pouvoir construire des systèmes et les comprendre assez profondément pour pouvoir les protéger.",
     },
