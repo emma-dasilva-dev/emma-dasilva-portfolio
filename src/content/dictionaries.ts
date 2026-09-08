@@ -2,6 +2,9 @@ import type { Locale } from "@/types/locale";
 
 interface FoundationDictionary {
   skipToContent: string;
+  menu: string;
+  closeMenu: string;
+  language: string;
   foundationLabel: string;
   foundationTitle: string;
   foundationCopy: string;
@@ -12,6 +15,9 @@ interface FoundationDictionary {
 const dictionaries: Record<Locale, FoundationDictionary> = {
   en: {
     skipToContent: "Skip to main content",
+    menu: "Menu",
+    closeMenu: "Close",
+    language: "Language",
     foundationLabel: "Phase 3 / Foundation",
     foundationTitle: "Portfolio foundation is ready.",
     foundationCopy:
@@ -22,6 +28,9 @@ const dictionaries: Record<Locale, FoundationDictionary> = {
   },
   fr: {
     skipToContent: "Aller au contenu principal",
+    menu: "Menu",
+    closeMenu: "Fermer",
+    language: "Langue",
     foundationLabel: "Phase 3 / Fondation",
     foundationTitle: "La fondation du portfolio est prête.",
     foundationCopy:
