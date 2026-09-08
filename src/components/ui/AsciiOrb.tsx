@@ -16,20 +16,36 @@ interface Point3D {
 
 const POINT_COUNT = 132;
 const CONNECTION_DISTANCE = 46;
-const FEMALE_VOICE_HINTS = [
-  "samantha",
-  "ava",
-  "victoria",
-  "serena",
-  "karen",
-  "moira",
-  "tessa",
-  "zira",
-  "aria",
-  "jenny",
-  "susan",
-  "female",
-];
+
+const FEMALE_VOICE_HINTS: Record<"en" | "fr", string[]> = {
+  en: [
+    "samantha",
+    "ava",
+    "victoria",
+    "serena",
+    "karen",
+    "moira",
+    "tessa",
+    "zira",
+    "aria",
+    "jenny",
+    "susan",
+    "female",
+  ],
+  fr: [
+    "amelie",
+    "audrey",
+    "aurelie",
+    "hortense",
+    "marie",
+    "virginie",
+    "julie",
+    "celine",
+    "lea",
+    "denise",
+    "female",
+  ],
+};
 
 function createSpherePoints(count: number): Point3D[] {
   const points: Point3D[] = [];
@@ -59,13 +75,13 @@ function pickPreferredVoice(locale: "en" | "fr") {
     voice.lang.toLowerCase().startsWith(localePrefix),
   );
 
+  const preferredHints = FEMALE_VOICE_HINTS[locale];
+
   return (
     localizedVoices.find((voice) =>
-      FEMALE_VOICE_HINTS.some((hint) => voice.name.toLowerCase().includes(hint)),
+      preferredHints.some((hint) => voice.name.toLowerCase().includes(hint)),
     ) ??
-    voices.find((voice) =>
-      FEMALE_VOICE_HINTS.some((hint) => voice.name.toLowerCase().includes(hint)),
-    ) ??
+    localizedVoices.find((voice) => voice.default) ??
     localizedVoices[0] ??
     null
   );
