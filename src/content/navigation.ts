@@ -2,7 +2,7 @@ import type { NavigationItem } from "@/types/content";
 
 export const navigationItems: NavigationItem[] = [
   { id: "home", label: { en: "Home", fr: "Accueil" }, href: "#home" },
-  { id: "work", label: { en: "Work", fr: "Projets" }, href: "#work" },
+  { id: "work", label: { en: "Projects", fr: "Projets" }, href: "#work" },
   {
     id: "cybersecurity",
     label: { en: "Cybersecurity", fr: "Cybersécurité" },
