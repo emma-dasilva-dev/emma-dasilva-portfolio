@@ -3,6 +3,10 @@
   margin-inline: auto;
 }
 
+.section {
+  padding-block: var(--section-space);
+}
+
 .reading-width {
   max-width: var(--reading-max);
 }
