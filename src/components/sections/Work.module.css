@@ -29,23 +29,21 @@
 
 .projects {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-6);
+  align-items: stretch;
 }
 
 .project {
   display: flex;
-  min-height: 23rem;
+  min-height: 24rem;
+  height: 100%;
   flex-direction: column;
   justify-content: flex-end;
   padding: clamp(var(--space-6), 3vw, var(--space-8));
   border: 1px solid var(--color-border);
   background: linear-gradient(180deg, rgb(255 255 255 / 0.01), rgb(255 255 255 / 0.025));
   transition: border-color var(--motion-standard) var(--ease-standard), transform var(--motion-standard) var(--ease-standard);
-}
-
-.project:first-child {
-  min-height: 29rem;
 }
 
 .project:hover {
@@ -109,12 +107,7 @@
 }
 
 @media (max-width: 63.9375rem) {
-  .projects {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .project,
-  .project:first-child {
+  .project {
     min-height: 24rem;
   }
 }
@@ -134,8 +127,7 @@
     grid-template-columns: 1fr;
   }
 
-  .project,
-  .project:first-child {
+  .project {
     min-height: 20rem;
   }
 }
