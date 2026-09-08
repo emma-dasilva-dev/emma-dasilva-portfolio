@@ -42,7 +42,7 @@ export function Hero({ locale }: HeroProps) {
             </a>
           </div>
 
-          <AsciiOrb locale={locale} />
+          <AsciiOrb key={locale} locale={locale} />
         </div>
       </PageContainer>
     </Section>
