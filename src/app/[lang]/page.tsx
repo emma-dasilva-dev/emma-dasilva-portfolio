@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { Hero } from "@/components/sections/Hero";
+import { Work } from "@/components/sections/Work";
 import { isLocale } from "@/lib/i18n";
 
 interface HomePageProps {
@@ -17,7 +18,7 @@ export default async function HomePage({ params }: HomePageProps) {
   return (
     <main id="main-content">
       <Hero locale={lang} />
-      <div id="work" aria-hidden="true" />
+      <Work locale={lang} />
     </main>
   );
 }
