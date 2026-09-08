@@ -3,30 +3,21 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: min(100%, 30rem);
-  min-height: 20rem;
+  width: min(100%, 31rem);
 }
 
-.orb {
-  margin: 0;
-  color: var(--color-text-muted);
-  font-family: var(--font-mono);
-  font-size: clamp(0.62rem, 1.15vw, 0.82rem);
-  line-height: 1;
-  letter-spacing: 0;
-  text-align: center;
-  white-space: pre;
-  user-select: none;
-  filter: drop-shadow(0 0 8px rgb(0 225 225 / 0.06));
-  transition:
-    color var(--motion-standard) var(--ease-standard),
-    filter var(--motion-standard) var(--ease-standard),
-    opacity var(--motion-standard) var(--ease-standard);
+.orbCanvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 28rem;
+  background: transparent;
+  filter: drop-shadow(0 0 20px rgb(0 225 225 / 0.08));
+  transition: filter var(--motion-standard) var(--ease-standard), opacity var(--motion-standard) var(--ease-standard);
 }
 
 .speaking {
-  color: var(--color-accent);
-  filter: drop-shadow(0 0 14px rgb(0 225 225 / 0.22));
+  filter: drop-shadow(0 0 30px rgb(0 225 225 / 0.18));
 }
 
 .voiceButton {
@@ -34,7 +25,7 @@
   align-items: center;
   gap: var(--space-2);
   min-height: 44px;
-  margin-top: var(--space-3);
+  margin-top: calc(var(--space-2) * -1);
   padding: 0;
   border: 0;
   background: transparent;
@@ -45,9 +36,9 @@
   transition: color var(--motion-fast) var(--ease-standard);
 }
 
-.voiceButton span {
-  color: var(--color-accent-secondary);
-  font-size: 0.6875rem;
+.voiceIcon {
+  color: var(--color-accent);
+  font-size: 0.75rem;
 }
 
 .voiceButton:hover,
@@ -57,23 +48,22 @@
 
 @media (max-width: 47.9375rem) {
   .root {
-    width: 100%;
-    min-height: 14rem;
+    width: min(100%, 23rem);
+    margin-inline: auto;
   }
 
-  .orb {
-    font-size: clamp(0.5rem, 2.3vw, 0.68rem);
+  .orbCanvas {
+    max-width: 21rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .orb,
+  .orbCanvas,
   .voiceButton {
     transition: none;
   }
 
   .speaking {
-    color: var(--color-text-muted);
-    filter: none;
+    filter: drop-shadow(0 0 20px rgb(0 225 225 / 0.08));
   }
 }
