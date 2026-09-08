@@ -4,40 +4,29 @@ interface WorkContent {
   sectionNumber: string;
   heading: string;
   intro: string;
-  challengeLabel: string;
-  stayChallenge: string;
   liveSite: string;
   github: string;
-  viewCaseStudy: string;
-  architectureLabel: string;
-  rolesLabel: string;
+  journal: string;
+  progressLabel: string;
 }
 
 export const workContent: Record<Locale, WorkContent> = {
   en: {
-    sectionNumber: "02 / Software Projects",
-    heading: "Selected Software Projects",
-    intro: "Finished software I’ve designed, built and can explain.",
-    challengeLabel: "What challenged me most",
-    stayChallenge:
-      "Connecting the frontend, API, authentication, permissions and database while keeping user roles and reservation data consistent.",
+    sectionNumber: "02 / Projects",
+    heading: "Projects",
+    intro: "Finished work I can show, explain and stand behind.",
     liveSite: "Live Site",
     github: "GitHub",
-    viewCaseStudy: "View Case Study",
-    architectureLabel: "System flow",
-    rolesLabel: "Roles",
+    journal: "Read the Journal",
+    progressLabel: "Progress",
   },
   fr: {
-    sectionNumber: "02 / Projets logiciels",
-    heading: "Projets logiciels sélectionnés",
-    intro: "Des logiciels finalisés que j’ai conçus, développés et que je peux expliquer.",
-    challengeLabel: "Mon principal défi",
-    stayChallenge:
-      "Relier le frontend, l’API, l’authentification, les permissions et la base de données tout en gardant les rôles et les réservations cohérents.",
+    sectionNumber: "02 / Projets",
+    heading: "Projets",
+    intro: "Des travaux finalisés que je peux montrer, expliquer et défendre.",
     liveSite: "Voir le site",
     github: "GitHub",
-    viewCaseStudy: "Voir l’étude de cas",
-    architectureLabel: "Flux système",
-    rolesLabel: "Rôles",
+    journal: "Lire le journal",
+    progressLabel: "Progression",
   },
 };
