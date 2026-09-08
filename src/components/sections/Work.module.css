@@ -51,8 +51,8 @@
 
 .project:hover,
 .project:focus-within {
-  border-color: var(--color-accent-secondary);
-  background: var(--color-accent-secondary);
+  border-color: var(--color-accent);
+  background: var(--color-accent);
   color: var(--color-black);
 }
 
