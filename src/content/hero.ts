@@ -2,7 +2,8 @@ import type { Locale } from "@/types/locale";
 
 interface HeroContent {
   eyebrow: string;
-  greeting: string;
+  greetingPrefix: string;
+  name: string;
   titlePrimary: string;
   titleSecondary: string;
   supportingCopy: string;
@@ -17,7 +18,8 @@ interface HeroContent {
 export const heroContent: Record<Locale, HeroContent> = {
   en: {
     eyebrow: "Software Engineering × Cybersecurity",
-    greeting: "Hi, I’m Emma Da Silva.",
+    greetingPrefix: "Hi 👋, I’m",
+    name: "Emma Da Silva.",
     titlePrimary: "Junior Full-Stack Software Engineer",
     titleSecondary: "building my expertise in cybersecurity.",
     supportingCopy: "I build thoughtful digital experiences and explore the systems behind them.",
@@ -30,7 +32,8 @@ export const heroContent: Record<Locale, HeroContent> = {
   },
   fr: {
     eyebrow: "Ingénierie logicielle × Cybersécurité",
-    greeting: "Salut, moi c’est Emma Da Silva.",
+    greetingPrefix: "Salut 👋, moi c’est",
+    name: "Emma Da Silva.",
     titlePrimary: "Ingénieure logiciel full-stack junior",
     titleSecondary: "et je développe mon expertise en cybersécurité.",
     supportingCopy:
