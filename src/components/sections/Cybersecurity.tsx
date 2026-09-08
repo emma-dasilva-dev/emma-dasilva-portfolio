@@ -29,58 +29,42 @@ export function Cybersecurity({ locale }: CybersecurityProps) {
       <PageContainer>
         <header className={styles.sectionHeader}>
           <p className={styles.sectionNumber}>{copy.sectionNumber}</p>
-          <div className={styles.sectionLead}>
-            <h2 className={styles.sectionTitle}>{copy.heading}</h2>
-            <p className={styles.sectionIntro}>{copy.intro}</p>
+          <div>
+            <h2>{copy.heading}</h2>
+            <p>{copy.intro}</p>
           </div>
         </header>
 
-        <div className={styles.groupIntro}>
-          <div>
-            <p className={styles.groupIndex}>01 / Evidence</p>
-            <h3>{copy.handsOnLabel}</h3>
-          </div>
-          <p>{copy.handsOnDescription}</p>
-        </div>
-
-        <article className={styles.banditFeature}>
-          <div className={styles.banditHeader}>
+        <article className={styles.entry}>
+          <div className={styles.entryHeader}>
             <div>
-              <p className={styles.itemIndex}>01 / OverTheWire</p>
-              <h4>{bandit.title}</h4>
+              <p className={styles.kicker}>01 · OverTheWire</p>
+              <h3>{bandit.title}</h3>
             </div>
             <span className={styles.status}>Documented</span>
           </div>
 
-          <div className={styles.banditStory}>
-            <p className={styles.itemSummary}>{bandit.summary[locale]}</p>
+          <div className={styles.entryBody}>
+            <p className={styles.summary}>{bandit.summary[locale]}</p>
 
-            <div className={styles.progressBlock} aria-label={`${copy.completedLabel} ${banditProgress.completedThrough}, ${copy.currentLabel} ${banditProgress.currentLevel}`}>
-              <div>
-                <span>{copy.completedLabel}</span>
-                <strong>{banditProgress.completedThrough}</strong>
-              </div>
-              <div className={styles.progressTrack} aria-hidden="true">
-                <span />
-              </div>
-              <div>
-                <span>{copy.currentLabel}</span>
-                <strong className={styles.currentLevel}>{banditProgress.currentLevel}</strong>
-              </div>
+            <div className={styles.progress} aria-label={`${copy.completedLabel} ${banditProgress.completedThrough}, ${copy.currentLabel} ${banditProgress.currentLevel}`}>
+              <span>{banditProgress.completedThrough}</span>
+              <div className={styles.progressLine} aria-hidden="true" />
+              <span className={styles.current}>{banditProgress.currentLevel}</span>
             </div>
           </div>
 
           <div className={styles.evidenceRow}>
-            <div className={styles.evidenceLabel}>
-              <span>{copy.evidenceLabel}</span>
-              <small>{copy.lastUpdatedLabel} {banditProgress.lastUpdated}</small>
-            </div>
+            <span className={styles.evidenceLabel}>{copy.evidenceLabel}</span>
             <ul>
-              {banditEvidence.map((item) => <li key={item}>{item}</li>)}
+              {banditEvidence.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
           </div>
 
-          <div className={styles.banditAction}>
+          <div className={styles.entryFooter}>
+            <span className={styles.updated}>{copy.lastUpdatedLabel} {banditProgress.lastUpdated}</span>
             <a href={bandit.links.journal} target="_blank" rel="noreferrer">
               {copy.readJournal} <span aria-hidden="true">↗</span>
             </a>
