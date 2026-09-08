@@ -3,26 +3,21 @@
   border-top: var(--border-width) solid var(--color-border);
 }
 
-.sectionHeader,
-.securityGrid {
+.sectionHeader {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: var(--space-6);
-}
-
-.sectionHeader {
   align-items: start;
   margin-bottom: var(--space-16);
 }
 
 .sectionNumber,
-.groupSignal,
+.groupIndex,
 .itemIndex,
-.evidenceState,
-.progressMeta,
-.progressValues span,
-.evidenceBlock,
-.compactEvidence,
+.status,
+.progressBlock span,
+.evidenceLabel,
+.linuxEvidence,
 .studyIndex {
   font-family: var(--font-mono);
 }
@@ -37,16 +32,17 @@
   text-transform: uppercase;
 }
 
-.headingBlock {
+.sectionLead {
   grid-column: 4 / span 7;
 }
 
 .sectionTitle {
   margin: 0;
-  font-size: clamp(1.875rem, 4vw, 2.75rem);
+  max-width: 11ch;
+  font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
 }
 
 .sectionIntro {
@@ -54,252 +50,317 @@
   margin: var(--space-4) 0 0;
   color: var(--color-text-muted);
   font-size: clamp(1rem, 1.5vw, 1.125rem);
-  line-height: 1.65;
+  line-height: 1.6;
 }
 
-.handsOn {
-  grid-column: 1 / span 7;
+.groupIntro {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--space-6);
+  align-items: end;
+  padding-block: var(--space-6);
+  border-top: var(--border-width) solid var(--color-border-strong);
 }
 
-.studying {
-  grid-column: 9 / -1;
+.groupIntro > div {
+  grid-column: 1 / span 6;
 }
 
-.groupHeader {
-  min-height: 8rem;
-  padding-bottom: var(--space-6);
-  border-bottom: var(--border-width) solid var(--color-border-strong);
+.groupIntro > p {
+  grid-column: 8 / -1;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+  line-height: 1.6;
 }
 
-.groupSignal {
-  margin: 0 0 var(--space-3);
+.groupIndex {
+  margin: 0 0 var(--space-2);
   color: var(--color-accent);
   font-size: 0.6875rem;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.065em;
   text-transform: uppercase;
 }
 
-.groupHeader h3 {
+.groupIntro h3 {
   margin: 0;
-  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
   font-weight: 600;
+  letter-spacing: -0.025em;
 }
 
-.groupHeader > p {
-  max-width: 27rem;
-  margin: var(--space-3) 0 0;
-  color: var(--color-text-muted);
-  font-size: 0.875rem;
-  line-height: 1.55;
-}
-
-.bandit,
-.linuxPractice {
+.banditFeature {
   padding-block: var(--space-8);
-  border-bottom: var(--border-width) solid var(--color-border);
+  border-top: var(--border-width) solid var(--color-border);
+  border-bottom: var(--border-width) solid var(--color-border-strong);
 }
 
-.itemHeader {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-6);
+.banditHeader,
+.banditStory,
+.evidenceRow,
+.linuxRow {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--space-6);
+}
+
+.banditHeader {
   align-items: start;
 }
 
-.itemIndex,
-.evidenceState {
+.banditHeader > div {
+  grid-column: 1 / span 8;
+}
+
+.itemIndex {
   margin: 0;
+  color: var(--color-accent-secondary);
   font-size: 0.6875rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
-.itemIndex {
-  color: var(--color-accent-secondary);
-}
-
-.itemHeader h4 {
-  margin: var(--space-2) 0 0;
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+.banditHeader h4,
+.linuxTitle h4 {
+  margin: var(--space-3) 0 0;
+  font-size: clamp(2rem, 4.5vw, 3rem);
   font-weight: 600;
-  letter-spacing: -0.02em;
+  line-height: 1;
+  letter-spacing: -0.04em;
 }
 
-.evidenceState {
-  padding: var(--space-2) var(--space-3);
+.status {
+  grid-column: 10 / -1;
+  justify-self: end;
   color: var(--color-accent);
-  border: var(--border-width) solid var(--color-accent-secondary);
-}
-
-.itemSummary {
-  max-width: 38rem;
-  margin: var(--space-4) 0 0;
-  color: var(--color-text-muted);
-  line-height: 1.65;
-}
-
-.progressPanel {
-  margin-top: var(--space-8);
-  padding: var(--space-5, 1.25rem);
-  border: var(--border-width) solid var(--color-border);
-  background: rgb(255 255 255 / 0.018);
-}
-
-.progressMeta {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-4);
-  color: var(--color-text-muted);
   font-size: 0.6875rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
-.progressValues {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: var(--space-6);
-  align-items: end;
+.banditStory {
   margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: var(--border-width) solid var(--color-border);
 }
 
-.progressValues > div {
+.itemSummary {
+  grid-column: 1 / span 6;
+  max-width: 39rem;
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(1.0625rem, 1.8vw, 1.25rem);
+  line-height: 1.55;
+}
+
+.progressBlock {
+  grid-column: 8 / -1;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: var(--space-4);
+  align-items: end;
+}
+
+.progressBlock > div {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
 }
 
-.progressValues span {
+.progressBlock span {
   color: var(--color-text-muted);
   font-size: 0.6875rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
-.progressValues strong {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
+.progressBlock strong {
+  color: var(--color-text);
+  font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 600;
+  line-height: 1;
 }
 
-.progressValues > div:last-child strong {
-  color: var(--color-accent);
+.currentLevel {
+  color: var(--color-accent) !important;
 }
 
 .progressArrow {
   padding-bottom: 0.35rem;
   color: var(--color-accent-secondary) !important;
-  font-size: 1rem !important;
 }
 
-.evidenceBlock {
-  margin-top: var(--space-6);
+.evidenceRow {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: var(--border-width) solid var(--color-border);
 }
 
-.evidenceBlock p {
-  margin: 0 0 var(--space-3);
-  color: var(--color-text-muted);
+.evidenceLabel {
+  grid-column: 1 / span 3;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  color: var(--color-accent-secondary);
   font-size: 0.6875rem;
-  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
-.evidenceBlock ul,
-.compactEvidence {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2) var(--space-3);
+.evidenceLabel small {
+  color: var(--color-text-muted);
+  font: inherit;
+  font-size: 0.625rem;
+  text-transform: none;
+}
+
+.evidenceRow ul {
+  grid-column: 4 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 var(--space-6);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.evidenceBlock li,
-.compactEvidence li {
-  padding: var(--space-2) var(--space-3);
+.evidenceRow li {
+  padding-block: var(--space-3);
   color: var(--color-text-muted);
-  border: var(--border-width) solid var(--color-border);
-  font-size: 0.75rem;
+  border-top: var(--border-width) solid var(--color-border);
+  font-size: 0.875rem;
 }
 
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-4) var(--space-6);
-  margin-top: var(--space-8);
+.banditAction {
+  margin-top: var(--space-6);
 }
 
-.actions a {
+.banditAction a {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
   min-height: 44px;
   color: var(--color-text);
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 500;
   text-decoration: none;
   border-bottom: 1px solid var(--color-border-strong);
   transition: color var(--motion-fast) var(--ease-standard), border-color var(--motion-fast) var(--ease-standard);
 }
 
-.actions a:hover,
-.actions a:focus-visible {
+.banditAction a:hover,
+.banditAction a:focus-visible {
   color: var(--color-accent);
   border-color: var(--color-accent);
 }
 
-.compactEvidence {
-  margin-top: var(--space-6);
+.linuxRow {
+  position: relative;
+  align-items: start;
+  padding-block: var(--space-8);
+  border-bottom: var(--border-width) solid var(--color-border-strong);
 }
 
-.studyList {
-  border-bottom: var(--border-width) solid var(--color-border);
+.linuxTitle {
+  grid-column: 1 / span 3;
+}
+
+.linuxTitle h4 {
+  font-size: clamp(1.375rem, 2vw, 1.75rem);
+}
+
+.linuxRow .itemSummary {
+  grid-column: 4 / span 4;
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+}
+
+.linuxEvidence {
+  grid-column: 8 / span 3;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-text-muted);
+  font-size: 0.6875rem;
+}
+
+.linuxEvidence li::before {
+  content: "+";
+  margin-right: var(--space-2);
+  color: var(--color-accent-secondary);
+}
+
+.linuxRow .status {
+  grid-column: 11 / -1;
+}
+
+.studySection {
+  margin-top: var(--space-16);
+}
+
+.studyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
+  border-top: var(--border-width) solid var(--color-border);
 }
 
 .studyItem {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--space-4);
-  padding-block: var(--space-6);
-  border-bottom: var(--border-width) solid var(--color-border);
+  padding-block: var(--space-6) var(--space-8);
+  border-top: 2px solid transparent;
 }
 
-.studyItem:last-child {
-  border-bottom: 0;
+.studyItem:first-child {
+  border-top-color: var(--color-accent-secondary);
 }
 
 .studyIndex {
-  padding-top: 0.2rem;
   color: var(--color-accent-secondary);
   font-size: 0.6875rem;
 }
 
 .studyItem h4 {
-  margin: 0;
-  font-size: 1rem;
+  margin: var(--space-6) 0 0;
+  font-size: 1.125rem;
   font-weight: 600;
 }
 
 .studyItem p {
-  margin: var(--space-2) 0 0;
+  margin: var(--space-3) 0 0;
   color: var(--color-text-muted);
   font-size: 0.875rem;
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 .philosophy {
-  width: min(100%, 52rem);
+  width: min(100%, 48rem);
   margin: var(--space-16) 0 0 auto;
-  padding: var(--space-6) 0 var(--space-6) var(--space-6);
+  padding: 0;
   color: var(--color-text);
-  border-left: 1px solid var(--color-accent);
   font-size: clamp(1.25rem, 2.4vw, 1.75rem);
   font-weight: 500;
   line-height: 1.4;
   letter-spacing: -0.015em;
 }
 
+.philosophy::before {
+  content: "↳";
+  display: block;
+  margin-bottom: var(--space-3);
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+}
+
 @media (max-width: 63.9375rem) {
   .sectionHeader,
-  .securityGrid {
+  .groupIntro,
+  .banditHeader,
+  .banditStory,
+  .evidenceRow,
+  .linuxRow {
     grid-template-columns: repeat(8, minmax(0, 1fr));
   }
 
@@ -307,22 +368,67 @@
     grid-column: 1 / span 2;
   }
 
-  .headingBlock {
+  .sectionLead {
     grid-column: 3 / -1;
   }
 
-  .handsOn {
-    grid-column: 1 / span 5;
+  .groupIntro > div {
+    grid-column: 1 / span 4;
   }
 
-  .studying {
-    grid-column: 6 / -1;
+  .groupIntro > p {
+    grid-column: 5 / -1;
+  }
+
+  .banditHeader > div {
+    grid-column: 1 / span 6;
+  }
+
+  .status {
+    grid-column: 7 / -1;
+  }
+
+  .itemSummary {
+    grid-column: 1 / span 4;
+  }
+
+  .progressBlock {
+    grid-column: 5 / -1;
+  }
+
+  .evidenceLabel {
+    grid-column: 1 / span 2;
+  }
+
+  .evidenceRow ul {
+    grid-column: 3 / -1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .linuxTitle {
+    grid-column: 1 / span 2;
+  }
+
+  .linuxRow .itemSummary {
+    grid-column: 3 / span 3;
+  }
+
+  .linuxEvidence {
+    grid-column: 6 / span 2;
+  }
+
+  .linuxRow .status {
+    grid-column: 8 / -1;
   }
 }
 
 @media (max-width: 47.9375rem) {
   .sectionHeader,
-  .securityGrid {
+  .groupIntro,
+  .banditHeader,
+  .banditStory,
+  .evidenceRow,
+  .linuxRow {
     display: block;
   }
 
@@ -334,17 +440,55 @@
     margin-bottom: var(--space-4);
   }
 
-  .groupHeader {
-    min-height: auto;
+  .sectionTitle {
+    max-width: none;
   }
 
-  .studying {
+  .groupIntro > p {
+    margin-top: var(--space-4);
+  }
+
+  .status {
+    display: inline-block;
+    margin-top: var(--space-4);
+  }
+
+  .banditStory {
+    margin-top: var(--space-6);
+  }
+
+  .progressBlock {
+    margin-top: var(--space-8);
+  }
+
+  .evidenceLabel {
+    margin-bottom: var(--space-4);
+  }
+
+  .evidenceRow ul {
+    grid-template-columns: 1fr;
+  }
+
+  .linuxRow .itemSummary,
+  .linuxEvidence {
+    margin-top: var(--space-6);
+  }
+
+  .studySection {
     margin-top: var(--space-12);
   }
 
-  .progressMeta {
-    flex-direction: column;
-    gap: var(--space-2);
+  .studyGrid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .studyItem {
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .studyItem:first-child {
+    border-top: 2px solid var(--color-accent-secondary);
   }
 
   .philosophy {
@@ -352,19 +496,8 @@
   }
 }
 
-@media (max-width: 29.9375rem) {
-  .itemHeader {
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-
-  .progressValues {
-    gap: var(--space-3);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .actions a {
+  .banditAction a {
     transition: none;
   }
 }
