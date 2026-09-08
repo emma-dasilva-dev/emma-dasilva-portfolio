@@ -14,47 +14,33 @@ export function Hero({ locale }: HeroProps) {
 
   return (
     <Section id="home" className={styles.hero}>
-      <PageContainer className={styles.container}>
-        <div className={styles.content}>
+      <PageContainer>
+        <div className={styles.heroInner}>
           <p className={styles.eyebrow}>{content.eyebrow}</p>
 
-          <div className={styles.introduction}>
-            <h1 className={styles.name}>
-              <span>{content.greetingPrefix}</span>{" "}
-              <span className={styles.personName}>{content.name}</span>
-            </h1>
-            <p className={styles.positioning}>
-              <span className={styles.primaryTitle}>{content.titlePrimary}</span>
-              <span className={styles.secondaryTitle}>{content.titleSecondary}</span>
-            </p>
-          </div>
+          <h1 className={styles.name}>
+            <span>{content.greetingPrefix}</span>{" "}
+            <span className={styles.personName}>{content.name}</span>
+          </h1>
+
+          <p className={styles.positioning}>
+            <span>{content.titlePrimary}</span>{" "}
+            <span className={styles.secondaryTitle}>{content.titleSecondary}</span>
+          </p>
 
           <p className={styles.supportingCopy}>{content.supportingCopy}</p>
 
-          <a className={styles.cta} href="#work">
-            <span>{content.cta}</span>
-            <span className={styles.ctaArrow} aria-hidden="true">
-              ↓
-            </span>
-          </a>
+          <div className={styles.heroFooter}>
+            <div className={styles.metaRow}>
+              <span>{content.location}</span>
+              <span>{content.status}</span>
+            </div>
+
+            <a className={styles.cta} href="#work">
+              {content.cta} <span aria-hidden="true">↘</span>
+            </a>
+          </div>
         </div>
-
-        <aside className={styles.metaRail} aria-label={locale === "en" ? "Introduction details" : "Détails de présentation"}>
-          <div className={styles.metaItem}>
-            <span className={styles.metaLabel}>{content.locationLabel}</span>
-            <span className={styles.metaValue}>{content.location}</span>
-          </div>
-
-          <div className={styles.metaItem}>
-            <span className={styles.metaLabel}>{content.statusLabel}</span>
-            <span className={styles.metaValue}>{content.status}</span>
-          </div>
-
-          <div className={styles.sectionMarker} aria-hidden="true">
-            <span className={styles.markerLine} />
-            <span>{content.sectionMarker}</span>
-          </div>
-        </aside>
       </PageContainer>
     </Section>
   );
