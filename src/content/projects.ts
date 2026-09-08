@@ -16,12 +16,15 @@ export const projects = [
       fr: "Plateforme hôtelière full-stack",
     },
     summary: {
-      en: "A reservation and hospitality management platform built as a practical full-stack project.",
-      fr: "Une plateforme de réservation et de gestion hôtelière conçue comme projet pratique full-stack.",
+      en: "A reservation and hospitality management platform for discovering accommodations in Benin, booking stays and managing reservations.",
+      fr: "Une plateforme de réservation et de gestion hôtelière pour découvrir des hébergements au Bénin, réserver des séjours et gérer les réservations.",
     },
     technologies: ["React", "Node.js", "Express", "MySQL", "JWT"],
     status: "published",
-    links: {},
+    links: {
+      live: "https://stay-rose.vercel.app/",
+      github: "https://github.com/emma-dasilva-dev/stay",
+    },
     seo: {
       en: {
         title: "STAY | Emma Da Silva",
@@ -42,12 +45,14 @@ export const projects = [
       fr: "Pratique Linux & cybersécurité",
     },
     summary: {
-      en: "Documented progression through OverTheWire Bandit focused on Linux and security fundamentals.",
-      fr: "Progression documentée sur OverTheWire Bandit, axée sur Linux et les fondamentaux de la sécurité.",
+      en: "My documented progression through OverTheWire Bandit, focused on Linux, command-line problem solving and security fundamentals.",
+      fr: "Ma progression documentée sur OverTheWire Bandit, axée sur Linux, la résolution de problèmes en ligne de commande et les fondamentaux de la sécurité.",
     },
     technologies: ["Linux", "SSH", "Bash"],
     status: "published",
-    links: {},
+    links: {
+      journal: "https://emma-dasilva-dev.github.io/bandit-redline-journal/",
+    },
     seo: {
       en: {
         title: "Bandit Redline | Emma Da Silva",
