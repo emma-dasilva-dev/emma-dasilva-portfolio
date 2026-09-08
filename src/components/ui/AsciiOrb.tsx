@@ -8,85 +8,89 @@ interface AsciiOrbProps {
   locale: "en" | "fr";
 }
 
-const WIDTH = 31;
-const HEIGHT = 17;
-const CHARACTERS = [" ", ".", ":", "*", "+", "#", "%", "@"];
+interface Point3D {
+  x: number;
+  y: number;
+  z: number;
+}
 
-function createOrbFrame(time: number, speaking: boolean) {
-  const rows: string[] = [];
-  const pulse = speaking
-    ? Math.sin(time * 0.018) * 0.08 + Math.sin(time * 0.043) * 0.045
-    : Math.sin(time * 0.0035) * 0.025;
+const POINT_COUNT = 132;
+const CONNECTION_DISTANCE = 46;
+const FEMALE_VOICE_HINTS = [
+  "samantha",
+  "ava",
+  "victoria",
+  "serena",
+  "karen",
+  "moira",
+  "tessa",
+  "zira",
+  "aria",
+  "jenny",
+  "susan",
+  "female",
+];
 
-  for (let y = 0; y < HEIGHT; y += 1) {
-    let row = "";
+function createSpherePoints(count: number): Point3D[] {
+  const points: Point3D[] = [];
+  const goldenAngle = Math.PI * (3 - Math.sqrt(5));
 
-    for (let x = 0; x < WIDTH; x += 1) {
-      const nx = (x - (WIDTH - 1) / 2) / ((WIDTH - 1) / 2);
-      const ny = (y - (HEIGHT - 1) / 2) / ((HEIGHT - 1) / 2);
-      const angle = Math.atan2(ny, nx);
-      const wobble =
-        Math.sin(angle * 3 + time * 0.0028) * (speaking ? 0.055 : 0.02) +
-        Math.cos(angle * 5 - time * 0.0021) * (speaking ? 0.035 : 0.012);
-      const radius = Math.sqrt(nx * nx + ny * ny);
-      const edge = 0.78 + pulse + wobble;
-      const shellDistance = Math.abs(radius - edge);
+  for (let index = 0; index < count; index += 1) {
+    const y = 1 - (index / (count - 1)) * 2;
+    const radius = Math.sqrt(1 - y * y);
+    const theta = goldenAngle * index;
 
-      if (shellDistance < 0.065) {
-        const shimmer =
-          (Math.sin(angle * 4 + time * 0.006) +
-            Math.cos(angle * 7 - time * 0.004) +
-            2) /
-          4;
-        const characterIndex = Math.min(
-          CHARACTERS.length - 1,
-          2 + Math.floor(shimmer * (CHARACTERS.length - 3)),
-        );
-        row += CHARACTERS[characterIndex];
-      } else if (radius < edge - 0.07) {
-        const field =
-          (Math.sin(nx * 7 + time * 0.004) +
-            Math.cos(ny * 8 - time * 0.0035) +
-            Math.sin((nx + ny) * 5 + time * 0.0025)) /
-          3;
-        const threshold = speaking ? 0.56 : 0.72;
-
-        if (field > threshold) {
-          row += speaking ? ":" : ".";
-        } else {
-          row += " ";
-        }
-      } else {
-        row += " ";
-      }
-    }
-
-    rows.push(row.replace(/\s+$/, ""));
+    points.push({
+      x: Math.cos(theta) * radius,
+      y,
+      z: Math.sin(theta) * radius,
+    });
   }
 
-  return rows.join("\n");
+  return points;
+}
+
+const spherePoints = createSpherePoints(POINT_COUNT);
+
+function pickPreferredVoice(locale: "en" | "fr") {
+  const voices = window.speechSynthesis.getVoices();
+  const localePrefix = locale === "fr" ? "fr" : "en";
+  const localizedVoices = voices.filter((voice) =>
+    voice.lang.toLowerCase().startsWith(localePrefix),
+  );
+
+  return (
+    localizedVoices.find((voice) =>
+      FEMALE_VOICE_HINTS.some((hint) => voice.name.toLowerCase().includes(hint)),
+    ) ??
+    voices.find((voice) =>
+      FEMALE_VOICE_HINTS.some((hint) => voice.name.toLowerCase().includes(hint)),
+    ) ??
+    localizedVoices[0] ??
+    null
+  );
 }
 
 export function AsciiOrb({ locale }: AsciiOrbProps) {
-  const [frame, setFrame] = useState(() => createOrbFrame(0, false));
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationRef = useRef<number | null>(null);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isSupported, setIsSupported] = useState(false);
-  const animationFrameRef = useRef<number | null>(null);
 
   const copy = useMemo(
     () =>
       locale === "fr"
         ? {
-            play: "Écouter l’intro",
+            play: "Écouter l’accueil",
             stop: "Arrêter",
             speech:
-              "Bienvenue sur le portfolio d’Emma. Je suis développeuse full-stack junior et je développe mon expertise en cybersécurité. Découvre mes projets et mon parcours.",
+              "Bienvenue sur le portfolio d’Emma. Je suis Emma, développeuse full-stack junior, et je développe mon expertise en cybersécurité. Découvre mes projets, mon parcours et les technologies avec lesquelles je travaille.",
           }
         : {
-            play: "Hear intro",
-            stop: "Stop voice",
+            play: "Hear welcome",
+            stop: "Stop",
             speech:
-              "Welcome to Emma's portfolio. I'm a junior full-stack software engineer building my expertise in cybersecurity. Explore my projects and journey.",
+              "Welcome to Emma's portfolio. I'm Emma, a junior full-stack software engineer building my expertise in cybersecurity. Explore my projects, experience, and the technologies I work with.",
           },
     [locale],
   );
@@ -96,23 +100,129 @@ export function AsciiOrb({ locale }: AsciiOrbProps) {
   }, []);
 
   useEffect(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    if (reduceMotion) {
-      setFrame(createOrbFrame(0, false));
-      return;
-    }
+    const context = canvas.getContext("2d");
+    if (!context) return;
 
-    const animate = (time: number) => {
-      setFrame(createOrbFrame(time, isSpeaking));
-      animationFrameRef.current = window.requestAnimationFrame(animate);
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const devicePixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+
+    const resize = () => {
+      const bounds = canvas.getBoundingClientRect();
+      canvas.width = Math.max(1, Math.floor(bounds.width * devicePixelRatio));
+      canvas.height = Math.max(1, Math.floor(bounds.height * devicePixelRatio));
+      context.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
     };
 
-    animationFrameRef.current = window.requestAnimationFrame(animate);
+    const observer = new ResizeObserver(resize);
+    observer.observe(canvas);
+    resize();
+
+    const draw = (time: number) => {
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const baseRadius = Math.min(width, height) * 0.34;
+      const speechPulse = isSpeaking
+        ? 1 + Math.sin(time * 0.013) * 0.045 + Math.sin(time * 0.031) * 0.018
+        : 1 + Math.sin(time * 0.0018) * 0.012;
+      const radius = baseRadius * speechPulse;
+      const rotationY = reducedMotion ? 0.55 : time * (isSpeaking ? 0.00034 : 0.00012);
+      const rotationX = reducedMotion ? -0.16 : -0.16 + Math.sin(time * 0.00055) * 0.08;
+
+      context.clearRect(0, 0, width, height);
+
+      const projected = spherePoints.map((point, index) => {
+        const cosY = Math.cos(rotationY);
+        const sinY = Math.sin(rotationY);
+        const x1 = point.x * cosY - point.z * sinY;
+        const z1 = point.x * sinY + point.z * cosY;
+
+        const cosX = Math.cos(rotationX);
+        const sinX = Math.sin(rotationX);
+        const y2 = point.y * cosX - z1 * sinX;
+        const z2 = point.y * sinX + z1 * cosX;
+
+        const distortion = isSpeaking
+          ? 1 + Math.sin(time * 0.018 + index * 0.62) * 0.035
+          : 1;
+        const perspective = 1 + z2 * 0.14;
+
+        return {
+          x: centerX + x1 * radius * distortion * perspective,
+          y: centerY + y2 * radius * distortion * perspective,
+          z: z2,
+        };
+      });
+
+      for (let first = 0; first < projected.length; first += 1) {
+        const a = projected[first];
+
+        for (let second = first + 1; second < projected.length; second += 1) {
+          const b = projected[second];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance > CONNECTION_DISTANCE) continue;
+          if (Math.abs(a.z - b.z) > 0.42) continue;
+
+          const depth = Math.max(0.12, ((a.z + b.z) / 2 + 1) / 2);
+          const alpha = (1 - distance / CONNECTION_DISTANCE) * depth * (isSpeaking ? 0.19 : 0.1);
+
+          context.beginPath();
+          context.moveTo(a.x, a.y);
+          context.lineTo(b.x, b.y);
+          context.strokeStyle = `rgba(0, 149, 166, ${alpha})`;
+          context.lineWidth = 0.55;
+          context.stroke();
+        }
+      }
+
+      projected.forEach((point, index) => {
+        const depth = (point.z + 1) / 2;
+        const flicker = isSpeaking ? 0.8 + Math.sin(time * 0.025 + index) * 0.2 : 1;
+        const size = 0.8 + depth * 1.7 + (isSpeaking ? 0.25 : 0);
+        const alpha = Math.max(0.22, (0.28 + depth * 0.72) * flicker);
+
+        context.beginPath();
+        context.arc(point.x, point.y, size, 0, Math.PI * 2);
+        context.fillStyle = `rgba(0, 225, 225, ${alpha})`;
+        context.fill();
+      });
+
+      const glow = context.createRadialGradient(
+        centerX,
+        centerY,
+        0,
+        centerX,
+        centerY,
+        radius * 1.15,
+      );
+      glow.addColorStop(0, `rgba(0, 225, 225, ${isSpeaking ? 0.055 : 0.025})`);
+      glow.addColorStop(0.55, `rgba(0, 149, 166, ${isSpeaking ? 0.025 : 0.012})`);
+      glow.addColorStop(1, "rgba(0, 0, 0, 0)");
+      context.fillStyle = glow;
+      context.fillRect(0, 0, width, height);
+
+      if (!reducedMotion) {
+        animationRef.current = window.requestAnimationFrame(draw);
+      }
+    };
+
+    draw(0);
+
+    if (!reducedMotion) {
+      animationRef.current = window.requestAnimationFrame(draw);
+    }
 
     return () => {
-      if (animationFrameRef.current !== null) {
-        window.cancelAnimationFrame(animationFrameRef.current);
+      observer.disconnect();
+      if (animationRef.current !== null) {
+        window.cancelAnimationFrame(animationRef.current);
       }
     };
   }, [isSpeaking]);
@@ -126,25 +236,35 @@ export function AsciiOrb({ locale }: AsciiOrbProps) {
     if (!isSupported) return;
 
     window.speechSynthesis.cancel();
+
     const utterance = new SpeechSynthesisUtterance(copy.speech);
     utterance.lang = locale === "fr" ? "fr-FR" : "en-US";
-    utterance.rate = 0.92;
-    utterance.pitch = 1;
+    utterance.rate = 0.93;
+    utterance.pitch = 1.08;
+
+    const preferredVoice = pickPreferredVoice(locale);
+    if (preferredVoice) {
+      utterance.voice = preferredVoice;
+    }
+
     utterance.onstart = () => setIsSpeaking(true);
     utterance.onend = () => setIsSpeaking(false);
     utterance.onerror = () => setIsSpeaking(false);
+
     window.speechSynthesis.speak(utterance);
   };
 
   return (
     <div className={styles.root}>
-      <pre className={`${styles.orb} ${isSpeaking ? styles.speaking : ""}`} aria-hidden="true">
-        {frame}
-      </pre>
+      <canvas
+        ref={canvasRef}
+        className={`${styles.orbCanvas} ${isSpeaking ? styles.speaking : ""}`}
+        aria-hidden="true"
+      />
 
       {isSupported ? (
         <button type="button" onClick={isSpeaking ? stopSpeech : speak} className={styles.voiceButton}>
-          <span aria-hidden="true">{isSpeaking ? "■" : "◉"}</span>
+          <span className={styles.voiceIcon} aria-hidden="true">{isSpeaking ? "■" : "◌"}</span>
           {isSpeaking ? copy.stop : copy.play}
         </button>
       ) : null}
