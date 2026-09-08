@@ -42,12 +42,16 @@
 
 .name {
   margin: 0;
-  max-width: 14ch;
+  max-width: 18ch;
   color: var(--color-text);
   font-size: clamp(2rem, 4.1vw, 3rem);
   font-weight: 600;
   line-height: 1.08;
   letter-spacing: -0.035em;
+}
+
+.personName {
+  white-space: nowrap;
 }
 
 .positioning {
@@ -188,7 +192,7 @@
   }
 
   .name {
-    max-width: 12ch;
+    max-width: 18ch;
   }
 
   .positioning {
