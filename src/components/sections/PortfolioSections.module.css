@@ -184,7 +184,19 @@
     opacity var(--motion-fast) var(--ease-standard);
 }
 
-.contactLinks a span:last-child {
+.contactLinkLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.contactLinkLabel svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex: 0 0 auto;
+}
+
+.contactLinks a > span:last-child {
   color: var(--color-black);
 }
 
