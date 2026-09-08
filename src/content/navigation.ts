@@ -4,11 +4,6 @@ export const navigationItems: NavigationItem[] = [
   { id: "home", label: { en: "Home", fr: "Accueil" }, href: "#home" },
   { id: "work", label: { en: "Projects", fr: "Projets" }, href: "#work" },
   {
-    id: "cybersecurity",
-    label: { en: "Cybersecurity", fr: "Cybersécurité" },
-    href: "#cybersecurity",
-  },
-  {
     id: "experience",
     label: { en: "Experience", fr: "Expérience" },
     href: "#experience",
