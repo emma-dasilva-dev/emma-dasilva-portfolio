@@ -1,6 +1,6 @@
 import { PageContainer } from "@/components/layout/PageContainer";
 import { Section } from "@/components/layout/Section";
-import { cybersecurityContent, linuxPractice, studyingAreas } from "@/content/cybersecurity";
+import { cybersecurityContent } from "@/content/cybersecurity";
 import { banditProgress, projects } from "@/content/projects";
 import type { Locale } from "@/types/locale";
 
@@ -11,7 +11,15 @@ interface CybersecurityProps {
 }
 
 const bandit = projects.find((project) => project.slug === "bandit-redline")!;
-const banditEvidence = ["Linux", "Permissions", "SSH", "Search & filtering", "Encoding / decoding", "Compression", "Command chaining"];
+const banditEvidence = [
+  "Linux",
+  "SSH",
+  "Permissions",
+  "Search & filtering",
+  "Encoding / decoding",
+  "Compression",
+  "Command chaining",
+];
 
 export function Cybersecurity({ locale }: CybersecurityProps) {
   const copy = cybersecurityContent[locale];
@@ -47,12 +55,14 @@ export function Cybersecurity({ locale }: CybersecurityProps) {
           <div className={styles.banditStory}>
             <p className={styles.itemSummary}>{bandit.summary[locale]}</p>
 
-            <div className={styles.progressBlock}>
+            <div className={styles.progressBlock} aria-label={`${copy.completedLabel} ${banditProgress.completedThrough}, ${copy.currentLabel} ${banditProgress.currentLevel}`}>
               <div>
                 <span>{copy.completedLabel}</span>
                 <strong>{banditProgress.completedThrough}</strong>
               </div>
-              <span className={styles.progressArrow} aria-hidden="true">→</span>
+              <div className={styles.progressTrack} aria-hidden="true">
+                <span />
+              </div>
               <div>
                 <span>{copy.currentLabel}</span>
                 <strong className={styles.currentLevel}>{banditProgress.currentLevel}</strong>
@@ -76,38 +86,6 @@ export function Cybersecurity({ locale }: CybersecurityProps) {
             </a>
           </div>
         </article>
-
-        <article className={styles.linuxRow}>
-          <div className={styles.linuxTitle}>
-            <p className={styles.itemIndex}>02 / Local Practice</p>
-            <h4>{linuxPractice.title}</h4>
-          </div>
-          <p className={styles.itemSummary}>{linuxPractice.description[locale]}</p>
-          <ul className={styles.linuxEvidence}>
-            {linuxPractice.evidence?.map((item) => <li key={item}>{item}</li>)}
-          </ul>
-          <span className={styles.status}>Ongoing</span>
-        </article>
-
-        <div className={styles.studySection}>
-          <div className={styles.groupIntro}>
-            <div>
-              <p className={styles.groupIndex}>02 / Direction</p>
-              <h3>{copy.studyingLabel}</h3>
-            </div>
-            <p>{copy.studyingDescription}</p>
-          </div>
-
-          <div className={styles.studyGrid}>
-            {studyingAreas.map((area, index) => (
-              <article key={area.title} className={styles.studyItem}>
-                <span className={styles.studyIndex}>0{index + 1}</span>
-                <h4>{area.title}</h4>
-                <p>{area.description[locale]}</p>
-              </article>
-            ))}
-          </div>
-        </div>
 
         <blockquote className={styles.philosophy}>{copy.philosophy}</blockquote>
       </PageContainer>
