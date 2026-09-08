@@ -2,403 +2,266 @@
   padding-block: var(--section-space);
 }
 
-.sectionHeader,
-.groupIntro,
-.banditHeader,
-.banditStory,
-.evidenceRow {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--space-6);
-}
-
 .sectionHeader {
-  margin-bottom: var(--space-14, 3.5rem);
-}
-
-.sectionNumber,
-.groupIndex,
-.itemIndex,
-.status,
-.progressBlock span,
-.evidenceLabel {
-  font-family: var(--font-mono);
+  display: grid;
+  grid-template-columns: 10rem minmax(0, 1fr);
+  gap: var(--space-8);
+  margin-bottom: var(--space-12);
 }
 
 .sectionNumber {
-  grid-column: 1 / span 3;
   margin: 0;
   color: var(--color-text-muted);
-  font-size: 0.6875rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.sectionLead {
-  grid-column: 4 / span 7;
-}
-
-.sectionTitle {
-  margin: 0;
-  font-size: clamp(2rem, 4vw, 2.75rem);
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.035em;
-}
-
-.sectionIntro {
-  max-width: 40rem;
-  margin: var(--space-4) 0 0;
-  color: var(--color-text-muted);
-  font-size: clamp(1rem, 1.4vw, 1.125rem);
-  line-height: 1.65;
-}
-
-.groupIntro {
-  align-items: end;
-  padding-block: var(--space-6);
-  border-top: 1px solid var(--color-border-strong);
-}
-
-.groupIntro > div {
-  grid-column: 1 / span 6;
-}
-
-.groupIntro > p {
-  grid-column: 8 / -1;
-  margin: 0;
-  color: var(--color-text-muted);
-  font-size: 0.9375rem;
-  line-height: 1.6;
-}
-
-.groupIndex {
-  margin: 0 0 var(--space-2);
-  color: var(--color-accent);
-  font-size: 0.6875rem;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
-.groupIntro h3 {
+.sectionHeader h2 {
   margin: 0;
   font-size: clamp(1.5rem, 2.5vw, 2rem);
   font-weight: 600;
-  letter-spacing: -0.025em;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
-.banditFeature {
-  padding-block: var(--space-10, 2.5rem) var(--space-12);
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.banditHeader > div {
-  grid-column: 1 / span 8;
-}
-
-.itemIndex {
-  margin: 0;
-  color: var(--color-accent-secondary);
-  font-size: 0.6875rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.banditHeader h4 {
+.sectionHeader p:last-child {
+  max-width: 39rem;
   margin: var(--space-3) 0 0;
-  font-size: clamp(2.25rem, 5vw, 3.5rem);
-  font-weight: 600;
-  line-height: 0.98;
-  letter-spacing: -0.05em;
-}
-
-.status {
-  grid-column: 10 / -1;
-  justify-self: end;
-  color: var(--color-accent);
-  font-size: 0.6875rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.banditStory {
-  align-items: end;
-  margin-top: var(--space-10, 2.5rem);
-}
-
-.itemSummary {
-  grid-column: 1 / span 5;
-  margin: 0;
   color: var(--color-text-muted);
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1.65;
 }
 
-.progressBlock {
-  grid-column: 7 / -1;
-  display: grid;
-  grid-template-columns: auto minmax(4rem, 1fr) auto;
-  gap: var(--space-5, 1.25rem);
-  align-items: end;
+.entry {
+  padding-block: var(--space-8) var(--space-6);
+  border-top: 1px solid var(--color-border-strong);
+  border-bottom: 1px solid var(--color-border);
 }
 
-.progressBlock > div:not(.progressTrack) {
+.entryHeader {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-6);
 }
 
-.progressBlock span {
-  color: var(--color-text-muted);
-  font-size: 0.6875rem;
-  letter-spacing: 0.04em;
+.kicker,
+.status,
+.evidenceLabel,
+.updated {
+  font-family: var(--font-mono);
+}
+
+.kicker,
+.status,
+.updated {
+  font-size: 0.625rem;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
-.progressBlock strong {
-  color: var(--color-text);
-  font-size: clamp(2rem, 4vw, 2.75rem);
-  font-weight: 600;
-  line-height: 0.95;
+.kicker {
+  margin: 0;
+  color: var(--color-accent-secondary);
 }
 
-.currentLevel {
+.status {
+  color: var(--color-accent);
+}
+
+.entryHeader h3 {
+  margin: var(--space-3) 0 0;
+  font-size: clamp(1.75rem, 3vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.entryBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: var(--space-12);
+  align-items: end;
+  margin-top: var(--space-8);
+}
+
+.summary {
+  max-width: 38rem;
+  margin: 0;
+  color: var(--color-text);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.progress {
+  display: grid;
+  grid-template-columns: auto minmax(4rem, 1fr) auto;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.progress > span {
+  color: var(--color-text);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.current {
   color: var(--color-accent) !important;
 }
 
-.progressTrack {
+.progressLine {
   position: relative;
   height: 1px;
-  margin-bottom: 0.55rem;
-  background: var(--color-border-strong);
+  background: linear-gradient(90deg, var(--color-border-strong), var(--color-accent-secondary));
 }
 
-.progressTrack::before,
-.progressTrack::after {
+.progressLine::before,
+.progressLine::after {
   content: "";
   position: absolute;
   top: 50%;
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   transform: translateY(-50%);
 }
 
-.progressTrack::before {
+.progressLine::before {
   left: 0;
   background: var(--color-text-muted);
 }
 
-.progressTrack::after {
+.progressLine::after {
   right: 0;
   background: var(--color-accent);
 }
 
-.progressTrack span {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, var(--color-border-strong), var(--color-accent-secondary));
-}
-
 .evidenceRow {
-  margin-top: var(--space-10, 2.5rem);
-  padding-top: var(--space-6);
+  display: grid;
+  grid-template-columns: 10rem minmax(0, 1fr);
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+  padding-top: var(--space-5, 1.25rem);
   border-top: 1px solid var(--color-border);
 }
 
 .evidenceLabel {
-  grid-column: 1 / span 3;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
   color: var(--color-text-muted);
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
-.evidenceLabel small {
-  color: var(--color-text-muted);
-  font: inherit;
-  font-size: 0.625rem;
-  text-transform: none;
-}
-
 .evidenceRow ul {
-  grid-column: 4 / -1;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-3) var(--space-6);
+  gap: var(--space-2) var(--space-4);
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.evidenceRow li {
   color: var(--color-text-muted);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
 }
 
-.evidenceRow li::before {
-  content: "•";
-  margin-right: var(--space-2);
+.evidenceRow li::after {
+  content: "·";
+  margin-left: var(--space-4);
   color: var(--color-accent-secondary);
 }
 
-.banditAction {
-  margin-top: var(--space-8);
+.evidenceRow li:last-child::after {
+  content: "";
+  margin: 0;
 }
 
-.banditAction a {
+.entryFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+}
+
+.updated {
+  color: var(--color-text-muted);
+}
+
+.entryFooter a {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
   min-height: 44px;
   color: var(--color-text);
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.875rem;
   text-decoration: none;
   transition: color var(--motion-fast) var(--ease-standard);
 }
 
-.banditAction a:hover,
-.banditAction a:focus-visible {
+.entryFooter a:hover,
+.entryFooter a:focus-visible {
   color: var(--color-accent);
 }
 
 .philosophy {
-  width: min(100%, 46rem);
-  margin: var(--space-14, 3.5rem) 0 0 auto;
-  padding: 0;
-  color: var(--color-text);
-  font-size: clamp(1.25rem, 2.3vw, 1.75rem);
-  font-weight: 500;
-  line-height: 1.4;
-  letter-spacing: -0.015em;
-}
-
-.philosophy::before {
-  content: "↳";
-  display: block;
-  margin-bottom: var(--space-3);
-  color: var(--color-accent);
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
+  max-width: 38rem;
+  margin: var(--space-10, 2.5rem) 0 0 auto;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1.7;
 }
 
 @media (max-width: 63.9375rem) {
   .sectionHeader,
-  .groupIntro,
-  .banditHeader,
-  .banditStory,
   .evidenceRow {
-    grid-template-columns: repeat(8, minmax(0, 1fr));
+    grid-template-columns: 8rem minmax(0, 1fr);
   }
 
-  .sectionNumber {
-    grid-column: 1 / span 2;
-  }
-
-  .sectionLead {
-    grid-column: 3 / -1;
-  }
-
-  .groupIntro > div {
-    grid-column: 1 / span 4;
-  }
-
-  .groupIntro > p {
-    grid-column: 5 / -1;
-  }
-
-  .banditHeader > div {
-    grid-column: 1 / span 6;
-  }
-
-  .status {
-    grid-column: 7 / -1;
-  }
-
-  .itemSummary {
-    grid-column: 1 / span 4;
-  }
-
-  .progressBlock {
-    grid-column: 5 / -1;
-  }
-
-  .evidenceLabel {
-    grid-column: 1 / span 2;
-  }
-
-  .evidenceRow ul {
-    grid-column: 3 / -1;
+  .entryBody {
+    gap: var(--space-8);
   }
 }
 
 @media (max-width: 47.9375rem) {
   .sectionHeader,
-  .groupIntro,
-  .banditHeader,
-  .banditStory,
   .evidenceRow {
     display: block;
   }
 
   .sectionHeader {
-    margin-bottom: var(--space-10, 2.5rem);
+    margin-bottom: var(--space-8);
   }
 
-  .sectionNumber {
-    margin-bottom: var(--space-4);
+  .sectionNumber,
+  .evidenceLabel {
+    margin-bottom: var(--space-3);
   }
 
-  .groupIntro > p {
-    margin-top: var(--space-4);
-  }
-
-  .status {
-    display: inline-block;
-    margin-top: var(--space-4);
-  }
-
-  .itemSummary {
+  .entryBody {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
     margin-top: var(--space-6);
   }
 
-  .progressBlock {
-    margin-top: var(--space-8);
-    grid-template-columns: auto minmax(3rem, 1fr) auto;
+  .evidenceRow {
+    margin-top: var(--space-6);
+  }
+
+  .entryFooter {
+    align-items: flex-start;
+    flex-direction: column;
     gap: var(--space-3);
   }
 
-  .evidenceLabel {
-    margin-bottom: var(--space-4);
-  }
-
-  .evidenceRow ul {
-    gap: var(--space-3) var(--space-4);
-  }
-
   .philosophy {
-    margin-top: var(--space-12);
-  }
-}
-
-@media (max-width: 29.9375rem) {
-  .progressBlock {
-    grid-template-columns: 1fr;
-    align-items: start;
-  }
-
-  .progressTrack {
-    width: 100%;
-    margin-block: var(--space-2);
+    margin-top: var(--space-8);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .banditAction a {
+  .entryFooter a {
     transition: none;
   }
 }
