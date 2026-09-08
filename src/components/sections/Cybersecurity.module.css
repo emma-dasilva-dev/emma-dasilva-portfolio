@@ -3,10 +3,17 @@
   border-top: var(--border-width) solid var(--color-border);
 }
 
-.sectionHeader {
+.sectionHeader,
+.groupIntro,
+.banditHeader,
+.banditStory,
+.evidenceRow {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: var(--space-6);
+}
+
+.sectionHeader {
   align-items: start;
   margin-bottom: var(--space-16);
 }
@@ -16,9 +23,7 @@
 .itemIndex,
 .status,
 .progressBlock span,
-.evidenceLabel,
-.linuxEvidence,
-.studyIndex {
+.evidenceLabel {
   font-family: var(--font-mono);
 }
 
@@ -38,7 +43,7 @@
 
 .sectionTitle {
   margin: 0;
-  max-width: 11ch;
+  max-width: 12ch;
   font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 600;
   line-height: 1.05;
@@ -46,20 +51,18 @@
 }
 
 .sectionIntro {
-  max-width: 39rem;
+  max-width: 40rem;
   margin: var(--space-4) 0 0;
   color: var(--color-text-muted);
   font-size: clamp(1rem, 1.5vw, 1.125rem);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .groupIntro {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--space-6);
   align-items: end;
   padding-block: var(--space-6);
   border-top: var(--border-width) solid var(--color-border-strong);
+  border-bottom: var(--border-width) solid var(--color-border);
 }
 
 .groupIntro > div {
@@ -90,18 +93,8 @@
 }
 
 .banditFeature {
-  padding-block: var(--space-8);
-  border-top: var(--border-width) solid var(--color-border);
+  padding-block: var(--space-10, 2.5rem) var(--space-12);
   border-bottom: var(--border-width) solid var(--color-border-strong);
-}
-
-.banditHeader,
-.banditStory,
-.evidenceRow,
-.linuxRow {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--space-6);
 }
 
 .banditHeader {
@@ -120,8 +113,7 @@
   text-transform: uppercase;
 }
 
-.banditHeader h4,
-.linuxTitle h4 {
+.banditHeader h4 {
   margin: var(--space-3) 0 0;
   font-size: clamp(2rem, 4.5vw, 3rem);
   font-weight: 600;
@@ -139,29 +131,30 @@
 }
 
 .banditStory {
-  margin-top: var(--space-8);
-  padding-top: var(--space-6);
+  align-items: end;
+  margin-top: var(--space-10, 2.5rem);
+  padding-top: var(--space-8);
   border-top: var(--border-width) solid var(--color-border);
 }
 
 .itemSummary {
-  grid-column: 1 / span 6;
-  max-width: 39rem;
+  grid-column: 1 / span 5;
+  max-width: 36rem;
   margin: 0;
   color: var(--color-text);
   font-size: clamp(1.0625rem, 1.8vw, 1.25rem);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 .progressBlock {
-  grid-column: 8 / -1;
+  grid-column: 7 / -1;
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: var(--space-4);
+  grid-template-columns: auto minmax(4rem, 1fr) auto;
+  gap: var(--space-5, 1.25rem);
   align-items: end;
 }
 
-.progressBlock > div {
+.progressBlock > div:not(.progressTrack) {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
@@ -176,22 +169,51 @@
 
 .progressBlock strong {
   color: var(--color-text);
-  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
   font-weight: 600;
-  line-height: 1;
+  line-height: 0.9;
 }
 
 .currentLevel {
   color: var(--color-accent) !important;
 }
 
-.progressArrow {
-  padding-bottom: 0.35rem;
-  color: var(--color-accent-secondary) !important;
+.progressTrack {
+  position: relative;
+  height: 1px;
+  margin-bottom: 0.6rem;
+  background: var(--color-border-strong);
+}
+
+.progressTrack::before,
+.progressTrack::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.progressTrack::before {
+  left: 0;
+  background: var(--color-text-muted);
+}
+
+.progressTrack::after {
+  right: 0;
+  background: var(--color-accent);
+}
+
+.progressTrack span {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--color-border-strong), var(--color-accent-secondary));
 }
 
 .evidenceRow {
-  margin-top: var(--space-8);
+  margin-top: var(--space-10, 2.5rem);
   padding-top: var(--space-6);
   border-top: var(--border-width) solid var(--color-border);
 }
@@ -224,14 +246,25 @@
 }
 
 .evidenceRow li {
-  padding-block: var(--space-3);
+  position: relative;
+  padding: var(--space-3) 0 var(--space-3) var(--space-4);
   color: var(--color-text-muted);
   border-top: var(--border-width) solid var(--color-border);
   font-size: 0.875rem;
 }
 
+.evidenceRow li::before {
+  content: "";
+  position: absolute;
+  top: 1.15rem;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  background: var(--color-accent-secondary);
+}
+
 .banditAction {
-  margin-top: var(--space-6);
+  margin-top: var(--space-8);
 }
 
 .banditAction a {
@@ -251,87 +284,6 @@
 .banditAction a:focus-visible {
   color: var(--color-accent);
   border-color: var(--color-accent);
-}
-
-.linuxRow {
-  position: relative;
-  align-items: start;
-  padding-block: var(--space-8);
-  border-bottom: var(--border-width) solid var(--color-border-strong);
-}
-
-.linuxTitle {
-  grid-column: 1 / span 3;
-}
-
-.linuxTitle h4 {
-  font-size: clamp(1.375rem, 2vw, 1.75rem);
-}
-
-.linuxRow .itemSummary {
-  grid-column: 4 / span 4;
-  color: var(--color-text-muted);
-  font-size: 0.9375rem;
-}
-
-.linuxEvidence {
-  grid-column: 8 / span 3;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  color: var(--color-text-muted);
-  font-size: 0.6875rem;
-}
-
-.linuxEvidence li::before {
-  content: "+";
-  margin-right: var(--space-2);
-  color: var(--color-accent-secondary);
-}
-
-.linuxRow .status {
-  grid-column: 11 / -1;
-}
-
-.studySection {
-  margin-top: var(--space-16);
-}
-
-.studyGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-6);
-  border-top: var(--border-width) solid var(--color-border);
-}
-
-.studyItem {
-  padding-block: var(--space-6) var(--space-8);
-  border-top: 2px solid transparent;
-}
-
-.studyItem:first-child {
-  border-top-color: var(--color-accent-secondary);
-}
-
-.studyIndex {
-  color: var(--color-accent-secondary);
-  font-size: 0.6875rem;
-}
-
-.studyItem h4 {
-  margin: var(--space-6) 0 0;
-  font-size: 1.125rem;
-  font-weight: 600;
-}
-
-.studyItem p {
-  margin: var(--space-3) 0 0;
-  color: var(--color-text-muted);
-  font-size: 0.875rem;
-  line-height: 1.6;
 }
 
 .philosophy {
@@ -359,8 +311,7 @@
   .groupIntro,
   .banditHeader,
   .banditStory,
-  .evidenceRow,
-  .linuxRow {
+  .evidenceRow {
     grid-template-columns: repeat(8, minmax(0, 1fr));
   }
 
@@ -404,22 +355,6 @@
     grid-column: 3 / -1;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-  .linuxTitle {
-    grid-column: 1 / span 2;
-  }
-
-  .linuxRow .itemSummary {
-    grid-column: 3 / span 3;
-  }
-
-  .linuxEvidence {
-    grid-column: 6 / span 2;
-  }
-
-  .linuxRow .status {
-    grid-column: 8 / -1;
-  }
 }
 
 @media (max-width: 47.9375rem) {
@@ -427,8 +362,7 @@
   .groupIntro,
   .banditHeader,
   .banditStory,
-  .evidenceRow,
-  .linuxRow {
+  .evidenceRow {
     display: block;
   }
 
@@ -455,10 +389,17 @@
 
   .banditStory {
     margin-top: var(--space-6);
+    padding-top: var(--space-6);
   }
 
   .progressBlock {
     margin-top: var(--space-8);
+    grid-template-columns: auto minmax(3rem, 1fr) auto;
+    gap: var(--space-3);
+  }
+
+  .progressBlock strong {
+    font-size: clamp(2rem, 12vw, 2.75rem);
   }
 
   .evidenceLabel {
@@ -469,30 +410,20 @@
     grid-template-columns: 1fr;
   }
 
-  .linuxRow .itemSummary,
-  .linuxEvidence {
-    margin-top: var(--space-6);
-  }
-
-  .studySection {
-    margin-top: var(--space-12);
-  }
-
-  .studyGrid {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  .studyItem {
-    border-top: var(--border-width) solid var(--color-border);
-  }
-
-  .studyItem:first-child {
-    border-top: 2px solid var(--color-accent-secondary);
-  }
-
   .philosophy {
     margin-top: var(--space-12);
+  }
+}
+
+@media (max-width: 29.9375rem) {
+  .progressBlock {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .progressTrack {
+    width: 100%;
+    margin-block: var(--space-2);
   }
 }
 
