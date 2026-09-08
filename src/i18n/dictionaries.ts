@@ -11,7 +11,7 @@ const homeDictionaries = {
 const projectDictionaries = {
   en: () =>
     import("../content/en/projects").then((module) => module.projects),
-  fr: () =>
+  fr: () =>    
     import("../content/fr/projects").then((module) => module.projects),
 } satisfies Record<Locale, () => Promise<ProjectCaseStudy[]>>;
 
