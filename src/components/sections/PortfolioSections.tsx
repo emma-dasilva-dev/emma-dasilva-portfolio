@@ -40,23 +40,26 @@ export function Profile({ locale }: PortfolioSectionProps) {
   return (
     <Section id="experience" className={styles.section}>
       <PageContainer>
-        <div className={styles.profileHeader}>
-          <h2>{locale === "en" ? "Profile" : "Profil"}</h2>
-          <p>{experience.intro}</p>
-        </div>
-
         <div className={styles.profileGrid}>
           <div className={styles.experienceColumn}>
-            <h3 className={styles.columnLabel}>{experience.heading}</h3>
+            <div className={styles.columnHeading}>
+              <h2>{experience.heading}</h2>
+              <p>{experience.intro}</p>
+            </div>
+
             <div className={styles.experienceList}>
               {experience.items.map((item) => (
                 <article key={`${item.period}-${item.title}`} className={styles.experienceItem}>
                   <p className={styles.period}>{item.period}</p>
-                  <div>
-                    <h4>{item.title}</h4>
+                  <div className={styles.experienceBody}>
+                    <h3>{item.title}</h3>
                     <p className={styles.role}>{item.role}</p>
                     <p className={styles.description}>{item.description}</p>
-                    {item.link ? <a href={item.link.href} target="_blank" rel="noreferrer">{item.link.label} ↗</a> : null}
+                    {item.link ? (
+                      <a href={item.link.href} target="_blank" rel="noreferrer">
+                        {item.link.label} ↗
+                      </a>
+                    ) : null}
                   </div>
                 </article>
               ))}
@@ -64,10 +67,16 @@ export function Profile({ locale }: PortfolioSectionProps) {
           </div>
 
           <div id="about" className={styles.aboutColumn}>
-            <h3 className={styles.columnLabel}>{about.heading}</h3>
-            <div className={styles.aboutCopy}>
-              {about.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            <div className={styles.columnHeading}>
+              <h2>{about.heading}</h2>
             </div>
+
+            <div className={styles.aboutCopy}>
+              {about.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+
             <blockquote>{about.quote}</blockquote>
           </div>
         </div>
@@ -78,13 +87,15 @@ export function Profile({ locale }: PortfolioSectionProps) {
 
 export function Stack({ locale }: PortfolioSectionProps) {
   const content = portfolioContent[locale].stack;
+
   return (
     <Section id="stack" className={styles.section}>
       <PageContainer>
         <div className={styles.sectionHeader}>
-          <h2>{locale === "en" ? "Technical Index" : "Index technique"}</h2>
+          <h2>{content.heading}</h2>
           <p>{content.intro}</p>
         </div>
+
         <div className={styles.stackList}>
           {content.groups.map((group) => (
             <div key={group.label} className={styles.stackRow}>
@@ -100,11 +111,16 @@ export function Stack({ locale }: PortfolioSectionProps) {
 
 export function Contact({ locale }: PortfolioSectionProps) {
   const content = portfolioContent[locale].contact;
+
   return (
     <Section id="contact" className={`${styles.section} ${styles.contactSection}`}>
       <PageContainer>
         <div className={styles.contactGrid}>
-          <div><h2>{content.heading}</h2><p>{content.copy}</p></div>
+          <div>
+            <h2>{content.heading}</h2>
+            <p>{content.copy}</p>
+          </div>
+
           <div className={styles.contactLinks}>
             {content.links.map((link) => (
               <a key={link.label} href={link.href} target={link.href.startsWith("mailto:") ? undefined : "_blank"} rel={link.href.startsWith("mailto:") ? undefined : "noreferrer"}>
@@ -114,8 +130,11 @@ export function Contact({ locale }: PortfolioSectionProps) {
             ))}
           </div>
         </div>
+
         <footer className={styles.footer}>
-          <span>Emma Da Silva</span><span>Software Engineering × Cybersecurity</span><span>{content.location}</span>
+          <span>Emma Da Silva</span>
+          <span>Software Engineering × Cybersecurity</span>
+          <span>{content.location}</span>
         </footer>
       </PageContainer>
     </Section>
