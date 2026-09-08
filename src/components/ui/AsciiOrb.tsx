@@ -16,36 +16,20 @@ interface Point3D {
 
 const POINT_COUNT = 132;
 const CONNECTION_DISTANCE = 46;
-
-const FEMALE_VOICE_HINTS: Record<"en" | "fr", string[]> = {
-  en: [
-    "samantha",
-    "ava",
-    "victoria",
-    "serena",
-    "karen",
-    "moira",
-    "tessa",
-    "zira",
-    "aria",
-    "jenny",
-    "susan",
-    "female",
-  ],
-  fr: [
-    "amelie",
-    "audrey",
-    "aurelie",
-    "hortense",
-    "marie",
-    "virginie",
-    "julie",
-    "celine",
-    "lea",
-    "denise",
-    "female",
-  ],
-};
+const FEMALE_VOICE_HINTS = [
+  "samantha",
+  "ava",
+  "victoria",
+  "serena",
+  "karen",
+  "moira",
+  "tessa",
+  "zira",
+  "aria",
+  "jenny",
+  "susan",
+  "female",
+];
 
 function createSpherePoints(count: number): Point3D[] {
   const points: Point3D[] = [];
@@ -75,13 +59,10 @@ function pickPreferredVoice(locale: "en" | "fr") {
     voice.lang.toLowerCase().startsWith(localePrefix),
   );
 
-  const preferredHints = FEMALE_VOICE_HINTS[locale];
-
   return (
     localizedVoices.find((voice) =>
-      preferredHints.some((hint) => voice.name.toLowerCase().includes(hint)),
+      FEMALE_VOICE_HINTS.some((hint) => voice.name.toLowerCase().includes(hint)),
     ) ??
-    localizedVoices.find((voice) => voice.default) ??
     localizedVoices[0] ??
     null
   );
@@ -124,6 +105,7 @@ export function AsciiOrb({ locale }: AsciiOrbProps) {
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const devicePixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+    let disposed = false;
 
     const resize = () => {
       const bounds = canvas.getBoundingClientRect();
@@ -137,6 +119,8 @@ export function AsciiOrb({ locale }: AsciiOrbProps) {
     resize();
 
     const draw = (time: number) => {
+      if (disposed) return;
+
       const width = canvas.clientWidth;
       const height = canvas.clientHeight;
       const centerX = width / 2;
@@ -224,24 +208,26 @@ export function AsciiOrb({ locale }: AsciiOrbProps) {
       context.fillStyle = glow;
       context.fillRect(0, 0, width, height);
 
-      if (!reducedMotion) {
+      if (!reducedMotion && !disposed) {
         animationRef.current = window.requestAnimationFrame(draw);
       }
     };
 
-    draw(0);
-
-    if (!reducedMotion) {
+    if (reducedMotion) {
+      draw(0);
+    } else {
       animationRef.current = window.requestAnimationFrame(draw);
     }
 
     return () => {
+      disposed = true;
       observer.disconnect();
       if (animationRef.current !== null) {
         window.cancelAnimationFrame(animationRef.current);
       }
+      window.speechSynthesis.cancel();
     };
-  }, [isSpeaking]);
+  }, [isSpeaking, locale]);
 
   const stopSpeech = () => {
     window.speechSynthesis.cancel();
