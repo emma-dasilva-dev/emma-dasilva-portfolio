@@ -84,9 +84,9 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
         </nav>
 
         <div className={styles.desktopLanguages} aria-label={languageLabel}>
-          <Link className={locale === "en" ? styles.languageActive : styles.languageLink} href={localeHref("en")} hrefLang="en">EN</Link>
+          <a className={locale === "en" ? styles.languageActive : styles.languageLink} href={localeHref("en")} hrefLang="en">EN</a>
           <span className={styles.languageDivider} aria-hidden="true">/</span>
-          <Link className={locale === "fr" ? styles.languageActive : styles.languageLink} href={localeHref("fr")} hrefLang="fr">FR</Link>
+          <a className={locale === "fr" ? styles.languageActive : styles.languageLink} href={localeHref("fr")} hrefLang="fr">FR</a>
         </div>
 
         <button
@@ -117,9 +117,9 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
             <div className={styles.mobileLanguages} aria-label={languageLabel}>
               <span className={styles.mobileLanguageLabel}>{languageLabel}</span>
               <div className={styles.mobileLanguageLinks}>
-                <Link className={locale === "en" ? styles.languageActive : styles.languageLink} href={localeHref("en")} hrefLang="en" onClick={() => closeMenu()}>EN</Link>
+                <a className={locale === "en" ? styles.languageActive : styles.languageLink} href={localeHref("en")} hrefLang="en">EN</a>
                 <span className={styles.languageDivider} aria-hidden="true">/</span>
-                <Link className={locale === "fr" ? styles.languageActive : styles.languageLink} href={localeHref("fr")} hrefLang="fr" onClick={() => closeMenu()}>FR</Link>
+                <a className={locale === "fr" ? styles.languageActive : styles.languageLink} href={localeHref("fr")} hrefLang="fr">FR</a>
               </div>
             </div>
           </nav>
