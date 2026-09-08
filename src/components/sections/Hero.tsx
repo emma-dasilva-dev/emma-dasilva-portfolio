@@ -19,7 +19,10 @@ export function Hero({ locale }: HeroProps) {
           <p className={styles.eyebrow}>{content.eyebrow}</p>
 
           <div className={styles.introduction}>
-            <h1 className={styles.name}>{content.greeting}</h1>
+            <h1 className={styles.name}>
+              <span>{content.greetingPrefix}</span>{" "}
+              <span className={styles.personName}>{content.name}</span>
+            </h1>
             <p className={styles.positioning}>
               <span className={styles.primaryTitle}>{content.titlePrimary}</span>
               <span className={styles.secondaryTitle}>{content.titleSecondary}</span>
