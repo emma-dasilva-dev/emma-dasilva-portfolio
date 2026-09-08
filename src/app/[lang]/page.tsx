@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import { Cybersecurity } from "@/components/sections/Cybersecurity";
 import { Hero } from "@/components/sections/Hero";
 import { Work } from "@/components/sections/Work";
 import { isLocale } from "@/lib/i18n";
@@ -19,6 +20,7 @@ export default async function HomePage({ params }: HomePageProps) {
     <main id="main-content">
       <Hero locale={lang} />
       <Work locale={lang} />
+      <Cybersecurity locale={lang} />
     </main>
   );
 }
