@@ -1,5 +1,6 @@
 import { PageContainer } from "@/components/layout/PageContainer";
 import { Section } from "@/components/layout/Section";
+import { AsciiOrb } from "@/components/ui/AsciiOrb";
 import { heroContent } from "@/content/hero";
 import type { Locale } from "@/types/locale";
 
@@ -15,29 +16,33 @@ export function Hero({ locale }: HeroProps) {
   return (
     <Section id="home" className={styles.hero}>
       <PageContainer>
-        <div className={styles.heroInner}>
-          <p className={styles.eyebrow}>{content.eyebrow}</p>
+        <div className={styles.heroGrid}>
+          <div className={styles.heroInner}>
+            <p className={styles.eyebrow}>{content.eyebrow}</p>
 
-          <h1 className={styles.name}>
-            <span>{content.greetingPrefix}</span>{" "}
-            <span className={styles.personName}>{content.name}</span>
-          </h1>
+            <h1 className={styles.name}>
+              <span>{content.greetingPrefix}</span>{" "}
+              <span className={styles.personName}>{content.name}</span>
+            </h1>
 
-          <p className={styles.positioning}>
-            {content.titlePrimary}<br />
-            <span>{content.titleSecondary}</span>
-          </p>
+            <p className={styles.positioning}>
+              {content.titlePrimary}<br />
+              <span>{content.titleSecondary}</span>
+            </p>
 
-          <p className={styles.supportingCopy}>{content.supportingCopy}</p>
+            <p className={styles.supportingCopy}>{content.supportingCopy}</p>
 
-          <div className={styles.details}>
-            <span>{content.location}</span>
-            <span>{content.status}</span>
+            <div className={styles.details}>
+              <span>{content.location}</span>
+              <span>{content.status}</span>
+            </div>
+
+            <a className={styles.cta} href="#work">
+              {content.cta} <span aria-hidden="true">↓</span>
+            </a>
           </div>
 
-          <a className={styles.cta} href="#work">
-            {content.cta} <span aria-hidden="true">↓</span>
-          </a>
+          <AsciiOrb locale={locale} />
         </div>
       </PageContainer>
     </Section>
