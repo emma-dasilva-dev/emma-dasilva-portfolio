@@ -59,9 +59,6 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
   }, []);
 
   const localeHref = (targetLocale: Locale) => `/${targetLocale}`;
-  const status = locale === "en"
-    ? [["Focus", "Cybersecurity"], ["Study", "Computer Engineering"], ["Learning", "Networking"], ["System", "Linux"], ["Status", "Building"]]
-    : [["Focus", "Cybersécurité"], ["Études", "Génie informatique"], ["Apprentissage", "Réseaux"], ["Système", "Linux"], ["Statut", "En progression"]];
 
   return (
     <header className={styles.header}>
@@ -79,13 +76,6 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
             ))}
           </ul>
         </nav>
-
-        <div className={styles.systemStatus} aria-label={locale === "en" ? "Current technical focus" : "Orientation technique actuelle"}>
-          <p>{locale === "en" ? "System status" : "État du système"}</p>
-          <dl>
-            {status.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
-          </dl>
-        </div>
 
         <div className={styles.desktopLanguages} aria-label={languageLabel}>
           <a className={locale === "en" ? styles.languageActive : styles.languageLink} href={localeHref("en")} hrefLang="en">EN</a>
