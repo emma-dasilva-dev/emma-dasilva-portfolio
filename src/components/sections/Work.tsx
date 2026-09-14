@@ -10,7 +10,6 @@ interface WorkProps {
   locale: Locale;
 }
 
-const stay = projects.find((project) => project.slug === "stay")!;
 const bandit = projects.find((project) => project.slug === "bandit-redline")!;
 
 export function Work({ locale }: WorkProps) {
@@ -25,17 +24,6 @@ export function Work({ locale }: WorkProps) {
         </header>
 
         <div className={styles.projects}>
-          <article className={styles.project}>
-            <p className={styles.projectType}>{stay.subtitle[locale]}</p>
-            <h3>{stay.title}</h3>
-            <p className={styles.summary}>{stay.summary[locale]}</p>
-            <p className={styles.stack}>{stay.technologies.join(" · ")}</p>
-            <div className={styles.links}>
-              <a href={stay.links.live} target="_blank" rel="noreferrer">{copy.liveSite} ↗</a>
-              <a href={stay.links.github} target="_blank" rel="noreferrer">{copy.github} ↗</a>
-            </div>
-          </article>
-
           <article className={styles.project}>
             <p className={styles.projectType}>{bandit.subtitle[locale]}</p>
             <h3>{bandit.title}</h3>
