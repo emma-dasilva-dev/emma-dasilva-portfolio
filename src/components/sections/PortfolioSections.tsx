@@ -56,7 +56,7 @@ const logoUrls: Record<string, string> = {
   bcrypt: "https://cdn.simpleicons.org/letsencrypt",
   Git: "https://cdn.simpleicons.org/git",
   GitHub: "https://cdn.simpleicons.org/github/FFFFFF",
-  "VS Code": "https://cdn.simpleicons.org/visualstudiocode",
+  "VS Code": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg",
   Postman: "https://cdn.simpleicons.org/postman",
   npm: "https://cdn.simpleicons.org/npm",
   Vercel: "https://cdn.simpleicons.org/vercel/FFFFFF",
@@ -193,7 +193,7 @@ export function Contact({ locale }: PortfolioSectionProps) {
 
         <footer className={styles.footer}>
           <span>Emma Da Silva</span>
-          <span>Software Engineering × Cybersecurity</span>
+          <span>Cybersecurity × Computer Engineering</span>
           <span>{content.location}</span>
         </footer>
       </PageContainer>
