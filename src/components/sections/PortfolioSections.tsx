@@ -51,7 +51,7 @@ const logoUrls: Record<string, string> = {
   MySQL: "https://cdn.simpleicons.org/mysql",
   Linux: "https://cdn.simpleicons.org/linux",
   Bash: "https://cdn.simpleicons.org/gnubash/FFFFFF",
-  SSH: "https://cdn.simpleicons.org/openssh/FFFFFF",
+  SSH: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ssh/ssh-original.svg",
   JWT: "https://cdn.simpleicons.org/jsonwebtokens/FFFFFF",
   bcrypt: "https://cdn.simpleicons.org/letsencrypt",
   Git: "https://cdn.simpleicons.org/git",
