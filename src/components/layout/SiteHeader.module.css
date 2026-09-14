@@ -1,14 +1,7 @@
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  height: var(--header-height-mobile);
-  background: rgb(0 0 0 / 0.96);
-  border-bottom: 1px solid var(--color-border);
-}
+.header { position:sticky; top:0; z-index:100; height:var(--header-height-mobile); background:rgb(0 0 0 / .96); border-bottom:1px solid var(--color-border); }
 .inner { display:flex; align-items:center; justify-content:space-between; height:100%; gap:var(--space-4); }
 .identity { display:inline-flex; align-items:center; min-height:2.75rem; color:var(--color-text); font-size:.875rem; font-weight:600; text-decoration:none; white-space:nowrap; }
-.desktopNav,.desktopLanguages { display:none; }
+.desktopNav,.desktopLanguages,.systemStatus { display:none; }
 .menuButton { min-height:2.75rem; padding:0; border:0; background:transparent; color:var(--color-text-muted); cursor:pointer; font:inherit; font-size:.8125rem; }
 .mobilePanel { position:absolute; top:100%; left:0; width:100%; background:var(--color-background); border-bottom:1px solid var(--color-border); }
 .mobileNav { padding-block:var(--space-5) var(--space-6); }
@@ -28,11 +21,21 @@
   .header { position:fixed; inset:0 auto 0 0; width:14.5rem; height:100dvh; border-right:1px solid var(--color-border); border-bottom:0; background:var(--color-black); }
   .inner { width:100%; margin:0; padding:var(--space-8) var(--space-6); display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start; gap:0; }
   .identity { min-height:0; align-items:flex-start; max-width:none; white-space:nowrap; font-size:.92rem; line-height:1.1; letter-spacing:-.015em; text-transform:uppercase; }
-  .desktopNav { display:block; margin-top:auto; margin-bottom:auto; }
+  .desktopNav { display:block; margin-top:clamp(4rem,10vh,7rem); }
   .navList { display:flex; flex-direction:column; align-items:flex-start; gap:var(--space-2); margin:0; padding:0; list-style:none; }
-  .navLink { display:inline-flex; align-items:center; min-height:2rem; color:var(--color-text-muted); font-size:.78rem; text-decoration:none; transition:color var(--motion-fast) var(--ease-standard),padding-left var(--motion-fast) var(--ease-standard); }
-  .navLink:hover,.navLink:focus-visible { padding-left:var(--space-2); color:var(--color-accent); }
-  .desktopLanguages { display:flex; margin-top:auto; }
+  .navLink { position:relative; display:inline-flex; align-items:center; min-height:2rem; color:var(--color-text-muted); font-size:.78rem; text-decoration:none; transition:color var(--motion-fast) var(--ease-standard),padding-left var(--motion-fast) var(--ease-standard); }
+  .navLink::before { content:""; position:absolute; left:0; width:3px; height:3px; border-radius:50%; background:var(--color-accent); opacity:0; transform:scale(.5); transition:opacity var(--motion-fast) var(--ease-standard),transform var(--motion-fast) var(--ease-standard); }
+  .navLink:hover,.navLink:focus-visible,.navLinkActive { padding-left:var(--space-3); color:var(--color-accent); }
+  .navLinkActive::before { opacity:1; transform:scale(1); }
+  .systemStatus { display:block; margin-top:auto; padding-block:var(--space-5); border-top:1px solid var(--color-border); border-bottom:1px solid var(--color-border); }
+  .systemStatus > p { margin:0 0 var(--space-4); color:var(--color-text); font-family:var(--font-mono); font-size:.64rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; }
+  .systemStatus dl { display:grid; gap:.42rem; margin:0; }
+  .systemStatus dl > div { display:grid; grid-template-columns:4.25rem minmax(0,1fr); gap:.35rem; align-items:baseline; }
+  .systemStatus dt,.systemStatus dd { margin:0; font-family:var(--font-mono); font-size:.58rem; line-height:1.35; }
+  .systemStatus dt { color:var(--color-text-muted); text-transform:uppercase; }
+  .systemStatus dd { color:var(--color-text); }
+  .systemStatus dl > div:last-child dd { color:var(--color-accent); }
+  .desktopLanguages { display:flex; margin-top:var(--space-4); }
   .menuButton,.mobilePanel { display:none; }
 }
-@media (prefers-reduced-motion:reduce) { .navLink { transition:none; } }
+@media (prefers-reduced-motion:reduce) { .navLink,.navLink::before { transition:none; } }
