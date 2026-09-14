@@ -1,6 +1,5 @@
 import { PageContainer } from "@/components/layout/PageContainer";
 import { Section } from "@/components/layout/Section";
-import { AsciiOrb } from "@/components/ui/AsciiOrb";
 import { heroContent } from "@/content/hero";
 import type { Locale } from "@/types/locale";
 
@@ -42,12 +41,7 @@ export function Hero({ locale }: HeroProps) {
             </a>
           </div>
 
-          <div className={styles.identityVisuals}>
-            <div className={styles.portraitFrame} role="img" aria-label={locale === "en" ? "Portrait of Emma Da Silva" : "Portrait d’Emma Da Silva"} />
-            <div className={styles.orbSlot}>
-              <AsciiOrb key={locale} locale={locale} />
-            </div>
-          </div>
+          <div className={styles.portraitFrame} role="img" aria-label={locale === "en" ? "Portrait of Emma Da Silva" : "Portrait d’Emma Da Silva"} />
         </div>
       </PageContainer>
     </Section>
