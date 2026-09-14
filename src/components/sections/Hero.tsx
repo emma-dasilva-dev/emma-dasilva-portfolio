@@ -10,6 +10,18 @@ interface HeroProps {
   locale: Locale;
 }
 
+function PortraitPlaceholder() {
+  return (
+    <div className={styles.portraitPlaceholder} aria-label="Portrait placeholder">
+      <svg viewBox="0 0 160 200" role="img" aria-hidden="true">
+        <circle cx="80" cy="64" r="32" />
+        <path d="M35 176c5-42 24-64 45-64s40 22 45 64" />
+      </svg>
+      <span>portrait</span>
+    </div>
+  );
+}
+
 export function Hero({ locale }: HeroProps) {
   const content = heroContent[locale];
 
@@ -42,7 +54,12 @@ export function Hero({ locale }: HeroProps) {
             </a>
           </div>
 
-          <AsciiOrb key={locale} locale={locale} />
+          <div className={styles.identityVisuals}>
+            <PortraitPlaceholder />
+            <div className={styles.orbSlot}>
+              <AsciiOrb key={locale} locale={locale} />
+            </div>
+          </div>
         </div>
       </PageContainer>
     </Section>
