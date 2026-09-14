@@ -3,178 +3,36 @@
   top: 0;
   z-index: 100;
   height: var(--header-height-mobile);
-  background: rgb(0 0 0 / 0.94);
-  backdrop-filter: blur(10px);
+  background: rgb(0 0 0 / 0.96);
   border-bottom: 1px solid var(--color-border);
 }
+.inner { display:flex; align-items:center; justify-content:space-between; height:100%; gap:var(--space-4); }
+.identity { display:inline-flex; align-items:center; min-height:2.75rem; color:var(--color-text); font-size:.875rem; font-weight:600; text-decoration:none; white-space:nowrap; }
+.desktopNav,.desktopLanguages { display:none; }
+.menuButton { min-height:2.75rem; padding:0; border:0; background:transparent; color:var(--color-text-muted); cursor:pointer; font:inherit; font-size:.8125rem; }
+.mobilePanel { position:absolute; top:100%; left:0; width:100%; background:var(--color-background); border-bottom:1px solid var(--color-border); }
+.mobileNav { padding-block:var(--space-5) var(--space-6); }
+.mobileList { margin:0; padding:0; list-style:none; }
+.mobileList li + li { border-top:1px solid var(--color-border); }
+.mobileLink { display:flex; align-items:center; min-height:3rem; color:var(--color-text); font-size:.9375rem; text-decoration:none; }
+.mobileLink:hover,.mobileLink:focus-visible { color:var(--color-accent); }
+.mobileLanguages { display:flex; align-items:center; justify-content:space-between; margin-top:var(--space-4); padding-top:var(--space-4); border-top:1px solid var(--color-border); }
+.mobileLanguageLabel { color:var(--color-text-muted); font-size:.75rem; }
+.mobileLanguageLinks,.desktopLanguages { align-items:center; gap:var(--space-2); font-size:.75rem; }
+.languageLink,.languageActive { display:inline-flex; align-items:center; justify-content:center; min-width:2.5rem; min-height:2.5rem; text-decoration:none; }
+.languageLink { color:var(--color-text-muted); }
+.languageActive { color:var(--color-accent); }
+.languageDivider { color:var(--color-border-strong); }
 
-.inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  gap: var(--space-4);
+@media (min-width:64rem) {
+  .header { position:fixed; inset:0 auto 0 0; width:14.5rem; height:100dvh; border-right:1px solid var(--color-border); border-bottom:0; background:var(--color-black); }
+  .inner { width:100%; margin:0; padding:var(--space-8) var(--space-6); display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start; gap:0; }
+  .identity { min-height:0; align-items:flex-start; max-width:7rem; white-space:normal; font-size:1rem; line-height:1.1; letter-spacing:-.02em; text-transform:uppercase; }
+  .desktopNav { display:block; margin-top:auto; margin-bottom:auto; }
+  .navList { display:flex; flex-direction:column; align-items:flex-start; gap:var(--space-2); margin:0; padding:0; list-style:none; }
+  .navLink { display:inline-flex; align-items:center; min-height:2rem; color:var(--color-text-muted); font-size:.78rem; text-decoration:none; transition:color var(--motion-fast) var(--ease-standard),padding-left var(--motion-fast) var(--ease-standard); }
+  .navLink:hover,.navLink:focus-visible { padding-left:var(--space-2); color:var(--color-accent); }
+  .desktopLanguages { display:flex; margin-top:auto; }
+  .menuButton,.mobilePanel { display:none; }
 }
-
-.identity {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.75rem;
-  color: var(--color-text);
-  font-size: 0.875rem;
-  font-weight: 600;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.desktopNav,
-.desktopLanguages {
-  display: none;
-}
-
-.menuButton {
-  min-height: 2.75rem;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: var(--color-text-muted);
-  cursor: pointer;
-  font: inherit;
-  font-size: 0.8125rem;
-}
-
-.mobilePanel {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  background: var(--color-background);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.mobileNav {
-  padding-block: var(--space-5, 1.25rem) var(--space-6);
-}
-
-.mobileList {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.mobileList li + li {
-  border-top: 1px solid var(--color-border);
-}
-
-.mobileLink {
-  display: flex;
-  align-items: center;
-  min-height: 3rem;
-  color: var(--color-text);
-  font-size: 0.9375rem;
-  text-decoration: none;
-}
-
-.mobileLink:hover,
-.mobileLink:focus-visible {
-  color: var(--color-accent);
-}
-
-.mobileLanguages {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: var(--space-4);
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--color-border);
-}
-
-.mobileLanguageLabel {
-  color: var(--color-text-muted);
-  font-size: 0.75rem;
-}
-
-.mobileLanguageLinks,
-.desktopLanguages {
-  align-items: center;
-  gap: var(--space-2);
-  font-size: 0.75rem;
-}
-
-.languageLink,
-.languageActive {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 2.5rem;
-  min-height: 2.5rem;
-  text-decoration: none;
-}
-
-.languageLink {
-  color: var(--color-text-muted);
-}
-
-.languageActive {
-  color: var(--color-accent);
-}
-
-.languageDivider {
-  color: var(--color-border-strong);
-}
-
-@media (min-width: 64rem) {
-  .header {
-    height: var(--header-height-desktop);
-  }
-
-  .inner {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    gap: var(--space-8);
-  }
-
-  .desktopNav {
-    display: block;
-  }
-
-  .navList {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: clamp(1rem, 1.5vw, 1.75rem);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .navLink {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2.5rem;
-    color: var(--color-text-muted);
-    font-size: 0.8125rem;
-    text-decoration: none;
-    transition: color var(--motion-fast) var(--ease-standard);
-  }
-
-  .navLink:hover,
-  .navLink:focus-visible {
-    color: var(--color-accent);
-  }
-
-  .desktopLanguages {
-    display: flex;
-  }
-
-  .menuButton,
-  .mobilePanel {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .navLink {
-    transition: none;
-  }
-}
+@media (prefers-reduced-motion:reduce) { .navLink { transition:none; } }
