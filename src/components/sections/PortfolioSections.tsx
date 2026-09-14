@@ -33,52 +33,102 @@ function ContactIcon({ label }: { label: string }) {
   return <svg {...commonProps} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="1" /><path d="m4 7 8 6 8-6" /></svg>;
 }
 
-export function Profile({ locale }: PortfolioSectionProps) {
-  const experience = portfolioContent[locale].experience;
-  const about = portfolioContent[locale].about;
+const techMarks: Record<string, string> = {
+  JavaScript: "JS",
+  TypeScript: "TS",
+  C: "C",
+  HTML: "</>",
+  CSS: "#",
+  React: "⚛",
+  "Next.js": "N",
+  Vite: "V",
+  "React Router": "RR",
+  "CSS Modules": "CM",
+  "Tailwind CSS": "TW",
+  "Node.js": "NODE",
+  "Express.js": "EX",
+  "REST APIs": "API",
+  MySQL: "SQL",
+  Linux: "LNX",
+  Bash: "$_",
+  SSH: "SSH",
+  JWT: "JWT",
+  bcrypt: "B",
+  Git: "⑂",
+  GitHub: "GH",
+  "VS Code": "<>_",
+  Postman: "P",
+  npm: "npm",
+  Vercel: "▲",
+  Railway: "RW",
+  GCC: "GCC",
+  Nano: "nano",
+};
+
+export function Experience({ locale }: PortfolioSectionProps) {
+  const content = portfolioContent[locale].experience;
 
   return (
     <Section id="experience" className={styles.section}>
       <PageContainer>
-        <div className={styles.profileGrid}>
-          <div className={styles.experienceColumn}>
-            <div className={styles.columnHeading}>
-              <h2>{experience.heading}</h2>
-              <p>{experience.intro}</p>
-            </div>
+        <div className={styles.sectionHeader}>
+          <h2>{content.heading}</h2>
+          <p>{content.intro}</p>
+        </div>
 
-            <div className={styles.experienceList}>
-              {experience.items.map((item) => (
-                <article key={`${item.period}-${item.title}`} className={styles.experienceItem}>
-                  <p className={styles.period}>{item.period}</p>
-                  <div className={styles.experienceBody}>
-                    <h3>{item.title}</h3>
-                    <p className={styles.role}>{item.role}</p>
-                    <p className={styles.description}>{item.description}</p>
-                    {item.link ? (
-                      <a href={item.link.href} target="_blank" rel="noreferrer">
-                        {item.link.label} ↗
-                      </a>
-                    ) : null}
-                  </div>
-                </article>
-              ))}
-            </div>
+        <div className={styles.timeline}>
+          {content.items.map((item) => (
+            <article key={`${item.period}-${item.title}`} className={styles.timelineItem}>
+              <div className={styles.timelineMarker} aria-hidden="true" />
+              <p className={styles.period}>{item.period}</p>
+              <div className={styles.timelineBody}>
+                <h3>{item.title}</h3>
+                <p className={styles.role}>{item.role}</p>
+                <p className={styles.description}>{item.description}</p>
+                {item.link ? (
+                  <a href={item.link.href} target="_blank" rel="noreferrer">
+                    {item.link.label} ↗
+                  </a>
+                ) : null}
+              </div>
+            </article>
+          ))}
+        </div>
+      </PageContainer>
+    </Section>
+  );
+}
+
+export function About({ locale }: PortfolioSectionProps) {
+  const content = portfolioContent[locale].about;
+  const journey = locale === "en"
+    ? ["Literature", "Programming", "Systems", "Cybersecurity"]
+    : ["Littérature", "Programmation", "Systèmes", "Cybersécurité"];
+
+  return (
+    <Section id="about" className={styles.section}>
+      <PageContainer>
+        <div className={styles.aboutHeader}>
+          <h2>{content.heading}</h2>
+        </div>
+
+        <div className={styles.aboutVisual}>
+          <div className={styles.journeyMap} aria-label={locale === "en" ? "Journey" : "Parcours"}>
+            {journey.map((step, index) => (
+              <div key={step} className={styles.journeyStep}>
+                <span>{step}</span>
+                {index < journey.length - 1 ? <span className={styles.journeyArrow} aria-hidden="true">→</span> : null}
+              </div>
+            ))}
           </div>
 
-          <div id="about" className={styles.aboutColumn}>
-            <div className={styles.columnHeading}>
-              <h2>{about.heading}</h2>
-            </div>
-
-            <div className={styles.aboutCopy}>
-              {about.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
-
-            <blockquote>{about.quote}</blockquote>
+          <div className={styles.aboutCopy}>
+            {content.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </div>
+
+          <blockquote>{content.quote}</blockquote>
         </div>
       </PageContainer>
     </Section>
@@ -96,12 +146,19 @@ export function Stack({ locale }: PortfolioSectionProps) {
           <p>{content.intro}</p>
         </div>
 
-        <div className={styles.stackList}>
+        <div className={styles.stackGroups}>
           {content.groups.map((group) => (
-            <div key={group.label} className={styles.stackRow}>
+            <section key={group.label} className={styles.stackGroup}>
               <h3>{group.label}</h3>
-              <p>{group.items.join(" · ")}</p>
-            </div>
+              <div className={styles.logoGrid}>
+                {group.items.map((item) => (
+                  <div key={item} className={styles.logoTile}>
+                    <span className={styles.logoMark} aria-hidden="true">{techMarks[item] ?? item.slice(0, 2).toUpperCase()}</span>
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
           ))}
         </div>
       </PageContainer>
