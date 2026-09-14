@@ -33,36 +33,36 @@ function ContactIcon({ label }: { label: string }) {
   return <svg {...commonProps} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="1" /><path d="m4 7 8 6 8-6" /></svg>;
 }
 
-const techMarks: Record<string, string> = {
-  JavaScript: "JS",
-  TypeScript: "TS",
-  C: "C",
-  HTML: "</>",
-  CSS: "#",
-  React: "⚛",
-  "Next.js": "N",
-  Vite: "V",
-  "React Router": "RR",
-  "CSS Modules": "CM",
-  "Tailwind CSS": "TW",
-  "Node.js": "NODE",
-  "Express.js": "EX",
-  "REST APIs": "API",
-  MySQL: "SQL",
-  Linux: "LNX",
-  Bash: "$_",
-  SSH: "SSH",
-  JWT: "JWT",
-  bcrypt: "B",
-  Git: "⑂",
-  GitHub: "GH",
-  "VS Code": "<>_",
-  Postman: "P",
-  npm: "npm",
-  Vercel: "▲",
-  Railway: "RW",
-  GCC: "GCC",
-  Nano: "nano",
+const logoUrls: Record<string, string> = {
+  JavaScript: "https://cdn.simpleicons.org/javascript",
+  TypeScript: "https://cdn.simpleicons.org/typescript",
+  C: "https://cdn.simpleicons.org/c",
+  HTML: "https://cdn.simpleicons.org/html5",
+  CSS: "https://cdn.simpleicons.org/css",
+  React: "https://cdn.simpleicons.org/react",
+  "Next.js": "https://cdn.simpleicons.org/nextdotjs/FFFFFF",
+  Vite: "https://cdn.simpleicons.org/vite",
+  "React Router": "https://cdn.simpleicons.org/reactrouter",
+  "CSS Modules": "https://cdn.simpleicons.org/cssmodules",
+  "Tailwind CSS": "https://cdn.simpleicons.org/tailwindcss",
+  "Node.js": "https://cdn.simpleicons.org/nodedotjs",
+  "Express.js": "https://cdn.simpleicons.org/express/FFFFFF",
+  "REST APIs": "https://cdn.simpleicons.org/swagger",
+  MySQL: "https://cdn.simpleicons.org/mysql",
+  Linux: "https://cdn.simpleicons.org/linux",
+  Bash: "https://cdn.simpleicons.org/gnubash/FFFFFF",
+  SSH: "https://cdn.simpleicons.org/openssh/FFFFFF",
+  JWT: "https://cdn.simpleicons.org/jsonwebtokens/FFFFFF",
+  bcrypt: "https://cdn.simpleicons.org/letsencrypt",
+  Git: "https://cdn.simpleicons.org/git",
+  GitHub: "https://cdn.simpleicons.org/github/FFFFFF",
+  "VS Code": "https://cdn.simpleicons.org/visualstudiocode",
+  Postman: "https://cdn.simpleicons.org/postman",
+  npm: "https://cdn.simpleicons.org/npm",
+  Vercel: "https://cdn.simpleicons.org/vercel/FFFFFF",
+  Railway: "https://cdn.simpleicons.org/railway/FFFFFF",
+  GCC: "https://cdn.simpleicons.org/gnu/FFFFFF",
+  Nano: "https://cdn.simpleicons.org/gnubash/FFFFFF",
 };
 
 export function Experience({ locale }: PortfolioSectionProps) {
@@ -112,22 +112,21 @@ export function About({ locale }: PortfolioSectionProps) {
           <h2>{content.heading}</h2>
         </div>
 
-        <div className={styles.aboutVisual}>
-          <div className={styles.journeyMap} aria-label={locale === "en" ? "Journey" : "Parcours"}>
-            {journey.map((step, index) => (
-              <div key={step} className={styles.journeyStep}>
-                <span>{step}</span>
-                {index < journey.length - 1 ? <span className={styles.journeyArrow} aria-hidden="true">→</span> : null}
-              </div>
-            ))}
-          </div>
+        <div className={styles.journeyLine} aria-label={locale === "en" ? "Journey" : "Parcours"}>
+          {journey.map((step, index) => (
+            <span key={step}>
+              {step}
+              {index < journey.length - 1 ? <span aria-hidden="true">→</span> : null}
+            </span>
+          ))}
+        </div>
 
+        <div className={styles.aboutVisual}>
           <div className={styles.aboutCopy}>
             {content.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
-
           <blockquote>{content.quote}</blockquote>
         </div>
       </PageContainer>
@@ -152,8 +151,12 @@ export function Stack({ locale }: PortfolioSectionProps) {
               <h3>{group.label}</h3>
               <div className={styles.logoGrid}>
                 {group.items.map((item) => (
-                  <div key={item} className={styles.logoTile}>
-                    <span className={styles.logoMark} aria-hidden="true">{techMarks[item] ?? item.slice(0, 2).toUpperCase()}</span>
+                  <div key={item} className={styles.logoItem}>
+                    <span
+                      className={styles.logoImage}
+                      aria-hidden="true"
+                      style={{ backgroundImage: `url(${logoUrls[item]})` }}
+                    />
                     <span>{item}</span>
                   </div>
                 ))}
