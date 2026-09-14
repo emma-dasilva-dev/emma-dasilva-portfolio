@@ -19,9 +19,9 @@ a:hover { color:var(--color-accent); }
 .foundation__copy { max-width:44rem; margin-bottom:var(--space-6); color:var(--color-text-muted); }
 .foundation__meta { display:flex; flex-wrap:wrap; gap:var(--space-3) var(--space-6); padding-top:var(--space-4); border-top:var(--border-width) solid var(--color-border); color:var(--color-text-muted); font-family:var(--font-mono); font-size:.8125rem; }
 @media (min-width:64rem) {
-  body { padding-left:14.5rem; }
+  body { padding-left:16rem; }
   [id] { scroll-margin-top:var(--space-6); }
   .foundation { min-height:100dvh; }
-  .skip-link { left:calc(14.5rem + var(--space-3)); }
+  .skip-link { left:calc(16rem + var(--space-3)); }
 }
 @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.01ms!important; animation-duration:.01ms!important; animation-iteration-count:1!important; } }
