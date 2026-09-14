@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 import { PageContainer } from "@/components/layout/PageContainer";
 import { Section } from "@/components/layout/Section";
 import { portfolioContent } from "@/content/portfolio";
@@ -19,11 +21,11 @@ const logoUrls: Record<string,string> = {
   JavaScript:"https://cdn.simpleicons.org/javascript",TypeScript:"https://cdn.simpleicons.org/typescript",C:"https://cdn.simpleicons.org/c",HTML:"https://cdn.simpleicons.org/html5",CSS:"https://cdn.simpleicons.org/css",React:"https://cdn.simpleicons.org/react","Next.js":"https://cdn.simpleicons.org/nextdotjs/FFFFFF",Vite:"https://cdn.simpleicons.org/vite","React Router":"https://cdn.simpleicons.org/reactrouter","CSS Modules":"https://cdn.simpleicons.org/cssmodules/FFFFFF","Tailwind CSS":"https://cdn.simpleicons.org/tailwindcss","Node.js":"https://cdn.simpleicons.org/nodedotjs","Express.js":"https://cdn.simpleicons.org/express/FFFFFF","REST APIs":"https://cdn.simpleicons.org/swagger",MySQL:"https://cdn.simpleicons.org/mysql",Linux:"https://cdn.simpleicons.org/linux",Bash:"https://cdn.simpleicons.org/gnubash/FFFFFF",SSH:"https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ssh/ssh-original.svg",JWT:"https://cdn.simpleicons.org/jsonwebtokens/FFFFFF",bcrypt:"https://cdn.simpleicons.org/letsencrypt",Git:"https://cdn.simpleicons.org/git",GitHub:"https://cdn.simpleicons.org/github/FFFFFF","VS Code":"https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg",Postman:"https://cdn.simpleicons.org/postman",npm:"https://cdn.simpleicons.org/npm",Vercel:"https://cdn.simpleicons.org/vercel/FFFFFF",Railway:"https://cdn.simpleicons.org/railway/FFFFFF",GCC:"https://cdn.simpleicons.org/gnu/FFFFFF",Nano:"https://cdn.simpleicons.org/gnubash/FFFFFF"
 };
 
-function Prompt({ children, locale }: { children: React.ReactNode; locale: Locale }) {
+function Prompt({ children, locale }: { children: ReactNode; locale: Locale }) {
   return <div className={styles.promptRow}><span className={styles.avatar}>Y</span><div><p className={styles.author}>{locale === "en" ? "Visitor" : "Visiteur"}</p><h2>{children}</h2></div></div>;
 }
 
-function Answer({ children }: { children: React.ReactNode }) {
+function Answer({ children }: { children: ReactNode }) {
   return <div className={styles.answerRow}><span className={`${styles.avatar} ${styles.emmaAvatar}`}>E</span><div className={styles.answerBody}><p className={styles.author}>Emma</p>{children}</div></div>;
 }
 
@@ -31,10 +33,7 @@ export function Experience({ locale }: PortfolioSectionProps) {
   const content = portfolioContent[locale].experience;
   return <Section id="experience" className={styles.section}><PageContainer><div className={styles.thread}>
     <Prompt locale={locale}>{locale === "en" ? "What experience does she have?" : "Quelle expérience a-t-elle ?"}</Prompt>
-    <Answer>
-      <p className={styles.intro}>{content.intro}</p>
-      <div className={styles.timeline}>{content.items.map((item)=><article key={`${item.period}-${item.title}`} className={styles.timelineItem}><div className={styles.timelineMarker}/><p className={styles.period}>{item.period}</p><div className={styles.timelineBody}><h3>{item.title}</h3><p className={styles.role}>{item.role}</p><p className={styles.description}>{item.description}</p>{item.link?<a href={item.link.href} target="_blank" rel="noreferrer">{item.link.label} ↗</a>:null}</div></article>)}</div>
-    </Answer>
+    <Answer><p className={styles.intro}>{content.intro}</p><div className={styles.timeline}>{content.items.map((item)=><article key={`${item.period}-${item.title}`} className={styles.timelineItem}><div className={styles.timelineMarker}/><p className={styles.period}>{item.period}</p><div className={styles.timelineBody}><h3>{item.title}</h3><p className={styles.role}>{item.role}</p><p className={styles.description}>{item.description}</p>{item.link?<a href={item.link.href} target="_blank" rel="noreferrer">{item.link.label} ↗</a>:null}</div></article>)}</div></Answer>
   </div></PageContainer></Section>;
 }
 
@@ -43,10 +42,7 @@ export function About({ locale }: PortfolioSectionProps) {
   const journey = locale === "en" ? ["Literature","Programming","Systems","Cybersecurity"] : ["Littérature","Programmation","Systèmes","Cybersécurité"];
   return <Section id="about" className={styles.section}><PageContainer><div className={styles.thread}>
     <Prompt locale={locale}>{locale === "en" ? "How did Emma get into cybersecurity?" : "Comment Emma est-elle arrivée à la cybersécurité ?"}</Prompt>
-    <Answer>
-      <div className={styles.journeyLine}>{journey.map((step,index)=><span key={step}>{step}{index<journey.length-1?<span>→</span>:null}</span>)}</div>
-      <div className={styles.aboutVisual}><div className={styles.aboutCopy}>{content.paragraphs.map((paragraph)=><p key={paragraph}>{paragraph}</p>)}</div><blockquote>{content.quote}</blockquote></div>
-    </Answer>
+    <Answer><div className={styles.journeyLine}>{journey.map((step,index)=><span key={step}>{step}{index<journey.length-1?<span>→</span>:null}</span>)}</div><div className={styles.aboutVisual}><div className={styles.aboutCopy}>{content.paragraphs.map((paragraph)=><p key={paragraph}>{paragraph}</p>)}</div><blockquote>{content.quote}</blockquote></div></Answer>
   </div></PageContainer></Section>;
 }
 
@@ -54,10 +50,7 @@ export function Stack({ locale }: PortfolioSectionProps) {
   const content = portfolioContent[locale].stack;
   return <Section id="stack" className={styles.section}><PageContainer><div className={styles.thread}>
     <Prompt locale={locale}>{locale === "en" ? "What technologies does she work with?" : "Avec quelles technologies travaille-t-elle ?"}</Prompt>
-    <Answer>
-      <p className={styles.intro}>{content.intro}</p>
-      <div className={styles.stackGroups}>{content.groups.map((group)=><section key={group.label} className={styles.stackGroup}><h3>{group.label}</h3><div className={styles.logoGrid}>{group.items.map((item)=><div key={item} className={styles.logoItem}><span className={styles.logoImage} aria-hidden="true" style={{backgroundImage:`url(${logoUrls[item]})`}}/><span>{item}</span></div>)}</div></section>)}</div>
-    </Answer>
+    <Answer><p className={styles.intro}>{content.intro}</p><div className={styles.stackGroups}>{content.groups.map((group)=><section key={group.label} className={styles.stackGroup}><h3>{group.label}</h3><div className={styles.logoGrid}>{group.items.map((item)=><div key={item} className={styles.logoItem}><span className={styles.logoImage} aria-hidden="true" style={{backgroundImage:`url(${logoUrls[item]})`}}/><span>{item}</span></div>)}</div></section>)}</div></Answer>
   </div></PageContainer></Section>;
 }
 
@@ -65,9 +58,6 @@ export function Contact({ locale }: PortfolioSectionProps) {
   const content = portfolioContent[locale].contact;
   return <Section id="contact" className={styles.section}><PageContainer><div className={styles.thread}>
     <Prompt locale={locale}>{locale === "en" ? "How can I contact Emma?" : "Comment contacter Emma ?"}</Prompt>
-    <Answer>
-      <div className={styles.contactCard}><div><h2>{content.heading}</h2><p>{content.copy}</p></div><div className={styles.contactLinks}>{content.links.map((link)=><a key={link.label} href={link.href} target={link.href.startsWith("mailto:")?undefined:"_blank"} rel={link.href.startsWith("mailto:")?undefined:"noreferrer"}><span className={styles.contactLinkLabel}><ContactIcon label={link.label}/><span>{link.label}</span></span><span>↗</span></a>)}</div></div>
-      <footer className={styles.footer}><span>Emma Da Silva</span><span>Cybersecurity × Computer Engineering</span><span>{content.location}</span></footer>
-    </Answer>
+    <Answer><div className={styles.contactCard}><div><h2>{content.heading}</h2><p>{content.copy}</p></div><div className={styles.contactLinks}>{content.links.map((link)=><a key={link.label} href={link.href} target={link.href.startsWith("mailto:")?undefined:"_blank"} rel={link.href.startsWith("mailto:")?undefined:"noreferrer"}><span className={styles.contactLinkLabel}><ContactIcon label={link.label}/><span>{link.label}</span></span><span>↗</span></a>)}</div></div><footer className={styles.footer}><span>Emma Da Silva</span><span>Cybersecurity × Computer Engineering</span><span>{content.location}</span></footer></Answer>
   </div></PageContainer></Section>;
 }
