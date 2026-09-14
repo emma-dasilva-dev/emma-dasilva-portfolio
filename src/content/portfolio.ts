@@ -69,8 +69,8 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
       heading: "About",
       paragraphs: [
         "I did not start from a technical background. I studied literature in high school and seriously began exploring programming in 2025 after returning to a course I had access to for years.",
-        "Development pulled me in because I enjoy turning ideas into things people can actually use.",
-        "I don’t want to limit myself to one side of technology. I want to become a versatile engineer, capable of building software while understanding the systems, networks and security principles behind it. That curiosity is what is drawing me deeper into cybersecurity.",
+        "Development pulled me in because I enjoy understanding how things work and turning ideas into tools people can actually use.",
+        "I am now studying cybersecurity and computer engineering, with cybersecurity as my main direction. Software development remains part of how I learn systems deeply, but my long-term focus is understanding networks, infrastructure and security well enough to protect them.",
       ],
       quote: "I want to be able to build systems and understand them deeply enough to protect them.",
     },
@@ -89,7 +89,7 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     },
     contact: {
       heading: "Let’s connect.",
-      copy: "I’m open to internships, collaborative projects, freelance work and conversations around software development and cybersecurity.",
+      copy: "I’m open to internships, technical collaborations and conversations around cybersecurity, systems, computer engineering and software development.",
       links: [
         { label: "Email", href: "mailto:emma.dasilva.dev@gmail.com" },
         { label: "GitHub", href: "https://github.com/emma-dasilva-dev" },
@@ -130,8 +130,8 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
       heading: "À propos",
       paragraphs: [
         "Je ne viens pas à l’origine d’un parcours technique. J’ai étudié la littérature au lycée et j’ai commencé à explorer sérieusement la programmation en 2025 en reprenant un cours auquel j’avais accès depuis plusieurs années.",
-        "Le développement m’a attirée parce que j’aime transformer des idées en outils réellement utilisables.",
-        "Je ne veux pas me limiter à un seul domaine de la technologie. Je veux devenir une ingénieure polyvalente, capable de construire des logiciels tout en comprenant les systèmes, les réseaux et les principes de sécurité qui les entourent. C’est cette curiosité qui m’attire de plus en plus vers la cybersécurité.",
+        "Le développement m’a attirée parce que j’aime comprendre comment les choses fonctionnent et transformer des idées en outils réellement utilisables.",
+        "J’étudie maintenant la cybersécurité et le génie informatique, avec la cybersécurité comme orientation principale. Le développement logiciel reste une façon pour moi de comprendre les systèmes en profondeur, mais mon objectif à long terme est de maîtriser les réseaux, l’infrastructure et la sécurité afin de pouvoir les protéger.",
       ],
       quote: "Je veux pouvoir construire des systèmes et les comprendre assez profondément pour pouvoir les protéger.",
     },
@@ -150,7 +150,7 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     },
     contact: {
       heading: "Restons en contact.",
-      copy: "Je suis ouverte aux stages, projets collaboratifs, missions freelance et échanges autour du développement logiciel et de la cybersécurité.",
+      copy: "Je suis ouverte aux stages, collaborations techniques et échanges autour de la cybersécurité, des systèmes, du génie informatique et du développement logiciel.",
       links: [
         { label: "Email", href: "mailto:emma.dasilva.dev@gmail.com" },
         { label: "GitHub", href: "https://github.com/emma-dasilva-dev" },
