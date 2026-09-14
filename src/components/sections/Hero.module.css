@@ -1,112 +1,16 @@
-.hero {
-  padding-block: clamp(3rem, 6vw, 5rem);
-}
-
-.heroGrid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
-  gap: clamp(var(--space-8), 5vw, var(--space-16));
-  align-items: center;
-}
-
-.heroInner {
-  max-width: 42rem;
-}
-
-.eyebrow {
-  margin: 0 0 var(--space-5, 1.25rem);
-  color: var(--color-accent);
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-.name {
-  margin: 0;
-  max-width: 22ch;
-  color: var(--color-text);
-  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
-}
-
-.personName {
-  white-space: nowrap;
-}
-
-.positioning {
-  max-width: 34rem;
-  margin: var(--space-5, 1.25rem) 0 0;
-  color: var(--color-text);
-  font-size: clamp(1.15rem, 2vw, 1.5rem);
-  font-weight: 500;
-  line-height: 1.45;
-}
-
-.positioning span {
-  color: var(--color-text-muted);
-}
-
-.supportingCopy {
-  max-width: 34rem;
-  margin: var(--space-5, 1.25rem) 0 0;
-  color: var(--color-text-muted);
-  font-size: 0.975rem;
-  line-height: 1.7;
-}
-
-.details {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2) var(--space-6);
-  margin-top: var(--space-6);
-  color: var(--color-text-muted);
-  font-size: 0.8125rem;
-}
-
-.cta {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  min-height: 44px;
-  margin-top: var(--space-6);
-  color: var(--color-text);
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: color var(--motion-fast) var(--ease-standard);
-}
-
-.cta:hover,
-.cta:focus-visible {
-  color: var(--color-accent);
-}
-
-@media (max-width: 63.9375rem) {
-  .heroGrid {
-    grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.72fr);
-    gap: var(--space-8);
-  }
-}
-
-@media (max-width: 47.9375rem) {
-  .hero {
-    padding-block: var(--space-12) var(--space-16);
-  }
-
-  .heroGrid {
-    grid-template-columns: 1fr;
-    gap: var(--space-10, 2.5rem);
-  }
-
-  .details {
-    flex-direction: column;
-    gap: var(--space-2);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cta {
-    transition: none;
-  }
-}
+.hero { min-height:100dvh; display:flex; align-items:center; padding-block:clamp(4rem,8vw,7rem); }
+.heroGrid { display:grid; grid-template-columns:minmax(0,1fr) 9rem; gap:clamp(var(--space-10),8vw,var(--space-20)); align-items:end; }
+.heroInner { max-width:46rem; }
+.eyebrow { margin:0 0 var(--space-6); color:var(--color-accent); font-family:var(--font-mono); font-size:.7rem; font-weight:500; letter-spacing:.05em; text-transform:uppercase; }
+.name { margin:0; max-width:22ch; color:var(--color-text); font-size:clamp(2rem,4vw,3.4rem); font-weight:600; line-height:1.05; letter-spacing:-.04em; }
+.personName { white-space:nowrap; }
+.positioning { max-width:32rem; margin:var(--space-8) 0 0; color:var(--color-text); font-size:clamp(1rem,1.7vw,1.25rem); font-weight:500; line-height:1.5; }
+.positioning span { color:var(--color-text-muted); }
+.supportingCopy { max-width:37rem; margin:var(--space-5) 0 0; color:var(--color-text-muted); font-size:.9rem; line-height:1.75; }
+.details { display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-8); margin-top:var(--space-8); padding-top:var(--space-4); border-top:1px solid var(--color-border); color:var(--color-text-muted); font-family:var(--font-mono); font-size:.7rem; }
+.cta { display:inline-flex; align-items:center; gap:var(--space-2); min-height:44px; margin-top:var(--space-6); color:var(--color-text); font-size:.82rem; font-weight:500; text-decoration:none; transition:color var(--motion-fast) var(--ease-standard); }
+.cta:hover,.cta:focus-visible { color:var(--color-accent); }
+.heroGrid > :last-child { width:9rem; align-self:end; }
+@media (max-width:63.9375rem) { .hero { min-height:auto; } .heroGrid { grid-template-columns:minmax(0,1fr) 8rem; gap:var(--space-8); } .heroGrid > :last-child { width:8rem; } }
+@media (max-width:47.9375rem) { .hero { padding-block:var(--space-16); } .heroGrid { grid-template-columns:1fr; gap:var(--space-8); } .heroGrid > :last-child { width:7rem; margin:0; justify-self:start; } .details { flex-direction:column; gap:var(--space-2); } }
+@media (prefers-reduced-motion:reduce) { .cta { transition:none; } }
