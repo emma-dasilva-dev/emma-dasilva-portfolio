@@ -45,7 +45,6 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
   useEffect(() => {
     const sections = navigationItems.map((item) => document.getElementById(item.id)).filter((section): section is HTMLElement => Boolean(section));
     if (!sections.length) return;
-
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio);
@@ -53,12 +52,21 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
       },
       { rootMargin: "-25% 0px -55% 0px", threshold: [0, 0.1, 0.25, 0.5] },
     );
-
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
 
   const localeHref = (targetLocale: Locale) => `/${targetLocale}`;
+  const languageSwitch = (
+    <>
+      <a className={locale === "en" ? styles.languageActive : styles.languageLink} href={localeHref("en")} hrefLang="en" aria-label="English" title="English">
+        <span className={styles.flag} aria-hidden="true">🇬🇧</span>
+      </a>
+      <a className={locale === "fr" ? styles.languageActive : styles.languageLink} href={localeHref("fr")} hrefLang="fr" aria-label="Français" title="Français">
+        <span className={styles.flag} aria-hidden="true">🇫🇷</span>
+      </a>
+    </>
+  );
 
   return (
     <header className={styles.header}>
@@ -77,11 +85,7 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
           </ul>
         </nav>
 
-        <div className={styles.desktopLanguages} aria-label={languageLabel}>
-          <a className={locale === "en" ? styles.languageActive : styles.languageLink} href={localeHref("en")} hrefLang="en">EN</a>
-          <span className={styles.languageDivider} aria-hidden="true">/</span>
-          <a className={locale === "fr" ? styles.languageActive : styles.languageLink} href={localeHref("fr")} hrefLang="fr">FR</a>
-        </div>
+        <div className={styles.desktopLanguages} aria-label={languageLabel}>{languageSwitch}</div>
 
         <button ref={menuButtonRef} className={styles.menuButton} type="button" aria-expanded={isOpen} aria-controls="mobile-navigation" onClick={() => setIsOpen((open) => !open)}>
           <span>{isOpen ? closeMenuLabel : menuLabel}</span>
@@ -96,11 +100,7 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
             </ul>
             <div className={styles.mobileLanguages} aria-label={languageLabel}>
               <span className={styles.mobileLanguageLabel}>{languageLabel}</span>
-              <div className={styles.mobileLanguageLinks}>
-                <a className={locale === "en" ? styles.languageActive : styles.languageLink} href={localeHref("en")} hrefLang="en">EN</a>
-                <span className={styles.languageDivider} aria-hidden="true">/</span>
-                <a className={locale === "fr" ? styles.languageActive : styles.languageLink} href={localeHref("fr")} hrefLang="fr">FR</a>
-              </div>
+              <div className={styles.mobileLanguageLinks}>{languageSwitch}</div>
             </div>
           </nav>
         </div>
