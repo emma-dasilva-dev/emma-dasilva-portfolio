@@ -18,16 +18,20 @@ const CANVAS_SIZE = 480;
 const POINT_COUNT = 150;
 const CONNECTION_DISTANCE = 58;
 const FEMALE_VOICE_HINTS = [
-  "samantha",
+  "jenny",
+  "aria",
+  "denise",
+  "hortense",
+  "amelie",
+  "audrey",
+  "zira",
   "ava",
-  "victoria",
   "serena",
+  "samantha",
+  "victoria",
   "karen",
   "moira",
   "tessa",
-  "zira",
-  "aria",
-  "jenny",
   "susan",
   "female",
 ];
@@ -82,13 +86,13 @@ export function AsciiOrb({ locale }: AsciiOrbProps) {
             play: "Écouter l’accueil",
             stop: "Arrêter",
             speech:
-              "Bienvenue sur le portfolio d’Emma. Je suis Emma, développeuse full-stack junior, et je développe mon expertise en cybersécurité. Découvre mes projets, mon parcours et les technologies avec lesquelles je travaille.",
+              "Bienvenue sur le portfolio d’Emma. Je suis Emma, étudiante en cybersécurité et génie informatique. Je développe mes compétences en systèmes, réseaux, Linux, sécurité et développement logiciel. Découvre mon parcours, mes projets et les technologies avec lesquelles je travaille.",
           }
         : {
             play: "Hear welcome",
             stop: "Stop",
             speech:
-              "Welcome to Emma's portfolio. I'm Emma, a junior full-stack software engineer building my expertise in cybersecurity. Explore my projects, experience, and the technologies I work with.",
+              "Welcome to Emma's portfolio. I'm Emma, a cybersecurity and computer engineering student building strong foundations in systems, networks, Linux, security and software development. Explore my work, experience and the technologies I use.",
           },
     [locale],
   );
