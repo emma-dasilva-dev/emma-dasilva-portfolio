@@ -10,7 +10,9 @@
 .details { display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-8); margin-top:var(--space-8); padding-top:var(--space-4); border-top:1px solid var(--color-border); color:var(--color-text-muted); font-family:var(--font-mono); font-size:.7rem; }
 .cta { display:inline-flex; align-items:center; gap:var(--space-2); min-height:44px; margin-top:var(--space-6); color:var(--color-text); font-size:.82rem; font-weight:500; text-decoration:none; transition:color var(--motion-fast) var(--ease-standard); }
 .cta:hover,.cta:focus-visible { color:var(--color-accent); }
+.heroVisuals { display:flex; flex-direction:column; align-items:center; gap:var(--space-6); width:100%; }
 .portraitFrame { width:100%; aspect-ratio:4 / 5; align-self:start; background-color:rgb(255 255 255 / .035); background-image:url('/images/emma-portrait.jpg'); background-position:center top; background-size:cover; background-repeat:no-repeat; }
-@media (max-width:63.9375rem) { .hero { min-height:auto; } .heroGrid { grid-template-columns:minmax(0,1fr) minmax(10rem,12rem); gap:var(--space-8); } }
-@media (max-width:47.9375rem) { .hero { padding-block:var(--space-16); } .heroGrid { grid-template-columns:1fr; gap:var(--space-10); } .portraitFrame { width:9rem; justify-self:start; } .details { flex-direction:column; gap:var(--space-2); } }
+.orbSlot { width:8.5rem; display:flex; justify-content:center; margin-inline:auto; }
+@media (max-width:63.9375rem) { .hero { min-height:auto; } .heroGrid { grid-template-columns:minmax(0,1fr) minmax(10rem,12rem); gap:var(--space-8); } .orbSlot { width:7.5rem; } }
+@media (max-width:47.9375rem) { .hero { padding-block:var(--space-16); } .heroGrid { grid-template-columns:1fr; gap:var(--space-10); } .heroVisuals { width:9rem; align-items:center; } .portraitFrame { width:9rem; justify-self:start; } .orbSlot { width:7rem; } .details { flex-direction:column; gap:var(--space-2); } }
 @media (prefers-reduced-motion:reduce) { .cta { transition:none; } }
