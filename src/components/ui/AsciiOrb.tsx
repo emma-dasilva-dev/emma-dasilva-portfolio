@@ -74,7 +74,6 @@ export function AsciiOrb({ locale }: AsciiOrbProps) {
   const animationRef = useRef<number | null>(null);
   const speakingRef = useRef(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [isSupported, setIsSupported] = useState(false);
 
   const copy = useMemo(
     () =>
@@ -95,10 +94,10 @@ export function AsciiOrb({ locale }: AsciiOrbProps) {
   );
 
   useEffect(() => {
-    setIsSupported("speechSynthesis" in window);
-
     return () => {
-      window.speechSynthesis.cancel();
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
     };
   }, [locale]);
 
@@ -216,13 +215,15 @@ export function AsciiOrb({ locale }: AsciiOrbProps) {
   }, []);
 
   const stopSpeech = () => {
+    if (!("speechSynthesis" in window)) return;
+
     window.speechSynthesis.cancel();
     speakingRef.current = false;
     setIsSpeaking(false);
   };
 
   const speak = () => {
-    if (!isSupported) return;
+    if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) return;
 
     window.speechSynthesis.cancel();
 
@@ -260,12 +261,10 @@ export function AsciiOrb({ locale }: AsciiOrbProps) {
         aria-hidden="true"
       />
 
-      {isSupported ? (
-        <button type="button" onClick={isSpeaking ? stopSpeech : speak} className={styles.voiceButton}>
-          <span className={styles.voiceIcon} aria-hidden="true">{isSpeaking ? "■" : "◌"}</span>
-          {isSpeaking ? copy.stop : copy.play}
-        </button>
-      ) : null}
+      <button type="button" onClick={isSpeaking ? stopSpeech : speak} className={styles.voiceButton}>
+        <span className={styles.voiceIcon} aria-hidden="true">{isSpeaking ? "■" : "◌"}</span>
+        {isSpeaking ? copy.stop : copy.play}
+      </button>
     </div>
   );
 }
