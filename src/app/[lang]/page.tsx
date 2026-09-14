@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { Contact, Profile, Stack } from "@/components/sections/PortfolioSections";
+import { About, Contact, Experience, Stack } from "@/components/sections/PortfolioSections";
 import { Hero } from "@/components/sections/Hero";
 import { Work } from "@/components/sections/Work";
 import { isLocale } from "@/lib/i18n";
@@ -20,7 +20,8 @@ export default async function HomePage({ params }: HomePageProps) {
     <main id="main-content">
       <Hero locale={lang} />
       <Work locale={lang} />
-      <Profile locale={lang} />
+      <Experience locale={lang} />
+      <About locale={lang} />
       <Stack locale={lang} />
       <Contact locale={lang} />
     </main>
