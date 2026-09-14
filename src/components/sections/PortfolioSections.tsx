@@ -43,7 +43,7 @@ const logoUrls: Record<string, string> = {
   "Next.js": "https://cdn.simpleicons.org/nextdotjs/FFFFFF",
   Vite: "https://cdn.simpleicons.org/vite",
   "React Router": "https://cdn.simpleicons.org/reactrouter",
-  "CSS Modules": "https://cdn.simpleicons.org/cssmodules",
+  "CSS Modules": "https://cdn.simpleicons.org/cssmodules/FFFFFF",
   "Tailwind CSS": "https://cdn.simpleicons.org/tailwindcss",
   "Node.js": "https://cdn.simpleicons.org/nodedotjs",
   "Express.js": "https://cdn.simpleicons.org/express/FFFFFF",
