@@ -62,52 +62,15 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
   }, [isOpen]);
 
   useEffect(() => {
-    const sections = navigationItems
-      .map((item) => document.getElementById(item.id))
-      .filter((section): section is HTMLElement => Boolean(section));
-
-    if (!sections.length) return;
-
-    let frameId: number | null = null;
-
-    const updateActiveSection = () => {
-      frameId = null;
-
-      const marker = window.innerHeight * 0.34;
-      const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
-
-      if (nearBottom) {
-        setActiveSection(sections[sections.length - 1].id);
-        return;
-      }
-
-      let currentSection = sections[0];
-
-      for (const section of sections) {
-        if (section.getBoundingClientRect().top <= marker) {
-          currentSection = section;
-        } else {
-          break;
-        }
-      }
-
-      setActiveSection(currentSection.id);
+    const updateFromHash = () => {
+      const hash = window.location.hash.replace("#", "");
+      const match = navigationItems.find((item) => item.id === hash);
+      setActiveSection(match?.id ?? "home");
     };
 
-    const requestUpdate = () => {
-      if (frameId !== null) return;
-      frameId = window.requestAnimationFrame(updateActiveSection);
-    };
-
-    updateActiveSection();
-    window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", requestUpdate);
-
-    return () => {
-      window.removeEventListener("scroll", requestUpdate);
-      window.removeEventListener("resize", requestUpdate);
-      if (frameId !== null) window.cancelAnimationFrame(frameId);
-    };
+    updateFromHash();
+    window.addEventListener("hashchange", updateFromHash);
+    return () => window.removeEventListener("hashchange", updateFromHash);
   }, []);
 
   const localeHref = (targetLocale: Locale) => `/${targetLocale}`;
@@ -173,7 +136,7 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
 
       {isOpen ? (
         <div ref={menuRef} id="mobile-navigation" className={styles.mobilePanel}>
-          <nav className={`container ${styles.mobileNav}`} aria-label={locale === "en" ? "Mobile navigation" : "Navigation mobile"}>
+          <nav className={`container ${styles.mobileNav}`} aria-label={locale === "en" ? "Mobile navigation" : "Navigation principale mobile"}>
             <ul className={styles.mobileList}>
               {navigationItems.map((item) => (
                 <li key={item.id}>
