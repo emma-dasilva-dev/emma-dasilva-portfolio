@@ -4,13 +4,6 @@ import type { ReactNode } from "react";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { getDictionary } from "@/content/dictionaries";
 import { isLocale } from "@/lib/i18n";
-import { locales } from "@/types/locale";
-
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return locales.map((lang) => ({ lang }));
-}
 
 interface LocaleLayoutProps {
   children: ReactNode;
