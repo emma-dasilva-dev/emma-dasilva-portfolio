@@ -42,11 +42,8 @@ export function Hero({ locale }: HeroProps) {
             </a>
           </div>
 
-          <div className={styles.heroVisuals}>
-            <div className={styles.portraitFrame} role="img" aria-label={locale === "en" ? "Portrait of Emma Da Silva" : "Portrait d’Emma Da Silva"} />
-            <div className={styles.orbSlot}>
-              <AsciiOrb key={locale} locale={locale} />
-            </div>
+          <div className={styles.orbSlot}>
+            <AsciiOrb key={locale} locale={locale} />
           </div>
         </div>
       </PageContainer>
