@@ -27,12 +27,12 @@
 .aboutCopy p + p { margin-top:var(--space-5); }
 .aboutVisual blockquote { margin:0; padding-left:var(--space-6); border-left:2px solid var(--color-accent); color:var(--color-text); font-size:clamp(1rem,1.7vw,1.25rem); font-weight:500; line-height:1.6; }
 
-.stackGroups { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(var(--space-10),5vw,var(--space-14,3.5rem)) clamp(var(--space-10),6vw,var(--space-16)); }
-.stackGroup { min-width:0; }
-.stackGroup h3 { margin:0 0 var(--space-5); color:var(--color-text-muted); font-family:var(--font-mono); font-size:.68rem; font-weight:500; text-transform:uppercase; letter-spacing:.05em; }
-.logoGrid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-5) var(--space-8); }
-.logoItem { display:flex; align-items:center; gap:var(--space-3); min-width:0; color:var(--color-text); }
-.logoImage { display:block; width:1.9rem; height:1.9rem; flex:0 0 1.9rem; background-position:center; background-repeat:no-repeat; background-size:contain; }
+.stackGroups { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(var(--space-12),6vw,var(--space-16)); }
+.stackGroup { min-width:0; padding-top:var(--space-5); border-top:1px solid var(--color-border); }
+.stackGroup h3 { margin:0 0 var(--space-6); color:var(--color-text-muted); font-family:var(--font-mono); font-size:.68rem; font-weight:500; text-transform:uppercase; letter-spacing:.05em; }
+.logoGrid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:var(--space-8); row-gap:var(--space-6); }
+.logoItem { display:grid; grid-template-columns:2rem minmax(0,1fr); align-items:center; gap:var(--space-3); min-width:0; color:var(--color-text); }
+.logoImage { display:block; width:2rem; height:2rem; background-position:center; background-repeat:no-repeat; background-size:contain; }
 .logoItem > span:last-child { min-width:0; font-size:.82rem; line-height:1.3; }
 
 .contactSection { padding-block:clamp(5rem,9vw,8rem) var(--space-8); border-top:0; background:var(--color-accent); color:var(--color-black); }
@@ -59,7 +59,7 @@
   .journeyLine { gap:var(--space-2) var(--space-3); margin-bottom:var(--space-8); }
   .journeyLine > span { gap:var(--space-3); }
   .aboutVisual blockquote { padding-left:var(--space-4); }
-  .logoGrid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-4) var(--space-5); }
+  .logoGrid { grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:var(--space-5); row-gap:var(--space-5); }
   .contactSection { padding-block:var(--space-16) var(--space-6); }
   .contactGrid,.footer { grid-template-columns:1fr; }
   .contactGrid { gap:var(--space-6); }
