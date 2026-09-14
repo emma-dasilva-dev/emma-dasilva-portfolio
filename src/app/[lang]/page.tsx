@@ -1,8 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { Hero } from "@/components/sections/Hero";
-import { About, Contact, Experience, Stack } from "@/components/sections/PortfolioSections";
-import { Work } from "@/components/sections/Work";
+import { PortfolioChat } from "@/components/chat/PortfolioChat";
 import { isLocale } from "@/lib/i18n";
 
 interface HomePageProps {
@@ -16,14 +14,5 @@ export default async function HomePage({ params }: HomePageProps) {
     notFound();
   }
 
-  return (
-    <main id="main-content">
-      <Hero locale={lang} />
-      <Work locale={lang} />
-      <Experience locale={lang} />
-      <About locale={lang} />
-      <Stack locale={lang} />
-      <Contact locale={lang} />
-    </main>
-  );
+  return <PortfolioChat locale={lang} />;
 }
