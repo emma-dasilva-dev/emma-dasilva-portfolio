@@ -28,41 +28,107 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
 
   useEffect(() => {
     if (!isOpen) return;
+
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") { closeMenu(true); return; }
+      if (event.key === "Escape") {
+        closeMenu(true);
+        return;
+      }
+
       if (event.key !== "Tab" || !menuRef.current) return;
-      const focusable = Array.from(menuRef.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+
+      const focusable = Array.from(
+        menuRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      );
+
       if (focusable.length === 0) return;
+
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
+
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
 
   useEffect(() => {
-    const sections = navigationItems.map((item) => document.getElementById(item.id)).filter((section): section is HTMLElement => Boolean(section));
+    const sections = navigationItems
+      .map((item) => document.getElementById(item.id))
+      .filter((section): section is HTMLElement => Boolean(section));
+
     if (!sections.length) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]) setActiveSection(visible[0].target.id);
-      },
-      { rootMargin: "-25% 0px -55% 0px", threshold: [0, 0.1, 0.25, 0.5] },
-    );
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+
+    let frameId: number | null = null;
+
+    const updateActiveSection = () => {
+      frameId = null;
+
+      const marker = window.innerHeight * 0.34;
+      const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
+
+      if (nearBottom) {
+        setActiveSection(sections[sections.length - 1].id);
+        return;
+      }
+
+      let currentSection = sections[0];
+
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= marker) {
+          currentSection = section;
+        } else {
+          break;
+        }
+      }
+
+      setActiveSection(currentSection.id);
+    };
+
+    const requestUpdate = () => {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(updateActiveSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+
+    return () => {
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+    };
   }, []);
 
   const localeHref = (targetLocale: Locale) => `/${targetLocale}`;
   const languageSwitch = (
     <>
-      <a className={locale === "en" ? styles.languageActive : styles.languageLink} href={localeHref("en")} hrefLang="en" aria-label="English" title="English">
+      <a
+        className={locale === "en" ? styles.languageActive : styles.languageLink}
+        href={localeHref("en")}
+        hrefLang="en"
+        aria-label="English"
+        title="English"
+      >
         <span className={styles.flag} aria-hidden="true">🇬🇧</span>
       </a>
-      <a className={locale === "fr" ? styles.languageActive : styles.languageLink} href={localeHref("fr")} hrefLang="fr" aria-label="Français" title="Français">
+      <a
+        className={locale === "fr" ? styles.languageActive : styles.languageLink}
+        href={localeHref("fr")}
+        hrefLang="fr"
+        aria-label="Français"
+        title="Français"
+      >
         <span className={styles.flag} aria-hidden="true">🇫🇷</span>
       </a>
     </>
@@ -71,13 +137,19 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
   return (
     <header className={styles.header}>
       <div className={`container ${styles.inner}`}>
-        <Link className={styles.identity} href={`/${locale}#home`} onClick={() => closeMenu()}>Emma Da Silva</Link>
+        <Link className={styles.identity} href={`/${locale}#home`} onClick={() => closeMenu()}>
+          Emma Da Silva
+        </Link>
 
         <nav className={styles.desktopNav} aria-label={locale === "en" ? "Primary navigation" : "Navigation principale"}>
           <ul className={styles.navList}>
             {navigationItems.map((item) => (
               <li key={item.id}>
-                <Link className={`${styles.navLink} ${activeSection === item.id ? styles.navLinkActive : ""}`} href={`/${locale}${item.href}`} aria-current={activeSection === item.id ? "location" : undefined}>
+                <Link
+                  className={`${styles.navLink} ${activeSection === item.id ? styles.navLinkActive : ""}`}
+                  href={`/${locale}${item.href}`}
+                  aria-current={activeSection === item.id ? "location" : undefined}
+                >
                   {item.label[locale]}
                 </Link>
               </li>
@@ -87,7 +159,14 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
 
         <div className={styles.desktopLanguages} aria-label={languageLabel}>{languageSwitch}</div>
 
-        <button ref={menuButtonRef} className={styles.menuButton} type="button" aria-expanded={isOpen} aria-controls="mobile-navigation" onClick={() => setIsOpen((open) => !open)}>
+        <button
+          ref={menuButtonRef}
+          className={styles.menuButton}
+          type="button"
+          aria-expanded={isOpen}
+          aria-controls="mobile-navigation"
+          onClick={() => setIsOpen((open) => !open)}
+        >
           <span>{isOpen ? closeMenuLabel : menuLabel}</span>
         </button>
       </div>
@@ -96,7 +175,13 @@ export function SiteHeader({ locale, menuLabel, closeMenuLabel, languageLabel }:
         <div ref={menuRef} id="mobile-navigation" className={styles.mobilePanel}>
           <nav className={`container ${styles.mobileNav}`} aria-label={locale === "en" ? "Mobile navigation" : "Navigation mobile"}>
             <ul className={styles.mobileList}>
-              {navigationItems.map((item) => <li key={item.id}><Link className={styles.mobileLink} href={`/${locale}${item.href}`} onClick={() => closeMenu()}>{item.label[locale]}</Link></li>)}
+              {navigationItems.map((item) => (
+                <li key={item.id}>
+                  <Link className={styles.mobileLink} href={`/${locale}${item.href}`} onClick={() => closeMenu()}>
+                    {item.label[locale]}
+                  </Link>
+                </li>
+              ))}
             </ul>
             <div className={styles.mobileLanguages} aria-label={languageLabel}>
               <span className={styles.mobileLanguageLabel}>{languageLabel}</span>
