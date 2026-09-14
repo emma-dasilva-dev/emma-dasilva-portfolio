@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 
 import { Hero } from "@/components/sections/Hero";
-import { OrbSignature } from "@/components/sections/OrbSignature";
 import { About, Contact, Experience, Stack } from "@/components/sections/PortfolioSections";
 import { Work } from "@/components/sections/Work";
 import { isLocale } from "@/lib/i18n";
@@ -23,7 +22,6 @@ export default async function HomePage({ params }: HomePageProps) {
       <Work locale={lang} />
       <Experience locale={lang} />
       <About locale={lang} />
-      <OrbSignature locale={lang} />
       <Stack locale={lang} />
       <Contact locale={lang} />
     </main>
