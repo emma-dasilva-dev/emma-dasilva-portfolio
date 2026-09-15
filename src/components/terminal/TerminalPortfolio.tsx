@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
+
 import { useMemo, useRef, useState } from "react";
 import { portfolioContent } from "@/content/portfolio";
 import type { Locale } from "@/types/locale";
@@ -54,7 +56,7 @@ export function TerminalPortfolio({ locale }: { locale: Locale }) {
     if (!command) return;
     if (command === "clear") { setHistory([]); setInput(""); setHistoryIndex(-1); return; }
     const valid = commands.includes(command);
-    setHistory(prev => [...prev, { command, output: valid ? outputFor(command as Command) : <p className={styles.error}>bash: {command}: {copy.unknown}. type 'help'.</p> }]);
+    setHistory(prev => [...prev, { command, output: valid ? outputFor(command as Command) : <p className={styles.error}>{`bash: ${command}: ${copy.unknown}. type 'help'.`}</p> }]);
     setInput(""); setHistoryIndex(-1);
     requestAnimationFrame(() => document.querySelector(`.${styles.terminalBody}`)?.scrollTo({ top: 99999, behavior: "smooth" }));
   }
