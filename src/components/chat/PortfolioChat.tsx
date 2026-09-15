@@ -1,87 +1,51 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
 import { heroContent } from "@/content/hero";
 import { portfolioContent } from "@/content/portfolio";
 import { projects } from "@/content/projects";
 import type { Locale } from "@/types/locale";
-
 import styles from "./PortfolioChat.module.css";
 
+type FileId = "welcome" | "about" | "experience" | "stack" | "bandit" | "contact";
 interface PortfolioChatProps { locale: Locale; }
 
-const logoUrls: Record<string, string> = {
-  JavaScript: "https://cdn.simpleicons.org/javascript", TypeScript: "https://cdn.simpleicons.org/typescript", C: "https://cdn.simpleicons.org/c", HTML: "https://cdn.simpleicons.org/html5", CSS: "https://cdn.simpleicons.org/css", React: "https://cdn.simpleicons.org/react", "Next.js": "https://cdn.simpleicons.org/nextdotjs/FFFFFF", Vite: "https://cdn.simpleicons.org/vite", "React Router": "https://cdn.simpleicons.org/reactrouter", "CSS Modules": "https://cdn.simpleicons.org/cssmodules/FFFFFF", "Tailwind CSS": "https://cdn.simpleicons.org/tailwindcss", "Node.js": "https://cdn.simpleicons.org/nodedotjs", "Express.js": "https://cdn.simpleicons.org/express/FFFFFF", "REST APIs": "https://cdn.simpleicons.org/swagger", MySQL: "https://cdn.simpleicons.org/mysql", Linux: "https://cdn.simpleicons.org/linux", Bash: "https://cdn.simpleicons.org/gnubash/FFFFFF", SSH: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ssh/ssh-original.svg", JWT: "https://cdn.simpleicons.org/jsonwebtokens/FFFFFF", bcrypt: "https://cdn.simpleicons.org/letsencrypt", Git: "https://cdn.simpleicons.org/git", GitHub: "https://cdn.simpleicons.org/github/FFFFFF", "VS Code": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg", Postman: "https://cdn.simpleicons.org/postman", npm: "https://cdn.simpleicons.org/npm", Vercel: "https://cdn.simpleicons.org/vercel/FFFFFF", Railway: "https://cdn.simpleicons.org/railway/FFFFFF", GCC: "https://cdn.simpleicons.org/gnu/FFFFFF", Nano: "https://cdn.simpleicons.org/gnubash/FFFFFF",
-};
+const toolLogos: Record<string,string> = { JavaScript:"https://cdn.simpleicons.org/javascript",TypeScript:"https://cdn.simpleicons.org/typescript",C:"https://cdn.simpleicons.org/c",HTML:"https://cdn.simpleicons.org/html5",CSS:"https://cdn.simpleicons.org/css",React:"https://cdn.simpleicons.org/react","Next.js":"https://cdn.simpleicons.org/nextdotjs/FFFFFF",Vite:"https://cdn.simpleicons.org/vite","React Router":"https://cdn.simpleicons.org/reactrouter","CSS Modules":"https://cdn.simpleicons.org/cssmodules/FFFFFF","Tailwind CSS":"https://cdn.simpleicons.org/tailwindcss","Node.js":"https://cdn.simpleicons.org/nodedotjs","Express.js":"https://cdn.simpleicons.org/express/FFFFFF","REST APIs":"https://cdn.simpleicons.org/swagger",MySQL:"https://cdn.simpleicons.org/mysql",Linux:"https://cdn.simpleicons.org/linux",Bash:"https://cdn.simpleicons.org/gnubash/FFFFFF",SSH:"https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ssh/ssh-original.svg",JWT:"https://cdn.simpleicons.org/jsonwebtokens/FFFFFF",bcrypt:"https://cdn.simpleicons.org/letsencrypt",Git:"https://cdn.simpleicons.org/git",GitHub:"https://cdn.simpleicons.org/github/FFFFFF","VS Code":"https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg",Postman:"https://cdn.simpleicons.org/postman",npm:"https://cdn.simpleicons.org/npm",Vercel:"https://cdn.simpleicons.org/vercel/FFFFFF",Railway:"https://cdn.simpleicons.org/railway/FFFFFF",GCC:"https://cdn.simpleicons.org/gnu/FFFFFF",Nano:"https://cdn.simpleicons.org/gnubash/FFFFFF" };
+const vscodeLogo="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg";
+const files:{id:FileId;name:string;type:"tsx"|"md"|"json"}[]=[{id:"welcome",name:"welcome.tsx",type:"tsx"},{id:"about",name:"about.tsx",type:"tsx"},{id:"experience",name:"experience.tsx",type:"tsx"},{id:"stack",name:"stack.tsx",type:"tsx"},{id:"bandit",name:"bandit-redline.md",type:"md"},{id:"contact",name:"contact.json",type:"json"}];
 
-export function PortfolioChat({ locale }: PortfolioChatProps) {
-  const hero = heroContent[locale];
-  const content = portfolioContent[locale];
-  const bandit = projects.find((project) => project.slug === "bandit-redline")!;
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => setReady(true), 650);
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  const t = locale === "en" ? {
-    boot: "INITIALIZING PRIVATE LAB ENVIRONMENT", granted: "LIMITED ACCESS GRANTED", lab: "EMMA / CYBER LAB", state: "LAB ACTIVE", updated: "UPDATED · SEP 2026",
-    eyebrow: "OPERATOR PROFILE", title: "Cybersecurity student lab.", intro: "A working record of what I am learning, testing and documenting while studying cybersecurity and computer engineering.",
-    focus: "CURRENT FOCUS", focusItems: ["Linux security", "Networking", "Web security"],
-    experiments: "EXPERIMENT LOGS", experimentNote: "Recorded work from hands-on security practice.", objective: "OBJECTIVE", environment: "ENVIRONMENT", observations: "OBSERVATIONS", outcome: "OUTCOME", open: "OPEN LAB NOTES",
-    objectiveText: "Work through progressively constrained Linux security challenges and document the reasoning used to reach each solution.", environmentText: "Remote Linux environment · SSH · shell utilities", observationText: "Permissions, file discovery, text processing, SSH access and command-line investigation recur throughout the exercises.", outcomeText: "Ongoing. Notes are maintained as the lab progresses.",
-    experience: "FIELD LOG", experienceNote: "Training and professional environments that shaped the current lab work.",
-    about: "OPERATOR NOTES", aboutNote: "Short context on the person maintaining this environment.",
-    capabilities: "CAPABILITIES / ACTIVE TOOLS", capabilitiesNote: "Technologies and tools I have used and can return to in practical work.",
-    access: "ACCESS", accessNote: "External channels. The lab itself remains read-only to visitors.", status: "STATUS", inProgress: "IN PROGRESS",
-  } : {
-    boot: "INITIALISATION DE L’ENVIRONNEMENT PRIVÉ", granted: "ACCÈS LIMITÉ AUTORISÉ", lab: "EMMA / CYBER LAB", state: "LAB ACTIF", updated: "MIS À JOUR · SEPT 2026",
-    eyebrow: "PROFIL OPÉRATEUR", title: "Laboratoire étudiant en cybersécurité.", intro: "Un espace de travail qui documente ce que j’apprends, teste et analyse pendant ma formation en cybersécurité et génie informatique.",
-    focus: "FOCUS ACTUEL", focusItems: ["Sécurité Linux", "Réseaux", "Sécurité web"],
-    experiments: "JOURNAL D’EXPÉRIENCES", experimentNote: "Travaux documentés issus de ma pratique de la sécurité.", objective: "OBJECTIF", environment: "ENVIRONNEMENT", observations: "OBSERVATIONS", outcome: "RÉSULTAT", open: "OUVRIR LES NOTES",
-    objectiveText: "Résoudre des défis Linux progressivement plus contraints et documenter le raisonnement utilisé pour chaque solution.", environmentText: "Environnement Linux distant · SSH · outils shell", observationText: "Permissions, recherche de fichiers, traitement de texte, accès SSH et investigation en ligne de commande reviennent régulièrement.", outcomeText: "En cours. Les notes évoluent avec le laboratoire.",
-    experience: "JOURNAL DE TERRAIN", experienceNote: "Formations et environnements professionnels qui structurent mon travail actuel.",
-    about: "NOTES OPÉRATEUR", aboutNote: "Contexte concis sur la personne qui maintient cet environnement.",
-    capabilities: "CAPACITÉS / OUTILS ACTIFS", capabilitiesNote: "Technologies et outils déjà utilisés dans des travaux pratiques.",
-    access: "ACCÈS", accessNote: "Canaux externes. Le laboratoire reste en lecture seule pour les visiteurs.", status: "STATUT", inProgress: "EN COURS",
-  };
-
-  return (
-    <main id="main-content" className={`${styles.lab} ${ready ? styles.ready : ""}`}>
-      <div className={styles.boot} aria-hidden={ready}><span>{ready ? t.granted : t.boot}</span><i /></div>
-      <div className={styles.workspace}>
-        <header id="home" className={styles.labHeader}>
-          <div><span className={styles.labId}>{t.lab}</span><span className={styles.access}>READ ONLY / VISITOR</span></div>
-          <div className={styles.labState}><span><i />{t.state}</span><span>{t.updated}</span></div>
-        </header>
-
-        <section className={styles.heroPanel}>
-          <div className={styles.heroCopy}><p className={styles.kicker}>{t.eyebrow}</p><h1>{t.title}</h1><p>{t.intro}</p><div className={styles.identityLine}><span>{hero.location}</span><span>{hero.titlePrimary}</span></div></div>
-          <aside className={styles.focusPanel}><div className={styles.panelLabel}><span>{t.focus}</span><span className={styles.liveDot} /></div>{t.focusItems.map((item, index) => <div className={styles.focusItem} key={item}><span>0{index + 1}</span><strong>{item}</strong><small>{t.inProgress}</small></div>)}</aside>
-        </section>
-
-        <section id="work" className={styles.labSection}>
-          <SectionHead code="01" title={t.experiments} note={t.experimentNote} />
-          <article className={styles.experiment}>
-            <div className={styles.experimentTop}><div><span className={styles.record}>EXP-001</span><h2>{bandit.title}</h2><p>{bandit.subtitle[locale]}</p></div><span className={styles.progress}>{t.inProgress}</span></div>
-            <div className={styles.logGrid}><Log label={t.objective} text={t.objectiveText}/><Log label={t.environment} text={t.environmentText}/><Log label={t.observations} text={t.observationText}/><Log label={t.outcome} text={t.outcomeText}/></div>
-            <div className={styles.experimentFooter}><span>{bandit.technologies.join(" / ")}</span><a href={bandit.links.journal} target="_blank" rel="noreferrer">{t.open} ↗</a></div>
-          </article>
-        </section>
-
-        <section id="experience" className={styles.labSection}><SectionHead code="02" title={t.experience} note={t.experienceNote}/><div className={styles.fieldLog}>{content.experience.items.map((item) => <article key={`${item.period}-${item.title}`}><time>{item.period}</time><div><h2>{item.title}</h2><strong>{item.role}</strong><p>{item.description}</p>{item.link ? <a href={item.link.href} target="_blank" rel="noreferrer">{item.link.label} ↗</a> : null}</div></article>)}</div></section>
-
-        <section id="about" className={styles.labSection}><SectionHead code="03" title={t.about} note={t.aboutNote}/><div className={styles.operator}><div>{content.about.paragraphs.map((p) => <p key={p}>{p}</p>)}</div><blockquote>{content.about.quote}</blockquote></div></section>
-
-        <section id="stack" className={styles.labSection}><SectionHead code="04" title={t.capabilities} note={t.capabilitiesNote}/><div className={styles.capabilities}>{content.stack.groups.map((group) => <section key={group.label}><h2>{group.label}</h2><div>{group.items.map((item) => <span className={styles.tool} key={item}><i style={{backgroundImage:`url(${logoUrls[item]})`}}/><b>{item}</b></span>)}</div></section>)}</div></section>
-
-        <section id="contact" className={`${styles.labSection} ${styles.accessSection}`}><SectionHead code="05" title={t.access} note={t.accessNote}/><div className={styles.accessGrid}><div><span>{t.status}</span><strong>{hero.status}</strong><small>{content.contact.location}</small></div><nav>{content.contact.links.map((link) => <a key={link.label} href={link.href} target={link.href.startsWith("mailto:") ? undefined : "_blank"} rel={link.href.startsWith("mailto:") ? undefined : "noreferrer"}><span>{link.label}</span><span>↗</span></a>)}</nav></div></section>
-      </div>
-    </main>
-  );
+export function PortfolioChat({locale}:PortfolioChatProps){
+ const hero=heroContent[locale],content=portfolioContent[locale],bandit=projects.find(p=>p.slug==="bandit-redline")!;
+ const [active,setActive]=useState<FileId>("welcome"); const [open,setOpen]=useState<FileId[]>(["welcome"]); const [explorer,setExplorer]=useState(true);
+ const t=locale==="en"?{explorer:"EXPLORER",folder:"EMMA-PORTFOLIO",src:"src",projects:"projects",contact:"contact",welcome:"Welcome",intro:"Cybersecurity & Computer Engineering student",copy:"I’m developing across systems, security and software engineering, with cybersecurity as my main direction.",about:"About",experience:"Experience",stack:"Stack",project:"Project",contactTitle:"Contact",available:"Available for internships & collaborative projects.",status:"Cybersecurity × Computer Engineering"}:{explorer:"EXPLORATEUR",folder:"EMMA-PORTFOLIO",src:"src",projects:"projets",contact:"contact",welcome:"Bienvenue",intro:"Étudiante en cybersécurité & génie informatique",copy:"Je me développe à travers les systèmes, la sécurité et le génie logiciel, avec la cybersécurité comme direction principale.",about:"À propos",experience:"Expérience",stack:"Stack",project:"Projet",contactTitle:"Contact",available:"Disponible pour stages et projets collaboratifs.",status:"Cybersécurité × Génie informatique"};
+ function openFile(id:FileId){setActive(id);setOpen(v=>v.includes(id)?v:[...v,id]);}
+ function closeFile(id:FileId,e:React.MouseEvent){e.stopPropagation();const next=open.filter(x=>x!==id);setOpen(next);if(active===id)setActive(next[next.length-1]??"welcome");}
+ const activeFile=files.find(f=>f.id===active)!;
+ return <main className={styles.ide} id="main-content">
+  <header className={styles.titlebar}><div className={styles.windowDots}><i/><i/><i/></div><div className={styles.title}><img src={vscodeLogo} alt=""/><span>emma-dasilva-portfolio — Visual Studio Code</span></div><div className={styles.titleActions}><span>—</span><span>□</span><span>×</span></div></header>
+  <div className={styles.workbench}>
+   <aside className={styles.activityBar} aria-label="VS Code activity bar"><button className={explorer?styles.activityActive:""} onClick={()=>setExplorer(v=>!v)} title={t.explorer}><ActivityIcon kind="files"/></button><button title="Search"><ActivityIcon kind="search"/></button><button title="Source Control"><ActivityIcon kind="git"/></button><a href="https://github.com/emma-dasilva-dev" target="_blank" rel="noreferrer" title="GitHub"><ActivityIcon kind="github"/></a><div className={styles.activityBottom}><button title="Account"><ActivityIcon kind="account"/></button><button title="Settings"><ActivityIcon kind="settings"/></button></div></aside>
+   {explorer&&<aside className={styles.explorer}><div className={styles.explorerHead}>{t.explorer}<span>•••</span></div><div className={styles.treeRoot}>⌄ {t.folder}</div><TreeFolder label={t.src}>{files.filter(f=>["welcome","about","experience","stack"].includes(f.id)).map(f=><FileButton key={f.id} file={f} active={active===f.id} onClick={()=>openFile(f.id)}/>)}</TreeFolder><TreeFolder label={t.projects}><FileButton file={files[4]} active={active==="bandit"} onClick={()=>openFile("bandit")}/></TreeFolder><TreeFolder label={t.contact}><FileButton file={files[5]} active={active==="contact"} onClick={()=>openFile("contact")}/></TreeFolder></aside>}
+   <section className={styles.editorArea}>
+    <div className={styles.tabs}>{open.map(id=>{const f=files.find(x=>x.id===id)!;return <button key={id} className={`${styles.tab} ${active===id?styles.tabActive:""}`} onClick={()=>setActive(id)}><FileGlyph type={f.type}/><span>{f.name}</span><b onClick={e=>closeFile(id,e)}>×</b></button>})}</div>
+    <div className={styles.breadcrumb}>emma-dasilva-portfolio <span>›</span> {activeFile.type==="md"?t.projects:activeFile.type==="json"?t.contact:t.src} <span>›</span> {activeFile.name}</div>
+    <div className={styles.editor}><EditorContent id={active} locale={locale} hero={hero} content={content} bandit={bandit} t={t}/></div>
+   </section>
+  </div>
+  <footer className={styles.statusbar}><div><span>⑂ redesign-2026</span><span>↻ 0</span><span>⚠ 0</span></div><div><span>{t.status}</span><span>UTF-8</span><span>{locale==="en"?"🇬🇧 EN":"🇫🇷 FR"}</span></div></footer>
+ </main>
 }
 
-function SectionHead({code,title,note}:{code:string;title:string;note:string}) { return <header className={styles.sectionHead}><span>{code}</span><div><h2>{title}</h2><p>{note}</p></div></header>; }
-function Log({label,text}:{label:string;text:string}) { return <div className={styles.log}><span>{label}</span><p>{text}</p></div>; }
+function EditorContent({id,locale,hero,content,bandit,t}:any){
+ if(id==="welcome")return <div className={styles.welcome}><div><p className={styles.comment}>// {t.welcome}</p><h1>{hero.greetingPrefix} <span>{hero.name}</span></h1><h2>{t.intro}</h2><p>{t.copy}</p><div className={styles.meta}><span>{hero.location}</span><span>{hero.status}</span></div></div><div className={styles.vscodeMark}><img src={vscodeLogo} alt="Visual Studio Code"/></div></div>;
+ if(id==="about")return <Article title={t.about}><div className={styles.prose}>{content.about.paragraphs.map((p:string)=><p key={p}>{p}</p>)}<blockquote>{content.about.quote}</blockquote></div></Article>;
+ if(id==="experience")return <Article title={t.experience}><div className={styles.timeline}>{content.experience.items.map((item:any)=><div key={item.period+item.title}><time>{item.period}</time><section><h2>{item.title}</h2><strong>{item.role}</strong><p>{item.description}</p>{item.link&&<a href={item.link.href} target="_blank" rel="noreferrer">{item.link.label} ↗</a>}</section></div>)}</div></Article>;
+ if(id==="stack")return <Article title={t.stack}><div className={styles.stack}>{content.stack.groups.map((g:any)=><section key={g.label}><h2>{g.label}</h2><div>{g.items.map((item:string)=><span key={item}><i style={{backgroundImage:`url(${toolLogos[item]})`}}/><b>{item}</b></span>)}</div></section>)}</div></Article>;
+ if(id==="bandit")return <Article title={bandit.title}><p className={styles.lead}>{bandit.subtitle[locale]}</p><p className={styles.projectCopy}>{bandit.summary[locale]}</p><div className={styles.tech}>{bandit.technologies.join(" · ")}</div><a className={styles.primaryLink} href={bandit.links.journal} target="_blank" rel="noreferrer">{locale==="en"?"Open project notes":"Ouvrir les notes"} ↗</a></Article>;
+ return <Article title={t.contactTitle}><p className={styles.lead}>{t.available}</p><div className={styles.contactLinks}>{content.contact.links.map((l:any)=><a key={l.label} href={l.href} target={l.href.startsWith("mailto:")?undefined:"_blank"} rel={l.href.startsWith("mailto:")?undefined:"noreferrer"}><span>{l.label}</span><span>↗</span></a>)}</div></Article>;
+}
+function Article({title,children}:{title:string;children:React.ReactNode}){return <article className={styles.article}><p className={styles.comment}>// portfolio</p><h1>{title}</h1>{children}</article>}
+function TreeFolder({label,children}:{label:string;children:React.ReactNode}){return <div className={styles.treeFolder}><div>⌄ <span>{label}</span></div>{children}</div>}
+function FileButton({file,active,onClick}:{file:(typeof files)[number];active:boolean;onClick:()=>void}){return <button className={`${styles.file} ${active?styles.fileActive:""}`} onClick={onClick}><FileGlyph type={file.type}/><span>{file.name}</span></button>}
+function FileGlyph({type}:{type:"tsx"|"md"|"json"}){return <i className={`${styles.fileGlyph} ${styles[type]}`}>{type==="tsx"?"⚛":type==="md"?"M↓":"{}"}</i>}
+function ActivityIcon({kind}:{kind:string}){const paths:any={files:<><path d="M4 4h6l2 2h8v14H4z"/><path d="M8 2h8v4"/></>,search:<><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></>,git:<><circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="12" r="2"/><path d="M6 7v10M8 6c6 0 4 6 8 6"/></>,github:<path d="M12 2a10 10 0 0 0-3.2 19.5v-2.2c-2.6.6-3.2-1.1-3.2-1.1-.4-1.1-1-1.4-1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.8.8.1-.6.3-1.1.6-1.3-2.1-.2-4.4-1.1-4.4-4.8 0-1.1.4-1.9 1-2.6-.1-.2-.4-1.2.1-2.5 0 0 .8-.3 2.7 1a9 9 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.5.6.7 1 1.5 1 2.6 0 3.7-2.3 4.6-4.4 4.8.3.3.6.9.6 1.7v3.1A10 10 0 0 0 12 2Z"/>,account:<><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 4-7 8-7s7 2 8 7"/></>,settings:<><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></>};return <svg viewBox="0 0 24 24" aria-hidden="true">{paths[kind]}</svg>}
