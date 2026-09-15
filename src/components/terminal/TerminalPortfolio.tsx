@@ -28,10 +28,10 @@ export function TerminalPortfolio({ locale }: { locale: Locale }) {
   const [historyIndex, setHistoryIndex] = useState(-1);
   const commands = useMemo(() => ["about", "experience", "stack", "projects", "contact", "github", "help", "clear"], []);
   const copy = locale === "en" ? {
-    welcome: "Welcome to my interactive portfolio.", hint: "Type 'help' or select a command below.", role: "Cybersecurity & Computer Engineering student", focus: "systems | security | software engineering", available: "available commands:", unknown: "command not found", tip: "commands can be typed or selected. use ↑ / ↓ for history.",
+    welcome: "Welcome to my interactive portfolio.", hint: "Type 'help' or select a command below.", role: "Cybersecurity & Computer Engineering student", focus: "systems | security | software engineering", available: "available commands:", unknown: "command not found", tip: "commands can be typed or selected. use ↑ / ↓ for history.", stackIntro: "tools and technologies currently in use:",
     labels: { about: "about me", experience: "experience & training", stack: "tools in active use", projects: "project work", contact: "contact information", github: "open GitHub profile", help: "show commands", clear: "clear terminal" }
   } : {
-    welcome: "Bienvenue dans mon portfolio interactif.", hint: "Tapez 'help' ou sélectionnez une commande ci-dessous.", role: "Étudiante en cybersécurité & génie informatique", focus: "systèmes | sécurité | génie logiciel", available: "commandes disponibles :", unknown: "commande introuvable", tip: "les commandes peuvent être saisies ou sélectionnées. utilisez ↑ / ↓ pour l’historique.",
+    welcome: "Bienvenue dans mon portfolio interactif.", hint: "Tapez 'help' ou sélectionnez une commande ci-dessous.", role: "Étudiante en cybersécurité & génie informatique", focus: "systèmes | sécurité | génie logiciel", available: "commandes disponibles :", unknown: "commande introuvable", tip: "les commandes peuvent être saisies ou sélectionnées. utilisez ↑ / ↓ pour l’historique.", stackIntro: "outils et technologies actuellement utilisés :",
     labels: { about: "à propos", experience: "expérience & formation", stack: "outils utilisés", projects: "projet", contact: "coordonnées", github: "ouvrir GitHub", help: "afficher les commandes", clear: "effacer le terminal" }
   };
 
@@ -39,7 +39,10 @@ export function TerminalPortfolio({ locale }: { locale: Locale }) {
     if (command === "help") return <CommandList commands={commands} labels={copy.labels} onRun={runCommand} />;
     if (command === "about") return <div className={styles.textOutput}>{content.about.paragraphs.map(p => <p key={p}>{p}</p>)}</div>;
     if (command === "experience") return <div className={styles.timeline}>{content.experience.items.map(item => <div key={item.period + item.title}><span>{item.period}</span><section><strong>{item.title}</strong><em>{item.role}</em><p>{item.description}</p></section></div>)}</div>;
-    if (command === "stack") return <div className={styles.stackOutput}>{content.stack.groups.map(group => <section key={group.label}><strong>{group.label}</strong><div>{group.items.map(item => <span className={styles.logoTile} key={item} title={item} aria-label={item}><img src={logos[item]} alt={item} /></span>)}</div></section>)}</div>;
+    if (command === "stack") {
+      const stackItems = Array.from(new Set(content.stack.groups.flatMap(group => group.items)));
+      return <div className={styles.stackOutput}><p>{copy.stackIntro}</p><div className={styles.stackGrid}>{stackItems.map(item => <span className={styles.logoTile} key={item} title={item} aria-label={item}><img src={logos[item]} alt={item} /></span>)}</div></div>;
+    }
     if (command === "projects") return <div className={styles.projectOutput}><strong>Bandit Redline Journal</strong><p>{locale === "en" ? "A practical cybersecurity journal documenting my progress through OverTheWire Bandit, with Linux, Bash, SSH and command-line problem solving." : "Un journal pratique de cybersécurité documentant ma progression sur OverTheWire Bandit, avec Linux, Bash, SSH et la résolution de problèmes en ligne de commande."}</p><div><a href={journalUrl} target="_blank" rel="noreferrer">journal ↗</a><a href={banditUrl} target="_blank" rel="noreferrer">OverTheWire ↗</a></div></div>;
     if (command === "contact") return <div className={styles.links}>{content.contact.links.map(link => <a key={link.label} href={link.href} target={link.href.startsWith("mailto:") ? undefined : "_blank"} rel="noreferrer">{link.label}<span>↗</span></a>)}</div>;
     if (command === "github") { if (typeof window !== "undefined") window.open(githubUrl, "_blank", "noopener,noreferrer"); return <p className={styles.muted}>github.com/emma-dasilva-dev ↗</p>; }
