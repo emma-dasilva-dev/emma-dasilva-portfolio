@@ -1,5 +1,6 @@
 import { IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
 import type { ReactNode } from "react";
+import type { Viewport } from "next";
 
 import "@/styles/globals.css";
 
@@ -15,6 +16,13 @@ const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-ibm-plex-mono",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#090817",
+};
 
 interface RootLayoutProps {
   children: ReactNode;
