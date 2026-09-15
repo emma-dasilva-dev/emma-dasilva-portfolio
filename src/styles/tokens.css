@@ -1,8 +1,8 @@
 :root {
   --color-black: #000000;
   --color-white: #ffffff;
-  --color-cyan-dark: #0095a6;
-  --color-cyan-bright: #00e1e1;
+  --color-vscode-blue: #007acc;
+  --color-vscode-blue-bright: #0098ff;
 
   --color-background: var(--color-black);
   --color-surface: var(--color-black);
@@ -10,9 +10,9 @@
   --color-text-muted: rgb(255 255 255 / 0.72);
   --color-border: rgb(255 255 255 / 0.16);
   --color-border-strong: rgb(255 255 255 / 0.3);
-  --color-accent: var(--color-cyan-bright);
-  --color-accent-secondary: var(--color-cyan-dark);
-  --color-focus: var(--color-cyan-bright);
+  --color-accent: var(--color-vscode-blue);
+  --color-accent-secondary: var(--color-vscode-blue-bright);
+  --color-focus: var(--color-vscode-blue-bright);
 
   --font-sans: var(--font-instrument-sans), Arial, sans-serif;
   --font-mono: var(--font-ibm-plex-mono), "Courier New", monospace;
