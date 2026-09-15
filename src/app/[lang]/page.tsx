@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { PortfolioChat } from "@/components/chat/PortfolioChat";
+import { TerminalPortfolio } from "@/components/terminal/TerminalPortfolio";
 import { isLocale } from "@/lib/i18n";
 
 interface HomePageProps {
@@ -14,5 +14,5 @@ export default async function HomePage({ params }: HomePageProps) {
     notFound();
   }
 
-  return <PortfolioChat locale={lang} />;
+  return <TerminalPortfolio locale={lang} />;
 }
