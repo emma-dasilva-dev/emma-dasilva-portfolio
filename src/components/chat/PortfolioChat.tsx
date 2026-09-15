@@ -31,7 +31,6 @@ export function PortfolioChat({locale}:PortfolioChatProps){
   <div className={`${styles.workbench} ${!panelOpen?styles.panelClosed:""}`}>
    <aside className={styles.activityBar} aria-label="VS Code activity bar">
     <ActivityButton kind="files" label={t.explorer} active={panelOpen&&panel==="explorer"} onClick={()=>selectPanel("explorer")}/>
-    <ActivityButton kind="search" label={t.search} active={panelOpen&&panel==="search"} onClick={()=>selectPanel("search")}/>
     <ActivityButton kind="git" label={t.source} active={panelOpen&&panel==="source"} onClick={()=>selectPanel("source")}/>
     <ActivityButton kind="github" label="GitHub" active={panelOpen&&panel==="github"} onClick={()=>selectPanel("github")}/>
     <div className={styles.activityBottom}><ActivityButton kind="account" label={t.account} active={panelOpen&&panel==="account"} onClick={()=>selectPanel("account")}/><ActivityButton kind="settings" label={t.settings} active={panelOpen&&panel==="settings"} onClick={()=>selectPanel("settings")}/></div>
