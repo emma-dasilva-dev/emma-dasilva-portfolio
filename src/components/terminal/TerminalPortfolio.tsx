@@ -28,11 +28,11 @@ export function TerminalPortfolio({ locale }: { locale: Locale }) {
   const [historyIndex, setHistoryIndex] = useState(-1);
   const commands = useMemo(() => ["about", "experience", "stack", "projects", "contact", "github", "help", "clear"], []);
   const copy = locale === "en" ? {
-    welcome: "Welcome to my interactive portfolio.", hint: "Type 'help' or select a command below.", role: "Cybersecurity & Computer Engineering student", focus: "systems | security | software engineering", available: "available commands:", unknown: "command not found", tip: "commands can be typed or selected. use ↑ / ↓ for history.", stackIntro: "tools and technologies currently in use:",
-    labels: { about: "about me", experience: "experience & training", stack: "tools in active use", projects: "project work", contact: "contact information", github: "open GitHub profile", help: "show commands", clear: "clear terminal" }
+    welcome: "Welcome to my interactive portfolio.", hint: "Type 'help' or select a command below.", role: "Cybersecurity & Computer Engineering student", focus: "systems | security | software engineering", available: "available commands:", unknown: "command not found", tip: "commands can be typed or selected. use ↑ / ↓ for history.", stackIntro: "tools and technologies currently in use:", githubIntro: "My GitHub contains my repositories, experiments and ongoing development work.", githubLink: "view GitHub profile",
+    labels: { about: "about me", experience: "experience & training", stack: "tools in active use", projects: "project work", contact: "contact information", github: "view GitHub profile", help: "show commands", clear: "clear terminal" }
   } : {
-    welcome: "Bienvenue dans mon portfolio interactif.", hint: "Tapez 'help' ou sélectionnez une commande ci-dessous.", role: "Étudiante en cybersécurité & génie informatique", focus: "systèmes | sécurité | génie logiciel", available: "commandes disponibles :", unknown: "commande introuvable", tip: "les commandes peuvent être saisies ou sélectionnées. utilisez ↑ / ↓ pour l’historique.", stackIntro: "outils et technologies actuellement utilisés :",
-    labels: { about: "à propos", experience: "expérience & formation", stack: "outils utilisés", projects: "projet", contact: "coordonnées", github: "ouvrir GitHub", help: "afficher les commandes", clear: "effacer le terminal" }
+    welcome: "Bienvenue dans mon portfolio interactif.", hint: "Tapez 'help' ou sélectionnez une commande ci-dessous.", role: "Étudiante en cybersécurité & génie informatique", focus: "systèmes | sécurité | génie logiciel", available: "commandes disponibles :", unknown: "commande introuvable", tip: "les commandes peuvent être saisies ou sélectionnées. utilisez ↑ / ↓ pour l’historique.", stackIntro: "outils et technologies actuellement utilisés :", githubIntro: "Mon GitHub contient mes dépôts, mes expérimentations et mes travaux de développement en cours.", githubLink: "voir mon profil GitHub",
+    labels: { about: "à propos", experience: "expérience & formation", stack: "outils utilisés", projects: "projet", contact: "coordonnées", github: "voir mon profil GitHub", help: "afficher les commandes", clear: "effacer le terminal" }
   };
 
   function outputFor(command: Command): React.ReactNode {
@@ -45,7 +45,7 @@ export function TerminalPortfolio({ locale }: { locale: Locale }) {
     }
     if (command === "projects") return <div className={styles.projectOutput}><strong>Bandit Redline Journal</strong><p>{locale === "en" ? "A practical cybersecurity journal documenting my progress through OverTheWire Bandit, with Linux, Bash, SSH and command-line problem solving." : "Un journal pratique de cybersécurité documentant ma progression sur OverTheWire Bandit, avec Linux, Bash, SSH et la résolution de problèmes en ligne de commande."}</p><div><a href={journalUrl} target="_blank" rel="noreferrer">journal ↗</a><a href={banditUrl} target="_blank" rel="noreferrer">OverTheWire ↗</a></div></div>;
     if (command === "contact") return <div className={styles.links}>{content.contact.links.map(link => <a key={link.label} href={link.href} target={link.href.startsWith("mailto:") ? undefined : "_blank"} rel="noreferrer">{link.label}<span>↗</span></a>)}</div>;
-    if (command === "github") { if (typeof window !== "undefined") window.open(githubUrl, "_blank", "noopener,noreferrer"); return <p className={styles.muted}>github.com/emma-dasilva-dev ↗</p>; }
+    if (command === "github") return <div className={styles.projectOutput}><p>{copy.githubIntro}</p><div><a href={githubUrl} target="_blank" rel="noreferrer">{copy.githubLink} ↗</a></div></div>;
     return null;
   }
 
@@ -76,7 +76,7 @@ export function TerminalPortfolio({ locale }: { locale: Locale }) {
           <div className={styles.helpGrid}><div><p className={styles.sectionLabel}>{copy.available}</p><CommandList commands={commands} labels={copy.labels} onRun={runCommand}/></div><aside><strong>tip</strong><p>{copy.tip}</p></aside></div>
         </div>
         {history.map((entry, index) => <div className={styles.entry} key={`${entry.command}-${index}`}><p><Prompt/> {entry.command}</p>{entry.output}</div>)}
-        <form className={styles.promptLine} onSubmit={e => { e.preventDefault(); runCommand(input); }}><Prompt/><input ref={inputRef} value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => { if (e.key === "ArrowUp") { e.preventDefault(); navigateHistory(-1); } if (e.key === "ArrowDown") { e.preventDefault(); navigateHistory(1); } }} aria-label="Terminal command" autoCapitalize="none" autoComplete="off" spellCheck={false}/><span className={styles.cursor}/></form>
+        <form className={styles.promptLine} onSubmit={e => { e.preventDefault(); runCommand(input); }}><Prompt/><input ref={inputRef} value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => { if (e.key === "ArrowUp") { e.preventDefault(); navigateHistory(-1); } if (e.key === "ArrowDown") { e.preventDefault(); navigateHistory(1); } }} aria-label="Terminal command" autoCapitalize="none" autoComplete="off" spellCheck={false}/></form>
       </div>
     </section>
     <nav className={styles.dock} aria-label="Desktop dock"><span>◉</span><span>⌘</span><span className={styles.dockActive}>›_</span><span>◈</span><span>◆</span></nav>
