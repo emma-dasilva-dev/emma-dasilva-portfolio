@@ -10,16 +10,16 @@ export const projects = [
   {
     id: "bandit-redline",
     slug: "bandit-redline",
-    title: "Bandit Redline",
+    title: "Bandit Redline Journal",
     subtitle: {
-      en: "Linux & Cybersecurity Practice",
-      fr: "Pratique Linux & cybersécurité",
+      en: "A practical cybersecurity journal documenting my progress through the OverTheWire Bandit wargame.",
+      fr: "Un journal pratique de cybersécurité documentant ma progression à travers le wargame OverTheWire Bandit.",
     },
     summary: {
-      en: "My documented progression through OverTheWire Bandit, focused on Linux, command-line problem solving and security fundamentals.",
-      fr: "Ma progression documentée sur OverTheWire Bandit, axée sur Linux, la résolution de problèmes en ligne de commande et les fondamentaux de la sécurité.",
+      en: "I created Bandit Redline to document how I approach Linux and security challenges, including the commands I use, the reasoning behind them and what I learn from each level.",
+      fr: "J’ai créé Bandit Redline pour documenter ma manière d’aborder les défis Linux et de sécurité, notamment les commandes utilisées, le raisonnement derrière celles-ci et ce que j’apprends à chaque niveau.",
     },
-    technologies: ["Linux", "SSH", "Bash"],
+    technologies: ["Linux", "Bash", "SSH", "Git"],
     status: "published",
     links: {
       journal: "https://emma-dasilva-dev.github.io/bandit-redline-journal/",
