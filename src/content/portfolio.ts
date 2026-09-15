@@ -68,11 +68,12 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     about: {
       heading: "About",
       paragraphs: [
-        "I did not start from a technical background. I studied literature in high school and seriously began exploring programming in 2025 after returning to a course I had access to for years.",
-        "Development pulled me in because I enjoy understanding how things work and turning ideas into tools people can actually use.",
-        "I am now studying cybersecurity and computer engineering, with cybersecurity as my main direction. Software development remains part of how I learn systems deeply, but my long-term focus is understanding networks, infrastructure and security well enough to protect them.",
+        "I’m Emma Da Silva, a student focused on cybersecurity and computer engineering. My technical foundation began with software development, working with C, JavaScript, TypeScript and web technologies. Through projects and internship experience, I’ve worked with frontend and backend development, databases, APIs, authentication and development tooling.",
+        "Cybersecurity is now my primary direction, with a growing focus on Linux security, networking and web security. I’m strengthening the fundamentals behind these areas through practical work with Linux, Bash, SSH, networking concepts and security exercises such as OverTheWire Bandit.",
+        "I prefer learning through implementation and problem-solving. When something fails, I try to understand the underlying cause rather than only finding a temporary fix. This approach has shaped how I work across programming, debugging, Linux environments and technical projects.",
+        "Software engineering remains an important part of my development. Understanding how applications, APIs, databases and systems are built provides useful context for understanding how they can fail or be secured. My goal is to develop a strong foundation across computer engineering and software systems while progressively specializing in cybersecurity.",
       ],
-      quote: "I want to be able to build systems and understand them deeply enough to protect them.",
+      quote: "Engineering + Security — building a stronger understanding of systems from both sides.",
     },
     stack: {
       heading: "Stack",
@@ -129,11 +130,12 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     about: {
       heading: "À propos",
       paragraphs: [
-        "Je ne viens pas à l’origine d’un parcours technique. J’ai étudié la littérature au lycée et j’ai commencé à explorer sérieusement la programmation en 2025 en reprenant un cours auquel j’avais accès depuis plusieurs années.",
-        "Le développement m’a attirée parce que j’aime comprendre comment les choses fonctionnent et transformer des idées en outils réellement utilisables.",
-        "J’étudie maintenant la cybersécurité et le génie informatique, avec la cybersécurité comme orientation principale. Le développement logiciel reste une façon pour moi de comprendre les systèmes en profondeur, mais mon objectif à long terme est de maîtriser les réseaux, l’infrastructure et la sécurité afin de pouvoir les protéger.",
+        "Je suis Emma Da Silva, étudiante orientée vers la cybersécurité et le génie informatique. Mes bases techniques ont commencé avec le développement logiciel, notamment le C, JavaScript, TypeScript et les technologies web. À travers mes projets et mes expériences de stage, j’ai travaillé sur le frontend et le backend, les bases de données, les APIs, l’authentification et les outils de développement.",
+        "La cybersécurité est désormais mon orientation principale, avec un intérêt croissant pour la sécurité Linux, les réseaux et la sécurité web. Je renforce actuellement les fondamentaux de ces domaines par une pratique de Linux, Bash, SSH, des concepts réseau et des exercices de sécurité comme OverTheWire Bandit.",
+        "Je préfère apprendre par l’implémentation et la résolution de problèmes. Lorsqu’un élément ne fonctionne pas, j’essaie d’en comprendre la cause plutôt que de me limiter à une correction temporaire. Cette approche influence ma manière de travailler en programmation, débogage, environnements Linux et projets techniques.",
+        "Le génie logiciel reste une partie importante de mon développement. Comprendre comment les applications, APIs, bases de données et systèmes sont construits apporte un contexte utile pour comprendre leurs défaillances et leur sécurisation. Mon objectif est de construire des bases solides en génie informatique et en systèmes logiciels tout en me spécialisant progressivement en cybersécurité.",
       ],
-      quote: "Je veux pouvoir construire des systèmes et les comprendre assez profondément pour pouvoir les protéger.",
+      quote: "Ingénierie + Sécurité — développer une compréhension plus complète des systèmes des deux côtés.",
     },
     stack: {
       heading: "Stack",
