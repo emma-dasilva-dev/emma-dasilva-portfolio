@@ -18,4 +18,10 @@ a:hover { color:var(--color-accent); }
 .foundation__title { max-width:18ch; margin-bottom:var(--space-4); font-size:clamp(2rem,5vw,3.25rem); line-height:1.08; }
 .foundation__copy { max-width:44rem; margin-bottom:var(--space-6); color:var(--color-text-muted); }
 .foundation__meta { display:flex; flex-wrap:wrap; gap:var(--space-3) var(--space-6); padding-top:var(--space-4); border-top:var(--border-width) solid var(--color-border); color:var(--color-text-muted); font-family:var(--font-mono); font-size:.8125rem; }
+
+/* macOS-style Finder folders used by the hidden desktop layer */
+[class*="fileIcon"] { position:relative!important; display:block!important; width:64px!important; height:49px!important; margin:4px auto 9px!important; border-radius:6px 7px 8px 8px!important; background:linear-gradient(180deg,#58b7ff 0%,#168be8 100%)!important; box-shadow:inset 0 1px 0 rgba(255,255,255,.48),0 3px 7px rgba(0,0,0,.3)!important; color:transparent!important; font-size:0!important; overflow:visible!important; }
+[class*="fileIcon"]::before { content:""; position:absolute; z-index:-1; top:-8px; left:4px; width:28px; height:15px; border-radius:6px 6px 0 0; background:linear-gradient(180deg,#78c8ff,#45aaf5); box-shadow:inset 0 1px 0 rgba(255,255,255,.5); }
+[class*="fileIcon"]::after { content:""; position:absolute; inset:5px 4px auto; height:1px; border-radius:999px; background:rgba(255,255,255,.28); }
+
 @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.01ms!important; animation-duration:.01ms!important; animation-iteration-count:1!important; } }
