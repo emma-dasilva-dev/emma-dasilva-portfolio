@@ -30,10 +30,10 @@ export function TerminalPortfolio({ locale }: { locale: Locale }) {
   const [historyIndex, setHistoryIndex] = useState(-1);
   const commands = useMemo(() => ["about", "experience", "stack", "projects", "contact", "github", "help", "clear"], []);
   const copy = locale === "en" ? {
-    welcome: "Welcome to my interactive portfolio.", hint: "Type 'help' or select a command below.", role: "Cybersecurity & Computer Engineering student", focus: "systems | security | software engineering", available: "available commands:", unknown: "command not found", tip: "commands can be typed or selected. use ↑ / ↓ for history.", stackIntro: "tools and technologies currently in use:", githubIntro: "My GitHub contains my repositories, experiments and ongoing development work.", githubLink: "view GitHub profile",
+    welcome: "Welcome to my interactive portfolio.", hint: "Type 'help' or select a command below.", role: "Cybersecurity & Computer Engineering student", focus: "systems | security | software engineering", available: "available commands:", unknown: "command not found", tip: "commands can be typed or selected. use ↑ / ↓ for history.", stackIntro: "tools and technologies currently in use:", githubIntro: "My GitHub contains my repositories, experiments and ongoing development work.", githubLink: "view GitHub profile", botTitle: "Bot E", botMessage: "Hi. I’m Bot E. Type a command to explore Emma’s portfolio.",
     labels: { about: "about me", experience: "experience & training", stack: "tools in active use", projects: "project work", contact: "contact information", github: "view GitHub profile", help: "show commands", clear: "clear terminal" }
   } : {
-    welcome: "Bienvenue dans mon portfolio interactif.", hint: "Tapez 'help' ou sélectionnez une commande ci-dessous.", role: "Étudiante en cybersécurité & génie informatique", focus: "systèmes | sécurité | génie logiciel", available: "commandes disponibles :", unknown: "commande introuvable", tip: "les commandes peuvent être saisies ou sélectionnées. utilisez ↑ / ↓ pour l’historique.", stackIntro: "outils et technologies actuellement utilisés :", githubIntro: "Mon GitHub contient mes dépôts, mes expérimentations et mes travaux de développement en cours.", githubLink: "voir mon profil GitHub",
+    welcome: "Bienvenue dans mon portfolio interactif.", hint: "Tapez 'help' ou sélectionnez une commande ci-dessous.", role: "Étudiante en cybersécurité & génie informatique", focus: "systèmes | sécurité | génie logiciel", available: "commandes disponibles :", unknown: "commande introuvable", tip: "les commandes peuvent être saisies ou sélectionnées. utilisez ↑ / ↓ pour l’historique.", stackIntro: "outils et technologies actuellement utilisés :", githubIntro: "Mon GitHub contient mes dépôts, mes expérimentations et mes travaux de développement en cours.", githubLink: "voir mon profil GitHub", botTitle: "Bot E", botMessage: "Salut. Je suis Bot E. Tape une commande pour explorer le portfolio d’Emma.",
     labels: { about: "à propos", experience: "expérience & formation", stack: "outils utilisés", projects: "projet", contact: "coordonnées", github: "voir mon profil GitHub", help: "afficher les commandes", clear: "effacer le terminal" }
   };
 
@@ -41,10 +41,7 @@ export function TerminalPortfolio({ locale }: { locale: Locale }) {
     if (command === "help") return <CommandList commands={commands} labels={copy.labels} onRun={runCommand} />;
     if (command === "about") return <div className={styles.textOutput}>{content.about.paragraphs.map(p => <p key={p}>{p}</p>)}</div>;
     if (command === "experience") return <div className={styles.timeline}>{content.experience.items.map(item => <div key={item.period + item.title}><span>{item.period}</span><section><strong>{item.title}</strong><em>{item.role}</em><p>{item.description}</p></section></div>)}</div>;
-    if (command === "stack") {
-      const stackItems = Array.from(new Set(content.stack.groups.flatMap(group => group.items)));
-      return <div className={styles.stackOutput}><p>{copy.stackIntro}</p><div className={styles.stackGrid}>{stackItems.map(item => <span className={styles.logoTile} key={item} title={item} aria-label={item}><img src={logos[item]} alt={item} /></span>)}</div></div>;
-    }
+    if (command === "stack") { const stackItems = Array.from(new Set(content.stack.groups.flatMap(group => group.items))); return <div className={styles.stackOutput}><p>{copy.stackIntro}</p><div className={styles.stackGrid}>{stackItems.map(item => <span className={styles.logoTile} key={item} title={item} aria-label={item}><img src={logos[item]} alt={item} /></span>)}</div></div>; }
     if (command === "projects") return <div className={styles.projectOutput}><strong>Bandit Redline Journal</strong><p>{locale === "en" ? "A practical cybersecurity journal documenting my progress through OverTheWire Bandit, with Linux, Bash, SSH and command-line problem solving." : "Un journal pratique de cybersécurité documentant ma progression sur OverTheWire Bandit, avec Linux, Bash, SSH et la résolution de problèmes en ligne de commande."}</p><div><a href={journalUrl} target="_blank" rel="noreferrer">journal ↗</a><a href={banditUrl} target="_blank" rel="noreferrer">OverTheWire ↗</a></div></div>;
     if (command === "contact") return <div className={styles.links}>{content.contact.links.map(link => <a key={link.label} href={link.href} target={link.href.startsWith("mailto:") ? undefined : "_blank"} rel="noreferrer">{link.label}<span>↗</span></a>)}</div>;
     if (command === "github") return <div className={styles.projectOutput}><p>{copy.githubIntro}</p><div><a href={githubUrl} target="_blank" rel="noreferrer">{copy.githubLink} ↗</a></div></div>;
@@ -74,7 +71,7 @@ export function TerminalPortfolio({ locale }: { locale: Locale }) {
     <section className={styles.terminalWindow} aria-label="Ubuntu terminal portfolio">
       <header className={styles.terminalHeader}><div className={styles.lights}><i/><i/><i/></div><span>emma@portfolio: ~</span><b>⌄</b></header>
       <div className={styles.terminalBody}>
-        <div className={styles.boot}><div className={styles.hero}><div><p><Prompt/> welcome</p><pre className={styles.ascii}>EMMA DA SILVA</pre><h1>{copy.role}</h1><div className={styles.rule}/><p><strong>{copy.welcome}</strong><br/>{copy.hint}</p><dl><dt>user</dt><dd>emma</dd><dt>host</dt><dd>portfolio</dd><dt>os</dt><dd>ubuntu</dd><dt>location</dt><dd>cotonou, benin</dd><dt>focus</dt><dd>{copy.focus}</dd></dl></div><div className={styles.ubuntuArt} aria-hidden="true"><span>◉</span><small>ubuntu / linux</small></div></div>
+        <div className={styles.boot}><div className={styles.hero}><div><p><Prompt/> welcome</p><pre className={styles.ascii}>EMMA DA SILVA</pre><h1>{copy.role}</h1><div className={styles.rule}/><p><strong>{copy.welcome}</strong><br/>{copy.hint}</p><dl><dt>user</dt><dd>emma</dd><dt>host</dt><dd>portfolio</dd><dt>os</dt><dd>ubuntu</dd><dt>location</dt><dd>cotonou, benin</dd><dt>focus</dt><dd>{copy.focus}</dd></dl></div><div className={styles.botE} aria-label={copy.botTitle}><div className={styles.botBubble}><strong>{copy.botTitle}</strong><p>{copy.botMessage}</p></div><div className={styles.botOrb} aria-hidden="true"><i/><i/></div><span className={styles.botShadow}/></div></div>
           <div className={styles.helpGrid}><div><p className={styles.sectionLabel}>{copy.available}</p><CommandList commands={commands} labels={copy.labels} onRun={runCommand}/></div><aside><strong>tip</strong><p>{copy.tip}</p></aside></div>
         </div>
         {history.map((entry, index) => <div className={styles.entry} key={`${entry.command}-${index}`}><p><Prompt/> {entry.command}</p>{entry.output}</div>)}
@@ -82,7 +79,7 @@ export function TerminalPortfolio({ locale }: { locale: Locale }) {
       </div>
     </section>
     <nav className={styles.dock} aria-label="Desktop dock"><span>◉</span><span>⌘</span><span className={styles.dockActive}>›_</span><span>◈</span><span>◆</span></nav>
-    <a className={styles.lang} href={`/${locale === "en" ? "fr" : "en"}`}>{locale === "en" ? "FR" : "EN"}</a>
+    <a className={styles.lang} href={`/${locale === "en" ? "fr" : "en"}`} aria-label={locale === "en" ? "Passer en français" : "Switch to English"}><span>{locale === "en" ? "EN" : "FR"}</span><b>{locale === "en" ? "FR" : "EN"}</b></a>
   </main>;
 }
 
