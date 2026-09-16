@@ -26,6 +26,41 @@ export function TerminalPortfolio({ locale }: { locale: Locale }) {
   function runCommand(raw:string){const command=raw.trim().toLowerCase();if(!command)return;if(command==="clear"){setHistory([]);setInput("");setHistoryIndex(-1);return}const valid=commands.includes(command);setHistory(prev=>[...prev,{command,output:valid?outputFor(command as Command):<p className={styles.error}>{`bash: ${command}: ${copy.unknown}. type 'help'.`}</p>}]);setInput("");setHistoryIndex(-1);requestAnimationFrame(()=>document.querySelector(`.${styles.terminalBody}`)?.scrollTo({top:99999,behavior:"smooth"}))}
   function navigateHistory(direction:number){const h=history.map(x=>x.command);if(!h.length)return;const next=historyIndex<0?h.length-1:Math.max(0,Math.min(h.length-1,historyIndex+direction));setHistoryIndex(next);setInput(h[next])}
   const switchStyle:React.CSSProperties={display:"flex",alignItems:"center",gap:3,padding:3,border:"1px solid rgba(232,121,249,.55)",borderRadius:8,background:"rgba(13,9,18,.72)",color:"#eee",textDecoration:"none",fontSize:11,justifySelf:"end"};const pill:React.CSSProperties={display:"grid",placeItems:"center",minWidth:30,height:24,padding:"0 6px",borderRadius:6};const active:React.CSSProperties={...pill,background:"#e879f9",color:"#160d19",fontWeight:700};
-  return <main className={styles.desktop} onClick={()=>inputRef.current?.focus()}><div className={styles.menuBar}><div><span className={styles.apple}>●</span><strong>Terminal</strong><span>Shell</span><span>Edit</span><span>View</span><span>Window</span><span>Help</span></div><div><span>⌁</span><span>◉</span><span>{locale==="en"?"EN":"FR"}</span></div></div><div className={styles.desktopIcons} aria-hidden="true"><span>▣<small>Development</small></span><span>▣<small>Cybersecurity</small></span><span>▤<small>notes.txt</small></span></div><section className={styles.terminalWindow} aria-label="Ubuntu terminal portfolio"><header className={styles.terminalHeader}><div className={styles.lights}><i/><i/><i/></div><span>emma@portfolio: ~</span><a href={`/${locale==="en"?"fr":"en"}`} style={switchStyle} onClick={e=>e.stopPropagation()}><span style={locale==="en"?active:pill}>EN</span><span style={locale==="fr"?active:pill}>FR</span></a></header><div className={styles.terminalBody}><div className={styles.boot}><div className={styles.hero}><div><p><Prompt/> welcome</p><pre className={styles.ascii}>EMMA DA SILVA</pre><h1>{copy.role}</h1><p style={{margin:"3px 0 0",color:"#69f0ae",fontSize:11,letterSpacing:".03em"}}>{copy.focus}<span style={{color:"#9f97a4"}}> · {copy.secondary}</span></p><div className={styles.rule}/><p><strong>{copy.welcome}</strong><br/>{copy.hint}</p><dl><dt>user</dt><dd>emma</dd><dt>host</dt><dd>portfolio</dd><dt>os</dt><dd>ubuntu</dd><dt>location</dt><dd>cotonou, benin</dd><dt>focus</dt><dd>{copy.focus}</dd></dl></div><div className={styles.botE} aria-label={copy.voiceLabel}><div className={styles.botOrb} aria-hidden="true" style={isSpeaking?{filter:"brightness(1.28) saturate(1.15)"}:undefined}/><span className={styles.botShadow}/><button type="button" className={styles.voiceButton} onClick={e=>{e.stopPropagation();toggleIntroduction()}} aria-pressed={isSpeaking}>{isSpeaking?copy.stop:copy.listen}</button><small style={{marginTop:6,color:"#777078",fontSize:9}}>{locale==="en"?"~20 sec":"~20 s"}</small></div></div><div className={styles.helpGrid}><div><p className={styles.sectionLabel}>{copy.available}</p><CommandList commands={commands} labels={copy.labels} onRun={runCommand}/></div><aside><strong>tip</strong><p>{copy.tip}</p></aside></div></div>{history.map((entry,index)=><div className={styles.entry} key={`${entry.command}-${index}`}><p><Prompt/> {entry.command}</p>{entry.output}</div>)}<form className={styles.promptLine} onSubmit={e=>{e.preventDefault();runCommand(input)}}><Prompt/><input ref={inputRef} value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>{if(e.key==="ArrowUp"){e.preventDefault();navigateHistory(-1)}if(e.key==="ArrowDown"){e.preventDefault();navigateHistory(1)}} aria-label="Terminal command" autoCapitalize="none" autoComplete="off" spellCheck={false}/></form></div></section><nav className={styles.dock} aria-label="Desktop dock"><span>◉</span><span>⌘</span><span className={styles.dockActive}>›_</span><span>◈</span><span>◆</span></nav></main>}
+
+  return <main className={styles.desktop} onClick={()=>inputRef.current?.focus()}>
+    <div className={styles.menuBar}><div><span className={styles.apple}>●</span><strong>Terminal</strong><span>Shell</span><span>Edit</span><span>View</span><span>Window</span><span>Help</span></div><div><span>⌁</span><span>◉</span><span>{locale==="en"?"EN":"FR"}</span></div></div>
+    <div className={styles.desktopIcons} aria-hidden="true"><span>▣<small>Development</small></span><span>▣<small>Cybersecurity</small></span><span>▤<small>notes.txt</small></span></div>
+    <section className={styles.terminalWindow} aria-label="Ubuntu terminal portfolio">
+      <header className={styles.terminalHeader}><div className={styles.lights}><i/><i/><i/></div><span>emma@portfolio: ~</span><a href={`/${locale==="en"?"fr":"en"}`} style={switchStyle} onClick={e=>e.stopPropagation()}><span style={locale==="en"?active:pill}>EN</span><span style={locale==="fr"?active:pill}>FR</span></a></header>
+      <div className={styles.terminalBody}>
+        <div className={styles.boot}>
+          <div className={styles.hero}>
+            <div><p><Prompt/> welcome</p><pre className={styles.ascii}>EMMA DA SILVA</pre><h1>{copy.role}</h1><p style={{margin:"3px 0 0",color:"#69f0ae",fontSize:11,letterSpacing:".03em"}}>{copy.focus}<span style={{color:"#9f97a4"}}> · {copy.secondary}</span></p><div className={styles.rule}/><p><strong>{copy.welcome}</strong><br/>{copy.hint}</p><dl><dt>user</dt><dd>emma</dd><dt>host</dt><dd>portfolio</dd><dt>os</dt><dd>ubuntu</dd><dt>location</dt><dd>cotonou, benin</dd><dt>focus</dt><dd>{copy.focus}</dd></dl></div>
+            <div className={styles.botE} aria-label={copy.voiceLabel}><div className={styles.botOrb} aria-hidden="true" style={isSpeaking?{filter:"brightness(1.28) saturate(1.15)"}:undefined}/><span className={styles.botShadow}/><button type="button" className={styles.voiceButton} onClick={e=>{e.stopPropagation();toggleIntroduction()}} aria-pressed={isSpeaking}>{isSpeaking?copy.stop:copy.listen}</button><small style={{marginTop:6,color:"#777078",fontSize:9}}>{locale==="en"?"~20 sec":"~20 s"}</small></div>
+          </div>
+          <div className={styles.helpGrid}><div><p className={styles.sectionLabel}>{copy.available}</p><CommandList commands={commands} labels={copy.labels} onRun={runCommand}/></div><aside><strong>tip</strong><p>{copy.tip}</p></aside></div>
+        </div>
+        {history.map((entry,index)=><div className={styles.entry} key={`${entry.command}-${index}`}><p><Prompt/> {entry.command}</p>{entry.output}</div>)}
+        <form className={styles.promptLine} onSubmit={e=>{e.preventDefault();runCommand(input)}}>
+          <Prompt/>
+          <input
+            ref={inputRef}
+            value={input}
+            onChange={e=>setInput(e.target.value)}
+            onKeyDown={e=>{
+              if(e.key==="ArrowUp"){e.preventDefault();navigateHistory(-1)}
+              if(e.key==="ArrowDown"){e.preventDefault();navigateHistory(1)}
+            }}
+            aria-label="Terminal command"
+            autoCapitalize="none"
+            autoComplete="off"
+            spellCheck={false}
+          />
+        </form>
+      </div>
+    </section>
+    <nav className={styles.dock} aria-label="Desktop dock"><span>◉</span><span>⌘</span><span className={styles.dockActive}>›_</span><span>◈</span><span>◆</span></nav>
+  </main>}
+
 function Prompt(){return <><strong className={styles.user}>emma@portfolio</strong><span className={styles.path}>:~$</span></>}
 function CommandList({commands,labels,onRun}:{commands:string[];labels:Record<string,string>;onRun:(command:string)=>void}){return <div className={styles.commandList}>{commands.map(command=><button key={command} onClick={e=>{e.stopPropagation();onRun(command)}}><strong>{command}</strong><span>{labels[command]}</span></button>)}</div>}
