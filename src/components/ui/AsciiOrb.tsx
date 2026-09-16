@@ -26,11 +26,31 @@ function createSpherePoints(count: number): Point3D[] {
 
 const spherePoints = createSpherePoints(POINT_COUNT);
 
-function pickPreferredVoice(locale: "en" | "fr") {
-  const voices = window.speechSynthesis.getVoices();
-  const prefix = locale === "fr" ? "fr" : "en";
-  const localized = voices.filter((voice) => voice.lang.toLowerCase().startsWith(prefix));
-  return localized.find((voice) => FEMALE_VOICE_HINTS.some((hint) => voice.name.toLowerCase().includes(hint))) ?? localized[0] ?? null;
+function pickPreferredVoice(locale: "en" | "fr"): Promise<SpeechSynthesisVoice | null> {
+  if (typeof window === "undefined" || !("speechSynthesis" in window)) return Promise.resolve(null);
+
+  const synth = window.speechSynthesis;
+  const getPreferredVoiceFromList = (voices: SpeechSynthesisVoice[]) => {
+    const prefix = locale === "fr" ? "fr" : "en";
+    const localized = voices.filter((voice) => voice.lang.toLowerCase().startsWith(prefix));
+    return localized.find((voice) => FEMALE_VOICE_HINTS.some((hint) => voice.name.toLowerCase().includes(hint))) ?? localized[0] ?? null;
+  };
+
+  const existingVoices = synth.getVoices();
+  if (existingVoices.length > 0) return Promise.resolve(getPreferredVoiceFromList(existingVoices));
+
+  return new Promise((resolve) => {
+    const handleVoicesChanged = () => {
+      synth.removeEventListener("voiceschanged", handleVoicesChanged);
+      resolve(getPreferredVoiceFromList(synth.getVoices()));
+    };
+
+    synth.addEventListener("voiceschanged", handleVoicesChanged, { once: true });
+    window.setTimeout(() => {
+      synth.removeEventListener("voiceschanged", handleVoicesChanged);
+      resolve(getPreferredVoiceFromList(synth.getVoices()));
+    }, 300);
+  });
 }
 
 export function AsciiOrb({ locale }: AsciiOrbProps) {
@@ -124,13 +144,14 @@ export function AsciiOrb({ locale }: AsciiOrbProps) {
     if (!("speechSynthesis" in window)) return;
     window.speechSynthesis.cancel(); speakingRef.current = false; setOrbState("idle");
   };
-  const speak = () => {
+  const speak = async () => {
     if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) return;
     if (completeTimerRef.current !== null) window.clearTimeout(completeTimerRef.current);
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(copy.speech);
     utterance.lang = locale === "fr" ? "fr-FR" : "en-US"; utterance.rate = 0.93; utterance.pitch = 1.08;
-    const voice = pickPreferredVoice(locale); if (voice) utterance.voice = voice;
+    const voice = await pickPreferredVoice(locale);
+    if (voice) utterance.voice = voice;
     utterance.onstart = () => { speakingRef.current = true; setOrbState("speaking"); };
     utterance.onend = finish;
     utterance.onerror = () => { speakingRef.current = false; setOrbState("idle"); };
