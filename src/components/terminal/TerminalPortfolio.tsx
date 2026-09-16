@@ -2,7 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { portfolioContent } from "@/content/portfolio";
 import type { Locale } from "@/types/locale";
 import styles from "./TerminalPortfolio.module.css";
@@ -25,43 +25,38 @@ const logos: Record<string, string> = {
 export function TerminalPortfolio({ locale }: { locale: Locale }) {
   const content = portfolioContent[locale];
   const inputRef = useRef<HTMLInputElement>(null);
+  const speechRef = useRef<SpeechSynthesisUtterance | null>(null);
   const [input, setInput] = useState("");
   const [history, setHistory] = useState<Entry[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const commands = useMemo(() => ["about", "experience", "stack", "projects", "contact", "github", "help", "clear"], []);
 
   const copy = locale === "en" ? {
-    welcome: "Welcome to my interactive portfolio.", hint: "Type 'help' or select a command below.", role: "Cybersecurity & Computer Engineering student", focus: "systems | security | software engineering", available: "available commands:", unknown: "command not found", tip: "commands can be typed or selected. use ↑ / ↓ for history.", stackIntro: "tools and technologies currently in use:", githubIntro: "My GitHub contains my repositories, experiments and ongoing development work.", githubLink: "view GitHub profile", botTitle: "Bot E",
-    bot: { welcome: "Hi, I'm Bot E. I can help you navigate Emma's portfolio.", about: "Here's a little about Emma.", experience: "Her experience and training so far.", stack: "These are the tools currently in her stack.", projects: "Here's what she's been working on.", contact: "Here are the best ways to reach Emma.", github: "You can explore her GitHub from here.", help: "These are the commands I can help you with.", clear: "Clean slate. Type a command whenever you're ready.", unknown: "Not quite. Try 'help' to see the available commands." },
+    welcome: "Welcome to my interactive portfolio.", hint: "Type 'help' or select a command below.", role: "Cybersecurity & Computer Engineering student", focus: "systems | security | software engineering", available: "available commands:", unknown: "command not found", tip: "commands can be typed or selected. use ↑ / ↓ for history.", stackIntro: "tools and technologies currently in use:", githubIntro: "My GitHub contains my repositories, experiments and ongoing development work.", githubLink: "view GitHub profile", listen: "listen", stop: "stop", voiceLabel: "Listen to Emma's introduction", voiceIntro: "Hi, I'm Emma. I'm a computer engineering and cybersecurity student with a strong interest in technology, systems, and software development. I enjoy understanding how things work, building things myself, and constantly learning something new.",
     labels: { about: "about me", experience: "experience & training", stack: "tools in active use", projects: "project work", contact: "contact information", github: "view GitHub profile", help: "show commands", clear: "clear terminal" }
   } : {
-    welcome: "Bienvenue dans mon portfolio interactif.", hint: "Tapez 'help' ou sélectionnez une commande ci-dessous.", role: "Étudiante en cybersécurité & génie informatique", focus: "systèmes | sécurité | génie logiciel", available: "commandes disponibles :", unknown: "commande introuvable", tip: "les commandes peuvent être saisies ou sélectionnées. utilisez ↑ / ↓ pour l’historique.", stackIntro: "outils et technologies actuellement utilisés :", githubIntro: "Mon GitHub contient mes dépôts, mes expérimentations et mes travaux de développement en cours.", githubLink: "voir mon profil GitHub", botTitle: "Bot E",
-    bot: { welcome: "Salut, je suis Bot E. Je peux t'aider à explorer le portfolio d'Emma.", about: "Voici quelques informations sur Emma.", experience: "Voici son expérience et sa formation jusqu'ici.", stack: "Voici les outils qu'elle utilise actuellement.", projects: "Voici ce sur quoi elle a travaillé.", contact: "Voici les meilleurs moyens de contacter Emma.", github: "Tu peux explorer son GitHub depuis ici.", help: "Voici les commandes que je peux t'aider à utiliser.", clear: "Terminal nettoyé. Tape une commande quand tu veux.", unknown: "Pas tout à fait. Essaie 'help' pour voir les commandes disponibles." },
+    welcome: "Bienvenue dans mon portfolio interactif.", hint: "Tapez 'help' ou sélectionnez une commande ci-dessous.", role: "Étudiante en cybersécurité & génie informatique", focus: "systèmes | sécurité | génie logiciel", available: "commandes disponibles :", unknown: "commande introuvable", tip: "les commandes peuvent être saisies ou sélectionnées. utilisez ↑ / ↓ pour l’historique.", stackIntro: "outils et technologies actuellement utilisés :", githubIntro: "Mon GitHub contient mes dépôts, mes expérimentations et mes travaux de développement en cours.", githubLink: "voir mon profil GitHub", listen: "écouter", stop: "arrêter", voiceLabel: "Écouter la présentation d'Emma", voiceIntro: "Salut, je suis Emma. Je suis étudiante en génie informatique et en cybersécurité, avec un fort intérêt pour la technologie, les systèmes et le développement logiciel. J'aime comprendre comment les choses fonctionnent, construire par moi-même et apprendre constamment de nouvelles choses.",
     labels: { about: "à propos", experience: "expérience & formation", stack: "outils utilisés", projects: "projet", contact: "coordonnées", github: "voir mon profil GitHub", help: "afficher les commandes", clear: "effacer le terminal" }
   };
 
-  const [botTarget, setBotTarget] = useState(copy.bot.welcome);
-  const [botText, setBotText] = useState("");
-  const [botSpeaking, setBotSpeaking] = useState(true);
-
-  useEffect(() => {
-    setBotTarget(copy.bot.welcome);
-  }, [locale]);
-
-  useEffect(() => {
-    setBotText("");
-    setBotSpeaking(true);
-    let index = 0;
-    const timer = window.setInterval(() => {
-      index += 1;
-      setBotText(botTarget.slice(0, index));
-      if (index >= botTarget.length) {
-        window.clearInterval(timer);
-        window.setTimeout(() => setBotSpeaking(false), 350);
-      }
-    }, 24);
-    return () => window.clearInterval(timer);
-  }, [botTarget]);
+  function toggleIntroduction() {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    if (isSpeaking) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(copy.voiceIntro);
+    utterance.lang = locale === "en" ? "en-US" : "fr-FR";
+    utterance.rate = 0.95;
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
+    speechRef.current = utterance;
+    setIsSpeaking(true);
+    window.speechSynthesis.speak(utterance);
+  }
 
   function outputFor(command: Command): React.ReactNode {
     if (command === "help") return <CommandList commands={commands} labels={copy.labels} onRun={runCommand} />;
@@ -77,11 +72,8 @@ export function TerminalPortfolio({ locale }: { locale: Locale }) {
   function runCommand(raw: string) {
     const command = raw.trim().toLowerCase();
     if (!command) return;
-    if (command === "clear") {
-      setHistory([]); setInput(""); setHistoryIndex(-1); setBotTarget(copy.bot.clear); return;
-    }
+    if (command === "clear") { setHistory([]); setInput(""); setHistoryIndex(-1); return; }
     const valid = commands.includes(command);
-    setBotTarget(valid ? copy.bot[command as keyof typeof copy.bot] : copy.bot.unknown);
     setHistory(prev => [...prev, { command, output: valid ? outputFor(command as Command) : <p className={styles.error}>{`bash: ${command}: ${copy.unknown}. type 'help'.`}</p> }]);
     setInput(""); setHistoryIndex(-1);
     requestAnimationFrame(() => document.querySelector(`.${styles.terminalBody}`)?.scrollTo({ top: 99999, behavior: "smooth" }));
@@ -103,14 +95,11 @@ export function TerminalPortfolio({ locale }: { locale: Locale }) {
     <div className={styles.desktopIcons} aria-hidden="true"><span>▣<small>Development</small></span><span>▣<small>Cybersecurity</small></span><span>▤<small>notes.txt</small></span></div>
     <section className={styles.terminalWindow} aria-label="Ubuntu terminal portfolio">
       <header className={styles.terminalHeader}>
-        <div className={styles.lights}><i/><i/><i/></div>
-        <span>emma@portfolio: ~</span>
-        <a href={`/${locale === "en" ? "fr" : "en"}`} aria-label={locale === "en" ? "Passer en français" : "Switch to English"} style={languageSwitchStyle} onClick={e => e.stopPropagation()}>
-          <span style={locale === "en" ? activeLanguageStyle : languagePillStyle}>EN</span><span style={locale === "fr" ? activeLanguageStyle : languagePillStyle}>FR</span>
-        </a>
+        <div className={styles.lights}><i/><i/><i/></div><span>emma@portfolio: ~</span>
+        <a href={`/${locale === "en" ? "fr" : "en"}`} aria-label={locale === "en" ? "Passer en français" : "Switch to English"} style={languageSwitchStyle} onClick={e => e.stopPropagation()}><span style={locale === "en" ? activeLanguageStyle : languagePillStyle}>EN</span><span style={locale === "fr" ? activeLanguageStyle : languagePillStyle}>FR</span></a>
       </header>
       <div className={styles.terminalBody}>
-        <div className={styles.boot}><div className={styles.hero}><div><p><Prompt/> welcome</p><pre className={styles.ascii}>EMMA DA SILVA</pre><h1>{copy.role}</h1><div className={styles.rule}/><p><strong>{copy.welcome}</strong><br/>{copy.hint}</p><dl><dt>user</dt><dd>emma</dd><dt>host</dt><dd>portfolio</dd><dt>os</dt><dd>ubuntu</dd><dt>location</dt><dd>cotonou, benin</dd><dt>focus</dt><dd>{copy.focus}</dd></dl></div><div className={styles.botE} aria-label={copy.botTitle}><div className={styles.botBubble} aria-live="polite"><strong>{copy.botTitle}</strong><p>{botText}<span aria-hidden="true">{botSpeaking ? "▌" : ""}</span></p></div><div className={styles.botOrb} aria-hidden="true" style={botSpeaking ? { transform: "scale(1.025)", filter: "brightness(1.16)" } : undefined}><i/><i/></div><span className={styles.botShadow}/></div></div>
+        <div className={styles.boot}><div className={styles.hero}><div><p><Prompt/> welcome</p><pre className={styles.ascii}>EMMA DA SILVA</pre><h1>{copy.role}</h1><div className={styles.rule}/><p><strong>{copy.welcome}</strong><br/>{copy.hint}</p><dl><dt>user</dt><dd>emma</dd><dt>host</dt><dd>portfolio</dd><dt>os</dt><dd>ubuntu</dd><dt>location</dt><dd>cotonou, benin</dd><dt>focus</dt><dd>{copy.focus}</dd></dl></div><div className={styles.botE} aria-label={copy.voiceLabel}><div className={styles.botOrb} aria-hidden="true" style={isSpeaking ? { transform: "scale(1.05)", filter: "brightness(1.2)" } : undefined}></div><span className={styles.botShadow}/><button type="button" className={styles.voiceButton} onClick={e => { e.stopPropagation(); toggleIntroduction(); }} aria-pressed={isSpeaking}>{isSpeaking ? copy.stop : copy.listen}</button></div></div>
           <div className={styles.helpGrid}><div><p className={styles.sectionLabel}>{copy.available}</p><CommandList commands={commands} labels={copy.labels} onRun={runCommand}/></div><aside><strong>tip</strong><p>{copy.tip}</p></aside></div>
         </div>
         {history.map((entry, index) => <div className={styles.entry} key={`${entry.command}-${index}`}><p><Prompt/> {entry.command}</p>{entry.output}</div>)}
