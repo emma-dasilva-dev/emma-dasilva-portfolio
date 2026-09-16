@@ -21,7 +21,43 @@ export function TerminalPortfolio({ locale }: { locale: Locale }) {
   const commands=useMemo(()=>["about","experience","stack","projects","contact","github","help","clear"],[]);
   const copy=locale==="en"?{welcome:"Welcome to my interactive portfolio.",hint:"Type a command below or use one of the shortcuts.",role:"Cybersecurity & Computer Engineering student",focus:"linux · networking · web security",secondary:"software engineering",available:"available commands:",unknown:"command not found",tip:"type a command, click a shortcut, or use ↑ / ↓ to revisit command history.",stackIntro:"tools and technologies currently in use:",githubIntro:"My GitHub contains my repositories, experiments and ongoing development work.",githubLink:"view GitHub profile",listen:"listen to intro",stop:"stop audio",voiceLabel:"Listen to Emma's introduction",voiceIntro:"Hi, I'm Emma. I'm a cybersecurity and computer engineering student focused on Linux, networking, web security, and software engineering. I like understanding how systems work, building practical projects, and learning by solving technical problems.",labels:{about:"about me",experience:"experience & training",stack:"tools in active use",projects:"project work",contact:"contact information",github:"view GitHub profile",help:"show commands",clear:"clear terminal"}}:{welcome:"Bienvenue dans mon portfolio interactif.",hint:"Tapez une commande ci-dessous ou utilisez un raccourci.",role:"Étudiante en cybersécurité & génie informatique",focus:"linux · réseaux · sécurité web",secondary:"génie logiciel",available:"commandes disponibles :",unknown:"commande introuvable",tip:"tapez une commande, cliquez sur un raccourci ou utilisez ↑ / ↓ pour parcourir l’historique.",stackIntro:"outils et technologies actuellement utilisés :",githubIntro:"Mon GitHub contient mes dépôts, mes expérimentations et mes travaux de développement en cours.",githubLink:"voir mon profil GitHub",listen:"écouter l'intro",stop:"arrêter l'audio",voiceLabel:"Écouter la présentation d'Emma",voiceIntro:"Salut, je suis Emma. Je suis étudiante en cybersécurité et en génie informatique, avec un intérêt particulier pour Linux, les réseaux, la sécurité web et le génie logiciel. J'aime comprendre le fonctionnement des systèmes, construire des projets pratiques et apprendre en résolvant des problèmes techniques.",labels:{about:"à propos",experience:"expérience & formation",stack:"outils utilisés",projects:"projet",contact:"coordonnées",github:"voir mon profil GitHub",help:"afficher les commandes",clear:"effacer le terminal"}};
 
-  function toggleIntroduction(){if(typeof window==="undefined"||!("speechSynthesis" in window))return;if(isSpeaking){window.speechSynthesis.cancel();setIsSpeaking(false);return}window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(copy.voiceIntro);u.lang=locale==="en"?"en-US":"fr-FR";u.rate=.95;u.onend=()=>setIsSpeaking(false);u.onerror=()=>setIsSpeaking(false);speechRef.current=u;setIsSpeaking(true);window.speechSynthesis.speak(u)}
+  function chooseVoice(voices:SpeechSynthesisVoice[]){
+    const language=locale==="en"?"en":"fr";
+    const matching=voices.filter(voice=>voice.lang.toLowerCase().startsWith(language));
+    const preferredNames=locale==="en"?["Microsoft Aria","Microsoft Zira","Google US English","Samantha"]:["Microsoft Denise","Microsoft Hortense","Google français","Thomas","Amélie"];
+    return preferredNames.map(name=>matching.find(voice=>voice.name.toLowerCase().includes(name.toLowerCase()))).find(Boolean) ?? matching.find(voice=>voice.default) ?? matching[0] ?? voices.find(voice=>voice.default) ?? voices[0];
+  }
+
+  function speakIntroduction(){
+    const synth=window.speechSynthesis;
+    const voices=synth.getVoices();
+    const utterance=new SpeechSynthesisUtterance(copy.voiceIntro);
+    const voice=chooseVoice(voices);
+    if(voice) utterance.voice=voice;
+    utterance.lang=voice?.lang ?? (locale==="en"?"en-US":"fr-FR");
+    utterance.rate=.92;
+    utterance.pitch=.92;
+    utterance.volume=1;
+    utterance.onstart=()=>setIsSpeaking(true);
+    utterance.onend=()=>{setIsSpeaking(false);speechRef.current=null};
+    utterance.onerror=()=>{setIsSpeaking(false);speechRef.current=null};
+    speechRef.current=utterance;
+    synth.cancel();
+    window.setTimeout(()=>synth.speak(utterance),60);
+  }
+
+  function toggleIntroduction(){
+    if(typeof window==="undefined"||!("speechSynthesis" in window))return;
+    const synth=window.speechSynthesis;
+    if(isSpeaking||synth.speaking||synth.pending){synth.cancel();speechRef.current=null;setIsSpeaking(false);return}
+    const voices=synth.getVoices();
+    if(voices.length){speakIntroduction();return}
+    let finished=false;
+    const start=()=>{if(finished)return;finished=true;synth.removeEventListener("voiceschanged",start);speakIntroduction()};
+    synth.addEventListener("voiceschanged",start,{once:true});
+    window.setTimeout(start,800);
+  }
+
   function outputFor(command:Command):React.ReactNode{if(command==="help")return <CommandList commands={commands} labels={copy.labels} onRun={runCommand}/>;if(command==="about")return <div className={styles.textOutput}>{content.about.paragraphs.map(p=><p key={p}>{p}</p>)}</div>;if(command==="experience")return <div className={styles.timeline}>{content.experience.items.map(item=><div key={item.period+item.title}><span>{item.period}</span><section><strong>{item.title}</strong><em>{item.role}</em><p>{item.description}</p></section></div>)}</div>;if(command==="stack"){const items=Array.from(new Set(content.stack.groups.flatMap(g=>g.items)));return <div className={styles.stackOutput}><p>{copy.stackIntro}</p><div className={styles.stackGrid}>{items.map(item=><span className={styles.logoTile} key={item} title={item}><img src={logos[item]} alt={item}/></span>)}</div></div>}if(command==="projects")return <div className={styles.projectOutput}><strong>Bandit Redline Journal</strong><p>{locale==="en"?"A practical cybersecurity journal documenting my progress through OverTheWire Bandit, with Linux, Bash, SSH and command-line problem solving.":"Un journal pratique de cybersécurité documentant ma progression sur OverTheWire Bandit, avec Linux, Bash, SSH et la résolution de problèmes en ligne de commande."}</p><div><a href={journalUrl} target="_blank" rel="noreferrer">journal ↗</a><a href={banditUrl} target="_blank" rel="noreferrer">OverTheWire ↗</a></div></div>;if(command==="contact")return <div className={styles.links}>{content.contact.links.map(link=><a key={link.label} href={link.href} target={link.href.startsWith("mailto:")?undefined:"_blank"} rel="noreferrer">{link.label}<span>↗</span></a>)}</div>;if(command==="github")return <div className={styles.projectOutput}><p>{copy.githubIntro}</p><div><a href={githubUrl} target="_blank" rel="noreferrer">{copy.githubLink} ↗</a></div></div>;return null}
   function runCommand(raw:string){const command=raw.trim().toLowerCase();if(!command)return;if(command==="clear"){setHistory([]);setInput("");setHistoryIndex(-1);return}const valid=commands.includes(command);setHistory(prev=>[...prev,{command,output:valid?outputFor(command as Command):<p className={styles.error}>{`bash: ${command}: ${copy.unknown}. type 'help'.`}</p>}]);setInput("");setHistoryIndex(-1);requestAnimationFrame(()=>document.querySelector(`.${styles.terminalBody}`)?.scrollTo({top:99999,behavior:"smooth"}))}
   function navigateHistory(direction:number){const h=history.map(x=>x.command);if(!h.length)return;const next=historyIndex<0?h.length-1:Math.max(0,Math.min(h.length-1,historyIndex+direction));setHistoryIndex(next);setInput(h[next])}
@@ -43,19 +79,7 @@ export function TerminalPortfolio({ locale }: { locale: Locale }) {
         {history.map((entry,index)=><div className={styles.entry} key={`${entry.command}-${index}`}><p><Prompt/> {entry.command}</p>{entry.output}</div>)}
         <form className={styles.promptLine} onSubmit={e=>{e.preventDefault();runCommand(input)}}>
           <Prompt/>
-          <input
-            ref={inputRef}
-            value={input}
-            onChange={e=>setInput(e.target.value)}
-            onKeyDown={e=>{
-              if(e.key==="ArrowUp"){e.preventDefault();navigateHistory(-1)}
-              if(e.key==="ArrowDown"){e.preventDefault();navigateHistory(1)}
-            }}
-            aria-label="Terminal command"
-            autoCapitalize="none"
-            autoComplete="off"
-            spellCheck={false}
-          />
+          <input ref={inputRef} value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>{if(e.key==="ArrowUp"){e.preventDefault();navigateHistory(-1)}if(e.key==="ArrowDown"){e.preventDefault();navigateHistory(1)}}} aria-label="Terminal command" autoCapitalize="none" autoComplete="off" spellCheck={false}/>
         </form>
       </div>
     </section>
