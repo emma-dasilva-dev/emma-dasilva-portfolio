@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { TerminalPortfolio } from "@/components/terminal/TerminalPortfolio";
+import { PapalePortfolio } from "@/components/portfolio/PapalePortfolio";
 import { isLocale } from "@/lib/i18n";
 
 interface HomePageProps {
@@ -14,5 +14,5 @@ export default async function HomePage({ params }: HomePageProps) {
     notFound();
   }
 
-  return <TerminalPortfolio locale={lang} />;
+  return <PapalePortfolio locale={lang} />;
 }
