@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { TerminalPortfolio } from "@/components/terminal/TerminalPortfolio";
+import { EditorialPortfolio } from "@/components/portfolio/EditorialPortfolio";
 import { isLocale } from "@/lib/i18n";
 
 interface HomePageProps {
@@ -9,10 +9,6 @@ interface HomePageProps {
 
 export default async function HomePage({ params }: HomePageProps) {
   const { lang } = await params;
-
-  if (!isLocale(lang)) {
-    notFound();
-  }
-
-  return <TerminalPortfolio locale={lang} />;
+  if (!isLocale(lang)) notFound();
+  return <EditorialPortfolio locale={lang} />;
 }
