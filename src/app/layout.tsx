@@ -1,4 +1,4 @@
-import { IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
+import { Bebas_Neue, IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
 import type { ReactNode } from "react";
 import type { Viewport } from "next";
 
@@ -17,6 +17,13 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const bebasNeue = Bebas_Neue({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-bebas-neue",
+  display: "swap",
+});
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -30,7 +37,7 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" className={`${instrumentSans.variable} ${ibmPlexMono.variable}`}>
+    <html lang="en" className={`${instrumentSans.variable} ${ibmPlexMono.variable} ${bebasNeue.variable}`}>
       <body>{children}</body>
     </html>
   );

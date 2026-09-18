@@ -1,13 +1,18 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
 import type { Locale } from "@/types/locale";
 import styles from "./PapalePortfolio.module.css";
+import heroStyles from "./PapaleHero.module.css";
+import { WebGLHeroGradient } from "./WebGLHeroGradient";
 
 const copy = {
   en: {
     nav:["WORK","ABOUT","PLAYGROUND","CONTACT"],
-    role:"SOFTWARE DEVELOPER AND CYBERSECURITY STUDENT",
+    role:["SOFTWARE DEVELOPER","& CYBERSECURITY STUDENT","BASED IN COTONOU"],
     place:"BASED IN COTONOU",
     aboutTitle:["A LITTLE","ABOUT ME"],
     about:"I build for the web, but I’m increasingly interested in what happens beneath it. Development taught me how ideas become interfaces and software. Cybersecurity is teaching me to look deeper into Linux, networks, systems and web security. I want to become the kind of engineer who understands both sides.",
@@ -23,7 +28,7 @@ const copy = {
   },
   fr: {
     nav:["TRAVAIL","À PROPOS","PLAYGROUND","CONTACT"],
-    role:"DÉVELOPPEUSE LOGICIEL ET ÉTUDIANTE EN CYBERSÉCURITÉ",
+    role:["DÉVELOPPEUSE LOGICIEL","& ÉTUDIANTE EN CYBERSÉCURITÉ","BASÉE À COTONOU"],
     place:"BASÉE À COTONOU",
     aboutTitle:["UN PEU","SUR MOI"],
     about:"Je construis pour le web, mais je m’intéresse de plus en plus à ce qui se passe en dessous. Le développement m’a appris comment une idée devient une interface et un logiciel. La cybersécurité m’apprend à aller plus loin dans Linux, les réseaux, les systèmes et la sécurité web. Je veux devenir une ingénieure capable de comprendre les deux côtés.",
@@ -60,22 +65,52 @@ export function PapalePortfolio({locale}:{locale:Locale}) {
       sculpture.current?.style.setProperty("--mx",String(x));
       sculpture.current?.style.setProperty("--my",String(y));
     };
-    const onScroll=()=>el.style.setProperty("--scroll",String(scrollY));
-    addEventListener("pointermove",onMove,{passive:true});addEventListener("scroll",onScroll,{passive:true});
-    return()=>{io.disconnect();removeEventListener("pointermove",onMove);removeEventListener("scroll",onScroll)};
+    addEventListener("pointermove",onMove,{passive:true});
+
+    if (reduced) {
+      return()=>{io.disconnect();removeEventListener("pointermove",onMove)};
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+    const hero=el.querySelector<HTMLElement>("[data-hero]");
+    const heading=el.querySelector<HTMLElement>("[data-hero-heading]");
+    const info=el.querySelector<HTMLElement>("[data-hero-info]");
+    const scrollIndicator=el.querySelector<HTMLElement>("[data-hero-scroll]");
+    const nav=el.querySelector<HTMLElement>("header");
+    const lenis=new Lenis({
+      easing:value=>Math.min(1,1.001-Math.pow(2,-10*value)),
+      lerp:.08,
+      smoothWheel:true,
+    });
+    let frame=0;
+    const raf=(time:number)=>{lenis.raf(time);frame=requestAnimationFrame(raf)};
+    frame=requestAnimationFrame(raf);
+    lenis.on("scroll",ScrollTrigger.update);
+
+    const context=gsap.context(()=>{
+      if(!hero||!heading) return;
+      const mobile=innerWidth<=800;
+      gsap.to(heading,{x:mobile?"12%":"87%",scale:mobile?1.7:4.2,transformOrigin:"50% 50%",ease:"none",scrollTrigger:{anticipatePin:1,end:"+=80%",pin:true,scrub:.3,start:"top top",trigger:hero}});
+      if(info) gsap.to(info,{x:20,y:20,opacity:0,scrollTrigger:{end:"+=40",scrub:true,start:"top top",trigger:hero}});
+      if(scrollIndicator) gsap.to(scrollIndicator,{x:-20,y:20,opacity:0,scrollTrigger:{end:"+=40",scrub:true,start:"top top",trigger:hero}});
+      if(nav) ScrollTrigger.create({onUpdate:trigger=>{gsap.to(nav,{duration:.25,overwrite:true,yPercent:trigger.direction===1&&trigger.scroll()>40?-100:0})}});
+    },el);
+
+    return()=>{context.revert();lenis.destroy();cancelAnimationFrame(frame);io.disconnect();removeEventListener("pointermove",onMove)};
   },[]);
 
-  return <main ref={root} className={styles.page} id="main-content">
-    <header className={styles.nav}>
+  return <main ref={root} className={`${styles.page} ${heroStyles.page}`} id="main-content">
+    <div className={heroStyles.grain} aria-hidden="true" />
+    <header className={`${styles.nav} ${heroStyles.nav}`}>
       <a href="#home" className={styles.logo}>ED</a>
       <nav>{c.nav.map((n,i)=><a key={n} href={`#${["work","about","playground","contact"][i]}`}>{n}</a>)}</nav>
       <a className={styles.lang} href={`/${locale==="en"?"fr":"en"}`}>{locale==="en"?"FR":"EN"}</a>
     </header>
 
-    <section className={styles.hero} id="home">
-      <div className={styles.name} aria-label="Emma Dasilva"><span>EMMA</span><span>DASILVA</span></div>
-      <div className={styles.heroInfo}><span>↘</span><p>{c.role}<br/>{c.place}</p></div>
-      <a className={styles.scroll} href="#about"><i>↓</i>{c.scroll}</a>
+    <section className={`${styles.hero} ${heroStyles.hero}`} id="home" data-hero>
+      <div className={`${styles.name} ${heroStyles.name}`} data-hero-heading aria-label="Emma Dasilva"><WebGLHeroGradient ariaLabel="Emma Dasilva" /></div>
+      <div className={`${styles.heroInfo} ${heroStyles.heroInfo}`} data-hero-info><span>↘</span><p>{c.role.map(line=><span key={line}>{line}</span>)}</p></div>
+      <a className={`${styles.scroll} ${heroStyles.scroll}`} data-hero-scroll href="#about"><i>↓</i>{c.scroll}</a>
     </section>
 
     <section className={styles.about} id="about">
