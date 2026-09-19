@@ -39,6 +39,30 @@ a {
   text-decoration: none;
 }
 
+.site-content {
+  position: relative;
+  z-index: 1;
+}
+
+.webgl-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 1;
+}
+
+.hero,
+.section {
+  position: relative;
+}
+
+.hero-name {
+  overflow: hidden;
+}
+
 ::selection {
   color: var(--foreground);
   background: var(--accent);
