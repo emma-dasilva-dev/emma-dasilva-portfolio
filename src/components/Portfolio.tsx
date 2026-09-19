@@ -124,14 +124,14 @@ export default function Portfolio() {
         },
       });
 
-      gsap.to(".contact", {
-        backgroundPosition: "100% 50%",
-        ease: "none",
+      gsap.from(".contact", {
+        y: 28,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: ".contact",
-          start: "top bottom",
-          end: "bottom bottom",
-          scrub: 1,
+          start: "top 88%",
         },
       });
     });
