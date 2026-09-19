@@ -1,333 +1,201 @@
 import Experience from "@/components/Experience";
 
 const expertise = [
-  {
-    number: "01",
-    title: "WEB DEVELOPMENT",
-    description:
-      "Building responsive, accessible and functional web experiences.",
-  },
-  {
-    number: "02",
-    title: "SOFTWARE DEVELOPMENT",
-    description:
-      "Turning ideas and problems into structured software solutions.",
-  },
-  {
-    number: "03",
-    title: "LINUX & SYSTEMS",
-    description:
-      "Working with Linux environments, the command line, permissions and system fundamentals.",
-  },
-  {
-    number: "04",
-    title: "NETWORKING",
-    description:
-      "Learning how devices, applications and services communicate across networks.",
-  },
-  {
-    number: "05",
-    title: "WEB SECURITY",
-    description:
-      "Exploring web vulnerabilities, defensive thinking and the security behind applications.",
-  },
-  {
-    number: "06",
-    title: "UI / UX",
-    description:
-      "Designing interfaces that are clear, intentional and easy to use.",
-  },
+  ["WEB DEVELOPMENT", "Building responsive, accessible and functional web experiences."],
+  ["SOFTWARE DEVELOPMENT", "Turning ideas and problems into structured software solutions."],
+  ["LINUX & SYSTEMS", "Working with Linux environments, the command line, permissions and system fundamentals."],
+  ["NETWORKING", "Learning how devices, applications and services communicate across networks."],
+  ["WEB SECURITY", "Exploring web vulnerabilities, defensive thinking and the security behind applications."],
+  ["UI / UX", "Designing interfaces that are clear, intentional and easy to use."],
 ];
 
 const qualities = [
-  {
-    title: "CURIOSITY",
-    quote:
-      "I want to understand what’s happening underneath, not just whether it works.",
-  },
-  {
-    title: "PERSISTENCE",
-    quote:
-      "If something breaks, I want to understand why before I move on.",
-  },
-  {
-    title: "PROBLEM SOLVING",
-    quote:
-      "I prefer understanding the problem properly before deciding how to solve it.",
-  },
-  {
-    title: "ATTENTION TO DETAIL",
-    quote:
-      "I notice the small things, especially when they affect how something works or feels.",
-  },
-  {
-    title: "ADAPTABILITY",
-    quote:
-      "I’m comfortable changing my approach when I find a better one.",
-  },
+  ["CURIOSITY", "I want to understand what’s happening underneath, not just whether it works."],
+  ["PERSISTENCE", "If something breaks, I want to understand why before I move on."],
+  ["PROBLEM SOLVING", "I prefer understanding the problem properly before deciding how to solve it."],
+  ["ATTENTION TO DETAIL", "I notice the small things, especially when they affect how something works or feels."],
+  ["ADAPTABILITY", "I’m comfortable changing my approach when I find a better one."],
 ];
 
 const playground = [
-  {
-    title: "C",
-    description: "Small programs, algorithms and experiments.",
-  },
-  {
-    title: "LINUX",
-    description: "Commands, systems, permissions and environment exploration.",
-  },
-  {
-    title: "SECURITY",
-    description:
-      "Labs and exercises as I develop my cybersecurity skills.",
-  },
-  {
-    title: "EXPERIMENTS",
-    description:
-      "Things I build simply because I want to understand how they work.",
-  },
+  ["C", "Small programs, algorithms and experiments."],
+  ["LINUX", "Commands, systems, permissions and environment exploration."],
+  ["SECURITY", "Labs and exercises as I develop my cybersecurity skills."],
+  ["EXPERIMENTS", "Things I build simply because I want to understand how they work."],
 ];
 
 export default function Home() {
   return (
-    <main>
-      <section className="hero" id="top">
-        <header className="site-header">
-          <a className="brand" href="#top" aria-label="Emma Dasilva, back to top">
-            ED / 26
-          </a>
-
-          <nav className="desktop-nav" aria-label="Primary navigation">
-            <a href="#work">WORK</a>
-            <a href="#about">ABOUT</a>
-            <a href="#expertise">EXPERTISE</a>
-            <a href="#playground">PLAYGROUND</a>
-            <a href="#contact">CONTACT</a>
-          </nav>
-        </header>
-
-        <div className="hero-content">
-          <div className="hero-kicker">
-            <span>SOFTWARE DEVELOPER</span>
-            <span>CYBERSECURITY STUDENT</span>
-            <span>COTONOU, BENIN</span>
-          </div>
-
-          <h1 className="hero-name" aria-label="Emma Dasilva">
-            <span>EMMA</span>
-            <span>DASILVA</span>
-          </h1>
-
-          <div className="hero-footer">
-            <p>
-              Building software while learning how systems work, communicate
-              and stay secure.
-            </p>
-            <a href="#about" className="scroll-link">
-              EXPLORE ↓
+    <>
+      <Experience />
+      <main className="site-content">
+        <section className="hero" id="top">
+          <header className="site-header">
+            <a className="brand-mark" href="#top" aria-label="Emma Dasilva, back to top">
+              ED
             </a>
-          </div>
-        </div>
-      </section>
 
-      <section className="section section-about" id="about">
-        <div className="section-meta">
-          <span>01</span>
-          <span>ABOUT</span>
-        </div>
+            <nav className="desktop-nav" aria-label="Primary navigation">
+              <a href="#work">WORK</a>
+              <a href="#about">ABOUT</a>
+              <a href="#expertise">EXPERTISE</a>
+              <a href="#playground">PLAYGROUND</a>
+              <a href="#contact">CONTACT</a>
+            </nav>
 
-        <div className="about-grid">
-          <h2 className="section-title">ABOUT ME</h2>
+            <span className="header-year">2026</span>
+          </header>
 
-          <div className="about-copy">
-            <p>
-              I’m Emma, a software developer and cybersecurity student based in
-              Cotonou.
-            </p>
-            <p>
-              I started programming because I wanted to understand how the
-              digital things I used every day were actually built. What began
-              with websites gradually became an interest in software, systems,
-              Linux, networks and security.
-            </p>
-            <p>
-              I like building things that are useful, functional and
-              thoughtfully designed. But I’m also interested in what happens
-              behind the interface: how systems work, how they communicate,
-              where things can go wrong and how they can be made more secure.
-            </p>
-            <p>
-              Today, I’m developing my skills across both software development
-              and cybersecurity. I don’t see them as completely separate paths.
-              I want to understand technology from both sides: how to build it
-              and how to protect it.
-            </p>
-            <p>
-              I’m still learning, experimenting and becoming a better developer
-              with every project I take on.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-work" id="work">
-        <div className="section-meta">
-          <span>02</span>
-          <span>WORK</span>
-        </div>
-
-        <div className="section-heading-row">
-          <h2 className="section-title">SELECTED WORK</h2>
-          <p className="section-intro">
-            A selection of projects, experiments and ideas I’ve turned into
-            working products.
-          </p>
-        </div>
-
-        <article className="project">
-          <div className="project-index">01</div>
-
-          <div className="project-main">
-            <p className="project-type">CYBERSECURITY PROJECT</p>
-            <h3>BANDIT REDLINE</h3>
-            <p className="project-description">
-              A cybersecurity learning project documenting my progress through
-              OverTheWire Bandit while developing practical skills in Linux,
-              SSH, permissions, file handling and command-line problem solving.
-            </p>
-          </div>
-
-          <dl className="project-details">
-            <div>
-              <dt>ROLE</dt>
-              <dd>Cybersecurity Learning / Documentation</dd>
+          <div className="hero-stage">
+            <div className="hero-title-mask">
+              <h1 className="hero-name">EMMA DASILVA</h1>
             </div>
-            <div>
-              <dt>TECHNOLOGIES</dt>
-              <dd>Linux / Bash / SSH</dd>
-            </div>
-          </dl>
 
-          <a className="project-link" href="#playground">
-            VIEW PROJECT <span aria-hidden="true">↗</span>
+            <div className="hero-descriptor">
+              <span className="hero-arrow" aria-hidden="true">↘</span>
+              <p>
+                SOFTWARE DEVELOPER &amp; CYBERSECURITY STUDENT
+                <br />
+                BASED IN COTONOU
+              </p>
+            </div>
+          </div>
+
+          <a className="scroll-orbit" href="#about" aria-label="Scroll to about section">
+            <span>↓</span>
+            <span>SCROLL</span>
           </a>
-        </article>
-      </section>
+        </section>
 
-      <section className="section section-expertise" id="expertise">
-        <div className="section-meta">
-          <span>03</span>
-          <span>EXPERTISE</span>
-        </div>
+        <section className="section intro-section" id="about">
+          <div className="section-label">ABOUT ME</div>
 
-        <h2 className="section-title expertise-title">WHAT I WORK WITH</h2>
-
-        <div className="expertise-list">
-          {expertise.map((item) => (
-            <article className="expertise-item" key={item.number}>
-              <span className="item-number">{item.number}</span>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section section-qualities">
-        <div className="section-meta">
-          <span>04</span>
-          <span>QUALITIES</span>
-        </div>
-
-        <h2 className="section-title">HOW I WORK</h2>
-
-        <div className="qualities-list">
-          {qualities.map((quality, index) => (
-            <article className="quality" key={quality.title}>
-              <span className="item-number">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <h3>{quality.title}</h3>
-              <p>“{quality.quote}”</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section section-playground" id="playground">
-        <div className="section-meta">
-          <span>05</span>
-          <span>PLAYGROUND</span>
-        </div>
-
-        <div className="section-heading-row playground-heading">
-          <h2 className="section-title">MY DIGITAL PLAYGROUND</h2>
-          <div className="section-intro">
-            <p>Not everything I build needs to become a finished project.</p>
-            <p>
-              This is where I experiment, test ideas, learn new tools and
-              explore the technical things that interest me.
+          <div className="intro-grid">
+            <p className="intro-lead">
+              I’m Emma, a software developer and cybersecurity student based in Cotonou.
             </p>
-          </div>
-        </div>
 
-        <div className="playground-list">
-          {playground.map((item, index) => (
-            <article className="playground-item" key={item.title}>
-              <span className="item-number">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-              <span className="playground-arrow" aria-hidden="true">
-                ↗
-              </span>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <footer className="section contact" id="contact">
-        <div className="section-meta">
-          <span>06</span>
-          <span>CONTACT</span>
-        </div>
-
-        <h2 className="contact-title">
-          LET’S BUILD
-          <br />
-          SOMETHING.
-        </h2>
-
-        <div className="contact-grid">
-          <p>
-            I’m open to opportunities, collaborations and conversations with
-            people building interesting things.
-          </p>
-
-          <div className="contact-actions">
-            <span className="email-placeholder">DROP ME AN EMAIL ↗</span>
-
-            <div className="socials" aria-label="Social links">
-              <a
-                href="https://github.com/emma-dasilva-dev"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GITHUB ↗
-              </a>
-              <span>LINKEDIN ↗</span>
-              <span>INSTAGRAM ↗</span>
+            <div className="intro-copy">
+              <p>
+                I started programming because I wanted to understand how the digital things I used every day were actually built. What began with websites gradually became an interest in software, systems, Linux, networks and security.
+              </p>
+              <p>
+                I like building things that are useful, functional and thoughtfully designed. But I’m also interested in what happens behind the interface: how systems work, how they communicate, where things can go wrong and how they can be made more secure.
+              </p>
+              <p>
+                Today, I’m developing my skills across both software development and cybersecurity. I don’t see them as completely separate paths. I want to understand technology from both sides: how to build it and how to protect it.
+              </p>
+              <p>
+                I’m still learning, experimenting and becoming a better developer with every project I take on.
+              </p>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div className="footer-line">
-          <span>EMMA DASILVA</span>
-          <span>COTONOU</span>
-          <span>2026</span>
-        </div>
-      </footer>
-    </main>
+        <section className="section" id="expertise">
+          <div className="section-label">EXPERTISE</div>
+
+          <div className="editorial-list">
+            {expertise.map(([title, description], index) => (
+              <article className="editorial-row expertise-item" key={title}>
+                <span className="row-index">{String(index + 1).padStart(2, "0")}</span>
+                <h2>{title}</h2>
+                <p>{description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section work-section" id="work">
+          <div className="section-head">
+            <span className="section-label">RECENT WORK</span>
+            <span className="section-count">01 PROJECT</span>
+          </div>
+
+          <article className="project">
+            <div className="project-topline">
+              <span>01</span>
+              <span>CYBERSECURITY / PERSONAL</span>
+              <span>2026</span>
+            </div>
+
+            <div className="project-title-wrap">
+              <h2>BANDIT REDLINE</h2>
+            </div>
+
+            <div className="project-bottom">
+              <p>
+                Documenting my progress through OverTheWire Bandit while developing practical skills in Linux, SSH, permissions, file handling and command-line problem solving.
+              </p>
+
+              <div className="project-meta">
+                <span>LINUX</span>
+                <span>BASH</span>
+                <span>SSH</span>
+              </div>
+
+              <a href="#playground">VIEW PROJECT ↗</a>
+            </div>
+          </article>
+        </section>
+
+        <section className="section" id="qualities">
+          <div className="section-label">HOW I WORK</div>
+
+          <div className="editorial-list qualities-list">
+            {qualities.map(([title, quote], index) => (
+              <article className="editorial-row quality" key={title}>
+                <span className="row-index">{String(index + 1).padStart(2, "0")}</span>
+                <h2>{title}</h2>
+                <p>“{quote}”</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section playground-section" id="playground">
+          <div className="playground-intro">
+            <span className="section-label">PLAYGROUND</span>
+            <div>
+              <p>Not everything I build needs to become a finished project.</p>
+              <p>
+                This is where I experiment, test ideas, learn new tools and explore the technical things that interest me.
+              </p>
+            </div>
+          </div>
+
+          <div className="editorial-list playground-list">
+            {playground.map(([title, description], index) => (
+              <article className="editorial-row playground-item" key={title}>
+                <span className="row-index">{String(index + 1).padStart(2, "0")}</span>
+                <h2>{title}</h2>
+                <p>{description}</p>
+                <span className="row-arrow" aria-hidden="true">↗</span>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <footer className="contact" id="contact">
+          <div className="contact-top">
+            <span>INTERESTED IN WORKING TOGETHER?</span>
+            <span>COTONOU / 2026</span>
+          </div>
+
+          <div className="contact-main">
+            <p>DROP ME AN EMAIL!</p>
+          </div>
+
+          <div className="contact-bottom">
+            <div className="socials">
+              <a href="https://github.com/emma-dasilva-dev" target="_blank" rel="noreferrer">GITHUB</a>
+              <span>LINKEDIN</span>
+              <span>INSTAGRAM</span>
+            </div>
+            <span>EMMA DASILVA</span>
+          </div>
+        </footer>
+      </main>
+    </>
   );
 }
