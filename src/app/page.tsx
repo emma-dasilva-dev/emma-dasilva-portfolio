@@ -1,3 +1,5 @@
+import Experience from "@/components/Experience";
+
 const expertise = [
   {
     number: "01",
