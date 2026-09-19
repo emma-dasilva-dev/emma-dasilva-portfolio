@@ -4,8 +4,8 @@
   --muted: #8f939b;
   --line: rgba(241, 242, 244, 0.14);
   --line-strong: rgba(241, 242, 244, 0.42);
-  --accent: #7181a3;
-  --accent-soft: #95a1bc;
+  --accent: #5f6f91;
+  --accent-soft: #9aa6bf;
   --page-x: clamp(1.2rem, 3.2vw, 3.75rem);
   --section-y: clamp(6.5rem, 11vw, 10rem);
   --font-sans: var(--font-geist-sans), Arial, Helvetica, sans-serif;
@@ -29,7 +29,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-sans);
-  font-weight: 300;
+  font-weight: 200;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -130,9 +130,9 @@ a {
 
 .hero-name {
   margin: auto 0;
-  font-size: clamp(5rem, 16vw, 14.5rem);
-  font-weight: 200;
-  line-height: 0.72;
+  font-size: clamp(4.4rem, 11vw, 9.5rem);
+  font-weight: 100;
+  line-height: 0.82;
   letter-spacing: -0.085em;
   text-transform: uppercase;
 }
@@ -188,9 +188,9 @@ a {
 }
 
 .section-title {
-  font-size: clamp(2.8rem, 6.4vw, 6.5rem);
-  font-weight: 200;
-  line-height: 0.95;
+  font-size: clamp(2.35rem, 4.8vw, 4.9rem);
+  font-weight: 100;
+  line-height: 1;
   letter-spacing: -0.055em;
   text-transform: uppercase;
 }
@@ -244,9 +244,9 @@ a {
 }
 
 .project-main h3 {
-  font-size: clamp(3.2rem, 7vw, 7rem);
-  font-weight: 200;
-  line-height: 0.9;
+  font-size: clamp(2.7rem, 5vw, 5.2rem);
+  font-weight: 100;
+  line-height: 0.98;
   letter-spacing: -0.065em;
 }
 
@@ -313,8 +313,8 @@ a {
 .expertise-item h3,
 .quality h3,
 .playground-item h3 {
-  font-size: clamp(1.15rem, 1.9vw, 1.9rem);
-  font-weight: 300;
+  font-size: clamp(1.05rem, 1.55vw, 1.55rem);
+  font-weight: 200;
   letter-spacing: -0.025em;
 }
 
@@ -370,11 +370,33 @@ a {
   flex-direction: column;
 }
 
+.contact {
+  background: var(--accent);
+  color: #f4f5f7;
+  border-top-color: transparent;
+}
+
+.contact .section-meta,
+.contact .contact-grid > p,
+.contact .socials span,
+.contact .footer-line {
+  color: rgba(244, 245, 247, 0.72);
+}
+
+.contact .email-placeholder {
+  color: #f4f5f7;
+  border-bottom-color: rgba(244, 245, 247, 0.55);
+}
+
+.contact .footer-line {
+  border-top-color: rgba(244, 245, 247, 0.22);
+}
+
 .contact-title {
   max-width: 9ch;
-  font-size: clamp(4rem, 10.5vw, 10rem);
-  font-weight: 200;
-  line-height: 0.84;
+  font-size: clamp(3.4rem, 7.5vw, 7.2rem);
+  font-weight: 100;
+  line-height: 0.92;
   letter-spacing: -0.075em;
 }
 
@@ -401,8 +423,8 @@ a {
 .email-placeholder {
   width: fit-content;
   color: var(--accent-soft);
-  font-size: clamp(1.35rem, 2.4vw, 2.4rem);
-  font-weight: 300;
+  font-size: clamp(1.2rem, 1.9vw, 1.9rem);
+  font-weight: 200;
   letter-spacing: -0.03em;
   border-bottom: 1px solid var(--line-strong);
 }
@@ -448,7 +470,7 @@ a {
   }
 
   .hero-name {
-    font-size: clamp(5rem, 20vw, 9rem);
+    font-size: clamp(4.4rem, 14vw, 7.2rem);
   }
 
   .hero-name span:last-child {
@@ -501,7 +523,7 @@ a {
   }
 
   .hero-name {
-    font-size: clamp(4.6rem, 24vw, 7rem);
+    font-size: clamp(3.8rem, 17vw, 5.6rem);
     line-height: 0.78;
   }
 
@@ -516,7 +538,7 @@ a {
   }
 
   .section-title {
-    font-size: clamp(2.7rem, 13vw, 4.8rem);
+    font-size: clamp(2.2rem, 10vw, 3.7rem);
   }
 
   .project {
@@ -524,7 +546,7 @@ a {
   }
 
   .project-main h3 {
-    font-size: clamp(3rem, 15vw, 5rem);
+    font-size: clamp(2.6rem, 12vw, 4.2rem);
   }
 
   .expertise-item,
@@ -534,7 +556,7 @@ a {
   }
 
   .contact-title {
-    font-size: clamp(4rem, 18vw, 6.5rem);
+    font-size: clamp(3.2rem, 14vw, 5rem);
   }
 
   .footer-line {
