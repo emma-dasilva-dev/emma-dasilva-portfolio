@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import Portfolio from "@/components/Portfolio";
 
-export default function RootPage() {
-  redirect("/en");
+export default function Page() {
+  return <Portfolio />;
 }
