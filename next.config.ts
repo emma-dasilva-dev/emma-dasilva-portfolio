@@ -1,15 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/en",
-        permanent: true,
-      },
-    ];
-  },
+  allowedDevOrigins: ["localhost", "127.0.0.1"],
 };
 
 export default nextConfig;
