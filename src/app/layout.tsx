@@ -1,4 +1,4 @@
-import { Bebas_Neue, IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
+import { IBM_Plex_Mono, Instrument_Sans, Oswald } from "next/font/google";
 import type { ReactNode } from "react";
 import type { Viewport } from "next";
 
@@ -17,10 +17,10 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-const bebasNeue = Bebas_Neue({
+const oswald = Oswald({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-bebas-neue",
+  weight: ["300"],
+  variable: "--font-hero-condensed",
   display: "swap",
 });
 
@@ -37,7 +37,7 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" className={`${instrumentSans.variable} ${ibmPlexMono.variable} ${bebasNeue.variable}`}>
+    <html lang="en" className={`${instrumentSans.variable} ${ibmPlexMono.variable} ${oswald.variable}`}>
       <body>{children}</body>
     </html>
   );
