@@ -92,7 +92,7 @@ export default function Home() {
       <section className="hero" id="top">
         <header className="site-header">
           <a className="brand" href="#top" aria-label="Emma Dasilva, back to top">
-            EMMA DASILVA
+            ED / 26
           </a>
 
           <nav className="desktop-nav" aria-label="Primary navigation">
@@ -105,19 +105,24 @@ export default function Home() {
         </header>
 
         <div className="hero-content">
-          <p className="eyebrow">PORTFOLIO / 2026</p>
+          <div className="hero-kicker">
+            <span>SOFTWARE DEVELOPER</span>
+            <span>CYBERSECURITY STUDENT</span>
+            <span>COTONOU, BENIN</span>
+          </div>
 
-          <h1 className="hero-title">
-            <span>SOFTWARE</span>
-            <span>DEVELOPER</span>
-            <span className="hero-accent">&amp; CYBERSECURITY</span>
-            <span>STUDENT</span>
+          <h1 className="hero-name" aria-label="Emma Dasilva">
+            <span>EMMA</span>
+            <span>DASILVA</span>
           </h1>
 
           <div className="hero-footer">
-            <p>BASED IN COTONOU</p>
+            <p>
+              Building software while learning how systems work, communicate
+              and stay secure.
+            </p>
             <a href="#about" className="scroll-link">
-              SCROLL TO EXPLORE ↓
+              EXPLORE ↓
             </a>
           </div>
         </div>
