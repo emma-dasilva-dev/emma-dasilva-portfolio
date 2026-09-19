@@ -188,7 +188,7 @@ export default function Experience() {
             "-=0.35"
           )
           .from(
-            ".hero-name > span",
+            ".hero-name",
             {
               yPercent: 115,
               opacity: 0,
@@ -208,44 +208,27 @@ export default function Experience() {
           );
 
         gsap.utils.toArray<HTMLElement>(".section").forEach((section) => {
-          const meta = section.querySelector(".section-meta");
-          const title = section.querySelector(
-            ".section-title, .contact-title"
-          );
-
-          if (meta) {
-            gsap.from(meta, {
-              y: 20,
+          const label = section.querySelector(".section-label");
+          if (label) {
+            gsap.from(label, {
+              y: 16,
               opacity: 0,
-              duration: 0.7,
+              duration: 0.6,
               scrollTrigger: {
                 trigger: section,
-                start: "top 82%",
-              },
-            });
-          }
-
-          if (title) {
-            gsap.from(title, {
-              y: 60,
-              opacity: 0,
-              duration: 1,
-              ease: "power4.out",
-              scrollTrigger: {
-                trigger: title,
-                start: "top 86%",
+                start: "top 84%",
               },
             });
           }
         });
 
-        gsap.from(".about-copy > p", {
-          y: 28,
+        gsap.from(".intro-lead, .intro-copy > p", {
+          y: 24,
           opacity: 0,
-          stagger: 0.1,
-          duration: 0.75,
+          stagger: 0.08,
+          duration: 0.7,
           scrollTrigger: {
-            trigger: ".about-copy",
+            trigger: ".intro-grid",
             start: "top 82%",
           },
         });
@@ -261,7 +244,7 @@ export default function Experience() {
           },
         });
 
-        gsap.from(".project-main h3", {
+        gsap.from(".project-title-wrap h2", {
           xPercent: -8,
           scrollTrigger: {
             trigger: ".project",
