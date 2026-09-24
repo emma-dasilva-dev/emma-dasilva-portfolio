@@ -1,11 +1,27 @@
+import Link from "next/link";
+
 export default function NotFound() {
   return (
-    <main id="main-content" className="foundation">
-      <div className="container">
-        <p className="foundation__label">404</p>
-        <h1 className="foundation__title">Page not found.</h1>
-        <p className="foundation__copy">The requested portfolio route does not exist.</p>
-      </div>
+    <main
+      id="main-content"
+      className="page-shell"
+      style={{ paddingBlock: "8rem" }}
+    >
+      <p className="section-label">404 / NOT FOUND</p>
+      <h1 className="section-heading">Nothing here.</h1>
+      <p style={{ color: "var(--text-secondary)", maxWidth: "34rem" }}>
+        The route does not exist or the project name is invalid.
+      </p>
+      <Link
+        href="/en"
+        style={{
+          display: "inline-block",
+          marginTop: "2rem",
+          borderBottom: "1px solid var(--accent)",
+        }}
+      >
+        Return home
+      </Link>
     </main>
   );
 }

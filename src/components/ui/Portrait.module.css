@@ -1,0 +1,55 @@
+.frame,
+.fallback {
+  position: relative;
+  min-height: 32rem;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.frame::after,
+.fallback::after {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 28%;
+  height: 0.35rem;
+  background: var(--accent);
+  content: "";
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.9) contrast(1.03);
+}
+
+.fallback {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 1rem;
+}
+
+.initials {
+  color: var(--text-primary);
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 600;
+  letter-spacing: -0.08em;
+}
+
+.note {
+  max-width: 14rem;
+  color: var(--text-muted);
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 0.68rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .frame,
+  .fallback {
+    min-height: 27rem;
+  }
+}

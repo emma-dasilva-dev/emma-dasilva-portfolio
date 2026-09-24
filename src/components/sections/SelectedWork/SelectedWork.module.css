@@ -1,0 +1,133 @@
+.headingRow {
+  display: grid;
+  grid-template-columns: minmax(0, 8fr) minmax(15rem, 4fr);
+  align-items: end;
+  gap: 2rem;
+}
+
+.intro {
+  max-width: 26rem;
+  margin: 0 0 0.3rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.projects {
+  margin-top: clamp(4rem, 8vw, 7rem);
+}
+
+.project {
+  position: relative;
+  padding-block: clamp(2.5rem, 5vw, 4.5rem);
+  border-top: 1px solid var(--border);
+}
+
+.project:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.number,
+.eyebrow,
+.meta dt {
+  margin: 0;
+  color: var(--text-muted);
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 0.67rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.number {
+  transition: color var(--fast) var(--ease);
+}
+
+.project:hover .number {
+  color: var(--accent);
+}
+
+.title {
+  margin: 2rem 0 0;
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-weight: 540;
+  letter-spacing: -0.06em;
+  line-height: 0.95;
+}
+
+.description {
+  max-width: 42rem;
+  margin: 1.5rem 0 0;
+  color: var(--text-secondary);
+  font-size: clamp(1rem, 1.45vw, 1.2rem);
+  line-height: 1.6;
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 3rem 0 0;
+  gap: 1.5rem;
+}
+
+.meta div {
+  min-width: 0;
+}
+
+.meta dd {
+  margin: 0.55rem 0 0;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.caseStudy {
+  display: inline-flex;
+  min-height: 44px;
+  margin-top: 3rem;
+  align-items: center;
+  gap: 0.65rem;
+  border-bottom: 1px solid var(--border-strong);
+  font-weight: 520;
+}
+
+.arrow {
+  width: 0.9rem;
+  height: 0.9rem;
+  transition: transform var(--fast) var(--ease);
+}
+
+.caseStudy:hover .arrow,
+.caseStudy:focus-visible .arrow {
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 900px) {
+  .headingRow {
+    grid-template-columns: 1fr;
+  }
+
+  .meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .title {
+    font-size: clamp(2.9rem, 15vw, 4.8rem);
+  }
+
+  .meta {
+    grid-template-columns: 1fr;
+  }
+}

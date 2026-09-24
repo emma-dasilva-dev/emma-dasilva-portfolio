@@ -1,21 +1,54 @@
-# Emma Da Silva Portfolio
+# Emma Da Silva Portfolio — Terminal Redesign
 
-Fresh 2026 portfolio redesign developed on `redesign-2026`.
+A bilingual developer portfolio built with Next.js 16, React 19, TypeScript, CSS Modules, and the App Router.
 
-## Stack
+## Design direction
 
-- Next.js 16.3.3
-- React 19.2
-- TypeScript
-- App Router
-- Native CSS + CSS Modules + CSS custom properties
+- English by default with French switch
+- Dark/light theme
+- `#C6FF33` controlled accent
+- Space Grotesk + IBM Plex Mono
+- Editorial layout with restrained terminal language
+- Optional interactive terminal commands
+- Normal menu navigation always available
+- Two text-led project case studies
+- Mobile-first responsive behavior
+- No project screenshots
 
-## Commands
+## Routes
 
-```bash
-npm install
-npm run dev
-npm run typecheck
-npm run lint
-npm run build
+- `/` → redirects to `/en`
+- `/en`
+- `/fr`
+- `/en/work/stay`
+- `/fr/work/stay`
+- `/en/work/bandit-learning-journal`
+- `/fr/work/bandit-learning-journal`
+
+## Portrait
+
+Add the real portrait at:
+
+`public/images/portrait/emma-portrait.jpg`
+
+If it is missing, the About section renders a clean `ED` fallback instead of breaking.
+
+## Run locally
+
+```powershell
+npm.cmd install
+npm.cmd run dev
 ```
+
+Then open `http://localhost:3000`.
+
+## Validate
+
+```powershell
+npm.cmd run lint
+npm.cmd run build
+```
+
+## Notes
+
+This package intentionally introduces no new runtime dependency. It uses the dependencies already present in the existing portfolio repository.
